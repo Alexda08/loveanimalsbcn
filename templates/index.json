@@ -2646,6 +2646,19 @@
         "titulo": "Peludos",
         "lead": "Organizados por álbumes, como en nuestro Instagram. Dentro de cada álbum encontrarás la ficha de cada animal con sus fotos, su historia y su carácter.",
         "padding-block-start": 78,
+        "padding-block-end": 56
+      }
+    },
+    "album_destacado_home": {
+      "type": "album-destacado",
+      "name": "Álbum destacado",
+      "settings": {
+        "max_animales": 3,
+        "fina": "así se ve un álbum por dentro →",
+        "titulo_prefijo": "Álbum ·",
+        "cta_label": "Conocer a",
+        "texto_volver": "← volver a los álbumes",
+        "padding-block-start": 0,
         "padding-block-end": 78
       }
     }
@@ -2658,6 +2671,7 @@
     "section_Jmdaay",
     "section_J9B6bX",
     "section_XakceW",
-    "albums_grid_peludos"
+    "albums_grid_peludos",
+    "album_destacado_home"
   ]
 }

@@ -7,10 +7,12 @@
 
   @param {object} animal - Metaobjeto de tipo `animal`
   @param {string} [cta_label] - Texto del enlace inferior (default: "Conocerle →")
+  @param {string} [cta_estilo] - "link" (enlace subrayado, default) o "boton"
+    (botón chocolate "Conocer a {nombre}", como en el panel de álbum de la home)
   @param {boolean} [mostrar_frase] - Mostrar la frase del animal (default: false)
 
   Ejemplo:
-    {% render 'animal-card', animal: a, mostrar_frase: true %}
+    {% render 'animal-card', animal: a, mostrar_frase: true, cta_estilo: 'boton' %}
 {% enddoc %}
 {%- liquid
   assign nombre = animal.nombre.value
@@ -62,7 +64,11 @@
   {%- if mostrar_frase and animal.frase.value != blank -%}
     <p class="animal-card__frase">"{{ animal.frase.value }}"</p>
   {%- endif -%}
-  <span class="animal-card__go">{{ cta }}</span>
+  {%- if cta_estilo == 'boton' -%}
+    <span class="animal-card__btn">{{ cta_label | default: 'Conocer a' }} {{ nombre }}</span>
+  {%- else -%}
+    <span class="animal-card__go">{{ cta }}</span>
+  {%- endif -%}
 </a>
 
 {% stylesheet %}
@@ -148,6 +154,25 @@
     font-size: 1rem;
     color: var(--la-wine, var(--color-foreground));
     margin: 6px 0 0;
+  }
+
+  .animal-card__btn {
+    display: inline-block;
+    margin-top: 12px;
+    font-family: var(--font-accent--family);
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    padding: 0.65em 1.2em;
+    border-radius: 3px;
+    background: var(--color-foreground);
+    color: var(--la-cream, var(--color-background));
+    transition: filter 0.14s ease, transform 0.12s ease;
+  }
+
+  .animal-card:hover .animal-card__btn {
+    filter: brightness(0.8);
   }
 
   .animal-card__go {

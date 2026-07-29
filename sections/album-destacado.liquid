@@ -1,0 +1,258 @@
+{% comment %}
+  Álbum destacado ("así se ve un álbum por dentro"): eliges UN álbum en los ajustes
+  y el panel se rellena solo con los primeros animales de su lista (orden del admin,
+  excluyendo adoptados). Diseño: panel crema con cabecera y grid de fichas con botón.
+{% endcomment %}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    {% render 'paleta-vars' %}
+    --album-dest-padding-top: {{ section.settings.padding-block-start }}px;
+    --album-dest-padding-bottom: {{ section.settings.padding-block-end }}px;
+  }
+</style>
+
+{%- liquid
+  assign album = section.settings.album
+  assign max = section.settings.max_animales | default: 3
+-%}
+
+<div class="album-dest">
+  <div class="album-dest__wrap">
+    {%- if album == blank -%}
+      {%- if request.design_mode -%}
+        <div class="album-dest__panel">
+          <p class="album-dest__vacio">Elige un álbum en los ajustes de la sección y sus animales aparecerán aquí solos.</p>
+        </div>
+      {%- endif -%}
+    {%- else -%}
+      {%- capture fichas -%}
+        {%- liquid
+          assign mostrados = 0
+          for a in album.animales.value
+            if mostrados >= max
+              break
+            endif
+            assign estado = a.estado.value | downcase | strip
+            if estado == 'adoptado'
+              continue
+            endif
+            assign mostrados = mostrados | plus: 1
+            render 'animal-card', animal: a, mostrar_frase: true, cta_estilo: 'boton', cta_label: section.settings.cta_label
+          endfor
+        -%}
+      {%- endcapture -%}
+      {%- assign fichas_limpio = fichas | strip -%}
+
+      <div class="album-dest__panel">
+        <div class="album-dest__head">
+          <div>
+            {%- if section.settings.fina != blank -%}
+              <span class="album-dest__fina">{{ section.settings.fina }}</span>
+            {%- endif -%}
+            <h3 class="album-dest__titulo">
+              {%- if section.settings.titulo_prefijo != blank -%}
+                {{ section.settings.titulo_prefijo }}
+              {% endif -%}
+              {{ album.titulo.value }}
+            </h3>
+          </div>
+          {%- if section.settings.pagina_animales != blank and section.settings.texto_volver != blank -%}
+            <a class="album-dest__volver" href="{{ section.settings.pagina_animales }}">
+              {{- section.settings.texto_volver -}}
+            </a>
+          {%- endif -%}
+        </div>
+
+        {%- if fichas_limpio != blank -%}
+          <div class="album-dest__grid">
+            {{ fichas }}
+          </div>
+        {%- elsif request.design_mode -%}
+          <p class="album-dest__vacio">Este álbum no tiene animales visibles (¿están todos adoptados o la lista está vacía?).</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .album-dest {
+    background: var(--la-nude, var(--color-background));
+    padding-block: var(--album-dest-padding-top) var(--album-dest-padding-bottom);
+    color: var(--color-foreground);
+  }
+
+  .album-dest__wrap {
+    max-width: var(--page-width);
+    margin-inline: auto;
+    padding-inline: var(--page-margin);
+  }
+
+  .album-dest__panel {
+    background: var(--la-cream, var(--color-background));
+    border: 1px solid rgb(var(--color-foreground-rgb) / var(--opacity-15));
+    border-radius: 4px;
+    padding: 38px 34px;
+    box-shadow: 0 10px 28px rgb(var(--color-foreground-rgb) / 0.1);
+  }
+
+  @media (max-width: 640px) {
+    .album-dest__panel {
+      padding: 26px 18px;
+    }
+  }
+
+  .album-dest__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+
+  .album-dest__fina {
+    font-family: var(--font-heading--family);
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--la-wine-soft, var(--color-foreground));
+  }
+
+  .album-dest__titulo {
+    font-family: var(--font-accent--family);
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 1.25rem;
+    letter-spacing: 0.1em;
+    margin: 0;
+  }
+
+  .album-dest__volver {
+    font-family: var(--font-accent--family);
+    font-weight: 500;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--la-wine, var(--color-foreground));
+    border-bottom: 2px solid var(--la-wine, var(--color-foreground));
+    padding-bottom: 2px;
+  }
+
+  .album-dest__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+
+  /* dentro del panel el mockup sube ligeramente el nombre (h4 de .ficha) */
+  .album-dest__grid .animal-card__nombre {
+    font-size: 1.4rem;
+  }
+
+  @media (max-width: 900px) {
+    .album-dest__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .album-dest__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .album-dest__vacio {
+    text-align: center;
+    font-size: 0.95rem;
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-muted-text));
+    margin: 0;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Álbum destacado",
+  "settings": [
+    {
+      "type": "metaobject",
+      "id": "album",
+      "metaobject_type": "album",
+      "label": "Álbum",
+      "info": "El panel se rellena solo con los primeros animales de su lista (los adoptados se saltan)."
+    },
+    {
+      "type": "range",
+      "id": "max_animales",
+      "label": "Animales a mostrar",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "text",
+      "id": "fina",
+      "label": "Entradilla (cursiva)",
+      "default": "así se ve un álbum por dentro →"
+    },
+    {
+      "type": "text",
+      "id": "titulo_prefijo",
+      "label": "Prefijo del título",
+      "default": "Álbum ·"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Texto del botón (se añade el nombre)",
+      "default": "Conocer a"
+    },
+    {
+      "type": "header",
+      "content": "Enlace volver"
+    },
+    {
+      "type": "url",
+      "id": "pagina_animales",
+      "label": "Página «Nuestros animales»"
+    },
+    {
+      "type": "text",
+      "id": "texto_volver",
+      "label": "Texto del enlace",
+      "default": "← volver a los álbumes"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 78
+    }
+  ],
+  "presets": [
+    {
+      "name": "Álbum destacado",
+      "category": "t:categories.storytelling"
+    }
+  ]
+}
+{% endschema %}
