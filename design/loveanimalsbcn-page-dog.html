@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tuco — Love Animals BCN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Oswald:wght@400;500;600&family=Figtree:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --nude:#D8CDBB;
+  --nude-soft:#E6DECF;
+  --cream:#F7F2E8;
+  --white:#FDFBF6;
+  --choco:#4A3628;
+  --wine:#6E4A44;
+  --wine-soft:#8A625B;
+  --gold:#B08D57;
+  --green:#5F7A5B;
+  --line:rgba(74,54,40,.16);
+  --f-serif:'Cormorant Garamond',serif;
+  --f-cond:'Oswald',sans-serif;
+  --f-body:'Figtree',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--f-body);background:var(--nude-soft);color:var(--choco);line-height:1.6}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+.fina{font-family:var(--f-serif);font-style:italic;font-weight:500}
+.cond{font-family:var(--f-cond);text-transform:uppercase}
+.btn{
+  display:inline-block;font-family:var(--f-cond);font-weight:500;text-transform:uppercase;
+  font-size:.88rem;letter-spacing:.08em;padding:.9em 1.9em;border-radius:3px;
+  background:var(--choco);color:var(--cream);transition:background .14s ease,transform .12s ease;
+  border:none;cursor:pointer;text-align:center;
+}
+.btn:hover{background:#35261B;transform:translateY(-2px)}
+.btn:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.btn--wine{background:var(--wine)}
+.btn--wine:hover{background:#573833}
+.btn--light{background:var(--white);color:var(--choco);border:1px solid var(--line)}
+.btn--light:hover{background:#fff}
+
+/* ---------- ticker + header ---------- */
+.ticker{background:var(--choco);color:var(--cream);font-size:.82rem;font-weight:600;padding:8px 0;text-align:center}
+.ticker b{color:#E3C08D}
+header{position:sticky;top:0;z-index:50;background:rgba(230,222,207,.95);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:13px 0}
+.logo{font-family:var(--f-serif);font-style:italic;font-weight:600;font-size:1.5rem}
+.nav-links{display:flex;gap:26px;font-weight:600;font-size:.9rem}
+.nav-links a:hover{color:var(--wine)}
+.nav .btn{font-size:.75rem;padding:.6em 1.2em}
+@media(max-width:860px){.nav-links{display:none}}
+
+/* ---------- breadcrumb ---------- */
+.crumbs{padding:18px 0 0;font-size:.8rem;color:var(--wine-soft);font-weight:600}
+.crumbs a:hover{color:var(--wine);text-decoration:underline;text-underline-offset:2px}
+.crumbs span{margin:0 .5em;color:var(--gold)}
+
+/* ---------- PDP grid ---------- */
+.pdp{padding:28px 0 70px}
+.pdp-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:52px;align-items:start}
+@media(max-width:880px){.pdp-grid{grid-template-columns:1fr;gap:40px}}
+
+/* galería */
+.gallery .main{
+  background:var(--white);border:1px solid var(--line);border-radius:4px;padding:10px;
+  box-shadow:0 12px 30px rgba(74,54,40,.14);position:relative;
+}
+.gallery .main img{aspect-ratio:1/1;object-fit:cover;width:100%}
+.gallery .dias{
+  position:absolute;top:20px;right:20px;background:var(--wine);color:var(--cream);
+  font-family:var(--f-cond);font-weight:500;font-size:.72rem;letter-spacing:.1em;
+  text-transform:uppercase;padding:.5em 1em;border-radius:2px;
+}
+.gallery .thumbs{display:flex;gap:12px;margin-top:14px}
+.gallery .thumbs button{
+  flex:1;background:var(--white);border:1px solid var(--line);border-radius:3px;padding:6px;
+  cursor:pointer;transition:border-color .13s ease,transform .13s ease;
+}
+.gallery .thumbs button:hover{transform:translateY(-3px)}
+.gallery .thumbs button.active{border-color:var(--wine);border-width:2px}
+.gallery .thumbs img{aspect-ratio:1/1;object-fit:cover;width:100%}
+
+/* adopt-box */
+.adopt-box .album-tag{
+  display:inline-block;font-family:var(--f-cond);font-weight:500;font-size:.68rem;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--wine);
+  border:1px solid var(--wine);border-radius:2px;padding:.4em .9em;
+}
+.adopt-box h1{
+  font-family:var(--f-serif);font-weight:500;font-size:clamp(2.6rem,6vw,3.8rem);
+  line-height:1;margin-top:14px;letter-spacing:.02em;
+}
+.adopt-box .frase{font-family:var(--f-serif);font-style:italic;font-size:1.35rem;color:var(--wine);margin-top:6px}
+/* bloque de días con peso (el "precio" de la PDP) */
+.dias-big{
+  margin-top:22px;background:var(--wine);color:var(--cream);border-radius:4px;
+  padding:20px 24px;display:flex;align-items:center;gap:20px;
+  box-shadow:0 10px 26px rgba(74,54,40,.18);
+}
+.dias-big .num{font-family:var(--f-serif);font-weight:500;font-size:3.6rem;line-height:1;letter-spacing:.01em}
+.dias-big .lbl{font-family:var(--f-cond);font-weight:500;text-transform:uppercase;letter-spacing:.14em;font-size:.8rem;line-height:1.5}
+.dias-big .sub{display:block;font-family:var(--f-serif);font-style:italic;text-transform:none;letter-spacing:0;font-size:1.05rem;color:#E3C08D;margin-top:2px}
+.dias-band{
+  position:absolute;left:0;right:0;bottom:0;background:rgba(110,74,68,.92);color:var(--cream);
+  font-family:var(--f-cond);font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+  font-size:.72rem;padding:.65em;text-align:center;
+}
+.dias-band b{font-family:var(--f-serif);font-size:1.1rem;letter-spacing:.02em;margin-right:.35em}
+.datos{
+  margin-top:22px;background:var(--white);border:1px solid var(--line);border-radius:4px;
+  padding:20px 22px;display:grid;grid-template-columns:1fr 1fr;gap:10px 20px;
+}
+@media(max-width:460px){.datos{grid-template-columns:1fr}}
+.dato{font-size:.88rem}
+.dato .k{font-family:var(--f-cond);font-weight:500;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:var(--wine-soft);display:block}
+.dato .v{font-weight:700}
+.dato .v.si{color:var(--green)}
+.dato .v.no{color:var(--wine)}
+
+.convive{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap}
+.conv{
+  font-size:.78rem;font-weight:700;border-radius:999px;padding:.5em 1.1em;
+  background:var(--cream);border:1px solid var(--line);
+}
+.conv.ok{color:var(--green)}
+.conv.ask{color:var(--gold)}
+
+.adopt-ctas{display:grid;gap:12px;margin-top:24px}
+.adopt-ctas .btn{width:100%}
+.contact-mini{
+  margin-top:14px;font-size:.85rem;color:var(--wine-soft);text-align:center;font-weight:600;
+}
+.share{
+  margin-top:22px;border-top:1px dashed var(--line);padding-top:18px;text-align:center;
+}
+.share .fina{font-size:1.05rem;color:var(--wine)}
+.share-btns{display:flex;justify-content:center;gap:10px;margin-top:10px;flex-wrap:wrap}
+.share-btns a{
+  font-family:var(--f-cond);font-weight:500;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;
+  border:1px solid var(--line);border-radius:999px;padding:.55em 1.1em;transition:all .13s ease;
+}
+.share-btns a:hover{background:var(--choco);color:var(--cream);border-color:var(--choco)}
+
+/* ---------- secciones inferiores ---------- */
+.pdp-sections{background:var(--nude);padding:64px 0}
+.sec-block{max-width:820px;margin:0 auto 44px}
+.sec-block:last-child{margin-bottom:0}
+.ig-head{
+  font-family:var(--f-cond);font-weight:500;text-transform:uppercase;
+  font-size:clamp(1.05rem,2vw,1.3rem);letter-spacing:.06em;
+  display:inline-block;border-bottom:2px solid var(--wine);padding-bottom:6px;
+}
+.sec-block p{margin-top:14px;font-size:.98rem}
+.sec-block p b{color:var(--wine)}
+.caracter-tags{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.ctag{
+  font-family:var(--f-serif);font-style:italic;font-weight:600;font-size:1.05rem;color:var(--choco);
+  background:var(--cream);border:1px solid var(--line);border-radius:999px;padding:.4em 1.2em;
+}
+.etologia-note{
+  margin-top:16px;font-size:.85rem;color:var(--wine-soft);font-style:italic;
+}
+
+/* caja licencia (condicional PPP) */
+.licencia{
+  background:var(--white);border:1px solid var(--line);border-left:4px solid var(--gold);
+  border-radius:4px;padding:26px 30px;box-shadow:0 8px 22px rgba(74,54,40,.08);
+}
+.licencia h3{font-family:var(--f-cond);font-weight:500;text-transform:uppercase;font-size:1.05rem;letter-spacing:.06em}
+.licencia p{margin-top:10px;font-size:.92rem}
+.licencia a{color:var(--wine);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+
+/* ---------- relacionados ---------- */
+.related{padding:64px 0}
+.related .head{text-align:center;margin-bottom:38px}
+.related .head .fina{font-size:1.2rem;color:var(--wine)}
+.related .head h2{
+  font-family:var(--f-serif);font-weight:500;text-transform:uppercase;
+  font-size:clamp(1.6rem,3.6vw,2.4rem);letter-spacing:.26em;margin-right:-.26em;margin-top:4px;
+}
+.rel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:900px;margin:0 auto}
+@media(max-width:760px){.rel-grid{grid-template-columns:1fr;max-width:400px}}
+.rel{
+  background:var(--white);border:1px solid var(--line);border-radius:4px;padding:10px 10px 16px;
+  text-align:center;box-shadow:0 8px 20px rgba(74,54,40,.1);transition:transform .14s ease;
+}
+.rel:hover{transform:translateY(-5px)}
+.rel .ph{position:relative}
+.rel img{aspect-ratio:1/1;object-fit:cover;width:100%}
+.rel .dias-chip{
+  position:absolute;top:8px;right:8px;background:var(--wine);color:var(--cream);
+  font-family:var(--f-cond);font-weight:500;font-size:.62rem;letter-spacing:.08em;
+  text-transform:uppercase;padding:.45em .8em;border-radius:2px;
+}
+.rel h3{font-family:var(--f-serif);font-style:italic;font-weight:600;font-size:1.35rem;margin-top:10px}
+.rel .meta{font-size:.8rem;color:var(--wine-soft);font-weight:600}
+.rel .go{
+  display:inline-block;margin-top:10px;font-family:var(--f-cond);font-weight:500;font-size:.68rem;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--wine);border-bottom:2px solid var(--wine);padding-bottom:2px;
+}
+
+/* ---------- footer ---------- */
+footer{background:var(--choco);color:rgba(247,242,232,.8);padding:44px 0 26px}
+.foot-bottom{font-size:.78rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.foot-bottom .fina{color:var(--cream);font-size:1.1rem}
+
+@media (prefers-reduced-motion: reduce){
+  *{transition:none!important;animation:none!important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<div class="ticker">Ahora mismo <b>necesitamos casas de acogida</b> · puedes salvar una vida sin adoptar</div>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#">Love Animals BCN</a>
+    <nav class="nav-links" aria-label="Navegación principal">
+      <a href="#">Quiero adoptar</a>
+      <a href="#">Quiero acoger</a>
+      <a href="#">Nuestros animales</a>
+      <a href="#">Colabora</a>
+    </nav>
+    <a class="btn btn--wine" href="#">Quiero acoger</a>
+  </div>
+</header>
+
+<!-- BREADCRUMB -->
+<div class="wrap crumbs">
+  <a href="#">Nuestros animales</a><span>›</span><a href="#">PPP jóvenes</a><span>›</span><b>Tuco</b>
+</div>
+
+<!-- PDP -->
+<section class="pdp">
+  <div class="wrap pdp-grid">
+
+    <!-- GALERÍA -->
+    <div class="gallery">
+      <div class="main">
+        <img id="mainImg" src="https://loveanimalsbcn.com/cdn/shop/articles/TUCO_e9a296fe-0f38-4cf3-92eb-121b3bfff834.png?v=1782034456&width=1000" alt="Tuco">
+      </div>
+      <div class="thumbs" id="thumbs">
+        <!-- en la implementación real: galería de fotos del metaobjeto del animal -->
+        <button class="active" data-src="https://loveanimalsbcn.com/cdn/shop/articles/TUCO_e9a296fe-0f38-4cf3-92eb-121b3bfff834.png?v=1782034456&width=1000"><img src="https://loveanimalsbcn.com/cdn/shop/articles/TUCO_e9a296fe-0f38-4cf3-92eb-121b3bfff834.png?v=1782034456&width=300" alt="Foto 1 de Tuco"></button>
+        <button data-placeholder="foto 2"><span style="display:flex;align-items:center;justify-content:center;aspect-ratio:1/1;font-size:.7rem;color:var(--wine-soft);font-weight:700">foto 2</span></button>
+        <button data-placeholder="foto 3"><span style="display:flex;align-items:center;justify-content:center;aspect-ratio:1/1;font-size:.7rem;color:var(--wine-soft);font-weight:700">foto 3</span></button>
+        <button data-placeholder="vídeo"><span style="display:flex;align-items:center;justify-content:center;aspect-ratio:1/1;font-size:.7rem;color:var(--wine-soft);font-weight:700">▶ vídeo</span></button>
+      </div>
+    </div>
+
+    <!-- ADOPT-BOX -->
+    <div class="adopt-box">
+      <span class="album-tag">Álbum · PPP jóvenes</span>
+      <h1>Tuco</h1>
+      <p class="frase">"me flipa la pelota"</p>
+
+      <div class="dias-big">
+        <span class="num" data-since-num="2025-11-15">—</span>
+        <div class="lbl">días esperando<br>una familia<span class="sub">hoy puede ser el último</span></div>
+      </div>
+
+      <div class="datos">
+        <div class="dato"><span class="k">Edad</span><span class="v">Joven (1–4 años)</span></div>
+        <div class="dato"><span class="k">Tamaño</span><span class="v">Grande</span></div>
+        <div class="dato"><span class="k">Sexo</span><span class="v">Macho</span></div>
+        <div class="dato"><span class="k">PPP</span><span class="v no">Sí · licencia sencilla</span></div>
+        <div class="dato"><span class="k">Vacunado y con chip</span><span class="v si">Sí ✓</span></div>
+        <div class="dato"><span class="k">Esterilizado</span><span class="v si">Sí ✓</span></div>
+      </div>
+
+      <div class="convive">
+        <span class="conv ok">✓ con niños</span>
+        <span class="conv ok">✓ con otros perros</span>
+        <span class="conv ask">? con gatos — consultar</span>
+      </div>
+
+      <div class="adopt-ctas">
+        <a class="btn btn--wine" href="#">Quiero adoptar a Tuco</a>
+        <a class="btn btn--light" href="#">Quiero acogerle temporalmente</a>
+      </div>
+      <p class="contact-mini">✉ [email] · 📱 DM a @adopta.loveanimals.bcn</p>
+
+      <div class="share">
+        <span class="fina">muchas adopciones empiezan con un repost…</span>
+        <div class="share-btns">
+          <a href="#">Compartir en Instagram</a>
+          <a href="#">WhatsApp</a>
+          <a href="#">Copiar enlace</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HISTORIA / CARÁCTER / LICENCIA -->
+<section class="pdp-sections">
+  <div class="wrap">
+    <div class="sec-block">
+      <span class="ig-head">Su historia</span>
+      <p>Tuco llegó a la protectora en noviembre de 2025. [Aquí va la historia real escrita por las voluntarias: de dónde viene, cómo fue su rescate, cómo ha evolucionado desde que está con nosotras.] Es un perro joven, lleno de energía y con un corazón enorme que la etiqueta "PPP" no consigue tapar.</p>
+      <p>Desde el primer día demostró ser <b>sociable, juguetón y muy listo</b>. Aprende rápido, adora a las personas y tiene una obsesión confesa: la pelota.</p>
+    </div>
+
+    <div class="sec-block">
+      <span class="ig-head">Su carácter</span>
+      <div class="caracter-tags">
+        <span class="ctag">enérgico</span>
+        <span class="ctag">juguetón</span>
+        <span class="ctag">sociable</span>
+        <span class="ctag">listo</span>
+        <span class="ctag">cariñoso</span>
+      </div>
+      <p class="etologia-note">Valoración realizada por nuestro equipo de etología canina, que os asesorará durante la visita sobre el encaje con vuestra familia.</p>
+    </div>
+
+    <div class="sec-block">
+      <!-- BLOQUE CONDICIONAL: solo se muestra si el animal es PPP -->
+      <div class="licencia">
+        <h3>Tuco necesita licencia PPP — y es más fácil de lo que parece</h3>
+        <p>Certificado de capacidad (como el del carnet de conducir), antecedentes penales (gratis, online), un seguro de responsabilidad civil y la solicitud en tu ayuntamiento. Se resuelve en unas semanas y <b>te acompañamos en todo el papeleo</b>. <a href="#">Ver la guía completa de la licencia →</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RELACIONADOS -->
+<section class="related">
+  <div class="wrap">
+    <div class="head">
+      <span class="fina">si Tuco te ha robado el corazón, espera a ver a…</span>
+      <h2>Más peludos de su álbum</h2>
+    </div>
+    <div class="rel-grid">
+      <a class="rel" href="#">
+        <div class="ph">
+          <img src="https://loveanimalsbcn.com/cdn/shop/articles/JHONNY_9e78823b-8f2b-4971-8fdd-83a13ae3e460.png?v=1782034634&width=600" alt="Jhonny">
+          <span class="dias-band"><b data-since-num="2025-07-20">—</b> días esperando</span>
+        </div>
+        <h3>Jhonny</h3>
+        <div class="meta">adulto · grande · cariñoso</div>
+        <span class="go">Conocerle →</span>
+      </a>
+      <a class="rel" href="#">
+        <div class="ph">
+          <img src="https://loveanimalsbcn.com/cdn/shop/articles/Rocky_veterano_1e806c13-fa57-4af1-a004-12f5fa716f89.png?v=1782032800&width=600" alt="Rocky">
+          <span class="dias-band"><b data-since-num="2021-09-01">—</b> días esperando</span>
+        </div>
+        <h3>Rocky</h3>
+        <div class="meta">veterano · mediano · noble</div>
+        <span class="go">Conocerle →</span>
+      </a>
+      <a class="rel" href="#">
+        <div class="ph">
+          <img src="https://loveanimalsbcn.com/cdn/shop/articles/WOODY_9523b206-71d9-4a3a-9276-bf46c2b3cfe6.jpg?v=1782034439&width=600" alt="Woody">
+          <span class="dias-band"><b data-since-num="2026-01-25">—</b> días esperando</span>
+        </div>
+        <h3>Woody</h3>
+        <div class="meta">adulto · mediano · sociable</div>
+        <span class="go">Conocerle →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-bottom">
+    <span class="fina">Love Animals BCN</span>
+    <span>© 2026 · Instagram · TikTok · Facebook</span>
+  </div>
+</footer>
+
+<script>
+// días esperando
+const fmt = n => n.toLocaleString('es-ES');
+const daysSince = d => Math.floor((Date.now() - new Date(d).getTime()) / 86400000);
+document.querySelectorAll('[data-since]').forEach(el => {
+  el.textContent = el.textContent.replace('—', fmt(daysSince(el.dataset.since)));
+});
+document.querySelectorAll('[data-since-num]').forEach(el => {
+  el.textContent = fmt(daysSince(el.dataset.sinceNum));
+});
+
+// galería
+const mainImg = document.getElementById('mainImg');
+document.querySelectorAll('#thumbs button').forEach(b => {
+  b.addEventListener('click', () => {
+    document.querySelectorAll('#thumbs button').forEach(x => x.classList.remove('active'));
+    b.classList.add('active');
+    if (b.dataset.src && !b.dataset.placeholder) mainImg.src = b.dataset.src;
+  });
+});
+</script>
+
+</body>
+</html>

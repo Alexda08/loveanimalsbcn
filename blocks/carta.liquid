@@ -1,0 +1,236 @@
+{% liquid
+  assign block_settings = block.settings
+%}
+
+{% style %}
+  .carta-{{ block.id }} {
+    --carta-rotation: {{ block_settings.rotation | default: 0 }}deg;
+    --carta-radius: {{ block_settings.corner_radius | default: 0 }}px;
+    {% if block_settings.background_color != blank %}
+      --carta-background: {{ block_settings.background_color }};
+    {% endif %}
+    {% if block_settings.text_color != blank %}
+      --carta-foreground: {{ block_settings.text_color }};
+      --carta-foreground-rgb: {{ block_settings.text_color.rgb }};
+    {% endif %}
+    {% if block_settings.accent_color != blank %}
+      --carta-accent: {{ block_settings.accent_color }};
+    {% endif %}
+    {% if block_settings.tape_color != blank %}
+      --carta-tape: {{ block_settings.tape_color }};
+    {% endif %}
+  }
+{% endstyle %}
+
+<div class="carta carta-{{ block.id }}" {{ block.shopify_attributes }}>
+  {% if block_settings.show_tape %}
+    <span class="carta__tape" aria-hidden="true"></span>
+  {% endif %}
+
+  {% if block_settings.kicker != blank %}
+    <p class="carta__kicker">{{ block_settings.kicker }}</p>
+  {% endif %}
+
+  {% if block_settings.title != blank %}
+    <h2 class="carta__title">{{ block_settings.title }}</h2>
+  {% endif %}
+
+  {% if block_settings.body != blank %}
+    <div class="carta__body rte">{{ block_settings.body }}</div>
+  {% endif %}
+
+  {% if block_settings.signature != blank %}
+    <p class="carta__signature">{{ block_settings.signature }}</p>
+  {% endif %}
+
+  {% if block_settings.postscript != blank %}
+    <p class="carta__postscript">{{ block_settings.postscript }}</p>
+  {% endif %}
+</div>
+
+{% stylesheet %}
+  .carta {
+    --carta-background: var(--palette-lightest);
+    --carta-foreground: var(--color-foreground);
+    --carta-foreground-rgb: var(--color-foreground-rgb);
+    --carta-accent: var(--color-foreground-muted);
+    --carta-tape: rgb(var(--carta-foreground-rgb) / var(--opacity-15));
+    position: relative;
+    width: 100%;
+    padding: clamp(1.75rem, 1.1rem + 2.7vw, 2.625rem) clamp(1.4rem, 0.9rem + 2.2vw, 2.625rem) clamp(1.5rem, 1.2rem + 1.3vw, 2.125rem);
+    background: var(--carta-background);
+    color: var(--carta-foreground);
+    border: var(--style-border-width, 1px) solid rgb(var(--carta-foreground-rgb) / var(--opacity-15));
+    border-radius: var(--carta-radius);
+    box-shadow: 0 14px 36px rgb(var(--carta-foreground-rgb) / var(--opacity-15));
+    transform: rotate(var(--carta-rotation));
+  }
+
+  .carta__tape {
+    position: absolute;
+    top: -13px;
+    left: 50%;
+    width: 110px;
+    height: 28px;
+    background: var(--carta-tape);
+    border-inline: 1px dashed rgb(var(--carta-foreground-rgb) / var(--opacity-20));
+    transform: translateX(-50%) rotate(-2deg);
+  }
+
+  .carta__kicker {
+    margin: 0;
+    font-family: var(--font-accent--family);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--carta-accent);
+  }
+
+  .carta__title {
+    margin: 0.375rem 0 0;
+    font-family: var(--font-heading--family);
+    font-style: italic;
+    font-size: var(--font-h4--size);
+    line-height: var(--font-h4--line-height, 1.2);
+    color: var(--carta-foreground);
+  }
+
+  .carta__body {
+    margin-block-start: 0.875rem;
+    font-family: var(--font-heading--family);
+    font-style: italic;
+    font-size: clamp(1.05rem, 0.95rem + 0.5vw, 1.22rem);
+    line-height: 1.75;
+  }
+
+  .carta__body p {
+    margin-block: 0 0.875rem;
+  }
+
+  .carta__body p:last-child {
+    margin-block-end: 0;
+  }
+
+  .carta__signature {
+    margin: 1.125rem 0 0;
+    font-family: var(--font-heading--family);
+    font-style: italic;
+    font-size: 1.15rem;
+    text-align: right;
+    color: var(--carta-accent);
+  }
+
+  .carta__postscript {
+    margin: 0.5rem 0 0;
+    font-family: var(--font-heading--family);
+    font-style: italic;
+    font-size: 0.98rem;
+    color: rgb(var(--carta-foreground-rgb) / var(--opacity-muted-text));
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .carta {
+      transform: none;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Carta",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Remite",
+      "default": "encontrada en la protectora"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Carta a mi futura familia"
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Texto de la carta",
+      "default": "<p>Hola. Todavía no te conozco, pero pienso en ti todos los días. No sé si tu casa es grande o pequeña, si madrugas o te quedas dormido. Me da igual: yo solo quiero estar donde estés tú.</p><p>Tómate tu tiempo. Yo sé esperar. Llevo mucho practicando.</p>"
+    },
+    {
+      "type": "text",
+      "id": "signature",
+      "label": "Firma",
+      "default": "— con amor, todos nosotros 🐾"
+    },
+    {
+      "type": "text",
+      "id": "postscript",
+      "label": "Posdata",
+      "default": "P.D.: si quieres conocerme, estoy en “nuestros animales”."
+    },
+    {
+      "type": "header",
+      "content": "t:content.appearance"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tape",
+      "label": "Mostrar cinta adhesiva",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "rotation",
+      "label": "Inclinación",
+      "min": -3,
+      "max": 3,
+      "step": 0.5,
+      "unit": "deg",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "label": "t:settings.corner_radius",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "t:settings.text_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Color de acento (remite y firma)",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
+      "id": "tape_color",
+      "label": "Color de la cinta",
+      "alpha": true,
+      "default": "#B08D5759"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Carta",
+      "category": "t:categories.storytelling"
+    }
+  ]
+}
+{% endschema %}
