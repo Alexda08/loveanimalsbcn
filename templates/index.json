@@ -2577,6 +2577,17 @@
         "padding-block-start": 22,
         "padding-block-end": 64
       }
+    },
+    "albums_grid_peludos": {
+      "type": "albums-grid",
+      "name": "Grid de álbumes",
+      "settings": {
+        "fina": "podéis conocer a nuestros...",
+        "titulo": "Peludos",
+        "lead": "Organizados por álbumes, como en nuestro Instagram. Dentro de cada álbum encontrarás la ficha de cada animal con sus fotos, su historia y su carácter.",
+        "padding-block-start": 78,
+        "padding-block-end": 78
+      }
     }
   },
   "order": [
@@ -2586,6 +2597,7 @@
     "section_Yi4nCE",
     "section_Jmdaay",
     "section_J9B6bX",
-    "section_XakceW"
+    "section_XakceW",
+    "albums_grid_peludos"
   ]
 }

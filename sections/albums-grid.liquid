@@ -49,6 +49,13 @@
       {%- else -%}
         {%- for album in shop.metaobjects.album.values -%}
           {%- render 'album-card', album: album -%}
+        {%- else -%}
+          {%- if request.design_mode -%}
+            <p class="albums-grid__vacio">
+              Aún no hay álbumes: crea entradas del metaobjeto «album» en el admin
+              (Configuración → Datos personalizados) y aparecerán aquí solas.
+            </p>
+          {%- endif -%}
         {%- endfor -%}
       {%- endif -%}
     </div>
@@ -120,6 +127,14 @@
       grid-template-columns: 1fr;
     }
   }
+
+  .albums-grid__vacio {
+    grid-column: 1 / -1;
+    text-align: center;
+    font-size: 0.95rem;
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-muted-text));
+    margin: 0;
+  }
 {% endstylesheet %}
 
 {% schema %}
@@ -130,7 +145,7 @@
       "type": "text",
       "id": "fina",
       "label": "Entradilla (cursiva)",
-      "default": "podéis conocer a nuestros…"
+      "default": "podéis conocer a nuestros..."
     },
     {
       "type": "text",
