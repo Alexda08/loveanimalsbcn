@@ -1,0 +1,270 @@
+{% comment %}
+  Página de álbum: cabecera (título, subtítulo, banda de días si es álbum de año),
+  grid de fichas iterando album.animales (el orden manual del admin manda,
+  se excluyen los adoptados) y desplegable de licencia PPP si el álbum tiene PPP.
+  Se usa en templates/metaobject/album.json. El metaobjeto llega como `metaobject`.
+{% endcomment %}
+
+{%- liquid
+  assign album = metaobject
+  assign anio = album.anio_espera.value
+-%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    {% render 'paleta-vars' %}
+    --album-main-padding-top: {{ section.settings.padding-block-start }}px;
+    --album-main-padding-bottom: {{ section.settings.padding-block-end }}px;
+  }
+</style>
+
+{%- if album == blank -%}
+  <div class="album-main__wrap album-main__vacio">
+    <p>Esta sección muestra un álbum de animales. Asígnala a la plantilla de metaobjeto «album».</p>
+  </div>
+{%- else -%}
+  <div class="album-main">
+    <div class="album-main__wrap">
+      <div class="album-main__head">
+        {%- if album.subtitulo.value != blank -%}
+          <p class="album-main__fina">{{ album.subtitulo.value }}</p>
+        {%- endif -%}
+        <h1 class="album-main__titulo">
+          {{ album.titulo.value }}
+          {%- if album.es_urgente.value %}
+            <span class="album-main__urgente">Urgente</span>
+          {%- endif %}
+        </h1>
+        {%- if anio != blank -%}
+          {%- assign desde_anio = anio | append: '-01-01' -%}
+          <p class="album-main__dias">
+            <b>{% render 'dias-esperando', desde: desde_anio %}</b>
+            días esperando familia
+          </p>
+        {%- endif -%}
+        {%- if section.settings.pagina_animales != blank -%}
+          <a class="album-main__volver" href="{{ section.settings.pagina_animales }}">← volver a los álbumes</a>
+        {%- endif -%}
+      </div>
+
+      {%- liquid
+        assign hay_ppp = false
+        assign visibles = 0
+      -%}
+      {%- capture fichas -%}
+        {%- liquid
+          for a in album.animales.value
+            assign estado = a.estado.value | downcase | strip
+            if estado == 'adoptado'
+              continue
+            endif
+            if a.ppp.value
+              assign hay_ppp = true
+            endif
+            assign visibles = visibles | plus: 1
+            render 'animal-card', animal: a, mostrar_frase: true
+          endfor
+        -%}
+      {%- endcapture -%}
+
+      {%- if visibles > 0 -%}
+        <div class="album-main__grid">
+          {{ fichas }}
+        </div>
+      {%- else -%}
+        <p class="album-main__sin-animales">
+          {{ section.settings.texto_vacio }}
+        </p>
+      {%- endif -%}
+
+      {%- if hay_ppp and section.settings.mostrar_licencia -%}
+        <div class="album-main__licencia">
+          {% render 'licencia-ppp', modo: 'desplegable' %}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .album-main {
+    background: var(--la-nude, var(--color-background));
+    padding-block: var(--album-main-padding-top) var(--album-main-padding-bottom);
+    color: var(--color-foreground);
+  }
+
+  .album-main__wrap {
+    max-width: var(--page-width);
+    margin-inline: auto;
+    padding-inline: var(--page-margin);
+  }
+
+  .album-main__vacio {
+    padding-block: 48px;
+    text-align: center;
+  }
+
+  .album-main__head {
+    text-align: center;
+    margin-bottom: 46px;
+  }
+
+  .album-main__fina {
+    font-family: var(--font-heading--family);
+    font-style: italic;
+    font-size: clamp(1.4rem, 2.8vw, 1.9rem);
+    color: var(--la-wine, var(--color-foreground));
+    margin: 0;
+  }
+
+  .album-main__titulo {
+    font-family: var(--font-heading--family);
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: clamp(1.9rem, 4.6vw, 3.1rem);
+    letter-spacing: 0.22em;
+    margin: 4px 0 0;
+    margin-right: -0.22em;
+  }
+
+  .album-main__urgente {
+    display: inline-block;
+    vertical-align: middle;
+    background: var(--la-wine, var(--color-foreground));
+    color: var(--la-cream, var(--color-background));
+    font-family: var(--font-accent--family);
+    font-weight: 500;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    padding: 0.45em 1em;
+    border-radius: 2px;
+    margin-inline-start: 0.6em;
+    transform: translateY(-0.4em);
+  }
+
+  .album-main__dias {
+    display: inline-block;
+    margin: 18px 0 0;
+    background: rgb(var(--la-wine-rgb, var(--color-foreground-rgb)) / 0.92);
+    color: var(--la-cream, var(--color-background));
+    font-family: var(--font-accent--family);
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    padding: 0.65em 1.4em;
+    border-radius: 2px;
+  }
+
+  .album-main__dias b {
+    font-family: var(--font-heading--family);
+    font-size: 1.1rem;
+    letter-spacing: 0.02em;
+    margin-right: 0.35em;
+    font-weight: 500;
+  }
+
+  .album-main__volver {
+    display: block;
+    margin-top: 18px;
+    font-family: var(--font-accent--family);
+    font-weight: 500;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--la-wine, var(--color-foreground));
+  }
+
+  .album-main__volver:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .album-main__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 900px) {
+    .album-main__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .album-main__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .album-main__sin-animales {
+    text-align: center;
+    font-family: var(--font-heading--family);
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--la-wine, var(--color-foreground));
+  }
+
+  .album-main__licencia {
+    margin-top: 50px;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Álbum de animales",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Muestra el metaobjeto «album»: cabecera y grid de fichas. El orden de los animales se controla arrastrando en el admin."
+    },
+    {
+      "type": "url",
+      "id": "pagina_animales",
+      "label": "Página «Nuestros animales» (enlace volver)"
+    },
+    {
+      "type": "text",
+      "id": "texto_vacio",
+      "label": "Texto si el álbum está vacío",
+      "default": "Ahora mismo todos los peludos de este álbum están adoptados o en acogida 🤍"
+    },
+    {
+      "type": "checkbox",
+      "id": "mostrar_licencia",
+      "label": "Mostrar guía de licencia PPP (si hay animales PPP)",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 78
+    }
+  ],
+  "enabled_on": {
+    "templates": ["metaobject"]
+  }
+}
+{% endschema %}

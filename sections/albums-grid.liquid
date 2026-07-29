@@ -1,0 +1,197 @@
+{% comment %}
+  Grid de álbumes de animales (home / página "Nuestros animales").
+  Con blocks se eligen álbumes concretos y su orden (arrastrando en el editor);
+  sin blocks se muestran todos los álbumes existentes.
+{% endcomment %}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    {% render 'paleta-vars' %}
+    --albums-grid-padding-top: {{ section.settings.padding-block-start }}px;
+    --albums-grid-padding-bottom: {{ section.settings.padding-block-end }}px;
+  }
+</style>
+
+{%- liquid
+  # Lista de álbumes: blocks elegidos a mano o, si no hay, todos
+  assign albums_manuales = false
+  if section.blocks.size > 0
+    assign albums_manuales = true
+  endif
+-%}
+
+<div class="albums-grid">
+  <div class="albums-grid__wrap">
+    {%- if section.settings.fina != blank or section.settings.titulo != blank -%}
+      <div class="albums-grid__head">
+        {%- if section.settings.fina != blank -%}
+          <p class="albums-grid__fina">{{ section.settings.fina }}</p>
+        {%- endif -%}
+        {%- if section.settings.titulo != blank -%}
+          <h2 class="albums-grid__titulo">{{ section.settings.titulo }}</h2>
+        {%- endif -%}
+        {%- if section.settings.lead != blank -%}
+          <p class="albums-grid__lead">{{ section.settings.lead }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="albums-grid__grid">
+      {%- if albums_manuales -%}
+        {%- for block in section.blocks -%}
+          {%- assign album = block.settings.album -%}
+          {%- if album != blank -%}
+            <div {{ block.shopify_attributes }}>
+              {%- render 'album-card', album: album -%}
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      {%- else -%}
+        {%- for album in shop.metaobjects.album.values -%}
+          {%- render 'album-card', album: album -%}
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .albums-grid {
+    background: var(--la-nude, var(--color-background));
+    padding-block: var(--albums-grid-padding-top) var(--albums-grid-padding-bottom);
+    color: var(--color-foreground);
+  }
+
+  .albums-grid__wrap {
+    max-width: var(--page-width);
+    margin-inline: auto;
+    padding-inline: var(--page-margin);
+  }
+
+  .albums-grid__head {
+    text-align: center;
+    margin-bottom: 46px;
+  }
+
+  .albums-grid__fina {
+    font-family: var(--font-heading--family);
+    font-style: italic;
+    font-size: clamp(1.4rem, 2.8vw, 1.9rem);
+    color: var(--la-wine, var(--color-foreground));
+    margin: 0;
+  }
+
+  .albums-grid__titulo {
+    font-family: var(--font-heading--family);
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: clamp(1.9rem, 4.6vw, 3.1rem);
+    letter-spacing: 0.28em;
+    margin: 4px 0 0;
+    margin-right: -0.28em;
+  }
+
+  .albums-grid__lead {
+    max-width: 44em;
+    margin: 14px auto 0;
+    font-size: 0.98rem;
+  }
+
+  .albums-grid__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+  }
+
+  @media (max-width: 1000px) {
+    .albums-grid__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 760px) {
+    .albums-grid__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 500px) {
+    .albums-grid__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Grid de álbumes",
+  "settings": [
+    {
+      "type": "text",
+      "id": "fina",
+      "label": "Entradilla (cursiva)",
+      "default": "podéis conocer a nuestros…"
+    },
+    {
+      "type": "text",
+      "id": "titulo",
+      "label": "Título",
+      "default": "Peludos"
+    },
+    {
+      "type": "textarea",
+      "id": "lead",
+      "label": "Texto introductorio",
+      "default": "Organizados por álbumes, como en nuestro Instagram. Dentro de cada álbum encontrarás la ficha de cada animal con sus fotos, su historia y su carácter."
+    },
+    {
+      "type": "paragraph",
+      "content": "Añade blocks para elegir álbumes concretos y ordenarlos arrastrando. Sin blocks, se muestran todos."
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 78
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 78
+    }
+  ],
+  "blocks": [
+    {
+      "type": "album",
+      "name": "Álbum",
+      "settings": [
+        {
+          "type": "metaobject",
+          "id": "album",
+          "metaobject_type": "album",
+          "label": "Álbum"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Grid de álbumes",
+      "category": "t:categories.storytelling"
+    }
+  ]
+}
+{% endschema %}

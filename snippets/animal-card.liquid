@@ -1,0 +1,165 @@
+{% doc %}
+  Ficha (card) de un animal para grids: foto con banda granate de días esperando,
+  nombre, línea de datos, frase y enlace a su página.
+
+  Requiere que la section contenedora defina las variables --la-* en su scope
+  (render 'paleta-vars' en el <style> de la section).
+
+  @param {object} animal - Metaobjeto de tipo `animal`
+  @param {string} [cta_label] - Texto del enlace inferior (default: "Conocerle →")
+  @param {boolean} [mostrar_frase] - Mostrar la frase del animal (default: false)
+
+  Ejemplo:
+    {% render 'animal-card', animal: a, mostrar_frase: true %}
+{% enddoc %}
+{%- liquid
+  assign nombre = animal.nombre.value
+  assign foto = animal.galeria.value | first
+
+  assign meta_parts = ''
+  if animal.edad.value != blank
+    assign meta_parts = meta_parts | append: animal.edad.value | append: '|'
+  endif
+  if animal.tamano.value != blank
+    assign meta_parts = meta_parts | append: animal.tamano.value | append: '|'
+  endif
+  assign primer_rasgo = animal.caracter.value | first
+  if primer_rasgo != blank
+    assign meta_parts = meta_parts | append: primer_rasgo | append: '|'
+  endif
+  assign meta_line = meta_parts | split: '|' | join: ' · '
+
+  assign cta = cta_label | default: 'Conocerle →'
+-%}
+
+<a class="animal-card" href="{{ animal.system.url }}">
+  <div class="animal-card__ph">
+    {%- if foto != blank -%}
+      {{
+        foto.preview_image
+        | image_url: width: 600
+        | image_tag:
+          widths: '300, 450, 600, 900',
+          sizes: '(min-width: 900px) 300px, 50vw',
+          alt: nombre,
+          loading: 'lazy',
+          class: 'animal-card__img'
+      }}
+    {%- else -%}
+      <span class="animal-card__placeholder" aria-hidden="true">🐾</span>
+    {%- endif -%}
+    {%- if animal.fecha_entrada.value != blank -%}
+      <span class="animal-card__dias">
+        <b>{% render 'dias-esperando', desde: animal.fecha_entrada.value %}</b>
+        días esperando
+      </span>
+    {%- endif -%}
+  </div>
+  <h3 class="animal-card__nombre">{{ nombre }}</h3>
+  {%- if meta_line != blank -%}
+    <p class="animal-card__meta">{{ meta_line | downcase }}</p>
+  {%- endif -%}
+  {%- if mostrar_frase and animal.frase.value != blank -%}
+    <p class="animal-card__frase">"{{ animal.frase.value }}"</p>
+  {%- endif -%}
+  <span class="animal-card__go">{{ cta }}</span>
+</a>
+
+{% stylesheet %}
+  .animal-card {
+    display: block;
+    background: var(--la-white, var(--color-background));
+    border: 1px solid rgb(var(--color-foreground-rgb) / var(--opacity-15));
+    border-radius: 4px;
+    padding: 10px 10px 16px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgb(var(--color-foreground-rgb) / var(--opacity-10));
+    transition: transform 0.14s ease;
+    color: var(--color-foreground);
+  }
+
+  .animal-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .animal-card__ph {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .animal-card__img {
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .animal-card__placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1 / 1;
+    font-size: 2rem;
+    background: var(--la-cream, var(--color-background));
+  }
+
+  .animal-card__dias {
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    background: rgb(var(--la-wine-rgb, var(--color-foreground-rgb)) / 0.92);
+    color: var(--la-cream, var(--color-background));
+    font-family: var(--font-accent--family);
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    padding: 0.65em;
+    text-align: center;
+  }
+
+  .animal-card__dias b {
+    font-family: var(--font-heading--family);
+    font-size: 1.1rem;
+    letter-spacing: 0.02em;
+    margin-right: 0.35em;
+    font-weight: 500;
+  }
+
+  .animal-card__nombre {
+    font-family: var(--font-heading--family);
+    font-style: italic;
+    font-weight: 600;
+    font-size: 1.35rem;
+    margin: 10px 0 0;
+  }
+
+  .animal-card__meta {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-muted-text));
+    margin: 2px 0 0;
+  }
+
+  .animal-card__frase {
+    font-family: var(--font-heading--family);
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--la-wine, var(--color-foreground));
+    margin: 6px 0 0;
+  }
+
+  .animal-card__go {
+    display: inline-block;
+    margin-top: 12px;
+    font-family: var(--font-accent--family);
+    font-weight: 500;
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--la-wine, var(--color-foreground));
+    border-bottom: 2px solid var(--la-wine, var(--color-foreground));
+    padding-bottom: 2px;
+  }
+{% endstylesheet %}

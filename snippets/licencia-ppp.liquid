@@ -1,0 +1,157 @@
+{% doc %}
+  Bloque informativo de la licencia PPP. Dos modos:
+  - "caja": caja destacada de la ficha de animal (borde dorado, resumen + enlace a guía)
+  - "desplegable": <details> con la guía completa paso a paso (páginas de álbum / home)
+
+  Requiere que la section contenedora defina las variables --la-* (render 'paleta-vars').
+
+  @param {string} modo - "caja" o "desplegable"
+  @param {string} [nombre] - Nombre del animal (modo caja: personaliza el titular)
+  @param {string} [guia_url] - Enlace a la guía completa (modo caja)
+
+  NOTA: los importes son orientativos, pendientes de confirmar con Carla.
+{% enddoc %}
+{%- liquid
+  assign modo = modo | default: 'desplegable'
+-%}
+
+{%- if modo == 'caja' -%}
+  <div class="licencia-ppp licencia-ppp--caja">
+    <h3 class="licencia-ppp__titulo">
+      {%- if nombre != blank -%}
+        {{ nombre }} necesita licencia PPP — y es más fácil de lo que parece
+      {%- else -%}
+        Necesita licencia PPP — y es más fácil de lo que parece
+      {%- endif -%}
+    </h3>
+    <p>
+      Certificado de capacidad (como el del carnet de conducir), antecedentes penales (gratis, online),
+      un seguro de responsabilidad civil y la solicitud en tu ayuntamiento. Se resuelve en unas semanas y
+      <b>te acompañamos en todo el papeleo</b>.
+      {%- if guia_url != blank %}
+        <a href="{{ guia_url }}">Ver la guía completa de la licencia →</a>
+      {%- endif %}
+    </p>
+  </div>
+{%- else -%}
+  <details class="licencia-ppp licencia-ppp--desplegable">
+    <summary class="licencia-ppp__summary">¿Cómo se tramita la licencia PPP?</summary>
+    <div class="licencia-ppp__body">
+      <p>
+        "PPP" significa "perro potencialmente peligroso": una etiqueta que la ley pone
+        <b>por raza, no por comportamiento</b>. La licencia asusta de primeras, pero es un trámite
+        sencillo que se resuelve en unas semanas:
+      </p>
+      <ol>
+        <li><b>Certificado de capacidad física y psicológica</b> — se hace en centros de reconocimiento (como el del carnet de conducir).</li>
+        <li><b>Certificado de antecedentes penales</b> — gratuito, se pide online en minutos.</li>
+        <li><b>Seguro de responsabilidad civil</b> — desde unos pocos euros al año.</li>
+        <li><b>Solicitud en tu ayuntamiento</b> — con los tres documentos anteriores y una tasa municipal.</li>
+      </ol>
+      <p class="licencia-ppp__nota">
+        Y no estás sola/o: te acompañamos en cada paso del papeleo. Muchas familias lo han hecho
+        antes que tú — pregúntanos sin compromiso.
+      </p>
+    </div>
+  </details>
+{%- endif -%}
+
+{% stylesheet %}
+  .licencia-ppp {
+    background: var(--la-white, var(--color-background));
+    border: 1px solid rgb(var(--color-foreground-rgb) / var(--opacity-15));
+    border-left: 4px solid var(--la-gold, var(--color-foreground));
+    border-radius: 4px;
+    box-shadow: 0 8px 22px rgb(var(--color-foreground-rgb) / var(--opacity-10));
+    color: var(--color-foreground);
+  }
+
+  .licencia-ppp--caja {
+    padding: 26px 30px;
+  }
+
+  .licencia-ppp--desplegable {
+    max-width: 820px;
+    margin-inline: auto;
+    padding: 30px 34px;
+  }
+
+  @media (max-width: 640px) {
+    .licencia-ppp--caja,
+    .licencia-ppp--desplegable {
+      padding: 24px 20px;
+    }
+  }
+
+  .licencia-ppp__titulo,
+  .licencia-ppp__summary {
+    font-family: var(--font-accent--family);
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 1.05rem;
+    letter-spacing: 0.06em;
+    margin: 0;
+  }
+
+  .licencia-ppp p {
+    margin: 10px 0 0;
+    font-size: 0.92rem;
+  }
+
+  .licencia-ppp p b,
+  .licencia-ppp li b {
+    color: var(--la-wine, var(--color-foreground));
+  }
+
+  .licencia-ppp--caja a {
+    color: var(--la-wine, var(--color-foreground));
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .licencia-ppp__summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .licencia-ppp__summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .licencia-ppp__summary::after {
+    content: '＋';
+    font-family: var(--font-body--family);
+    font-size: 1.3rem;
+    color: var(--la-gold, var(--color-foreground));
+    transition: transform 0.18s ease;
+  }
+
+  .licencia-ppp--desplegable[open] .licencia-ppp__summary::after {
+    transform: rotate(45deg);
+  }
+
+  .licencia-ppp__body {
+    margin-top: 16px;
+    font-size: 0.94rem;
+  }
+
+  .licencia-ppp__body ol {
+    margin: 12px 0 0 1.2em;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0;
+  }
+
+  .licencia-ppp__nota {
+    font-family: var(--font-heading--family);
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--la-wine, var(--color-foreground));
+  }
+{% endstylesheet %}

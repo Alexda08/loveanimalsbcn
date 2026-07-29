@@ -1,0 +1,723 @@
+{% comment %}
+  Ficha de animal (parte superior): breadcrumb, galería con miniaturas y adopt-box.
+  Se usa en templates/metaobject/animal.json. El metaobjeto llega como `metaobject`.
+{% endcomment %}
+
+{%- liquid
+  assign animal = metaobject
+  assign nombre = animal.nombre.value
+
+  # Primer álbum que contiene a este animal (para migas, tag y relacionados)
+  assign primer_album = blank
+  for alb in shop.metaobjects.album.values
+    for a in alb.animales.value
+      if a.system.id == animal.system.id
+        assign primer_album = alb
+        break
+      endif
+    endfor
+    if primer_album != blank
+      break
+    endif
+  endfor
+
+  assign galeria = animal.galeria.value
+-%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    {% render 'paleta-vars' %}
+    --animal-main-padding-top: {{ section.settings.padding-block-start }}px;
+    --animal-main-padding-bottom: {{ section.settings.padding-block-end }}px;
+  }
+</style>
+
+{%- if animal == blank -%}
+  <div class="animal-main__wrap animal-main__vacio">
+    <p>Esta sección muestra la ficha de un animal. Asígnala a la plantilla de metaobjeto «animal».</p>
+  </div>
+{%- else -%}
+
+  <div class="animal-main">
+    <nav class="animal-main__wrap animal-main__crumbs" aria-label="Migas de pan">
+      {%- if section.settings.pagina_animales != blank -%}
+        <a href="{{ section.settings.pagina_animales }}">Nuestros animales</a>
+        <span aria-hidden="true">›</span>
+      {%- endif -%}
+      {%- if primer_album != blank -%}
+        <a href="{{ primer_album.system.url }}">{{ primer_album.titulo.value }}</a>
+        <span aria-hidden="true">›</span>
+      {%- endif -%}
+      <b>{{ nombre }}</b>
+    </nav>
+
+    <div class="animal-main__wrap animal-main__grid">
+      {%- comment -%} GALERÍA {%- endcomment -%}
+      <animal-gallery class="animal-main__gallery">
+        <div class="animal-main__gallery-main">
+          {%- if galeria.size > 0 -%}
+            {%- for foto in galeria -%}
+              {%- liquid
+                assign img_loading = 'lazy'
+                if forloop.first
+                  assign img_loading = 'eager'
+                endif
+              -%}
+              <div data-gallery-main {% unless forloop.first %}hidden{% endunless %}>
+                {{
+                  foto.preview_image
+                  | image_url: width: 1200
+                  | image_tag:
+                    widths: '600, 900, 1200, 1600',
+                    sizes: '(min-width: 900px) 560px, 100vw',
+                    alt: nombre,
+                    loading: img_loading,
+                    class: 'animal-main__gallery-img'
+                }}
+              </div>
+            {%- endfor -%}
+          {%- else -%}
+            <span class="animal-main__gallery-placeholder" aria-hidden="true">🐾</span>
+          {%- endif -%}
+        </div>
+        {%- if galeria.size > 1 -%}
+          <div class="animal-main__thumbs">
+            {%- for foto in galeria -%}
+              <button
+                type="button"
+                data-gallery-thumb
+                class="{% if forloop.first %}active{% endif %}"
+                aria-label="Foto {{ forloop.index }} de {{ nombre }}"
+              >
+                {{
+                  foto.preview_image
+                  | image_url: width: 300
+                  | image_tag: widths: '150, 300', alt: '', loading: 'lazy'
+                }}
+              </button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </animal-gallery>
+
+      {%- comment -%} ADOPT-BOX {%- endcomment -%}
+      <div class="animal-main__box">
+        {%- if primer_album != blank -%}
+          <a class="animal-main__album-tag" href="{{ primer_album.system.url }}">
+            Álbum · {{ primer_album.titulo.value }}
+          </a>
+        {%- endif -%}
+
+        <h1 class="animal-main__nombre">{{ nombre }}</h1>
+
+        {%- if animal.frase.value != blank -%}
+          <p class="animal-main__frase">"{{ animal.frase.value }}"</p>
+        {%- endif -%}
+
+        {%- if animal.fecha_entrada.value != blank -%}
+          <div class="animal-main__dias">
+            <span class="animal-main__dias-num">
+              {%- render 'dias-esperando', desde: animal.fecha_entrada.value -%}
+            </span>
+            <div class="animal-main__dias-lbl">
+              días esperando<br>
+              una familia
+              {%- if section.settings.sub_dias != blank -%}
+                <span class="animal-main__dias-sub">{{ section.settings.sub_dias }}</span>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endif -%}
+
+        <dl class="animal-main__datos">
+          {%- if animal.edad.value != blank -%}
+            <div class="animal-main__dato"><dt>Edad</dt><dd>{{ animal.edad.value }}</dd></div>
+          {%- endif -%}
+          {%- if animal.tamano.value != blank -%}
+            <div class="animal-main__dato"><dt>Tamaño</dt><dd>{{ animal.tamano.value }}</dd></div>
+          {%- endif -%}
+          {%- if animal.sexo.value != blank -%}
+            <div class="animal-main__dato"><dt>Sexo</dt><dd>{{ animal.sexo.value }}</dd></div>
+          {%- endif -%}
+          {%- if animal.ppp.value -%}
+            <div class="animal-main__dato">
+              <dt>PPP</dt>
+              <dd class="animal-main__dato--wine">{{ section.settings.ppp_valor }}</dd>
+            </div>
+          {%- endif -%}
+          {%- if section.settings.vacunado_valor != blank -%}
+            <div class="animal-main__dato">
+              <dt>Vacunado y con chip</dt>
+              <dd class="animal-main__dato--ok">{{ section.settings.vacunado_valor }}</dd>
+            </div>
+          {%- endif -%}
+          {%- if section.settings.esterilizado_valor != blank -%}
+            <div class="animal-main__dato">
+              <dt>Esterilizado</dt>
+              <dd class="animal-main__dato--ok">{{ section.settings.esterilizado_valor }}</dd>
+            </div>
+          {%- endif -%}
+        </dl>
+
+        {%- liquid
+          assign conv_defs = 'con niños=convive_ninos;con otros perros=convive_perros;con gatos=convive_gatos' | split: ';'
+        -%}
+        <div class="animal-main__convive">
+          {%- for def in conv_defs -%}
+            {%- liquid
+              assign parts = def | split: '='
+              assign conv_label = parts[0]
+              assign conv_key = parts[1]
+              assign conv_valor = animal[conv_key].value | downcase | strip
+            -%}
+            {%- if conv_valor == 'si' or conv_valor == 'sí' -%}
+              <span class="animal-main__conv animal-main__conv--ok">✓ {{ conv_label }}</span>
+            {%- elsif conv_valor == 'no' -%}
+              <span class="animal-main__conv animal-main__conv--no">✗ {{ conv_label }}</span>
+            {%- elsif conv_valor contains 'consultar' -%}
+              <span class="animal-main__conv animal-main__conv--ask">? {{ conv_label }} — consultar</span>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+
+        <div class="animal-main__ctas">
+          {%- if section.settings.link_adoptar != blank -%}
+            <a class="animal-main__btn animal-main__btn--wine" href="{{ section.settings.link_adoptar }}">
+              Quiero adoptar a {{ nombre }}
+            </a>
+          {%- endif -%}
+          {%- if section.settings.link_acoger != blank -%}
+            <a class="animal-main__btn animal-main__btn--light" href="{{ section.settings.link_acoger }}">
+              Quiero acogerle temporalmente
+            </a>
+          {%- endif -%}
+        </div>
+
+        {%- if section.settings.contacto != blank -%}
+          <p class="animal-main__contacto">{{ section.settings.contacto }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.mostrar_compartir -%}
+          {%- liquid
+            assign url_ficha = request.origin | append: animal.system.url
+            assign texto_wa = 'Mira a ' | append: nombre | append: ', está esperando familia 🐾 ' | append: url_ficha | url_encode
+          -%}
+          <div class="animal-main__share">
+            <span class="animal-main__share-fina">muchas adopciones empiezan con un repost…</span>
+            <copy-link-button class="animal-main__share-btns" data-url="{{ url_ficha }}">
+              {%- if section.settings.instagram_url != blank -%}
+                <a href="{{ section.settings.instagram_url }}" target="_blank" rel="noopener">Instagram</a>
+              {%- endif -%}
+              <a href="https://wa.me/?text={{ texto_wa }}" target="_blank" rel="noopener">WhatsApp</a>
+              <button type="button">Copiar enlace</button>
+            </copy-link-button>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .animal-main {
+    padding-block: var(--animal-main-padding-top) var(--animal-main-padding-bottom);
+    color: var(--color-foreground);
+  }
+
+  .animal-main__wrap {
+    max-width: var(--page-width);
+    margin-inline: auto;
+    padding-inline: var(--page-margin);
+  }
+
+  .animal-main__vacio {
+    padding-block: 48px;
+    text-align: center;
+  }
+
+  .animal-main__crumbs {
+    padding-block-end: 22px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-muted-text));
+  }
+
+  .animal-main__crumbs a:hover {
+    color: var(--la-wine, var(--color-foreground));
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .animal-main__crumbs span {
+    margin-inline: 0.5em;
+    color: var(--la-gold, var(--color-foreground));
+  }
+
+  .animal-main__grid {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 52px;
+    align-items: start;
+  }
+
+  @media (max-width: 880px) {
+    .animal-main__grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+  }
+
+  /* Galería */
+  .animal-main__gallery-main {
+    background: var(--la-white, var(--color-background));
+    border: 1px solid rgb(var(--color-foreground-rgb) / var(--opacity-15));
+    border-radius: 4px;
+    padding: 10px;
+    box-shadow: 0 12px 30px rgb(var(--color-foreground-rgb) / var(--opacity-15));
+  }
+
+  .animal-main__gallery-img {
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .animal-main__gallery-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1 / 1;
+    font-size: 3rem;
+    background: var(--la-cream, var(--color-background));
+  }
+
+  .animal-main__thumbs {
+    display: flex;
+    gap: 12px;
+    margin-top: 14px;
+  }
+
+  .animal-main__thumbs button {
+    flex: 1;
+    max-width: 25%;
+    background: var(--la-white, var(--color-background));
+    border: 1px solid rgb(var(--color-foreground-rgb) / var(--opacity-15));
+    border-radius: 3px;
+    padding: 6px;
+    cursor: pointer;
+    transition: border-color 0.13s ease, transform 0.13s ease;
+  }
+
+  .animal-main__thumbs button:hover {
+    transform: translateY(-3px);
+  }
+
+  .animal-main__thumbs button.active {
+    border-color: var(--la-wine, var(--color-foreground));
+    border-width: 2px;
+  }
+
+  .animal-main__thumbs img {
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Adopt-box */
+  .animal-main__album-tag {
+    display: inline-block;
+    font-family: var(--font-accent--family);
+    font-weight: 500;
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--la-wine, var(--color-foreground));
+    border: 1px solid var(--la-wine, var(--color-foreground));
+    border-radius: 2px;
+    padding: 0.4em 0.9em;
+  }
+
+  .animal-main__nombre {
+    font-family: var(--font-heading--family);
+    font-weight: 500;
+    font-size: clamp(2.6rem, 6vw, 3.8rem);
+    line-height: 1;
+    margin: 14px 0 0;
+    letter-spacing: 0.02em;
+  }
+
+  .animal-main__frase {
+    font-family: var(--font-heading--family);
+    font-style: italic;
+    font-size: 1.35rem;
+    color: var(--la-wine, var(--color-foreground));
+    margin: 6px 0 0;
+  }
+
+  .animal-main__dias {
+    margin-top: 22px;
+    background: var(--la-wine, var(--color-foreground));
+    color: var(--la-cream, var(--color-background));
+    border-radius: 4px;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 10px 26px rgb(var(--color-foreground-rgb) / var(--opacity-20));
+  }
+
+  .animal-main__dias-num {
+    font-family: var(--font-heading--family);
+    font-weight: 500;
+    font-size: 3.6rem;
+    line-height: 1;
+    letter-spacing: 0.01em;
+  }
+
+  .animal-main__dias-lbl {
+    font-family: var(--font-accent--family);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+
+  .animal-main__dias-sub {
+    display: block;
+    font-family: var(--font-heading--family);
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 1.05rem;
+    color: var(--la-gold, inherit);
+    filter: brightness(1.35);
+    margin-top: 2px;
+  }
+
+  .animal-main__datos {
+    margin: 22px 0 0;
+    background: var(--la-white, var(--color-background));
+    border: 1px solid rgb(var(--color-foreground-rgb) / var(--opacity-15));
+    border-radius: 4px;
+    padding: 20px 22px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 20px;
+  }
+
+  @media (max-width: 460px) {
+    .animal-main__datos {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .animal-main__dato {
+    font-size: 0.88rem;
+  }
+
+  .animal-main__dato dt {
+    font-family: var(--font-accent--family);
+    font-weight: 500;
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-muted-text));
+  }
+
+  .animal-main__dato dd {
+    margin: 0;
+    font-weight: 700;
+  }
+
+  .animal-main__dato--ok {
+    color: var(--la-green, var(--color-foreground));
+  }
+
+  .animal-main__dato--wine {
+    color: var(--la-wine, var(--color-foreground));
+  }
+
+  .animal-main__convive {
+    margin-top: 16px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .animal-main__conv {
+    font-size: 0.78rem;
+    font-weight: 700;
+    border-radius: 999px;
+    padding: 0.5em 1.1em;
+    background: var(--la-cream, var(--color-background));
+    border: 1px solid rgb(var(--color-foreground-rgb) / var(--opacity-15));
+  }
+
+  .animal-main__conv--ok {
+    color: var(--la-green, var(--color-foreground));
+  }
+
+  .animal-main__conv--no {
+    color: var(--la-wine, var(--color-foreground));
+  }
+
+  .animal-main__conv--ask {
+    color: var(--la-gold, var(--color-foreground));
+  }
+
+  .animal-main__ctas {
+    display: grid;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .animal-main__btn {
+    display: inline-block;
+    width: 100%;
+    font-family: var(--font-accent--family);
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 0.88rem;
+    letter-spacing: 0.08em;
+    padding: 0.9em 1.9em;
+    border-radius: 3px;
+    text-align: center;
+    transition: filter 0.14s ease, transform 0.12s ease;
+  }
+
+  .animal-main__btn:hover {
+    filter: brightness(0.85);
+    transform: translateY(-2px);
+  }
+
+  .animal-main__btn:focus-visible {
+    outline: 3px solid var(--la-gold, var(--color-foreground));
+    outline-offset: 3px;
+  }
+
+  .animal-main__btn--wine {
+    background: var(--la-wine, var(--color-foreground));
+    color: var(--la-cream, var(--color-background));
+  }
+
+  .animal-main__btn--light {
+    background: var(--la-white, var(--color-background));
+    color: var(--color-foreground);
+    border: 1px solid rgb(var(--color-foreground-rgb) / var(--opacity-15));
+  }
+
+  .animal-main__contacto {
+    margin-top: 14px;
+    font-size: 0.85rem;
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-muted-text));
+    text-align: center;
+    font-weight: 600;
+  }
+
+  .animal-main__share {
+    margin-top: 22px;
+    border-top: 1px dashed rgb(var(--color-foreground-rgb) / var(--opacity-20));
+    padding-top: 18px;
+    text-align: center;
+  }
+
+  .animal-main__share-fina {
+    font-family: var(--font-heading--family);
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--la-wine, var(--color-foreground));
+  }
+
+  .animal-main__share-btns {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+
+  .animal-main__share-btns a,
+  .animal-main__share-btns button {
+    font-family: var(--font-accent--family);
+    font-weight: 500;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 1px solid rgb(var(--color-foreground-rgb) / var(--opacity-15));
+    border-radius: 999px;
+    padding: 0.55em 1.1em;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    transition: all 0.13s ease;
+  }
+
+  .animal-main__share-btns a:hover,
+  .animal-main__share-btns button:hover {
+    background: var(--color-foreground);
+    color: var(--color-background);
+    border-color: var(--color-foreground);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animal-main__btn,
+    .animal-main__thumbs button,
+    .animal-main__share-btns a,
+    .animal-main__share-btns button {
+      transition: none;
+    }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  if (!customElements.get('animal-gallery')) {
+    customElements.define(
+      'animal-gallery',
+      class extends HTMLElement {
+        connectedCallback() {
+          this.mains = this.querySelectorAll('[data-gallery-main]');
+          this.thumbs = this.querySelectorAll('[data-gallery-thumb]');
+          this.thumbs.forEach((btn, i) => btn.addEventListener('click', () => this.select(i)));
+        }
+        select(index) {
+          this.mains.forEach((m, i) => m.toggleAttribute('hidden', i !== index));
+          this.thumbs.forEach((b, i) => b.classList.toggle('active', i === index));
+        }
+      }
+    );
+  }
+
+  if (!customElements.get('copy-link-button')) {
+    customElements.define(
+      'copy-link-button',
+      class extends HTMLElement {
+        connectedCallback() {
+          const btn = this.querySelector('button');
+          if (!btn) return;
+          btn.addEventListener('click', () => {
+            navigator.clipboard.writeText(this.dataset.url).then(() => {
+              const original = btn.textContent;
+              btn.textContent = '¡Copiado!';
+              setTimeout(() => (btn.textContent = original), 1500);
+            });
+          });
+        }
+      }
+    );
+  }
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Ficha de animal",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Muestra los datos del metaobjeto «animal». Úsala en la plantilla de metaobjeto animal."
+    },
+    {
+      "type": "url",
+      "id": "pagina_animales",
+      "label": "Página «Nuestros animales» (migas de pan)"
+    },
+    {
+      "type": "text",
+      "id": "sub_dias",
+      "label": "Frase bajo el contador de días",
+      "default": "hoy puede ser el último"
+    },
+    {
+      "type": "header",
+      "content": "Datos fijos"
+    },
+    {
+      "type": "text",
+      "id": "vacunado_valor",
+      "label": "Vacunado y con chip",
+      "default": "Sí ✓",
+      "info": "Vacío = ocultar fila"
+    },
+    {
+      "type": "text",
+      "id": "esterilizado_valor",
+      "label": "Esterilizado",
+      "default": "Sí ✓",
+      "info": "Vacío = ocultar fila"
+    },
+    {
+      "type": "text",
+      "id": "ppp_valor",
+      "label": "Texto del dato PPP",
+      "default": "Sí · licencia sencilla",
+      "info": "Solo se muestra si el animal es PPP"
+    },
+    {
+      "type": "header",
+      "content": "Botones y contacto"
+    },
+    {
+      "type": "url",
+      "id": "link_adoptar",
+      "label": "Enlace «Quiero adoptar»"
+    },
+    {
+      "type": "url",
+      "id": "link_acoger",
+      "label": "Enlace «Quiero acoger»"
+    },
+    {
+      "type": "text",
+      "id": "contacto",
+      "label": "Línea de contacto",
+      "default": "📱 DM a @adopta.loveanimals.bcn"
+    },
+    {
+      "type": "header",
+      "content": "Compartir"
+    },
+    {
+      "type": "checkbox",
+      "id": "mostrar_compartir",
+      "label": "Mostrar bloque de compartir",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Perfil de Instagram"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 70
+    }
+  ],
+  "enabled_on": {
+    "templates": ["metaobject"]
+  }
+}
+{% endschema %}

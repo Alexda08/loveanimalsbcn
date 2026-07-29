@@ -1,0 +1,199 @@
+{% doc %}
+  Card de un álbum para el grid de álbumes: portada (o cubierta con el año),
+  badge Álbum/Urgente, solapita de licencia PPP, banda de días para los álbumes
+  de año, título y subtítulo.
+
+  Requiere que la section contenedora defina las variables --la-* (render 'paleta-vars').
+
+  @param {object} album - Metaobjeto de tipo `album`
+{% enddoc %}
+{%- liquid
+  assign portada = album.portada.value
+  assign anio = album.anio_espera.value
+
+  assign tiene_ppp = false
+  for a in album.animales.value
+    if a.ppp.value
+      assign tiene_ppp = true
+      break
+    endif
+  endfor
+-%}
+
+<a class="album-card" href="{{ album.system.url }}">
+  <div class="album-card__ph">
+    {%- if portada != blank -%}
+      {{
+        portada.preview_image
+        | image_url: width: 600
+        | image_tag:
+          widths: '300, 450, 600, 900',
+          sizes: '(min-width: 1000px) 280px, 50vw',
+          alt: album.titulo.value,
+          loading: 'lazy',
+          class: 'album-card__img'
+      }}
+    {%- elsif anio != blank -%}
+      <span class="album-card__anio-cover"><span>{{ anio }}</span></span>
+    {%- else -%}
+      <span class="album-card__placeholder" aria-hidden="true">🐾</span>
+    {%- endif -%}
+
+    {%- if anio != blank -%}
+      {%- assign desde_anio = anio | append: '-01-01' -%}
+      <span class="album-card__dias">
+        <b>{% render 'dias-esperando', desde: desde_anio %}</b>
+        días esperando
+      </span>
+    {%- elsif album.es_urgente.value -%}
+      <span class="album-card__badge album-card__badge--urgente">Urgente</span>
+    {%- else -%}
+      <span class="album-card__badge">Álbum</span>
+    {%- endif -%}
+
+    {%- if tiene_ppp -%}
+      <span class="album-card__ppp">ℹ licencia PPP</span>
+    {%- endif -%}
+  </div>
+  <h3 class="album-card__titulo">{{ album.titulo.value }}</h3>
+  {%- if album.subtitulo.value != blank -%}
+    <span class="album-card__fina">{{ album.subtitulo.value }}</span>
+  {%- endif -%}
+</a>
+
+{% stylesheet %}
+  .album-card {
+    position: relative;
+    display: block;
+    background: var(--la-white, var(--color-background));
+    border: 1px solid rgb(var(--color-foreground-rgb) / var(--opacity-15));
+    border-radius: 4px;
+    padding: 10px 10px 14px;
+    box-shadow: 0 8px 22px rgb(var(--color-foreground-rgb) / var(--opacity-10));
+    transition: transform 0.15s ease;
+    color: var(--color-foreground);
+  }
+
+  .album-card:hover {
+    transform: translateY(-5px) rotate(-0.4deg);
+  }
+
+  .album-card__ph {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .album-card__img {
+    aspect-ratio: 1 / 0.95;
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .album-card__anio-cover {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1 / 0.95;
+    background: var(--color-background);
+  }
+
+  .album-card__anio-cover span {
+    font-family: var(--font-heading--family);
+    font-weight: 500;
+    font-size: 2.4rem;
+    letter-spacing: 0.14em;
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-muted-text));
+    border-block: 1px solid rgb(var(--color-foreground-rgb) / var(--opacity-muted-text));
+    padding: 8px 4px;
+  }
+
+  .album-card__placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1 / 0.95;
+    font-size: 2rem;
+    background: var(--la-cream, var(--color-background));
+  }
+
+  .album-card__badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: var(--color-foreground);
+    color: var(--la-cream, var(--color-background));
+    font-family: var(--font-accent--family);
+    font-weight: 500;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.4em 0.8em;
+    border-radius: 2px;
+  }
+
+  .album-card__badge--urgente {
+    background: var(--la-wine, var(--color-foreground));
+  }
+
+  .album-card__dias {
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
+    background: rgb(var(--la-wine-rgb, var(--color-foreground-rgb)) / 0.92);
+    color: var(--la-cream, var(--color-background));
+    font-family: var(--font-accent--family);
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    padding: 0.65em;
+    text-align: center;
+  }
+
+  .album-card__dias b {
+    font-family: var(--font-heading--family);
+    font-size: 1.1rem;
+    letter-spacing: 0.02em;
+    margin-right: 0.35em;
+    font-weight: 500;
+  }
+
+  .album-card__ppp {
+    position: absolute;
+    top: 44px;
+    right: -1px;
+    background: var(--la-gold, var(--color-foreground));
+    color: var(--la-white, var(--color-background));
+    font-family: var(--font-accent--family);
+    font-weight: 500;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.5em 0.8em 0.5em 1em;
+    border-radius: 3px 0 0 3px;
+    box-shadow: -2px 2px 6px rgb(var(--color-foreground-rgb) / var(--opacity-20));
+  }
+
+  .album-card__titulo {
+    font-family: var(--font-accent--family);
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 0.92rem;
+    letter-spacing: 0.08em;
+    text-align: center;
+    margin: 12px 0 0;
+    line-height: 1.3;
+  }
+
+  .album-card__fina {
+    display: block;
+    text-align: center;
+    font-family: var(--font-heading--family);
+    font-style: italic;
+    font-size: 1rem;
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-muted-text));
+    margin-top: 2px;
+  }
+{% endstylesheet %}

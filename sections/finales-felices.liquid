@@ -1,0 +1,302 @@
+{% comment %}
+  Muro de finales felices: animales con estado "adoptado".
+  Al marcar un animal como adoptado en el admin desaparece de los álbumes
+  (lo filtran las plantillas) y aparece aquí automáticamente.
+{% endcomment %}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    {% render 'paleta-vars' %}
+    --felices-padding-top: {{ section.settings.padding-block-start }}px;
+    --felices-padding-bottom: {{ section.settings.padding-block-end }}px;
+  }
+</style>
+
+{%- liquid
+  assign max = section.settings.max_animales | default: 8
+  assign adoptados_count = 0
+-%}
+
+{%- capture muro -%}
+  {%- for a in shop.metaobjects.animal.values -%}
+    {%- liquid
+      if adoptados_count >= max
+        break
+      endif
+      assign estado = a.estado.value | downcase | strip
+    -%}
+    {%- if estado == 'adoptado' -%}
+      {%- liquid
+        assign adoptados_count = adoptados_count | plus: 1
+        assign foto = a.galeria.value | first
+        assign sexo = a.sexo.value | downcase
+      -%}
+      <div class="feliz-card">
+        <div class="feliz-card__ph">
+          {%- if foto != blank -%}
+            {{
+              foto.preview_image
+              | image_url: width: 600
+              | image_tag:
+                widths: '300, 450, 600',
+                sizes: '(min-width: 1000px) 260px, 50vw',
+                alt: a.nombre.value,
+                loading: 'lazy',
+                class: 'feliz-card__img'
+            }}
+          {%- else -%}
+            <span class="feliz-card__placeholder" aria-hidden="true">📷</span>
+          {%- endif -%}
+        </div>
+        <h3 class="feliz-card__nombre">{{ a.nombre.value }}</h3>
+        <span class="feliz-card__sello">
+          {%- if sexo contains 'embra' %}Adoptada{% else %}Adoptado{% endif -%}
+          {%- if a.fecha_adopcion.value != blank %} · {{ a.fecha_adopcion.value | date: '%Y' }}{% endif -%}
+        </span>
+      </div>
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+
+{%- assign muro_limpio = muro | strip -%}
+{%- if muro_limpio != blank or request.design_mode -%}
+  <div class="felices">
+    <div class="felices__wrap">
+      <div class="felices__head">
+        {%- if section.settings.fina != blank -%}
+          <p class="felices__fina">{{ section.settings.fina }}</p>
+        {%- endif -%}
+        {%- if section.settings.titulo != blank -%}
+          <h2 class="felices__titulo">{{ section.settings.titulo }}</h2>
+        {%- endif -%}
+        {%- if section.settings.lead != blank -%}
+          <p class="felices__lead">{{ section.settings.lead }}</p>
+        {%- endif -%}
+      </div>
+
+      {%- if muro_limpio != blank -%}
+        <div class="felices__grid">
+          {{ muro }}
+        </div>
+      {%- else -%}
+        <p class="felices__vacio">Aún no hay animales marcados como adoptados (estado «adoptado» en el metaobjeto).</p>
+      {%- endif -%}
+
+      {%- if section.settings.nota != blank -%}
+        <p class="felices__nota">{{ section.settings.nota }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .felices {
+    background: var(--la-nude, var(--color-background));
+    padding-block: var(--felices-padding-top) var(--felices-padding-bottom);
+    color: var(--color-foreground);
+  }
+
+  .felices__wrap {
+    max-width: var(--page-width);
+    margin-inline: auto;
+    padding-inline: var(--page-margin);
+  }
+
+  .felices__head {
+    text-align: center;
+    margin-bottom: 46px;
+  }
+
+  .felices__fina {
+    font-family: var(--font-heading--family);
+    font-style: italic;
+    font-size: clamp(1.4rem, 2.8vw, 1.9rem);
+    color: var(--la-wine, var(--color-foreground));
+    margin: 0;
+  }
+
+  .felices__titulo {
+    font-family: var(--font-heading--family);
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: clamp(1.9rem, 4.6vw, 3.1rem);
+    letter-spacing: 0.22em;
+    margin: 4px 0 0;
+    margin-right: -0.22em;
+  }
+
+  .felices__lead {
+    max-width: 44em;
+    margin: 14px auto 0;
+    font-size: 0.98rem;
+  }
+
+  .felices__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+
+  @media (max-width: 960px) {
+    .felices__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 500px) {
+    .felices__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .feliz-card {
+    background: var(--la-white, var(--color-background));
+    border: 1px solid rgb(var(--color-foreground-rgb) / var(--opacity-15));
+    border-radius: 4px;
+    padding: 10px 10px 16px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgb(var(--color-foreground-rgb) / var(--opacity-10));
+    transform: rotate(-0.6deg);
+  }
+
+  .feliz-card:nth-child(even) {
+    transform: rotate(0.6deg);
+  }
+
+  .feliz-card__ph {
+    overflow: hidden;
+  }
+
+  .feliz-card__img {
+    aspect-ratio: 1 / 0.9;
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .feliz-card__placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1 / 0.9;
+    font-size: 2rem;
+    background: var(--color-background);
+  }
+
+  .feliz-card__nombre {
+    font-family: var(--font-heading--family);
+    font-style: italic;
+    font-weight: 600;
+    font-size: 1.3rem;
+    margin: 10px 0 0;
+  }
+
+  .feliz-card__sello {
+    display: inline-block;
+    margin-top: 6px;
+    font-family: var(--font-accent--family);
+    font-weight: 500;
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--la-wine, var(--color-foreground));
+    border: 1.5px solid var(--la-wine, var(--color-foreground));
+    border-radius: 3px;
+    padding: 0.35em 0.8em;
+    transform: rotate(-2deg);
+  }
+
+  .felices__nota {
+    text-align: center;
+    margin: 26px 0 0;
+    font-family: var(--font-heading--family);
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--la-wine, var(--color-foreground));
+  }
+
+  .felices__vacio {
+    text-align: center;
+    font-size: 0.95rem;
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-muted-text));
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .feliz-card,
+    .feliz-card:nth-child(even) {
+      transform: none;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Finales felices",
+  "settings": [
+    {
+      "type": "text",
+      "id": "fina",
+      "label": "Entradilla (cursiva)",
+      "default": "sí, esto acaba bien"
+    },
+    {
+      "type": "text",
+      "id": "titulo",
+      "label": "Título",
+      "default": "Finales felices"
+    },
+    {
+      "type": "textarea",
+      "id": "lead",
+      "label": "Texto introductorio",
+      "default": "Los que ya salieron por la puerta grande. Este muro crece con cada adopción."
+    },
+    {
+      "type": "range",
+      "id": "max_animales",
+      "label": "Máximo de animales",
+      "min": 4,
+      "max": 24,
+      "step": 4,
+      "default": 8
+    },
+    {
+      "type": "text",
+      "id": "nota",
+      "label": "Nota final",
+      "default": "el próximo nombre de este muro lo decides tú 🤍"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 78
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 78
+    }
+  ],
+  "presets": [
+    {
+      "name": "Finales felices",
+      "category": "t:categories.storytelling"
+    }
+  ]
+}
+{% endschema %}

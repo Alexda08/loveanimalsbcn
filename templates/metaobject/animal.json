@@ -1,0 +1,33 @@
+{
+  "sections": {
+    "main": {
+      "type": "animal-main",
+      "settings": {
+        "sub_dias": "hoy puede ser el último",
+        "vacunado_valor": "Sí ✓",
+        "esterilizado_valor": "Sí ✓",
+        "ppp_valor": "Sí · licencia sencilla",
+        "contacto": "📱 DM a @adopta.loveanimals.bcn",
+        "mostrar_compartir": true,
+        "padding-block-start": 18,
+        "padding-block-end": 70
+      }
+    },
+    "historia": {
+      "type": "animal-historia",
+      "settings": {
+        "padding-block-start": 64,
+        "padding-block-end": 64
+      }
+    },
+    "relacionados": {
+      "type": "animal-relacionados",
+      "settings": {
+        "max_animales": 3,
+        "padding-block-start": 64,
+        "padding-block-end": 64
+      }
+    }
+  },
+  "order": ["main", "historia", "relacionados"]
+}

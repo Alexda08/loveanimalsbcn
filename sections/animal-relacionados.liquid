@@ -1,0 +1,166 @@
+{% comment %}
+  Ficha de animal: "más peludos de su álbum". Muestra otros animales del primer
+  álbum que contiene al animal actual (excluye adoptados y al propio animal).
+{% endcomment %}
+
+{%- liquid
+  assign animal = metaobject
+  assign nombre = animal.nombre.value
+  assign max = section.settings.max_animales | default: 3
+
+  assign primer_album = blank
+  for alb in shop.metaobjects.album.values
+    for a in alb.animales.value
+      if a.system.id == animal.system.id
+        assign primer_album = alb
+        break
+      endif
+    endfor
+    if primer_album != blank
+      break
+    endif
+  endfor
+-%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    {% render 'paleta-vars' %}
+    --animal-rel-padding-top: {{ section.settings.padding-block-start }}px;
+    --animal-rel-padding-bottom: {{ section.settings.padding-block-end }}px;
+  }
+</style>
+
+{%- if animal != blank and primer_album != blank -%}
+  {%- capture cards -%}
+    {%- liquid
+      assign mostrados = 0
+      for otro in primer_album.animales.value
+        if mostrados >= max
+          break
+        endif
+        if otro.system.id == animal.system.id
+          continue
+        endif
+        assign estado = otro.estado.value | downcase | strip
+        if estado == 'adoptado'
+          continue
+        endif
+        render 'animal-card', animal: otro
+        assign mostrados = mostrados | plus: 1
+      endfor
+    -%}
+  {%- endcapture -%}
+
+  {%- assign cards_limpio = cards | strip -%}
+  {%- if cards_limpio != blank -%}
+    <div class="animal-rel">
+      <div class="animal-rel__wrap">
+        <div class="animal-rel__head">
+          <span class="animal-rel__fina">si {{ nombre }} te ha robado el corazón, espera a ver a…</span>
+          <h2 class="animal-rel__titulo">Más peludos de su álbum</h2>
+        </div>
+        <div class="animal-rel__grid">
+          {{ cards }}
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+{%- endif -%}
+
+{% stylesheet %}
+  .animal-rel {
+    padding-block: var(--animal-rel-padding-top) var(--animal-rel-padding-bottom);
+    color: var(--color-foreground);
+  }
+
+  .animal-rel__wrap {
+    max-width: var(--page-width);
+    margin-inline: auto;
+    padding-inline: var(--page-margin);
+  }
+
+  .animal-rel__head {
+    text-align: center;
+    margin-bottom: 38px;
+  }
+
+  .animal-rel__fina {
+    font-family: var(--font-heading--family);
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--la-wine, var(--color-foreground));
+  }
+
+  .animal-rel__titulo {
+    font-family: var(--font-heading--family);
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: clamp(1.6rem, 3.6vw, 2.4rem);
+    letter-spacing: 0.26em;
+    margin: 4px 0 0;
+    margin-right: -0.26em;
+  }
+
+  .animal-rel__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 760px) {
+    .animal-rel__grid {
+      grid-template-columns: 1fr;
+      max-width: 400px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Más peludos del álbum",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Muestra otros animales del primer álbum que contiene al animal actual."
+    },
+    {
+      "type": "range",
+      "id": "max_animales",
+      "label": "Máximo de animales",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 64
+    }
+  ],
+  "enabled_on": {
+    "templates": ["metaobject"]
+  }
+}
+{% endschema %}

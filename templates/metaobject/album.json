@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "main": {
+      "type": "album-main",
+      "settings": {
+        "mostrar_licencia": true,
+        "padding-block-start": 56,
+        "padding-block-end": 78
+      }
+    }
+  },
+  "order": ["main"]
+}

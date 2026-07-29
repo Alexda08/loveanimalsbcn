@@ -1,0 +1,25 @@
+{% doc %}
+  Contador de días transcurridos desde una fecha, renderizado en servidor (sin JS).
+  Devuelve SOLO el número formateado con separador de miles es-ES (p. ej. "1.884").
+
+  @param {string} desde - Fecha de inicio (ISO "YYYY-MM-DD", valor de un campo date de metaobjeto)
+
+  Ejemplo:
+    <b>{% render 'dias-esperando', desde: metaobject.fecha_entrada.value %}</b> días esperando
+{% enddoc %}
+{%- liquid
+  assign desde_epoch = desde | date: '%s' | plus: 0
+  assign ahora_epoch = 'now' | date: '%s' | plus: 0
+  assign dias = ahora_epoch | minus: desde_epoch | divided_by: 86400
+  if dias < 0 or desde == blank
+    assign dias = 0
+  endif
+
+  if dias >= 1000
+    assign miles = dias | divided_by: 1000
+    assign resto = dias | modulo: 1000 | prepend: '00' | slice: -3, 3
+    echo miles | append: '.' | append: resto
+  else
+    echo dias
+  endif
+-%}

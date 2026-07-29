@@ -1,0 +1,28 @@
+{% doc %}
+  Variables CSS de la paleta del proyecto para secciones custom.
+  Renderizar DENTRO de un bloque de estilos scoped a la section:
+
+    <style>
+      #shopify-section-{{ section.id }} { {% render 'paleta-vars' %} }
+    </style>
+
+  Convención de la paleta (Ajustes de tema → Colores):
+    background = nude claro · foreground = chocolate
+    color1 = vino · color2 = nude · color3 = dorado
+    color4 = crema · color5 = blanco papel · color6 = verde
+{% enddoc %}
+{%- liquid
+  assign c_wine = settings.color_palette.color1 | default: settings.color_palette.foreground
+  assign c_nude = settings.color_palette.color2 | default: settings.color_palette.background
+  assign c_gold = settings.color_palette.color3 | default: settings.color_palette.foreground
+  assign c_cream = settings.color_palette.color4 | default: settings.color_palette.background
+  assign c_white = settings.color_palette.color5 | default: settings.color_palette.background
+  assign c_green = settings.color_palette.color6 | default: settings.color_palette.foreground
+  echo '--la-wine: ' | append: c_wine | append: ';'
+  echo '--la-nude: ' | append: c_nude | append: ';'
+  echo '--la-gold: ' | append: c_gold | append: ';'
+  echo '--la-cream: ' | append: c_cream | append: ';'
+  echo '--la-white: ' | append: c_white | append: ';'
+  echo '--la-green: ' | append: c_green | append: ';'
+  echo '--la-wine-rgb: ' | append: c_wine.rgb | append: ';'
+-%}
