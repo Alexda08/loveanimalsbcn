@@ -2653,10 +2653,12 @@
       "type": "album-destacado",
       "name": "Álbum destacado",
       "settings": {
+        "album": "abuelos",
         "max_animales": 3,
         "fina": "así se ve un álbum por dentro →",
         "titulo_prefijo": "Álbum ·",
         "cta_label": "Conocer a",
+        "pagina_animales": "#",
         "texto_volver": "← volver a los álbumes",
         "padding-block-start": 0,
         "padding-block-end": 78
