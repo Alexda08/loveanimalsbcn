@@ -710,8 +710,8 @@
             "placeholder": "",
             "padding-block-start": 24,
             "padding-block-end": 24,
-            "padding-inline-start": 12,
-            "padding-inline-end": 12
+            "padding-inline-start": 32,
+            "padding-inline-end": 32
           },
           "blocks": {
             "text_7piYWL": {
