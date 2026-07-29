@@ -593,7 +593,7 @@
                 "background_color": "{{ settings.color_palette.color5 }}",
                 "text_color": "",
                 "accent_color": "{{ settings.color_palette.color1 }}",
-                "tape_color": "#B08D5759"
+                "tape_color": "#b08d5759"
               },
               "blocks": {}
             }
@@ -621,7 +621,7 @@
         "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "#E6DECF",
+        "background_color": "#e6decf",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
@@ -1241,7 +1241,7 @@
         "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "#E6DECF",
+        "background_color": "#e6decf",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
@@ -1697,7 +1697,7 @@
         "section_height": "small",
         "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "#D8CDBB",
+        "background_color": "#d8cdbb",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
@@ -1913,7 +1913,7 @@
         "section_height": "small",
         "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "#E6DECF",
+        "background_color": "#e6decf",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
@@ -2387,7 +2387,7 @@
         "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "#E6DECF",
+        "background_color": "#e6decf",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
@@ -2562,7 +2562,7 @@
         "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "#E6DECF",
+        "background_color": "#e6decf",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
@@ -2580,6 +2580,17 @@
     },
     "albums_grid_peludos": {
       "type": "albums-grid",
+      "blocks": {
+        "album_P37iWj": {
+          "type": "album",
+          "settings": {
+            "album": ""
+          }
+        }
+      },
+      "block_order": [
+        "album_P37iWj"
+      ],
       "name": "Grid de álbumes",
       "settings": {
         "fina": "podéis conocer a nuestros...",
