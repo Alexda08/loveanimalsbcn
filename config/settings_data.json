@@ -80,8 +80,9 @@
       "background": "#ffffff",
       "foreground": "#000000",
       "color1": "#333333",
-      "color2": "#EEF1EA",
-      "color3": "#DFDFDF"
+      "color2": "#eef1ea",
+      "color3": "#dfdfdf",
+      "color4": "#90a0f9"
     }
   },
   "presets": {
