@@ -2584,12 +2584,61 @@
         "album_P37iWj": {
           "type": "album",
           "settings": {
-            "album": ""
+            "album": "abuelos"
+          }
+        },
+        "album_nKxakG": {
+          "type": "album",
+          "settings": {
+            "album": "abuelos"
+          }
+        },
+        "album_hdXzqw": {
+          "type": "album",
+          "settings": {
+            "album": "abuelos"
+          }
+        },
+        "album_Mf7Kff": {
+          "type": "album",
+          "settings": {
+            "album": "abuelos"
+          }
+        },
+        "album_rJfLL6": {
+          "type": "album",
+          "settings": {
+            "album": "abuelos"
+          }
+        },
+        "album_jNzzpe": {
+          "type": "album",
+          "settings": {
+            "album": "abuelos"
+          }
+        },
+        "album_NbRgfw": {
+          "type": "album",
+          "settings": {
+            "album": "abuelos"
+          }
+        },
+        "album_8cGzza": {
+          "type": "album",
+          "settings": {
+            "album": "abuelos"
           }
         }
       },
       "block_order": [
-        "album_P37iWj"
+        "album_P37iWj",
+        "album_nKxakG",
+        "album_hdXzqw",
+        "album_Mf7Kff",
+        "album_rJfLL6",
+        "album_jNzzpe",
+        "album_NbRgfw",
+        "album_8cGzza"
       ],
       "name": "Grid de álbumes",
       "settings": {
