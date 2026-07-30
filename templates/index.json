@@ -564,13 +564,21 @@
               "blocks": {}
             },
             "button_4MQm8z": {
-              "type": "enlace-go",
-              "name": "Enlace destacado",
+              "type": "button",
+              "name": "t:names.button",
               "settings": {
-                "texto": "Ver proceso →",
-                "enlace": "#shopify-section-section_Yi4nCE",
-                "nueva_pestana": false,
-                "color": "{{ settings.color_palette.color1 }}"
+                "label": "Ver proceso →",
+                "link": "#shopify-section-section_Yi4nCE",
+                "open_in_new_tab": false,
+                "style_class": "button-unstyled",
+                "custom_button_background": "{{ settings.color_palette.foreground }}",
+                "custom_button_text": "{{ settings.color_palette.background }}",
+                "custom_button_border": "{{ settings.color_palette.background }}",
+                "link_text_color": "{{ settings.color_palette.color1 }}",
+                "width": "fit-content",
+                "custom_width": 100,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 100
               },
               "blocks": {}
             }
@@ -702,13 +710,21 @@
               "blocks": {}
             },
             "button_rn8fcG": {
-              "type": "enlace-go",
-              "name": "Enlace destacado",
+              "type": "button",
+              "name": "t:names.button",
               "settings": {
-                "texto": "Saber más →",
-                "enlace": "#shopify-section-section_Jmdaay",
-                "nueva_pestana": false,
-                "color": "{{ settings.color_palette.color1 }}"
+                "label": "Saber más →",
+                "link": "#shopify-section-section_Jmdaay",
+                "open_in_new_tab": false,
+                "style_class": "button-unstyled",
+                "custom_button_background": "{{ settings.color_palette.foreground }}",
+                "custom_button_text": "{{ settings.color_palette.background }}",
+                "custom_button_border": "{{ settings.color_palette.background }}",
+                "link_text_color": "{{ settings.color_palette.color1 }}",
+                "width": "fit-content",
+                "custom_width": 100,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 100
               },
               "blocks": {}
             }
@@ -840,13 +856,21 @@
               "blocks": {}
             },
             "button_YTcHyW": {
-              "type": "enlace-go",
-              "name": "Enlace destacado",
+              "type": "button",
+              "name": "t:names.button",
               "settings": {
-                "texto": "Ver álbumes →",
-                "enlace": "/pages/nuestros-animales",
-                "nueva_pestana": false,
-                "color": "{{ settings.color_palette.color1 }}"
+                "label": "Ver álbumes →",
+                "link": "/pages/nuestros-animales",
+                "open_in_new_tab": false,
+                "style_class": "button-unstyled",
+                "custom_button_background": "{{ settings.color_palette.foreground }}",
+                "custom_button_text": "{{ settings.color_palette.background }}",
+                "custom_button_border": "{{ settings.color_palette.background }}",
+                "link_text_color": "{{ settings.color_palette.color1 }}",
+                "width": "fit-content",
+                "custom_width": 100,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 100
               },
               "blocks": {}
             }
@@ -978,13 +1002,21 @@
               "blocks": {}
             },
             "button_6fVpzW": {
-              "type": "enlace-go",
-              "name": "Enlace destacado",
+              "type": "button",
+              "name": "t:names.button",
               "settings": {
-                "texto": "Cómo ayudar →",
-                "enlace": "#shopify-section-section_mG9zrt",
-                "nueva_pestana": false,
-                "color": "{{ settings.color_palette.color1 }}"
+                "label": "Cómo ayudar →",
+                "link": "#shopify-section-section_mG9zrt",
+                "open_in_new_tab": false,
+                "style_class": "button-unstyled",
+                "custom_button_background": "{{ settings.color_palette.foreground }}",
+                "custom_button_text": "{{ settings.color_palette.background }}",
+                "custom_button_border": "{{ settings.color_palette.background }}",
+                "link_text_color": "{{ settings.color_palette.color1 }}",
+                "width": "fit-content",
+                "custom_width": 100,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 100
               },
               "blocks": {}
             }
@@ -2832,13 +2864,21 @@
                   "blocks": {}
                 },
                 "button_8U9n6a": {
-                  "type": "enlace-go",
-                  "name": "Enlace destacado",
+                  "type": "button",
+                  "name": "t:names.button",
                   "settings": {
-                    "texto": "Ver la tienda →",
-                    "enlace": "/collections/all",
-                    "nueva_pestana": false,
-                    "color": "{{ settings.color_palette.color1 }}"
+                    "label": "Ver la tienda →",
+                    "link": "/collections/all",
+                    "open_in_new_tab": false,
+                    "style_class": "button-unstyled",
+                    "custom_button_background": "{{ settings.color_palette.foreground }}",
+                    "custom_button_text": "{{ settings.color_palette.background }}",
+                    "custom_button_border": "{{ settings.color_palette.background }}",
+                    "link_text_color": "{{ settings.color_palette.color1 }}",
+                    "width": "fit-content",
+                    "custom_width": 100,
+                    "width_mobile": "fit-content",
+                    "custom_width_mobile": 100
                   },
                   "blocks": {}
                 }
@@ -2970,13 +3010,21 @@
                   "blocks": {}
                 },
                 "button_KeCxXE": {
-                  "type": "enlace-go",
-                  "name": "Enlace destacado",
+                  "type": "button",
+                  "name": "t:names.button",
                   "settings": {
-                    "texto": "Unirse al grupo →",
-                    "enlace": "#",
-                    "nueva_pestana": false,
-                    "color": "{{ settings.color_palette.color1 }}"
+                    "label": "Unirse al grupo →",
+                    "link": "#",
+                    "open_in_new_tab": false,
+                    "style_class": "button-unstyled",
+                    "custom_button_background": "{{ settings.color_palette.foreground }}",
+                    "custom_button_text": "{{ settings.color_palette.background }}",
+                    "custom_button_border": "{{ settings.color_palette.background }}",
+                    "link_text_color": "{{ settings.color_palette.color1 }}",
+                    "width": "fit-content",
+                    "custom_width": 100,
+                    "width_mobile": "fit-content",
+                    "custom_width_mobile": 100
                   },
                   "blocks": {}
                 }
@@ -3108,13 +3156,21 @@
                   "blocks": {}
                 },
                 "button_AVbPLU": {
-                  "type": "enlace-go",
-                  "name": "Enlace destacado",
+                  "type": "button",
+                  "name": "t:names.button",
                   "settings": {
-                    "texto": "Cómo donar →",
-                    "enlace": "#",
-                    "nueva_pestana": false,
-                    "color": "{{ settings.color_palette.color1 }}"
+                    "label": "Cómo donar →",
+                    "link": "#",
+                    "open_in_new_tab": false,
+                    "style_class": "button-unstyled",
+                    "custom_button_background": "{{ settings.color_palette.foreground }}",
+                    "custom_button_text": "{{ settings.color_palette.background }}",
+                    "custom_button_border": "{{ settings.color_palette.background }}",
+                    "link_text_color": "{{ settings.color_palette.color1 }}",
+                    "width": "fit-content",
+                    "custom_width": 100,
+                    "width_mobile": "fit-content",
+                    "custom_width_mobile": 100
                   },
                   "blocks": {}
                 }
@@ -3246,13 +3302,21 @@
                   "blocks": {}
                 },
                 "button_ixmhLy": {
-                  "type": "enlace-go",
-                  "name": "Enlace destacado",
+                  "type": "button",
+                  "name": "t:names.button",
                   "settings": {
-                    "texto": "Seguirnos →",
-                    "enlace": "https://www.instagram.com/adopta.loveanimals.bcn",
-                    "nueva_pestana": false,
-                    "color": "{{ settings.color_palette.color1 }}"
+                    "label": "Seguirnos →",
+                    "link": "https://www.instagram.com/adopta.loveanimals.bcn",
+                    "open_in_new_tab": false,
+                    "style_class": "button-unstyled",
+                    "custom_button_background": "{{ settings.color_palette.foreground }}",
+                    "custom_button_text": "{{ settings.color_palette.background }}",
+                    "custom_button_border": "{{ settings.color_palette.background }}",
+                    "link_text_color": "{{ settings.color_palette.color1 }}",
+                    "width": "fit-content",
+                    "custom_width": 100,
+                    "width_mobile": "fit-content",
+                    "custom_width_mobile": 100
                   },
                   "blocks": {}
                 }
