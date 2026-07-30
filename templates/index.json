@@ -2467,78 +2467,123 @@
     "section_nwhiLi": {
       "type": "section",
       "blocks": {
-        "popup_link_UgND7U": {
-          "type": "popup-link",
-          "name": "t:names.popup_link",
+        "group_fpCQxM": {
+          "type": "group",
+          "name": "t:names.group",
           "settings": {
-            "behavior": "default",
-            "heading": "¿Cómo se tramita la licencia PPP?",
-            "type_preset": "h3",
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "custom",
+            "custom_width": 80,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "background_color": "#FDFBF6",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "link": "",
+            "open_in_new_tab": false,
+            "placeholder": "",
+            "padding-block-start": 32,
+            "padding-block-end": 32,
+            "padding-inline-start": 24,
+            "padding-inline-end": 24
           },
           "blocks": {
-            "text_J6raqX": {
-              "type": "text",
+            "popup_link_KQqgHT": {
+              "type": "popup-link",
+              "name": "t:names.popup_link",
               "settings": {
-                "text": "<h1>¿Cómo se tramita la licencia PPP?</h1>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "text_color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 16,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "text_fELJz3": {
-              "type": "text",
-              "settings": {
-                "text": "<p>\"PPP\" significa \"perro potencialmente peligroso\": una etiqueta que la ley pone <strong>por raza, no por comportamiento</strong>. La licencia asusta de primeras, pero es un trámite sencillo que se resuelve en unas semanas:</p><ol><li><strong>Certificado de capacidad física y psicológica</strong> — se hace en centros de reconocimiento (como el del carnet de conducir, ~40-60 €).</li><li><strong>Certificado de antecedentes penales</strong> — gratuito, se pide online en minutos.</li><li><strong>Seguro de responsabilidad civil</strong> — desde ~40 €/año.</li><li><strong>Solicitud en tu ayuntamiento</strong> — con los tres documentos anteriores y una tasa municipal.</li></ol><p>Y no estás sola/o: te acompañamos en cada paso del papeleo. Muchas familias lo han hecho antes que tú — pregúntanos sin compromiso.</p>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "text_color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
+                "behavior": "default",
+                "heading": "¿Cómo se tramita la licencia PPP?",
+                "type_preset": "h3",
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
               },
-              "blocks": {}
+              "blocks": {
+                "text_J6raqX": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<h1>¿Cómo se tramita la licencia PPP?</h1>",
+                    "width": "fit-content",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "rte",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "text_color": "",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 16,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
+                "text_fELJz3": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>\"PPP\" significa \"perro potencialmente peligroso\": una etiqueta que la ley pone <strong>por raza, no por comportamiento</strong>. La licencia asusta de primeras, pero es un trámite sencillo que se resuelve en unas semanas:</p><ol><li><strong>Certificado de capacidad física y psicológica</strong> — se hace en centros de reconocimiento (como el del carnet de conducir, ~40-60 €).</li><li><strong>Certificado de antecedentes penales</strong> — gratuito, se pide online en minutos.</li><li><strong>Seguro de responsabilidad civil</strong> — desde ~40 €/año.</li><li><strong>Solicitud en tu ayuntamiento</strong> — con los tres documentos anteriores y una tasa municipal.</li></ol><p>Y no estás sola/o: te acompañamos en cada paso del papeleo. Muchas familias lo han hecho antes que tú — pregúntanos sin compromiso.</p>",
+                    "width": "fit-content",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "rte",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "text_color": "",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_J6raqX",
+                "text_fELJz3"
+              ]
             }
           },
           "block_order": [
-            "text_J6raqX",
-            "text_fELJz3"
+            "popup_link_KQqgHT"
           ]
         }
       },
       "block_order": [
-        "popup_link_UgND7U"
+        "group_fpCQxM"
       ],
       "name": "t:names.rich_text_section",
       "settings": {
@@ -2554,7 +2599,7 @@
         "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "",
+        "background_color": "#D8CDBB",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
