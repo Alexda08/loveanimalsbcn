@@ -1,0 +1,81 @@
+{% comment %}
+  Enlace destacado («go-link» del diseño): rótulo condensado en mayúsculas con
+  subrayado grueso del mismo color. Es el enlace de las cards de apartados,
+  colaboración y equivalentes. Reutilizable en cualquier section con blocks @theme.
+{% endcomment %}
+
+<a
+  class="enlace-go"
+  {% if block.settings.enlace != blank %}
+    href="{{ block.settings.enlace }}"
+    {% if block.settings.nueva_pestana %}target="_blank" rel="noopener"{% endif %}
+  {% endif %}
+  {% if block.settings.color != blank %}
+    style="--enlace-go-color: {{ block.settings.color }};"
+  {% endif %}
+  {{ block.shopify_attributes }}
+>
+  {{- block.settings.texto -}}
+</a>
+
+{% stylesheet %}
+  .enlace-go {
+    display: inline-block;
+    font-family: var(--font-accent--family);
+    font-weight: 500;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--enlace-go-color, var(--color-foreground));
+    border-bottom: 2px solid currentColor;
+    padding-bottom: 3px;
+    text-decoration: none;
+    transition: opacity 0.14s ease;
+  }
+
+  .enlace-go:hover {
+    opacity: 0.75;
+  }
+
+  .enlace-go:focus-visible {
+    outline: 3px solid var(--enlace-go-color, var(--color-foreground));
+    outline-offset: 3px;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Enlace destacado",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "texto",
+      "label": "Texto",
+      "default": "Saber más →"
+    },
+    {
+      "type": "url",
+      "id": "enlace",
+      "label": "Enlace"
+    },
+    {
+      "type": "checkbox",
+      "id": "nueva_pestana",
+      "label": "Abrir en pestaña nueva",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "color",
+      "label": "Color",
+      "default": "{{ settings.color_palette.color1 }}"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Enlace destacado"
+    }
+  ]
+}
+{% endschema %}
