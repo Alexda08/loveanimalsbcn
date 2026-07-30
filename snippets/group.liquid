@@ -26,6 +26,7 @@
     group-block
     group-block--height-{{ settings.height }}
     group-block--width-{{ settings.width }}
+    {% if settings.shadow != blank and settings.shadow != 'none' %}group-block--sombra-{{ settings.shadow }}{% endif %}
     border-style
     spacing-style
     size-style
@@ -97,4 +98,18 @@
   .group-block__link ~ .group-block-content--design-mode {
     pointer-events: auto;
   }
+
+  /* LA START - sombras del diseño Love Animals (setting «shadow» añadido en blocks/group) */
+  .group-block--sombra-suave {
+    box-shadow: 0 8px 22px rgb(var(--color-foreground-rgb) / 0.1);
+  }
+
+  .group-block--sombra-media {
+    box-shadow: 0 10px 26px rgb(var(--color-foreground-rgb) / 0.12);
+  }
+
+  .group-block--sombra-intensa {
+    box-shadow: 0 14px 36px rgb(var(--color-foreground-rgb) / 0.18);
+  }
+  /* LA END */
 {% endstylesheet %}
