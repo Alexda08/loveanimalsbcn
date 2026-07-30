@@ -2467,20 +2467,45 @@
     "section_nwhiLi": {
       "type": "section",
       "blocks": {
-        "popup_link_X4NFR6": {
+        "popup_link_UgND7U": {
           "type": "popup-link",
           "name": "t:names.popup_link",
           "settings": {
             "behavior": "default",
-            "heading": "¿Cómo se tramita la licencia PPP?",
-            "type_preset": "paragraph",
+            "heading": "Learn more",
+            "type_preset": "",
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
             "padding-inline-end": 0
           },
           "blocks": {
-            "text_UYneyV": {
+            "text_J6raqX": {
+              "type": "text",
+              "settings": {
+                "text": "<h1>¿Cómo se tramita la licencia PPP?</h1>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 16,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_fELJz3": {
               "type": "text",
               "settings": {
                 "text": "<p>\"PPP\" significa \"perro potencialmente peligroso\": una etiqueta que la ley pone <strong>por raza, no por comportamiento</strong>. La licencia asusta de primeras, pero es un trámite sencillo que se resuelve en unas semanas:</p><ol><li><strong>Certificado de capacidad física y psicológica</strong> — se hace en centros de reconocimiento (como el del carnet de conducir, ~40-60 €).</li><li><strong>Certificado de antecedentes penales</strong> — gratuito, se pide online en minutos.</li><li><strong>Seguro de responsabilidad civil</strong> — desde ~40 €/año.</li><li><strong>Solicitud en tu ayuntamiento</strong> — con los tres documentos anteriores y una tasa municipal.</li></ol><p>Y no estás sola/o: te acompañamos en cada paso del papeleo. Muchas familias lo han hecho antes que tú — pregúntanos sin compromiso.</p>",
@@ -2507,12 +2532,13 @@
             }
           },
           "block_order": [
-            "text_UYneyV"
+            "text_J6raqX",
+            "text_fELJz3"
           ]
         }
       },
       "block_order": [
-        "popup_link_X4NFR6"
+        "popup_link_UgND7U"
       ],
       "name": "t:names.rich_text_section",
       "settings": {
