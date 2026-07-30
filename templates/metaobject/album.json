@@ -14,9 +14,12 @@
       "settings": {
         "mostrar_licencia": true,
         "padding-block-start": 56,
-        "padding-block-end": 78
+        "padding-block-end": 78,
+        "pagina_animales": "/#shopify-section-albums_grid_peludos"
       }
     }
   },
-  "order": ["main"]
+  "order": [
+    "main"
+  ]
 }
