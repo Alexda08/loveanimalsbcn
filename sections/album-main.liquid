@@ -10,11 +10,20 @@
   assign anio = album.anio_espera.value
 -%}
 
+{% liquid
+  if section.settings.background_color != blank
+    render 'contrast-override', background_color: section.settings.background_color, section_id: section.id
+  endif
+%}
+
 <style>
   #shopify-section-{{ section.id }} {
     {% render 'paleta-vars' %}
     --album-main-padding-top: {{ section.settings.padding-block-start }}px;
     --album-main-padding-bottom: {{ section.settings.padding-block-end }}px;
+    {%- if section.settings.background_color != blank %}
+    --album-main-bg: var(--color-background);
+    {%- endif %}
   }
 </style>
 
@@ -23,7 +32,7 @@
     <p>Esta sección muestra un álbum de animales. Asígnala a la plantilla de metaobjeto «album».</p>
   </div>
 {%- else -%}
-  <div class="album-main">
+  <div class="album-main{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}">
     <div class="album-main__wrap">
       <div class="album-main__head">
         {%- if album.subtitulo.value != blank -%}
@@ -88,7 +97,7 @@
 
 {% stylesheet %}
   .album-main {
-    background: var(--la-nude, var(--color-background));
+    background: var(--album-main-bg, var(--la-nude, var(--color-background)));
     padding-block: var(--album-main-padding-top) var(--album-main-padding-bottom);
     color: var(--color-foreground);
   }
@@ -237,6 +246,12 @@
       "id": "mostrar_licencia",
       "label": "Mostrar guía de licencia PPP (si hay animales PPP)",
       "default": true
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "placeholder": "t:settings.default"
     },
     {
       "type": "header",

@@ -24,11 +24,20 @@
   assign galeria = animal.galeria.value
 -%}
 
+{% liquid
+  if section.settings.background_color != blank
+    render 'contrast-override', background_color: section.settings.background_color, section_id: section.id
+  endif
+%}
+
 <style>
   #shopify-section-{{ section.id }} {
     {% render 'paleta-vars' %}
     --animal-main-padding-top: {{ section.settings.padding-block-start }}px;
     --animal-main-padding-bottom: {{ section.settings.padding-block-end }}px;
+    {%- if section.settings.background_color != blank %}
+    --animal-main-bg: var(--color-background);
+    {%- endif %}
   }
 </style>
 
@@ -38,7 +47,7 @@
   </div>
 {%- else -%}
 
-  <div class="animal-main">
+  <div class="animal-main{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}">
     <nav class="animal-main__wrap animal-main__crumbs" aria-label="Migas de pan">
       {%- if section.settings.pagina_animales != blank -%}
         <a href="{{ section.settings.pagina_animales }}">Nuestros animales</a>
@@ -220,6 +229,7 @@
 
 {% stylesheet %}
   .animal-main {
+    background: var(--animal-main-bg, transparent);
     padding-block: var(--animal-main-padding-top) var(--animal-main-padding-bottom);
     color: var(--color-foreground);
   }
@@ -690,6 +700,12 @@
       "type": "url",
       "id": "instagram_url",
       "label": "Perfil de Instagram"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "placeholder": "t:settings.default"
     },
     {
       "type": "header",

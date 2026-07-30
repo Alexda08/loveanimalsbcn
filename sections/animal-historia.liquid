@@ -8,11 +8,20 @@
   assign nombre = animal.nombre.value
 -%}
 
+{% liquid
+  if section.settings.background_color != blank
+    render 'contrast-override', background_color: section.settings.background_color, section_id: section.id
+  endif
+%}
+
 <style>
   #shopify-section-{{ section.id }} {
     {% render 'paleta-vars' %}
     --animal-historia-padding-top: {{ section.settings.padding-block-start }}px;
     --animal-historia-padding-bottom: {{ section.settings.padding-block-end }}px;
+    {%- if section.settings.background_color != blank %}
+    --animal-historia-bg: var(--color-background);
+    {%- endif %}
   }
 </style>
 
@@ -23,7 +32,7 @@
   {%- endif -%}
 
   {%- if tiene_historia -%}
-    <div class="animal-historia">
+    <div class="animal-historia{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}">
       <div class="animal-historia__wrap">
         {%- if animal.historia.value != blank -%}
           <div class="animal-historia__block">
@@ -60,7 +69,7 @@
 
 {% stylesheet %}
   .animal-historia {
-    background: var(--la-nude, var(--color-background));
+    background: var(--animal-historia-bg, var(--la-nude, var(--color-background)));
     padding-block: var(--animal-historia-padding-top) var(--animal-historia-padding-bottom);
     color: var(--color-foreground);
   }
@@ -154,6 +163,12 @@
       "type": "url",
       "id": "guia_ppp",
       "label": "Enlace a la guía completa de la licencia PPP"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "placeholder": "t:settings.default"
     },
     {
       "type": "header",

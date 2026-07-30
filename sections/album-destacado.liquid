@@ -4,11 +4,20 @@
   excluyendo adoptados). Diseño: panel crema con cabecera y grid de fichas con botón.
 {% endcomment %}
 
+{% liquid
+  if section.settings.background_color != blank
+    render 'contrast-override', background_color: section.settings.background_color, section_id: section.id
+  endif
+%}
+
 <style>
   #shopify-section-{{ section.id }} {
     {% render 'paleta-vars' %}
     --album-dest-padding-top: {{ section.settings.padding-block-start }}px;
     --album-dest-padding-bottom: {{ section.settings.padding-block-end }}px;
+    {%- if section.settings.background_color != blank %}
+    --album-dest-bg: var(--color-background);
+    {%- endif %}
   }
 </style>
 
@@ -17,7 +26,7 @@
   assign max = section.settings.max_animales | default: 3
 -%}
 
-<div class="album-dest">
+<div class="album-dest{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}">
   <div class="album-dest__wrap">
     {%- if album == blank -%}
       {%- if request.design_mode -%}
@@ -78,7 +87,7 @@
 
 {% stylesheet %}
   .album-dest {
-    background: var(--la-nude, var(--color-background));
+    background: var(--album-dest-bg, var(--la-nude, var(--color-background)));
     padding-block: var(--album-dest-padding-top) var(--album-dest-padding-bottom);
     color: var(--color-foreground);
   }
@@ -222,6 +231,12 @@
       "id": "texto_volver",
       "label": "Texto del enlace",
       "default": "← volver a los álbumes"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "placeholder": "t:settings.default"
     },
     {
       "type": "header",

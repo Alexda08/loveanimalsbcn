@@ -22,11 +22,20 @@
   endfor
 -%}
 
+{% liquid
+  if section.settings.background_color != blank
+    render 'contrast-override', background_color: section.settings.background_color, section_id: section.id
+  endif
+%}
+
 <style>
   #shopify-section-{{ section.id }} {
     {% render 'paleta-vars' %}
     --animal-rel-padding-top: {{ section.settings.padding-block-start }}px;
     --animal-rel-padding-bottom: {{ section.settings.padding-block-end }}px;
+    {%- if section.settings.background_color != blank %}
+    --animal-rel-bg: var(--color-background);
+    {%- endif %}
   }
 </style>
 
@@ -53,7 +62,7 @@
 
   {%- assign cards_limpio = cards | strip -%}
   {%- if cards_limpio != blank -%}
-    <div class="animal-rel">
+    <div class="animal-rel{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}">
       <div class="animal-rel__wrap">
         <div class="animal-rel__head">
           <span class="animal-rel__fina">si {{ nombre }} te ha robado el corazón, espera a ver a…</span>
@@ -69,6 +78,7 @@
 
 {% stylesheet %}
   .animal-rel {
+    background: var(--animal-rel-bg, transparent);
     padding-block: var(--animal-rel-padding-top) var(--animal-rel-padding-bottom);
     color: var(--color-foreground);
   }
@@ -133,6 +143,12 @@
       "max": 6,
       "step": 1,
       "default": 3
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "placeholder": "t:settings.default"
     },
     {
       "type": "header",

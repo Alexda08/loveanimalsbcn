@@ -4,11 +4,20 @@
   sin blocks se muestran todos los álbumes existentes.
 {% endcomment %}
 
+{% liquid
+  if section.settings.background_color != blank
+    render 'contrast-override', background_color: section.settings.background_color, section_id: section.id
+  endif
+%}
+
 <style>
   #shopify-section-{{ section.id }} {
     {% render 'paleta-vars' %}
     --albums-grid-padding-top: {{ section.settings.padding-block-start }}px;
     --albums-grid-padding-bottom: {{ section.settings.padding-block-end }}px;
+    {%- if section.settings.background_color != blank %}
+    --albums-grid-bg: var(--color-background);
+    {%- endif %}
   }
 </style>
 
@@ -20,7 +29,7 @@
   endif
 -%}
 
-<div class="albums-grid">
+<div class="albums-grid{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}">
   <div class="albums-grid__wrap">
     {%- if section.settings.fina != blank or section.settings.titulo != blank -%}
       <div class="albums-grid__head">
@@ -64,7 +73,7 @@
 
 {% stylesheet %}
   .albums-grid {
-    background: var(--la-nude, var(--color-background));
+    background: var(--albums-grid-bg, var(--la-nude, var(--color-background)));
     padding-block: var(--albums-grid-padding-top) var(--albums-grid-padding-bottom);
     color: var(--color-foreground);
   }
@@ -162,6 +171,12 @@
     {
       "type": "paragraph",
       "content": "Añade blocks para elegir álbumes concretos y ordenarlos arrastrando. Sin blocks, se muestran todos."
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "placeholder": "t:settings.default"
     },
     {
       "type": "header",
