@@ -1065,6 +1065,52 @@
         "padding-block-end": 48
       }
     },
+    "peludo_destacado_home": {
+      "type": "peludo-destacado",
+      "blocks": {
+        "animal_LA_leo": {
+          "type": "animal",
+          "settings": {
+            "animal": "leo"
+          }
+        },
+        "animal_LA_tomas": {
+          "type": "animal",
+          "settings": {
+            "animal": "tomas"
+          }
+        },
+        "animal_LA_julieta": {
+          "type": "animal",
+          "settings": {
+            "animal": "julieta"
+          }
+        },
+        "animal_LA_blue": {
+          "type": "animal",
+          "settings": {
+            "animal": "blue"
+          }
+        }
+      },
+      "block_order": [
+        "animal_LA_leo",
+        "animal_LA_tomas",
+        "animal_LA_julieta",
+        "animal_LA_blue"
+      ],
+      "settings": {
+        "fina": "os presentamos a…",
+        "cta_label": "Conocer a",
+        "texto_todos": "ver a todos los peludos →",
+        "pagina_animales": "/pages/nuestros-animales",
+        "velocidad": 6,
+        "max_animales": 4,
+        "background_color": "",
+        "padding-block-start": 78,
+        "padding-block-end": 78
+      }
+    },
     "section_Yi4nCE": {
       "type": "section",
       "blocks": {
@@ -2475,7 +2521,7 @@
         "fina": "podéis conocer a nuestros...",
         "titulo": "Peludos",
         "lead": "Organizados por álbumes, como en nuestro Instagram. Dentro de cada álbum encontrarás la ficha de cada animal con sus fotos, su historia y su carácter.",
-        "background_color": "",
+        "background_color": "#D8CDBB",
         "padding-block-start": 78,
         "padding-block-end": 56
       }
@@ -3487,51 +3533,6 @@
         "padding-block-start": 78,
         "padding-block-end": 78
       }
-    },
-    "peludo_destacado_home": {
-      "type": "peludo-destacado",
-      "settings": {
-        "fina": "os presentamos a…",
-        "cta_label": "Conocer a",
-        "texto_todos": "ver a todos los peludos →",
-        "pagina_animales": "/pages/nuestros-animales",
-        "velocidad": 6,
-        "max_animales": 4,
-        "padding-block-start": 78,
-        "padding-block-end": 78
-      },
-      "blocks": {
-        "animal_LA_leo": {
-          "type": "animal",
-          "settings": {
-            "animal": "leo"
-          }
-        },
-        "animal_LA_tomas": {
-          "type": "animal",
-          "settings": {
-            "animal": "tomas"
-          }
-        },
-        "animal_LA_julieta": {
-          "type": "animal",
-          "settings": {
-            "animal": "julieta"
-          }
-        },
-        "animal_LA_blue": {
-          "type": "animal",
-          "settings": {
-            "animal": "blue"
-          }
-        }
-      },
-      "block_order": [
-        "animal_LA_leo",
-        "animal_LA_tomas",
-        "animal_LA_julieta",
-        "animal_LA_blue"
-      ]
     }
   },
   "order": [
