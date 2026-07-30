@@ -303,6 +303,14 @@
           {
             "value": "heading-loose",
             "label": "t:options.loose"
+          },
+          {
+            "value": "heading-wide",
+            "label": "Ancho (0.1em)"
+          },
+          {
+            "value": "heading-display",
+            "label": "Display (0.24em)"
           }
         ],
         "default": "heading-normal"
@@ -451,6 +459,14 @@
           {
             "value": "heading-loose",
             "label": "t:options.loose"
+          },
+          {
+            "value": "heading-wide",
+            "label": "Ancho (0.1em)"
+          },
+          {
+            "value": "heading-display",
+            "label": "Display (0.24em)"
           }
         ],
         "default": "heading-normal"
@@ -607,6 +623,14 @@
           {
             "value": "heading-loose",
             "label": "t:options.loose"
+          },
+          {
+            "value": "heading-wide",
+            "label": "Ancho (0.1em)"
+          },
+          {
+            "value": "heading-display",
+            "label": "Display (0.24em)"
           }
         ],
         "default": "heading-normal"
@@ -763,6 +787,14 @@
           {
             "value": "heading-loose",
             "label": "t:options.loose"
+          },
+          {
+            "value": "heading-wide",
+            "label": "Ancho (0.1em)"
+          },
+          {
+            "value": "heading-display",
+            "label": "Display (0.24em)"
           }
         ],
         "default": "heading-normal"
@@ -919,6 +951,14 @@
           {
             "value": "heading-loose",
             "label": "t:options.loose"
+          },
+          {
+            "value": "heading-wide",
+            "label": "Ancho (0.1em)"
+          },
+          {
+            "value": "heading-display",
+            "label": "Display (0.24em)"
           }
         ],
         "default": "heading-normal"
@@ -1075,6 +1115,14 @@
           {
             "value": "heading-loose",
             "label": "t:options.loose"
+          },
+          {
+            "value": "heading-wide",
+            "label": "Ancho (0.1em)"
+          },
+          {
+            "value": "heading-display",
+            "label": "Display (0.24em)"
           }
         ],
         "default": "heading-normal"
