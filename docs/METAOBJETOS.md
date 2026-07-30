@@ -3,6 +3,16 @@
 El theme ya tiene todo el código. Lo único que hay que hacer en el **admin de Shopify**
 es crear las dos definiciones de metaobjetos, activar sus web pages y dar de alta el contenido.
 
+> **Estado (30-07-2026): HECHO por Admin API en la dev store.** Definiciones `animal` y
+> `album` creadas y con web pages activas; 11 álbumes (los 10 de Carla + **GATOS**, que
+> existe en la web actual) y **135 animales reales** scrapeados del blog de
+> loveanimalsbcn.com: nombres, edades, álbum(es) de cada uno, PPP sí/no y fechas de
+> entrada (21 reales del artículo "Los más veteranos", 20 estimadas por "N años en una
+> jaula", el resto placeholder `2025-01-01`). Las 8 imágenes del CDN están subidas a
+> Archivos (portadas de álbum + galería de Thor, Ciclone, Tuco, Johnny y Rocky).
+> **Pendiente:** fotos del resto (los animales viven en embeds de Instagram — hace falta
+> navegador o descarga manual), historias y carácter por animal, y las fechas reales de Carla.
+
 ## 1. Crear las definiciones (Configuración → Datos personalizados → Metaobjetos)
 
 ### Definición `animal`
