@@ -2472,8 +2472,8 @@
           "name": "t:names.popup_link",
           "settings": {
             "behavior": "default",
-            "heading": "Learn more",
-            "type_preset": "",
+            "heading": "¿Cómo se tramita la licencia PPP?",
+            "type_preset": "h3",
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
