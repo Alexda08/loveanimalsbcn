@@ -2714,7 +2714,7 @@
             "align_baseline": false,
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 12,
+            "gap": 22,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -2815,7 +2815,7 @@
                   "type": "text",
                   "name": "t:names.heading",
                   "settings": {
-                    "text": "<p>Quiero adoptar</p>",
+                    "text": "<p>Tienda solidaria</p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "center",
@@ -2841,7 +2841,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>El proceso paso a paso, sin sorpresas, y cómo contactar con nosotras.</p>",
+                    "text": "<p>Todo el beneficio de la tienda va a veterinario, pienso y residencias.</p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "center",
@@ -2867,8 +2867,8 @@
                   "type": "button",
                   "name": "t:names.button",
                   "settings": {
-                    "label": "Ver proceso →",
-                    "link": "#shopify-section-section_Yi4nCE",
+                    "label": "Ver la tienda →",
+                    "link": "/collections/all",
                     "open_in_new_tab": false,
                     "style_class": "button-unstyled",
                     "custom_button_background": "{{ settings.color_palette.foreground }}",
@@ -2935,7 +2935,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p><em>i.</em></p>",
+                    "text": "<p><em>ii.</em></p>",
                     "width": "fit-content",
                     "max_width": "none",
                     "alignment": "center",
@@ -2961,7 +2961,7 @@
                   "type": "text",
                   "name": "t:names.heading",
                   "settings": {
-                    "text": "<p>Quiero adoptar</p>",
+                    "text": "<p>Teaming</p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "center",
@@ -2987,7 +2987,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>El proceso paso a paso, sin sorpresas, y cómo contactar con nosotras.</p>",
+                    "text": "<p>1 € al mes que se convierte en pienso, veterinario y rescates.</p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "center",
@@ -3013,8 +3013,8 @@
                   "type": "button",
                   "name": "t:names.button",
                   "settings": {
-                    "label": "Ver proceso →",
-                    "link": "#shopify-section-section_Yi4nCE",
+                    "label": "Unirse al grupo →",
+                    "link": "#",
                     "open_in_new_tab": false,
                     "style_class": "button-unstyled",
                     "custom_button_background": "{{ settings.color_palette.foreground }}",
@@ -3081,7 +3081,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p><em>i.</em></p>",
+                    "text": "<p><em>iii.</em></p>",
                     "width": "fit-content",
                     "max_width": "none",
                     "alignment": "center",
@@ -3107,7 +3107,7 @@
                   "type": "text",
                   "name": "t:names.heading",
                   "settings": {
-                    "text": "<p>Quiero adoptar</p>",
+                    "text": "<p>Donación puntual</p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "center",
@@ -3133,7 +3133,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>El proceso paso a paso, sin sorpresas, y cómo contactar con nosotras.</p>",
+                    "text": "<p>Bizum o transferencia: cada euro cuenta y todo queda en los animales.</p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "center",
@@ -3159,8 +3159,8 @@
                   "type": "button",
                   "name": "t:names.button",
                   "settings": {
-                    "label": "Ver proceso →",
-                    "link": "#shopify-section-section_Yi4nCE",
+                    "label": "Cómo donar →",
+                    "link": "#",
                     "open_in_new_tab": false,
                     "style_class": "button-unstyled",
                     "custom_button_background": "{{ settings.color_palette.foreground }}",
@@ -3227,7 +3227,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p><em>i.</em></p>",
+                    "text": "<p><em>iv.</em></p>",
                     "width": "fit-content",
                     "max_width": "none",
                     "alignment": "center",
@@ -3253,7 +3253,7 @@
                   "type": "text",
                   "name": "t:names.heading",
                   "settings": {
-                    "text": "<p>Quiero adoptar</p>",
+                    "text": "<p>Difusión en redes</p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "center",
@@ -3279,7 +3279,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>El proceso paso a paso, sin sorpresas, y cómo contactar con nosotras.</p>",
+                    "text": "<p>Compartir salva vidas: síguenos y ayúdanos a que les vean.</p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "center",
@@ -3305,8 +3305,8 @@
                   "type": "button",
                   "name": "t:names.button",
                   "settings": {
-                    "label": "Ver proceso →",
-                    "link": "#shopify-section-section_Yi4nCE",
+                    "label": "Seguirnos →",
+                    "link": "https://www.instagram.com/adopta.loveanimals.bcn",
                     "open_in_new_tab": false,
                     "style_class": "button-unstyled",
                     "custom_button_background": "{{ settings.color_palette.foreground }}",
