@@ -2748,6 +2748,63 @@
         "padding-block-start": 80,
         "padding-block-end": 48
       }
+    },
+    "finales_felices_JKyyhW": {
+      "type": "finales-felices",
+      "blocks": {
+        "animal_bmMxd9": {
+          "type": "animal",
+          "settings": {
+            "animal": "cooper",
+            "frase": ""
+          }
+        },
+        "animal_URm3jm": {
+          "type": "animal",
+          "settings": {
+            "animal": "troy",
+            "frase": ""
+          }
+        },
+        "animal_WUKDzg": {
+          "type": "animal",
+          "settings": {
+            "animal": "gordo",
+            "frase": ""
+          }
+        },
+        "animal_EwTAMi": {
+          "type": "animal",
+          "settings": {
+            "animal": "gilda",
+            "frase": ""
+          }
+        }
+      },
+      "block_order": [
+        "animal_bmMxd9",
+        "animal_URm3jm",
+        "animal_WUKDzg",
+        "animal_EwTAMi"
+      ],
+      "name": "Finales felices",
+      "settings": {
+        "fina": "sí, esto acaba bien",
+        "titulo": "Finales felices",
+        "lead": "Los que ya salieron por la puerta grande. Este muro crece con cada adopción.",
+        "columns": 4,
+        "mobile_columns": "1",
+        "columns_gap": 20,
+        "girar": true,
+        "mostrar_sello": true,
+        "mostrar_anio": true,
+        "max_animales": 8,
+        "nota": "el próximo nombre de este muro lo decides tú 🤍",
+        "section_width": "page-width",
+        "background_color": "",
+        "padding-block-start": 78,
+        "padding-block-end": 78
+      }
     }
   },
   "order": [
@@ -2760,6 +2817,7 @@
     "albums_grid_peludos",
     "album_destacado_home",
     "section_nwhiLi",
-    "section_mG9zrt"
+    "section_mG9zrt",
+    "finales_felices_JKyyhW"
   ]
 }
