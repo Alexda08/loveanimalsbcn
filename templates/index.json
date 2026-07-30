@@ -1106,7 +1106,7 @@
         "pagina_animales": "/pages/nuestros-animales",
         "velocidad": 6,
         "max_animales": 4,
-        "background_color": "",
+        "background_color": "#D8CDBB",
         "padding-block-start": 78,
         "padding-block-end": 78
       }
