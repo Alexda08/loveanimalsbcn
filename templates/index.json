@@ -263,7 +263,7 @@
                   "name": "t:names.button",
                   "settings": {
                     "label": "Ver nuestros animales",
-                    "link": "#shopify-section-albums_grid_peludos",
+                    "link": "/pages/nuestros-animales",
                     "open_in_new_tab": false,
                     "style_class": "button",
                     "custom_button_background": "{{ settings.color_palette.foreground }}",
@@ -853,7 +853,7 @@
               "name": "t:names.button",
               "settings": {
                 "label": "Ver álbumes →",
-                "link": "#shopify-section-albums_grid_peludos",
+                "link": "/pages/nuestros-animales",
                 "open_in_new_tab": false,
                 "style_class": "button-unstyled",
                 "custom_button_background": "{{ settings.color_palette.foreground }}",

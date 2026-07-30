@@ -1,0 +1,45 @@
+{
+  "sections": {
+    "grid_albumes": {
+      "type": "albums-grid",
+      "blocks": {
+        "album_acogida": { "type": "album", "settings": { "album": "necesitamos-casa-de-acogida" } },
+        "album_abuelos": { "type": "album", "settings": { "album": "abuelos" } },
+        "album_veteranos": { "type": "album", "settings": { "album": "los-mas-veteranos" } },
+        "album_ppp_j": { "type": "album", "settings": { "album": "ppp-jovenes" } },
+        "album_ppp_a": { "type": "album", "settings": { "album": "ppp-adultos" } },
+        "album_mestizos": { "type": "album", "settings": { "album": "mestizos" } },
+        "album_2021": { "type": "album", "settings": { "album": "desde-2021-esperando-familia" } },
+        "album_2022": { "type": "album", "settings": { "album": "desde-2022-esperando-familia" } },
+        "album_2023": { "type": "album", "settings": { "album": "desde-2023-esperando-familia" } },
+        "album_2024": { "type": "album", "settings": { "album": "desde-2024-esperando-familia" } },
+        "album_gatos": { "type": "album", "settings": { "album": "gatos" } }
+      },
+      "block_order": [
+        "album_acogida",
+        "album_abuelos",
+        "album_veteranos",
+        "album_ppp_j",
+        "album_ppp_a",
+        "album_mestizos",
+        "album_2021",
+        "album_2022",
+        "album_2023",
+        "album_2024",
+        "album_gatos"
+      ],
+      "settings": {
+        "padding-block-start": 78,
+        "padding-block-end": 78
+      }
+    },
+    "felices": {
+      "type": "finales-felices",
+      "settings": {
+        "padding-block-start": 78,
+        "padding-block-end": 78
+      }
+    }
+  },
+  "order": ["grid_albumes", "felices"]
+}
