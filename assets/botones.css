@@ -1,0 +1,12 @@
+/* Botones globales ajustados al diseño Love Animals BCN.
+   La familia (accent/Oswald), el uppercase y el radio de 3px ya vienen de los
+   settings del theme; aquí solo lo que los settings no cubren. */
+
+.button,
+.button-secondary,
+.button-custom,
+button.shopify-payment-button__button--unbranded {
+  font-weight: 500;
+  font-size: 0.88rem;
+  letter-spacing: 0.08em;
+}

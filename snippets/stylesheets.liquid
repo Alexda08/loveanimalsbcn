@@ -1,2 +1,5 @@
 {{ 'overflow-list.css' | asset_url | preload_tag: as: 'style' }}
 {{ 'base.css' | asset_url | stylesheet_tag: preload: true }}
+{% comment %} LA START - botones al diseño (peso/tamaño/tracking que los settings no cubren) {% endcomment %}
+{{ 'botones.css' | asset_url | stylesheet_tag }}
+{% comment %} LA END {% endcomment %}
