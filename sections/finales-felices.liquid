@@ -1,7 +1,11 @@
 {% comment %}
-  Muro de finales felices: animales con estado "adoptado".
-  Al marcar un animal como adoptado en el admin desaparece de los álbumes
-  (lo filtran las plantillas) y aparece aquí automáticamente.
+  Muro de finales felices.
+
+  Dos modos:
+  - Con bloques «Animal adoptado»: eliges y ordenas exactamente qué animales salen
+    (el diseño de referencia muestra 4), con frase opcional de su familia.
+  - Sin bloques: se rellena solo con los animales en estado «adoptado» (el muro
+    crece con cada adopción sin tocar el theme editor).
 {% endcomment %}
 
 {% liquid
@@ -15,62 +19,51 @@
     {% render 'paleta-vars' %}
     --felices-padding-top: {{ section.settings.padding-block-start }}px;
     --felices-padding-bottom: {{ section.settings.padding-block-end }}px;
+    --felices-cols: {{ section.settings.columns | default: 4 }};
+    --felices-cols-mobile: {{ section.settings.mobile_columns | default: '1' }};
+    --felices-gap: {{ section.settings.columns_gap | default: 20 }}px;
     {%- if section.settings.background_color != blank %}
     --felices-bg: var(--color-background);
     {%- endif %}
   }
 </style>
 
-{%- liquid
-  assign max = section.settings.max_animales | default: 8
-  assign adoptados_count = 0
--%}
-
 {%- capture muro -%}
-  {%- for a in shop.metaobjects.animal.values -%}
-    {%- liquid
-      if adoptados_count >= max
-        break
-      endif
-      assign estado = a.estado.value | downcase | strip
-    -%}
-    {%- if estado == 'adoptado' -%}
+  {%- if section.blocks.size > 0 -%}
+    {%- for block in section.blocks -%}
       {%- liquid
-        assign adoptados_count = adoptados_count | plus: 1
-        assign foto = a.galeria.value | first
-        assign sexo = a.sexo.value | downcase
+        assign elegido = block.settings.animal
+        if elegido != blank
+          render 'feliz-card', animal: elegido, frase: block.settings.frase, mostrar_sello: section.settings.mostrar_sello, mostrar_anio: section.settings.mostrar_anio, shopify_attributes: block.shopify_attributes, avisar_no_adoptado: true
+        elsif request.design_mode
+          echo '<div class="feliz-card feliz-card--vacia" '
+          echo block.shopify_attributes
+          echo '><span class="feliz-card__elige">🐾<br>Elige un animal en los ajustes del bloque</span></div>'
+        endif
       -%}
-      <div class="feliz-card">
-        <div class="feliz-card__ph">
-          {%- if foto != blank -%}
-            {{
-              foto.preview_image
-              | image_url: width: 600
-              | image_tag:
-                widths: '300, 450, 600',
-                sizes: '(min-width: 1000px) 260px, 50vw',
-                alt: a.nombre.value,
-                loading: 'lazy',
-                class: 'feliz-card__img'
-            }}
-          {%- else -%}
-            <span class="feliz-card__placeholder" aria-hidden="true">📷</span>
-          {%- endif -%}
-        </div>
-        <h3 class="feliz-card__nombre">{{ a.nombre.value }}</h3>
-        <span class="feliz-card__sello">
-          {%- if sexo contains 'embra' %}Adoptada{% else %}Adoptado{% endif -%}
-          {%- if a.fecha_adopcion.value != blank %} · {{ a.fecha_adopcion.value | date: '%Y' }}{% endif -%}
-        </span>
-      </div>
-    {%- endif -%}
-  {%- endfor -%}
+    {%- endfor -%}
+  {%- else -%}
+    {%- liquid
+      assign max = section.settings.max_animales | default: 8
+      assign adoptados_count = 0
+      for a in shop.metaobjects.animal.values
+        if adoptados_count >= max
+          break
+        endif
+        assign estado = a.estado.value | downcase | strip
+        if estado == 'adoptado'
+          assign adoptados_count = adoptados_count | plus: 1
+          render 'feliz-card', animal: a, mostrar_sello: section.settings.mostrar_sello, mostrar_anio: section.settings.mostrar_anio
+        endif
+      endfor
+    -%}
+  {%- endif -%}
 {%- endcapture -%}
 
 {%- assign muro_limpio = muro | strip -%}
 {%- if muro_limpio != blank or request.design_mode -%}
   <div class="felices{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}">
-    <div class="felices__wrap">
+    <div class="felices__wrap{% if section.settings.section_width == 'full-width' %} felices__wrap--full{% endif %}">
       <div class="felices__head">
         {%- if section.settings.fina != blank -%}
           <p class="felices__fina">{{ section.settings.fina }}</p>
@@ -84,11 +77,11 @@
       </div>
 
       {%- if muro_limpio != blank -%}
-        <div class="felices__grid">
+        <div class="felices__grid{% if section.settings.girar %} felices__grid--girado{% endif %}">
           {{ muro }}
         </div>
       {%- else -%}
-        <p class="felices__vacio">Aún no hay animales marcados como adoptados (estado «adoptado» en el metaobjeto).</p>
+        <p class="felices__vacio">Añade bloques «Animal adoptado» o marca animales con estado «adoptado» y aparecerán aquí.</p>
       {%- endif -%}
 
       {%- if section.settings.nota != blank -%}
@@ -109,6 +102,10 @@
     max-width: var(--page-width);
     margin-inline: auto;
     padding-inline: var(--page-margin);
+  }
+
+  .felices__wrap--full {
+    max-width: none;
   }
 
   .felices__head {
@@ -142,8 +139,8 @@
 
   .felices__grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(var(--felices-cols, 4), 1fr);
+    gap: var(--felices-gap, 20px);
   }
 
   @media (max-width: 960px) {
@@ -154,7 +151,7 @@
 
   @media (max-width: 500px) {
     .felices__grid {
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(var(--felices-cols-mobile, 1), 1fr);
     }
   }
 
@@ -165,10 +162,13 @@
     padding: 10px 10px 16px;
     text-align: center;
     box-shadow: 0 8px 20px rgb(var(--color-foreground-rgb) / var(--opacity-10));
+  }
+
+  .felices__grid--girado .feliz-card {
     transform: rotate(-0.6deg);
   }
 
-  .feliz-card:nth-child(even) {
+  .felices__grid--girado .feliz-card:nth-child(even) {
     transform: rotate(0.6deg);
   }
 
@@ -216,6 +216,39 @@
     transform: rotate(-2deg);
   }
 
+  .feliz-card__frase {
+    font-family: var(--font-heading--family);
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--la-wine-soft, var(--color-foreground));
+    margin: 8px 0 0;
+  }
+
+  .feliz-card__aviso {
+    display: block;
+    margin-top: 8px;
+    font-family: var(--font-accent--family);
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--la-gold, var(--color-foreground));
+  }
+
+  .feliz-card--vacia {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 240px;
+    border-style: dashed;
+    box-shadow: none;
+  }
+
+  .feliz-card__elige {
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-muted-text));
+  }
+
   .felices__nota {
     text-align: center;
     margin: 26px 0 0;
@@ -232,8 +265,8 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .feliz-card,
-    .feliz-card:nth-child(even) {
+    .felices__grid--girado .feliz-card,
+    .felices__grid--girado .feliz-card:nth-child(even) {
       transform: none;
     }
   }
@@ -262,9 +295,73 @@
       "default": "Los que ya salieron por la puerta grande. Este muro crece con cada adopción."
     },
     {
+      "type": "header",
+      "content": "t:content.cards_layout"
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "t:settings.columns",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "select",
+      "id": "mobile_columns",
+      "label": "t:settings.mobile_columns",
+      "options": [
+        { "value": "1", "label": "t:options.one_number" },
+        { "value": "2", "label": "t:options.two_number" }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "range",
+      "id": "columns_gap",
+      "label": "t:settings.horizontal_gap",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Tarjetas"
+    },
+    {
+      "type": "checkbox",
+      "id": "girar",
+      "label": "Girar tarjetas (efecto polaroid)",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "mostrar_sello",
+      "label": "Mostrar sello «Adoptado/a»",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "mostrar_anio",
+      "label": "Añadir el año al sello",
+      "default": true,
+      "visible_if": "{{ section.settings.mostrar_sello }}"
+    },
+    {
+      "type": "header",
+      "content": "Relleno automático"
+    },
+    {
+      "type": "paragraph",
+      "content": "Sin bloques «Animal adoptado», el muro se rellena solo con los animales en estado «adoptado»."
+    },
+    {
       "type": "range",
       "id": "max_animales",
-      "label": "Máximo de animales",
+      "label": "Máximo en modo automático",
       "min": 4,
       "max": 24,
       "step": 4,
@@ -275,6 +372,20 @@
       "id": "nota",
       "label": "Nota final",
       "default": "el próximo nombre de este muro lo decides tú 🤍"
+    },
+    {
+      "type": "header",
+      "content": "t:content.section_layout"
+    },
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "t:settings.width",
+      "options": [
+        { "value": "page-width", "label": "t:options.page" },
+        { "value": "full-width", "label": "t:options.full" }
+      ],
+      "default": "page-width"
     },
     {
       "type": "color",
@@ -307,10 +418,38 @@
       "default": 78
     }
   ],
+  "blocks": [
+    {
+      "type": "animal",
+      "name": "Animal adoptado",
+      "settings": [
+        {
+          "type": "metaobject",
+          "id": "animal",
+          "metaobject_type": "animal",
+          "label": "Animal",
+          "info": "Elige uno con estado «adoptado» (si no lo está, el editor te avisará)."
+        },
+        {
+          "type": "text",
+          "id": "frase",
+          "label": "Frase de su familia",
+          "info": "Opcional, en cursiva bajo el sello: «ahora duerme en el sofá»."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 12,
   "presets": [
     {
       "name": "Finales felices",
-      "category": "t:categories.storytelling"
+      "category": "t:categories.storytelling",
+      "blocks": [
+        { "type": "animal" },
+        { "type": "animal" },
+        { "type": "animal" },
+        { "type": "animal" }
+      ]
     }
   ]
 }

@@ -1,0 +1,55 @@
+{% doc %}
+  Tarjeta polaroid del muro de finales felices: foto, nombre, sello
+  "Adoptada/Adoptado · año" y frase opcional de su familia.
+
+  Requiere las variables --la-* en el scope de la section (render 'paleta-vars').
+
+  @param {object} animal - Metaobjeto de tipo `animal`
+  @param {string} [frase] - Frase de la familia adoptante (cursiva bajo el sello)
+  @param {boolean} [mostrar_sello] - Mostrar el sello (default: true)
+  @param {boolean} [mostrar_anio] - Añadir el año de adopción al sello (default: true)
+  @param {string} [shopify_attributes] - block.shopify_attributes para el theme editor
+  @param {boolean} [avisar_no_adoptado] - En el editor, avisa si el animal no está en estado «adoptado»
+
+  Ejemplo:
+    {% render 'feliz-card', animal: a, frase: block.settings.frase, shopify_attributes: block.shopify_attributes %}
+{% enddoc %}
+{%- liquid
+  assign foto = animal.galeria.value | first
+  assign sexo = animal.sexo.value | downcase
+  assign estado = animal.estado.value | downcase | strip
+-%}
+
+<div class="feliz-card" {{ shopify_attributes }}>
+  <div class="feliz-card__ph">
+    {%- if foto != blank -%}
+      {{
+        foto.preview_image
+        | image_url: width: 600
+        | image_tag:
+          widths: '300, 450, 600',
+          sizes: '(min-width: 1000px) 260px, 50vw',
+          alt: animal.nombre.value,
+          loading: 'lazy',
+          class: 'feliz-card__img'
+      }}
+    {%- else -%}
+      <span class="feliz-card__placeholder" aria-hidden="true">📷</span>
+    {%- endif -%}
+  </div>
+  <h3 class="feliz-card__nombre">{{ animal.nombre.value }}</h3>
+  {%- unless mostrar_sello == false -%}
+    <span class="feliz-card__sello">
+      {%- if sexo contains 'embra' %}Adoptada{% else %}Adoptado{% endif -%}
+      {%- unless mostrar_anio == false -%}
+        {%- if animal.fecha_adopcion.value != blank %} · {{ animal.fecha_adopcion.value | date: '%Y' }}{% endif -%}
+      {%- endunless -%}
+    </span>
+  {%- endunless -%}
+  {%- if frase != blank -%}
+    <p class="feliz-card__frase">"{{ frase }}"</p>
+  {%- endif -%}
+  {%- if avisar_no_adoptado and request.design_mode and estado != 'adoptado' -%}
+    <span class="feliz-card__aviso">aún no está marcado como «adoptado»</span>
+  {%- endif -%}
+</div>
