@@ -2378,67 +2378,67 @@
         "album_P37iWj": {
           "type": "album",
           "settings": {
-            "album": "gid://shopify/Metaobject/244605976621"
+            "album": "necesitamos-casa-de-acogida"
           }
         },
         "album_nKxakG": {
           "type": "album",
           "settings": {
-            "album": "gid://shopify/Metaobject/244365754413"
+            "album": "abuelos"
           }
         },
         "album_hdXzqw": {
           "type": "album",
           "settings": {
-            "album": "gid://shopify/Metaobject/244606009389"
+            "album": "los-mas-veteranos"
           }
         },
         "album_Mf7Kff": {
           "type": "album",
           "settings": {
-            "album": "gid://shopify/Metaobject/244606042157"
+            "album": "ppp-jovenes"
           }
         },
         "album_rJfLL6": {
           "type": "album",
           "settings": {
-            "album": "gid://shopify/Metaobject/244606074925"
+            "album": "ppp-adultos"
           }
         },
         "album_jNzzpe": {
           "type": "album",
           "settings": {
-            "album": "gid://shopify/Metaobject/244606107693"
+            "album": "mestizos"
           }
         },
         "album_NbRgfw": {
           "type": "album",
           "settings": {
-            "album": "gid://shopify/Metaobject/244606140461"
+            "album": "desde-2021-esperando-familia"
           }
         },
         "album_8cGzza": {
           "type": "album",
           "settings": {
-            "album": "gid://shopify/Metaobject/244606173229"
+            "album": "desde-2022-esperando-familia"
           }
         },
         "album_LA_d2023": {
           "type": "album",
           "settings": {
-            "album": "gid://shopify/Metaobject/244606205997"
+            "album": "desde-2023-esperando-familia"
           }
         },
         "album_LA_d2024": {
           "type": "album",
           "settings": {
-            "album": "gid://shopify/Metaobject/244606238765"
+            "album": "desde-2024-esperando-familia"
           }
         },
         "album_LA_gatos": {
           "type": "album",
           "settings": {
-            "album": "gid://shopify/Metaobject/244612137005"
+            "album": "gatos"
           }
         }
       },
@@ -2469,7 +2469,7 @@
       "type": "album-destacado",
       "name": "Álbum destacado",
       "settings": {
-        "album": "gid://shopify/Metaobject/244606042157",
+        "album": "ppp-jovenes",
         "max_animales": 3,
         "fina": "así se ve un álbum por dentro →",
         "titulo_prefijo": "Álbum ·",
@@ -2770,28 +2770,28 @@
         "animal_bmMxd9": {
           "type": "animal",
           "settings": {
-            "animal": "gid://shopify/Metaobject/244615544877",
+            "animal": "luna",
             "frase": ""
           }
         },
         "animal_URm3jm": {
           "type": "animal",
           "settings": {
-            "animal": "gid://shopify/Metaobject/244615577645",
+            "animal": "simba-3",
             "frase": ""
           }
         },
         "animal_WUKDzg": {
           "type": "animal",
           "settings": {
-            "animal": "gid://shopify/Metaobject/244615610413",
+            "animal": "kira",
             "frase": ""
           }
         },
         "animal_EwTAMi": {
           "type": "animal",
           "settings": {
-            "animal": "gid://shopify/Metaobject/244615643181",
+            "animal": "bruno",
             "frase": ""
           }
         }

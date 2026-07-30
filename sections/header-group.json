@@ -17,7 +17,7 @@
         "announcement_BxgCk9": {
           "type": "_announcement",
           "settings": {
-            "text": "<strong>Ahora mismo necesitamos casas de acogida · puedes salvar una vida sin adoptar → </strong><a href=\"#acoger\">saber más</a>",
+            "text": "Ahora mismo <strong>necesitamos casas de acogida</strong> · puedes salvar una vida sin adoptar → <a href=\"/#shopify-section-section_Jmdaay\">saber más</a>",
             "link": "",
             "font": "var(--font-subheading--family)",
             "font_size": "0.875rem",
@@ -89,9 +89,9 @@
         "show_search": true,
         "search_position": "right",
         "search_row": "top",
-        "show_country": true,
+        "show_country": false,
         "country_selector_style": false,
-        "show_language": true,
+        "show_language": false,
         "localization_font": "heading",
         "localization_font_size": "0.875rem",
         "localization_position": "right",
