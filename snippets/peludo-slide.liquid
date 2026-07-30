@@ -1,6 +1,7 @@
 {% doc %}
-  Slide del «Peludo destacado»: foto polaroid con banda de días + nombre grande,
-  frase y CTAs. La primera slide entra activa; el resto las rota <peludo-rotador>.
+  Slide del «Peludo destacado»: polaroid con banda de días, sello del año,
+  coletilla manuscrita, nombre grande, hito de navidades, frase y CTAs
+  (ficha + compartir por WhatsApp). La primera slide entra activa.
 
   Requiere las variables --la-* en el scope de la section (render 'paleta-vars').
 
@@ -10,6 +11,9 @@
   @param {string} [cta_label] - Texto del botón (se añade el nombre)
   @param {string} [texto_todos] - Texto del enlace a todos los peludos
   @param {string} [pagina_animales] - URL de la página de álbumes
+  @param {string} [coletilla] - Línea manuscrita bajo la foto ("…y hoy suma uno más")
+  @param {string} [texto_compartir] - Texto de la píldora de WhatsApp
+  @param {boolean} [mostrar_sello] - Sello «busco familia desde AAAA» (default true)
   @param {string} [shopify_attributes] - block.shopify_attributes en modo bloques
 {% enddoc %}
 {%- liquid
@@ -29,14 +33,36 @@
   endif
   assign meta_line = meta_parts | split: '|' | join: ' · '
 
+  # días y navidades server-side (mismo cálculo que dias-esperando)
+  assign navidades = 0
+  if animal.fecha_entrada.value != blank
+    assign desde_epoch = animal.fecha_entrada.value | date: '%s' | plus: 0
+    assign ahora_epoch = 'now' | date: '%s' | plus: 0
+    assign dias_num = ahora_epoch | minus: desde_epoch | divided_by: 86400
+    assign navidades = dias_num | divided_by: 365
+  endif
+
   assign img_loading = 'lazy'
   if indice == 1
     assign img_loading = 'eager'
   endif
+
+  # mensaje de WhatsApp con su ficha
+  assign url_ficha = request.origin | append: animal.system.url
+  assign msg = 'Este es ' | append: nombre | append: ', lleva '
+  assign msg = msg | append: dias_num | append: ' días esperando una familia. ¿Le echas un ojo? '
+  assign msg = msg | append: url_ficha
+  assign msg_enc = msg | url_encode | replace: '+', '%20'
+  assign wa_url = 'https://wa.me/?text=' | append: msg_enc
 -%}
 
 <div class="pd-slide{% if indice == 1 %} activo{% endif %}" {{ shopify_attributes }}>
   <div class="pd-slide__marco">
+    {%- unless mostrar_sello == false -%}
+      {%- if animal.fecha_entrada.value != blank -%}
+        <span class="pd-slide__sello">busco familia<br>desde {{ animal.fecha_entrada.value | date: '%Y' }}</span>
+      {%- endif -%}
+    {%- endunless -%}
     {%- if foto != blank -%}
       {{
         foto.preview_image
@@ -57,6 +83,9 @@
         días esperando
       </span>
     {%- endif -%}
+    {%- if coletilla != blank -%}
+      <span class="pd-slide__coletilla">{{ coletilla }}</span>
+    {%- endif -%}
   </div>
 
   <div class="pd-slide__texto">
@@ -67,6 +96,15 @@
     {%- if meta_line != blank -%}
       <p class="pd-slide__meta">{{ meta_line | downcase }}</p>
     {%- endif -%}
+    {%- if navidades >= 1 -%}
+      <p class="pd-slide__hito">
+        {%- if navidades == 1 -%}
+          ya ha pasado una navidad aquí dentro
+        {%- else -%}
+          ya son {{ navidades }} navidades aquí dentro
+        {%- endif -%}
+      </p>
+    {%- endif -%}
     {%- if animal.frase.value != blank -%}
       <p class="pd-slide__frase">"{{ animal.frase.value }}"</p>
     {%- endif -%}
@@ -74,6 +112,11 @@
       <a class="pd-slide__btn" href="{{ animal.system.url }}">
         {{- cta_label | default: 'Conocer a' }} {{ nombre -}}
       </a>
+      {%- if texto_compartir != blank -%}
+        <a class="pd-slide__compartir" href="{{ wa_url }}" target="_blank" rel="noopener">
+          {{- texto_compartir -}}
+        </a>
+      {%- endif -%}
       {%- if pagina_animales != blank and texto_todos != blank -%}
         <a class="pd-slide__todos" href="{{ pagina_animales }}">{{ texto_todos }}</a>
       {%- endif -%}

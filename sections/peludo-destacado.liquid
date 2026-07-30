@@ -50,7 +50,7 @@
       {%- if a != blank -%}
         {%- assign total = total | plus: 1 -%}
         {%- assign nombres = nombres | append: a.nombre.value | append: '|' -%}
-        {%- render 'peludo-slide', animal: a, indice: total, fina: section.settings.fina, cta_label: section.settings.cta_label, texto_todos: section.settings.texto_todos, pagina_animales: section.settings.pagina_animales, shopify_attributes: block.shopify_attributes -%}
+        {%- render 'peludo-slide', animal: a, indice: total, fina: section.settings.fina, cta_label: section.settings.cta_label, texto_todos: section.settings.texto_todos, pagina_animales: section.settings.pagina_animales, coletilla: section.settings.coletilla, texto_compartir: section.settings.texto_compartir, mostrar_sello: section.settings.mostrar_sello, shopify_attributes: block.shopify_attributes -%}
       {%- endif -%}
     {%- endfor -%}
   {%- else -%}
@@ -80,7 +80,7 @@
         assign usados = usados | append: mejor.system.handle | append: ','
         assign total = total | plus: 1
         assign nombres = nombres | append: mejor.nombre.value | append: '|'
-        render 'peludo-slide', animal: mejor, indice: ronda, fina: section.settings.fina, cta_label: section.settings.cta_label, texto_todos: section.settings.texto_todos, pagina_animales: section.settings.pagina_animales
+        render 'peludo-slide', animal: mejor, indice: ronda, fina: section.settings.fina, cta_label: section.settings.cta_label, texto_todos: section.settings.texto_todos, pagina_animales: section.settings.pagina_animales, coletilla: section.settings.coletilla, texto_compartir: section.settings.texto_compartir, mostrar_sello: section.settings.mostrar_sello
       endfor
     -%}
   {%- endif -%}
@@ -103,6 +103,7 @@
               </button>
             {%- endfor -%}
           </div>
+          <span class="pd-progress" aria-hidden="true"><span class="pd-progress__fill"></span></span>
         {%- endif -%}
       </peludo-rotador>
     </div>
@@ -233,6 +234,49 @@
     letter-spacing: 0.02em;
     margin-right: 0.35em;
     font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* sello del año, estampado en la esquina de la foto */
+  .pd-slide__sello {
+    position: absolute;
+    top: 22px;
+    right: -8px;
+    z-index: 1;
+    font-family: var(--font-accent--family);
+    font-weight: 500;
+    font-size: 0.6rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 1.5;
+    color: var(--la-wine, var(--color-foreground));
+    border: 1.5px solid var(--la-wine, var(--color-foreground));
+    border-radius: 3px;
+    padding: 0.5em 0.9em;
+    background: rgb(var(--la-white-rgb, 253 251 246) / 0.85);
+    transform: rotate(4deg);
+  }
+
+  /* coletilla manuscrita en el faldón blanco de la polaroid */
+  .pd-slide__coletilla {
+    position: absolute;
+    inset-inline: 12px;
+    bottom: 8px;
+    text-align: center;
+    font-family: var(--font-heading--family);
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--la-wine-soft, var(--color-foreground));
+  }
+
+  /* hito de navidades */
+  .pd-slide__hito {
+    font-family: var(--font-heading--family);
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--la-gold, var(--color-foreground));
+    margin: 10px 0 0;
   }
 
   /* lado texto */
@@ -315,6 +359,61 @@
     padding-bottom: 3px;
   }
 
+  /* píldora de compartir por WhatsApp */
+  .pd-slide__compartir {
+    display: inline-block;
+    font-family: var(--font-accent--family);
+    font-weight: 500;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 1px solid rgb(var(--color-foreground-rgb) / var(--opacity-15));
+    border-radius: 999px;
+    padding: 0.6em 1.2em;
+    color: inherit;
+    transition: all 0.13s ease;
+  }
+
+  .pd-slide__compartir:hover {
+    background: var(--la-green, var(--color-foreground));
+    border-color: var(--la-green, var(--color-foreground));
+    color: var(--la-cream, var(--color-background));
+  }
+
+  /* hilo de progreso dorado hasta el siguiente peludo */
+  .pd-progress {
+    display: block;
+    width: 180px;
+    height: 2px;
+    margin: 14px auto 0;
+    background: rgb(var(--color-foreground-rgb) / var(--opacity-10));
+    overflow: hidden;
+  }
+
+  .pd-progress__fill {
+    display: block;
+    height: 100%;
+    width: 100%;
+    background: var(--la-gold, var(--color-foreground));
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+
+  .pd-progress__fill.corre {
+    animation: pd-progreso linear forwards;
+  }
+
+  @keyframes pd-progreso {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pd-progress {
+      display: none;
+    }
+  }
+
   /* tabs con nombres */
   .peludo-dest__tabs {
     display: flex;
@@ -377,18 +476,21 @@
       connectedCallback() {
         this.slides = Array.from(this.querySelectorAll('.pd-slide'));
         this.tabs = Array.from(this.querySelectorAll('.pd-tab'));
+        this.barra = this.querySelector('.pd-progress__fill');
+        this.sinMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        this.cuenta(this.slides[0]);
         if (this.slides.length < 2) return;
         this.i = 0;
         this.velocidad = (parseInt(this.dataset.velocidad, 10) || 6) * 1000;
         this.tabs.forEach((tab, n) => {
           tab.addEventListener('click', () => { this.ir(n); this.reinicia(); });
         });
-        this.addEventListener('mouseenter', () => this.para());
-        this.addEventListener('mouseleave', () => this.arranca());
-        this.addEventListener('focusin', () => this.para());
-        this.addEventListener('focusout', () => this.arranca());
+        this.addEventListener('mouseenter', () => this.pausa());
+        this.addEventListener('mouseleave', () => this.sigue());
+        this.addEventListener('focusin', () => this.pausa());
+        this.addEventListener('focusout', () => this.sigue());
         document.addEventListener('visibilitychange', () => {
-          document.hidden ? this.para() : this.arranca();
+          document.hidden ? this.pausa() : this.sigue();
         });
         this.arranca();
       }
@@ -407,16 +509,65 @@
           this.tabs[this.i].classList.add('activo');
           this.tabs[this.i].setAttribute('aria-selected', 'true');
         }
+        this.cuenta(this.slides[this.i]);
+        this.lanzaBarra();
+      }
+
+      /* el contador de días "despierta": cuenta hasta su cifra real */
+      cuenta(slide) {
+        if (this.sinMovimiento || !slide) return;
+        const b = slide.querySelector('.pd-slide__dias-band b');
+        if (!b) return;
+        const fin = parseInt(b.textContent.replace(/\./g, ''), 10);
+        if (!fin || fin < 30) return;
+        const ini = Math.floor(fin * 0.9);
+        const t0 = performance.now();
+        const dur = 900;
+        const paso = (t) => {
+          const p = Math.min(1, (t - t0) / dur);
+          const suave = 1 - Math.pow(1 - p, 3);
+          b.textContent = Math.round(ini + (fin - ini) * suave).toLocaleString('es-ES');
+          if (p < 1) requestAnimationFrame(paso);
+        };
+        requestAnimationFrame(paso);
+      }
+
+      lanzaBarra() {
+        if (!this.barra || this.sinMovimiento || !this.t) return;
+        this.barra.classList.remove('corre');
+        void this.barra.offsetWidth;
+        this.barra.style.animationDuration = this.velocidad + 'ms';
+        this.barra.style.animationPlayState = 'running';
+        this.barra.classList.add('corre');
       }
 
       arranca() {
-        if (this.t || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        if (this.t || this.sinMovimiento) return;
         this.t = setInterval(() => this.ir(this.i + 1), this.velocidad);
+        this.lanzaBarra();
       }
 
       para() {
         clearInterval(this.t);
         this.t = null;
+        if (this.barra) this.barra.classList.remove('corre');
+      }
+
+      /* pausa que conserva el hilo de progreso congelado */
+      pausa() {
+        clearInterval(this.t);
+        this.t = null;
+        if (this.barra) this.barra.style.animationPlayState = 'paused';
+      }
+
+      sigue() {
+        if (this.t || this.sinMovimiento) return;
+        this.t = setInterval(() => this.ir(this.i + 1), this.velocidad);
+        if (this.barra && this.barra.classList.contains('corre')) {
+          this.barra.style.animationPlayState = 'running';
+        } else {
+          this.lanzaBarra();
+        }
       }
 
       reinicia() { this.para(); this.arranca(); }
@@ -454,6 +605,29 @@
       "type": "url",
       "id": "pagina_animales",
       "label": "Página «Nuestros animales»"
+    },
+    {
+      "type": "header",
+      "content": "Detalles especiales"
+    },
+    {
+      "type": "text",
+      "id": "coletilla",
+      "label": "Coletilla manuscrita bajo la foto",
+      "default": "…y hoy suma uno más"
+    },
+    {
+      "type": "text",
+      "id": "texto_compartir",
+      "label": "Píldora de compartir por WhatsApp",
+      "info": "Vacío = no se muestra. Comparte su ficha con el contador de días.",
+      "default": "preséntale a alguien 💬"
+    },
+    {
+      "type": "checkbox",
+      "id": "mostrar_sello",
+      "label": "Sello «busco familia desde…»",
+      "default": true
     },
     {
       "type": "range",
