@@ -1,0 +1,82 @@
+{% doc %}
+  Slide del «Peludo destacado»: foto polaroid con banda de días + nombre grande,
+  frase y CTAs. La primera slide entra activa; el resto las rota <peludo-rotador>.
+
+  Requiere las variables --la-* en el scope de la section (render 'paleta-vars').
+
+  @param {object} animal - Metaobjeto de tipo `animal`
+  @param {number} indice - Posición (1 = slide activa inicial)
+  @param {string} [fina] - Entradilla en cursiva
+  @param {string} [cta_label] - Texto del botón (se añade el nombre)
+  @param {string} [texto_todos] - Texto del enlace a todos los peludos
+  @param {string} [pagina_animales] - URL de la página de álbumes
+  @param {string} [shopify_attributes] - block.shopify_attributes en modo bloques
+{% enddoc %}
+{%- liquid
+  assign nombre = animal.nombre.value
+  assign foto = animal.galeria.value | first
+
+  assign meta_parts = ''
+  if animal.edad.value != blank
+    assign meta_parts = meta_parts | append: animal.edad.value | append: '|'
+  endif
+  if animal.tamano.value != blank
+    assign meta_parts = meta_parts | append: animal.tamano.value | append: '|'
+  endif
+  assign primer_rasgo = animal.caracter.value | first
+  if primer_rasgo != blank
+    assign meta_parts = meta_parts | append: primer_rasgo | append: '|'
+  endif
+  assign meta_line = meta_parts | split: '|' | join: ' · '
+
+  assign img_loading = 'lazy'
+  if indice == 1
+    assign img_loading = 'eager'
+  endif
+-%}
+
+<div class="pd-slide{% if indice == 1 %} activo{% endif %}" {{ shopify_attributes }}>
+  <div class="pd-slide__marco">
+    {%- if foto != blank -%}
+      {{
+        foto.preview_image
+        | image_url: width: 900
+        | image_tag:
+          widths: '430, 640, 860, 900',
+          sizes: '(min-width: 820px) 430px, 90vw',
+          alt: nombre,
+          loading: img_loading,
+          class: 'pd-slide__img'
+      }}
+    {%- else -%}
+      <span class="pd-slide__placeholder" aria-hidden="true">🐾</span>
+    {%- endif -%}
+    {%- if animal.fecha_entrada.value != blank -%}
+      <span class="pd-slide__dias-band">
+        <b>{% render 'dias-esperando', desde: animal.fecha_entrada.value %}</b>
+        días esperando
+      </span>
+    {%- endif -%}
+  </div>
+
+  <div class="pd-slide__texto">
+    {%- if fina != blank -%}
+      <p class="pd-slide__fina">{{ fina }}</p>
+    {%- endif -%}
+    <h2 class="pd-slide__nombre">{{ nombre }}</h2>
+    {%- if meta_line != blank -%}
+      <p class="pd-slide__meta">{{ meta_line | downcase }}</p>
+    {%- endif -%}
+    {%- if animal.frase.value != blank -%}
+      <p class="pd-slide__frase">"{{ animal.frase.value }}"</p>
+    {%- endif -%}
+    <div class="pd-slide__ctas">
+      <a class="pd-slide__btn" href="{{ animal.system.url }}">
+        {{- cta_label | default: 'Conocer a' }} {{ nombre -}}
+      </a>
+      {%- if pagina_animales != blank and texto_todos != blank -%}
+        <a class="pd-slide__todos" href="{{ pagina_animales }}">{{ texto_todos }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+</div>

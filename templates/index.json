@@ -3487,11 +3487,57 @@
         "padding-block-start": 78,
         "padding-block-end": 78
       }
+    },
+    "peludo_destacado_home": {
+      "type": "peludo-destacado",
+      "settings": {
+        "fina": "os presentamos a…",
+        "cta_label": "Conocer a",
+        "texto_todos": "ver a todos los peludos →",
+        "pagina_animales": "/pages/nuestros-animales",
+        "velocidad": 6,
+        "max_animales": 4,
+        "padding-block-start": 78,
+        "padding-block-end": 78
+      },
+      "blocks": {
+        "animal_LA_leo": {
+          "type": "animal",
+          "settings": {
+            "animal": "leo"
+          }
+        },
+        "animal_LA_tomas": {
+          "type": "animal",
+          "settings": {
+            "animal": "tomas"
+          }
+        },
+        "animal_LA_julieta": {
+          "type": "animal",
+          "settings": {
+            "animal": "julieta"
+          }
+        },
+        "animal_LA_blue": {
+          "type": "animal",
+          "settings": {
+            "animal": "blue"
+          }
+        }
+      },
+      "block_order": [
+        "animal_LA_leo",
+        "animal_LA_tomas",
+        "animal_LA_julieta",
+        "animal_LA_blue"
+      ]
     }
   },
   "order": [
     "section_MCf4eT",
     "section_M6qBnK",
+    "peludo_destacado_home",
     "section_Yi4nCE",
     "section_Jmdaay",
     "section_J9B6bX",

@@ -1,0 +1,529 @@
+{% comment %}
+  Peludo destacado: un "featured" de animal para la home con varios rotando.
+  - Con bloques «Animal»: eliges y ordenas quiénes rotan.
+  - Sin bloques: rotan automáticamente los que MÁS días llevan esperando
+    (fecha_entrada más antigua, excluyendo adoptados).
+  Animación de barajado tipo polaroid (crossfade + giro), en pausa con hover/foco
+  y desactivada con prefers-reduced-motion. Tabs con los nombres para saltar.
+{% endcomment %}
+
+{% liquid
+  if section.settings.background_color != blank
+    render 'contrast-override', background_color: section.settings.background_color, section_id: section.id
+  endif
+%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    {% render 'paleta-vars' %}
+    --pd-padding-top: {{ section.settings.padding-block-start }}px;
+    --pd-padding-bottom: {{ section.settings.padding-block-end }}px;
+    {%- if section.settings.background_color != blank %}
+    --pd-bg: var(--color-background);
+    {%- endif %}
+  }
+</style>
+
+{%- liquid
+  assign max = section.settings.max_animales | default: 4
+
+  # ---- candidatos: bloques elegidos o los que más esperan ----
+  assign hay_bloques = false
+  if section.blocks.size > 0
+    for block in section.blocks
+      if block.settings.animal != blank
+        assign hay_bloques = true
+        break
+      endif
+    endfor
+  endif
+-%}
+
+{%- capture slides -%}
+  {%- liquid
+    assign total = 0
+    assign nombres = ''
+  -%}
+  {%- if hay_bloques -%}
+    {%- for block in section.blocks -%}
+      {%- assign a = block.settings.animal -%}
+      {%- if a != blank -%}
+        {%- assign total = total | plus: 1 -%}
+        {%- assign nombres = nombres | append: a.nombre.value | append: '|' -%}
+        {%- render 'peludo-slide', animal: a, indice: total, fina: section.settings.fina, cta_label: section.settings.cta_label, texto_todos: section.settings.texto_todos, pagina_animales: section.settings.pagina_animales, shopify_attributes: block.shopify_attributes -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- else -%}
+    {%- liquid
+      assign usados = ','
+      for ronda in (1..max)
+        assign mejor = blank
+        assign mejor_fecha = '9999-99-99'
+        for a in shop.metaobjects.animal.values
+          assign estado = a.estado.value | downcase | strip
+          if estado == 'adoptado' or a.fecha_entrada.value == blank
+            continue
+          endif
+          assign clave = ',' | append: a.system.handle | append: ','
+          if usados contains clave
+            continue
+          endif
+          assign fecha_txt = a.fecha_entrada.value | append: ''
+          if fecha_txt < mejor_fecha
+            assign mejor_fecha = fecha_txt
+            assign mejor = a
+          endif
+        endfor
+        if mejor == blank
+          break
+        endif
+        assign usados = usados | append: mejor.system.handle | append: ','
+        assign total = total | plus: 1
+        assign nombres = nombres | append: mejor.nombre.value | append: '|'
+        render 'peludo-slide', animal: mejor, indice: ronda, fina: section.settings.fina, cta_label: section.settings.cta_label, texto_todos: section.settings.texto_todos, pagina_animales: section.settings.pagina_animales
+      endfor
+    -%}
+  {%- endif -%}
+{%- endcapture -%}
+{%- assign slides_limpio = slides | strip -%}
+{%- assign lista_nombres = nombres | split: '|' -%}
+
+{%- if slides_limpio != blank -%}
+  <div class="peludo-dest{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}">
+    <div class="peludo-dest__wrap">
+      <peludo-rotador class="peludo-dest__panel" data-velocidad="{{ section.settings.velocidad | default: 6 }}">
+        <div class="peludo-dest__slides">
+          {{ slides }}
+        </div>
+        {%- if lista_nombres.size > 1 -%}
+          <div class="peludo-dest__tabs" role="tablist" aria-label="Elegir peludo">
+            {%- for nombre in lista_nombres -%}
+              <button type="button" class="pd-tab{% if forloop.first %} activo{% endif %}" role="tab" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">
+                {{- nombre -}}
+              </button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </peludo-rotador>
+    </div>
+  </div>
+{%- elsif request.design_mode -%}
+  <div class="peludo-dest">
+    <div class="peludo-dest__wrap">
+      <p class="peludo-dest__vacio">Añade bloques «Animal» o deja la sección sin bloques para que roten solos los que más días llevan esperando.</p>
+    </div>
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .peludo-dest {
+    background: var(--pd-bg, var(--la-nude, var(--color-background)));
+    padding-block: var(--pd-padding-top) var(--pd-padding-bottom);
+    color: var(--color-foreground);
+    overflow: hidden;
+  }
+
+  .peludo-dest__wrap {
+    max-width: var(--page-width);
+    margin-inline: auto;
+    padding-inline: var(--page-margin);
+  }
+
+  .peludo-dest__panel {
+    display: block;
+  }
+
+  .peludo-dest__slides {
+    display: grid;
+  }
+
+  .pd-slide {
+    grid-area: 1 / 1;
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 52px;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.55s ease, transform 0.55s ease, visibility 0s 0.55s;
+  }
+
+  .pd-slide.activo {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: opacity 0.55s ease 0.1s, transform 0.55s ease 0.1s, visibility 0s;
+  }
+
+  @media (max-width: 820px) {
+    .pd-slide {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+  }
+
+  /* foto polaroid: al entrar "cae" barajándose */
+  .pd-slide__marco {
+    background: var(--la-white, var(--color-background));
+    border: 1px solid rgb(var(--color-foreground-rgb) / var(--opacity-15));
+    border-radius: 4px;
+    padding: 12px 12px 40px;
+    box-shadow: 0 14px 36px rgb(var(--color-foreground-rgb) / 0.18);
+    transform: rotate(-4deg) scale(0.97);
+    transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.1s;
+    justify-self: center;
+    width: min(100%, 430px);
+    position: relative;
+  }
+
+  .pd-slide.activo .pd-slide__marco {
+    transform: rotate(-1.4deg) scale(1);
+  }
+
+  /* washi tape */
+  .pd-slide__marco::before {
+    content: "";
+    position: absolute;
+    top: -13px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-2deg);
+    width: 96px;
+    height: 26px;
+    background: rgb(var(--la-wine-rgb, var(--color-foreground-rgb)) / 0.18);
+    border-left: 1px dashed rgb(var(--color-foreground-rgb) / var(--opacity-20));
+    border-right: 1px dashed rgb(var(--color-foreground-rgb) / var(--opacity-20));
+  }
+
+  .pd-slide__img,
+  .pd-slide__placeholder {
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .pd-slide__placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    background: var(--la-cream, var(--color-background));
+  }
+
+  .pd-slide__dias-band {
+    position: absolute;
+    inset-inline: 12px;
+    bottom: 40px;
+    background: rgb(var(--la-wine-rgb, var(--color-foreground-rgb)) / 0.92);
+    color: var(--la-cream, var(--color-background));
+    font-family: var(--font-accent--family);
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    padding: 0.7em;
+    text-align: center;
+  }
+
+  .pd-slide__dias-band b {
+    font-family: var(--font-heading--family);
+    font-size: 1.15rem;
+    letter-spacing: 0.02em;
+    margin-right: 0.35em;
+    font-weight: 500;
+  }
+
+  /* lado texto */
+  .pd-slide__fina {
+    font-family: var(--font-heading--family);
+    font-style: italic;
+    font-size: clamp(1.3rem, 2.4vw, 1.7rem);
+    color: var(--la-wine, var(--color-foreground));
+    margin: 0;
+  }
+
+  .pd-slide__nombre {
+    font-family: var(--font-heading--family);
+    font-style: italic;
+    font-weight: 600;
+    font-size: clamp(2.6rem, 6vw, 4.2rem);
+    line-height: 1.05;
+    margin: 6px 0 0;
+  }
+
+  .pd-slide__meta {
+    font-family: var(--font-accent--family);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 0.78rem;
+    color: var(--la-wine-soft, var(--color-foreground));
+    margin: 14px 0 0;
+  }
+
+  .pd-slide__frase {
+    font-family: var(--font-heading--family);
+    font-style: italic;
+    font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+    color: var(--la-wine, var(--color-foreground));
+    margin: 16px 0 0;
+    max-width: 26em;
+  }
+
+  .pd-slide__ctas {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    flex-wrap: wrap;
+    margin-top: 26px;
+  }
+
+  .pd-slide__btn {
+    display: inline-block;
+    font-family: var(--font-accent--family);
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    padding: 0.85em 1.9em;
+    border-radius: 3px;
+    background: var(--color-foreground);
+    color: var(--la-cream, var(--color-background));
+    transition: filter 0.14s ease, transform 0.12s ease;
+  }
+
+  .pd-slide__btn:hover {
+    filter: brightness(0.8);
+    transform: translateY(-2px);
+  }
+
+  .pd-slide__btn:focus-visible {
+    outline: 3px solid var(--la-gold, var(--color-foreground));
+    outline-offset: 3px;
+  }
+
+  .pd-slide__todos {
+    font-family: var(--font-accent--family);
+    font-weight: 500;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--la-wine, var(--color-foreground));
+    border-bottom: 2px solid currentColor;
+    padding-bottom: 3px;
+  }
+
+  /* tabs con nombres */
+  .peludo-dest__tabs {
+    display: flex;
+    justify-content: center;
+    gap: 6px 22px;
+    flex-wrap: wrap;
+    margin-top: 34px;
+  }
+
+  .pd-tab {
+    appearance: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-accent--family);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 0.72rem;
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-muted-text));
+    padding: 4px 2px;
+    border-bottom: 2px solid transparent;
+    transition: color 0.14s ease, border-color 0.14s ease;
+  }
+
+  .pd-tab:hover {
+    color: var(--la-wine, var(--color-foreground));
+  }
+
+  .pd-tab.activo {
+    color: var(--la-wine, var(--color-foreground));
+    border-bottom-color: var(--la-wine, var(--color-foreground));
+  }
+
+  .pd-tab:focus-visible {
+    outline: 2px solid var(--la-gold, var(--color-foreground));
+    outline-offset: 2px;
+  }
+
+  .peludo-dest__vacio {
+    text-align: center;
+    font-size: 0.95rem;
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-muted-text));
+    margin: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pd-slide,
+    .pd-slide.activo,
+    .pd-slide__marco,
+    .pd-slide.activo .pd-slide__marco {
+      transition: none;
+    }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  if (!customElements.get('peludo-rotador')) {
+    customElements.define('peludo-rotador', class extends HTMLElement {
+      connectedCallback() {
+        this.slides = Array.from(this.querySelectorAll('.pd-slide'));
+        this.tabs = Array.from(this.querySelectorAll('.pd-tab'));
+        if (this.slides.length < 2) return;
+        this.i = 0;
+        this.velocidad = (parseInt(this.dataset.velocidad, 10) || 6) * 1000;
+        this.tabs.forEach((tab, n) => {
+          tab.addEventListener('click', () => { this.ir(n); this.reinicia(); });
+        });
+        this.addEventListener('mouseenter', () => this.para());
+        this.addEventListener('mouseleave', () => this.arranca());
+        this.addEventListener('focusin', () => this.para());
+        this.addEventListener('focusout', () => this.arranca());
+        document.addEventListener('visibilitychange', () => {
+          document.hidden ? this.para() : this.arranca();
+        });
+        this.arranca();
+      }
+
+      disconnectedCallback() { this.para(); }
+
+      ir(n) {
+        this.slides[this.i].classList.remove('activo');
+        if (this.tabs[this.i]) {
+          this.tabs[this.i].classList.remove('activo');
+          this.tabs[this.i].setAttribute('aria-selected', 'false');
+        }
+        this.i = (n + this.slides.length) % this.slides.length;
+        this.slides[this.i].classList.add('activo');
+        if (this.tabs[this.i]) {
+          this.tabs[this.i].classList.add('activo');
+          this.tabs[this.i].setAttribute('aria-selected', 'true');
+        }
+      }
+
+      arranca() {
+        if (this.t || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        this.t = setInterval(() => this.ir(this.i + 1), this.velocidad);
+      }
+
+      para() {
+        clearInterval(this.t);
+        this.t = null;
+      }
+
+      reinicia() { this.para(); this.arranca(); }
+    });
+  }
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Peludo destacado",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Sin bloques, rotan solos los que más días llevan esperando."
+    },
+    {
+      "type": "text",
+      "id": "fina",
+      "label": "Entradilla (cursiva)",
+      "default": "os presentamos a…"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Texto del botón (se añade el nombre)",
+      "default": "Conocer a"
+    },
+    {
+      "type": "text",
+      "id": "texto_todos",
+      "label": "Texto del enlace a todos",
+      "default": "ver a todos los peludos →"
+    },
+    {
+      "type": "url",
+      "id": "pagina_animales",
+      "label": "Página «Nuestros animales»"
+    },
+    {
+      "type": "range",
+      "id": "velocidad",
+      "label": "Segundos entre peludos",
+      "min": 4,
+      "max": 12,
+      "step": 1,
+      "default": 6
+    },
+    {
+      "type": "range",
+      "id": "max_animales",
+      "label": "Peludos en modo automático",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 78
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 78
+    }
+  ],
+  "blocks": [
+    {
+      "type": "animal",
+      "name": "Animal",
+      "settings": [
+        {
+          "type": "metaobject",
+          "id": "animal",
+          "metaobject_type": "animal",
+          "label": "Animal"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Peludo destacado",
+      "category": "t:categories.storytelling"
+    }
+  ]
+}
+{% endschema %}
