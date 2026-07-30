@@ -10,8 +10,10 @@ es crear las dos definiciones de metaobjetos, activar sus web pages y dar de alt
 > entrada (21 reales del artículo "Los más veteranos", 20 estimadas por "N años en una
 > jaula", el resto placeholder `2025-01-01`). Las 8 imágenes del CDN están subidas a
 > Archivos (portadas de álbum + galería de Thor, Ciclone, Tuco, Johnny y Rocky).
-> **Pendiente:** fotos del resto (los animales viven en embeds de Instagram — hace falta
-> navegador o descarga manual), historias y carácter por animal, y las fechas reales de Carla.
+> Los 130 animales sin foto propia llevan **fotos de muestra** (dog.ceo / thecatapi:
+> PPP con razas tipo staffordshire, álbum GATOS con gatos; 10 veteranos con galería de 3
+> fotos para probar la ficha). **Pendiente:** sustituirlas por las reales de Instagram,
+> historias y carácter por animal, y las fechas reales de Carla.
 
 ## 1. Crear las definiciones (Configuración → Datos personalizados → Metaobjetos)
 
