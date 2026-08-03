@@ -70,8 +70,9 @@
     {% render 'border-override', settings: block_settings %}
     {% render 'spacing-style', settings: block_settings %}
     --gallery-aspect-ratio: {{ ratio }};
-    {% comment %} LA START - fondo de la foto de la tarjeta (setting «media_background») {% endcomment %}
+    {% comment %} LA START - fondo y margen interior de la foto de la tarjeta {% endcomment %}
     {% if block_settings.media_background != blank %}background: {{ block_settings.media_background }};{% endif %}
+    {% if block_settings.media_padding > 0 %}--la-card-media-padding: {{ block_settings.media_padding }}px;{% endif %}
     {% comment %} LA END {% endcomment %}
   "
   data-product-id="{{ product.id }}"

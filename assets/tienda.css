@@ -1,0 +1,57 @@
+/*
+  Tienda solidaria — ajustes de piezas del theme original al diseño de Love Animals BCN.
+  Aquí va solo lo que no cabe en un bloque propio porque toca markup del vendor
+  (precio comparativo, botón de la tarjeta, etiquetas de variante, foto de la tarjeta).
+*/
+
+/* ---------- precio comparativo ---------- */
+/* En el diseño el precio tachado es pequeño y de cuerpo, no del tamaño del precio de venta. */
+.product-grid__card .compare-at-price,
+.product-card .compare-at-price {
+  font-family: var(--font-body--family);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  letter-spacing: 0;
+  color: var(--la-wine, var(--color-foreground));
+}
+
+.product-details .compare-at-price {
+  font-family: var(--font-body--family);
+  font-size: 1rem;
+  line-height: 1.4;
+  letter-spacing: 0;
+  color: var(--la-wine, var(--color-foreground));
+}
+
+/* ---------- botón de la tarjeta ---------- */
+/* CTA condensado del diseño (.card .add): más pequeño y con más tracking que un botón normal. */
+.product-grid__card .group-block .button {
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  line-height: 1.2;
+}
+
+/* ---------- etiquetas de las opciones de variante ---------- */
+/* «Modelo», «Talla», «Color» van en el sello condensado del diseño (.opt-label). */
+.product-details .variant-option--buttons legend,
+.product-details .variant-option[data-testid='variant-option-single'] {
+  font-family: var(--font-accent--family);
+  font-weight: 500;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--la-wine, var(--color-foreground));
+}
+
+.product-details .variant-option__swatch-value {
+  font-family: var(--font-body--family);
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--color-foreground);
+}
+
+/* ---------- foto de la tarjeta ---------- */
+/* Margen interior para que la prenda respire sobre el panel crema (setting del bloque). */
+.card-gallery .product-media-container {
+  padding: var(--la-card-media-padding, 0);
+}

@@ -68,7 +68,7 @@
     color: var(--caja-color, var(--la-cream, var(--color-background)));
     border-radius: var(--caja-radius, 4px);
     padding: 18px 22px;
-    box-shadow: 0 10px 24px rgb(var(--color-foreground-rgb) / var(--opacity-20));
+    box-shadow: 0 10px 24px rgb(var(--la-foreground-rgb, var(--color-shadow-rgb)) / 0.18);
   }
 
   .impacto-caja__ico {
@@ -90,7 +90,7 @@
     font-weight: 600;
     font-size: 1.35em;
     line-height: 1.25;
-    color: var(--caja-accent, var(--la-gold, currentcolor));
+    color: var(--caja-accent, var(--la-gold-soft, currentcolor));
   }
 {% endstylesheet %}
 

@@ -99,8 +99,14 @@ marcadores** (se reconocen porque las etiquetas están en español):
 
 - `blocks/_product-card.liquid`: acepta los bloques nuevos (`impacto-banda`, `etiqueta`, `fina`, `button`)
   y añade el ajuste «Sombra».
-- `blocks/_product-card-gallery.liquid`: ajuste «Fondo de la foto».
-- `blocks/_product-media-gallery.liquid`: ajustes «Fondo de las fotos», «Borde en las fotos», «Sombra de las fotos».
+- `blocks/_product-card-gallery.liquid`: ajustes «Fondo de la foto», «Margen interior de la foto» y
+  «Ocultar el sello de rebaja del theme».
+- `blocks/_product-media-gallery.liquid`: ajustes «Fondo de las fotos», «Margen interior de las fotos»,
+  «Borde en las fotos» y «Sombra de las fotos».
+- `sections/main-collection.liquid` + `snippets/product-grid.liquid`: ajuste «Columnas en escritorio»
+  (número fijo de columnas, una menos entre 750 y 1000px).
+- `assets/tienda.css` (cargado desde `snippets/stylesheets.liquid`): precio comparativo, botón de la
+  tarjeta, etiquetas de las opciones de variante y margen interior de la foto de la tarjeta.
 - `blocks/text.liquid`: opciones de separación «Ancho (0.1em)» y «Display (0.24em)».
 - `config/settings_schema.json`: esas mismas dos opciones en la tipografía global (de la fase anterior).
 
@@ -121,7 +127,20 @@ Scripts en el scratchpad de la sesión: `import_products.py`, `import_collection
 
 ---
 
-## 5. Pendiente / a mano
+## 5. Diferencias conscientes con el diseño
+
+- **La franja «¿a dónde va tu compra?» va después de la rejilla**, no intercalada tras la primera fila:
+  la rejilla de Horizon no admite meter contenido entre tarjetas sin reescribirla.
+- **El botón de la tarjeta dice «Lo quiero»** y lleva a la ficha: desde la rejilla no se puede añadir al
+  carrito una camiseta de 40 variantes sin elegir talla.
+- **El sello «Ahorras …» no se recalcula al cambiar de variante** (solo el precio, que sí lo hace el theme).
+  En este catálogo todas las tallas valen lo mismo, así que el importe es correcto; si algún día una
+  variante cambia de precio, habría que darle su propio JS.
+- **La guía de tallas** del diseño no está: hacen falta las medidas reales de las prendas.
+- Los números y destacados sobre granate usan `color8` (#E3C08D, el dorado claro del diseño) en vez del
+  dorado normal: el dorado oscuro sobre granate no llega al contraste mínimo.
+
+## 6. Pendiente / a mano
 
 - **Moneda:** la tienda de pruebas está en dólares, así que los precios salen como `$15.00`.
   Es un ajuste del panel (Configuración → Datos de la tienda → Moneda), no del theme;

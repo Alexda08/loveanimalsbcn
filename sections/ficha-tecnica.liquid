@@ -10,6 +10,11 @@
   if section.settings.background_color != blank
     render 'contrast-override', background_color: section.settings.background_color, section_id: section.id
   endif
+
+  # la tarjeta tiene su propio color: que el texto contraste con ÉL, no con el fondo de la section
+  assign color_tarjeta = section.settings.card_color | default: settings.color_palette.color5
+  assign id_tarjeta = section.id | append: '-tarjeta'
+  render 'contrast-override', background_color: color_tarjeta, section_id: id_tarjeta
 %}
 
 <style>
@@ -24,9 +29,7 @@
     {%- if section.settings.background_color != blank %}
     --tec-bg: var(--color-background);
     {%- endif %}
-    {%- if section.settings.card_color != blank %}
-    --tec-card-bg: {{ section.settings.card_color }};
-    {%- endif %}
+    --tec-card-bg: {{ color_tarjeta }};
   }
 </style>
 
@@ -44,7 +47,7 @@
           endif
           assign certs = producto.metafields.custom.certificaciones.value
         %}
-        <div class="tec" {{ block.shopify_attributes }}>
+        <div class="tec color-custom-{{ section.id }}-tarjeta" {{ block.shopify_attributes }}>
           {% if block.settings.titulo != blank %}
             <h3 class="tec__titulo">{{ block.settings.titulo }}</h3>
           {% endif %}
@@ -94,7 +97,8 @@
   }
 
   .tec {
-    background: var(--tec-card-bg, var(--la-white, var(--color-background)));
+    background: var(--color-background);
+    color: var(--color-foreground);
     border: 1px solid rgb(var(--color-foreground-rgb) / var(--opacity-15));
     border-radius: var(--tec-radius, 4px);
     padding: 26px 28px;

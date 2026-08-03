@@ -28,6 +28,24 @@
           --product-grid-columns-desktop: repeat(auto-fill, minmax({{ product_card_size }}, 1fr));
         }
 
+        {% comment %} LA START - número fijo de columnas en escritorio (setting «desktop_columns») {% endcomment %}
+        {% assign columnas_fijas = section.settings.desktop_columns | plus: 0 %}
+        {% if columnas_fijas > 0 %}
+          {% assign columnas_medias = columnas_fijas | minus: 1 | at_least: 2 %}
+          @media screen and (min-width: 1000px) {
+            .product-grid--{{ section.id }}:is(.product-grid--grid) {
+              --product-grid-columns-desktop: repeat({{ columnas_fijas }}, 1fr);
+            }
+          }
+
+          @media screen and (min-width: 750px) and (max-width: 999px) {
+            .product-grid--{{ section.id }}:is(.product-grid--grid) {
+              --product-grid-columns-desktop: repeat({{ columnas_medias }}, 1fr);
+            }
+          }
+        {% endif %}
+        {% comment %} LA END {% endcomment %}
+
 
       {% when 'organic' %}
         {% assign large_span = 2 %}

@@ -23,10 +23,11 @@
   }
 
   {%- if section.settings.fijar %}
-  #shopify-section-{{ section.id }} .chips-barra {
+  /* el sticky va en el contenedor de la section: dentro de .chips-barra no hay recorrido */
+  #shopify-section-{{ section.id }} {
     position: sticky;
-    top: var(--header-height, 56px);
-    z-index: 3;
+    top: var(--header-height, 60px);
+    z-index: var(--layer-sticky, 8);
   }
   {%- endif %}
 </style>
@@ -121,6 +122,11 @@
     border-color: var(--la-wine, var(--color-foreground));
   }
 
+  .chip:focus-visible {
+    outline: 2px solid var(--la-wine, var(--color-foreground));
+    outline-offset: 2px;
+  }
+
   .chip--on {
     background: var(--color-foreground);
     color: var(--color-background);
@@ -135,7 +141,7 @@
   .chips-barra__count {
     font-size: 0.85rem;
     font-weight: 600;
-    color: var(--la-wine-soft, var(--color-foreground));
+    color: var(--la-wine, var(--color-foreground));
   }
 
   @media (prefers-reduced-motion: reduce) {

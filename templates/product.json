@@ -73,7 +73,8 @@
             "padding-inline-end": 0,
             "media_background": "{{ settings.color_palette.color4 }}",
             "media_border": true,
-            "media_shadow": "media"
+            "media_shadow": "media",
+            "media_padding": 24
           },
           "blocks": {}
         },
@@ -114,9 +115,10 @@
               "blocks": {}
             },
             "titulo": {
-              "type": "product-title",
+              "type": "text",
               "name": "t:names.product_title",
               "settings": {
+                "text": "<h1>{{ closest.product.title }}</h1>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -198,7 +200,7 @@
                     "tamano": 11,
                     "corner_radius": 2,
                     "background_color": "{{ settings.color_palette.color3 }}",
-                    "color": "{{ settings.color_palette.color5 }}"
+                    "color": "{{ settings.color_palette.foreground }}"
                   },
                   "blocks": {}
                 }
@@ -216,7 +218,7 @@
                 "tamano": 15,
                 "background_color": "{{ settings.color_palette.color1 }}",
                 "color": "{{ settings.color_palette.color4 }}",
-                "accent_color": "{{ settings.color_palette.color3 }}",
+                "accent_color": "{{ settings.color_palette.color8 }}",
                 "corner_radius": 4,
                 "sombra": true,
                 "padding-block-start": 0,
@@ -319,7 +321,7 @@
       "settings": {
         "content_width": "content-center-aligned",
         "desktop_media_position": "left",
-        "equal_columns": false,
+        "equal_columns": true,
         "limit_details_width": false,
         "gap": 48,
         "enable_sticky_add_to_cart": false,
@@ -426,7 +428,6 @@
             "border": "solid",
             "border_width": 1,
             "border_opacity": 16,
-            "border_color": "{{ settings.color_palette.foreground }}",
             "border_radius": 4,
             "padding-block-start": 0,
             "padding-block-end": 16,
@@ -445,7 +446,9 @@
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0,
-                "media_background": "{{ settings.color_palette.color4 }}"
+                "media_background": "{{ settings.color_palette.color4 }}",
+                "media_padding": 10,
+                "ocultar_sello_rebaja": true
               },
               "blocks": {}
             },

@@ -84,7 +84,6 @@
             "border": "solid",
             "border_width": 1,
             "border_opacity": 16,
-            "border_color": "{{ settings.color_palette.foreground }}",
             "border_radius": 4,
             "padding-block-start": 0,
             "padding-block-end": 18,
@@ -104,7 +103,9 @@
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0,
-                "media_background": "{{ settings.color_palette.color4 }}"
+                "media_background": "{{ settings.color_palette.color4 }}",
+                "media_padding": 10,
+                "ocultar_sello_rebaja": true
               },
               "blocks": {}
             },
@@ -251,7 +252,8 @@
         "padding-inline-start": 0,
         "padding-inline-end": 0,
         "padding-block-start": 40,
-        "padding-block-end": 40
+        "padding-block-end": 40,
+        "desktop_columns": "4"
       }
     }
   },

@@ -12,6 +12,9 @@
       endif
     -%}
     {% comment %} LA END {% endcomment %}
+    {%- if block.settings.ocultar_sello_rebaja -%}
+      {%- assign la_sello_theme = false -%}
+    {%- endif -%}
     {%- if la_sello_theme or la_etiqueta != blank -%}
       <div
         class="product-badges product-badges--{{ settings.badge_position }}"
@@ -104,6 +107,23 @@
       "id": "media_background",
       "label": "Fondo de la foto",
       "placeholder": "t:settings.default"
+    },
+    {
+      "type": "range",
+      "id": "media_padding",
+      "label": "Margen interior de la foto",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "checkbox",
+      "id": "ocultar_sello_rebaja",
+      "label": "Ocultar el sello de rebaja del theme",
+      "default": false,
+      "info": "Útil cuando el producto ya lleva su propia etiqueta."
     },
     {
       "type": "header",

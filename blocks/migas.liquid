@@ -10,6 +10,12 @@
   assign raiz_url = block.settings.enlace_raiz
   assign raiz_texto = block.settings.texto_raiz
 
+  # handle de la colección raíz, para no repetirla en el segundo nivel
+  assign raiz_handle = ''
+  if raiz_url contains '/collections/'
+    assign raiz_handle = raiz_url | split: '/collections/' | last | split: '?' | first | split: '/' | first
+  endif
+
   assign col = blank
   if block.settings.mostrar_coleccion
     if collection != blank and collection.handle != blank
@@ -19,12 +25,12 @@
         if c.handle == blank
           continue
         endif
-        if raiz_url contains c.handle
-          continue
-        endif
         assign col = c
         break
       endfor
+    endif
+    if col != blank and raiz_handle != '' and col.handle == raiz_handle
+      assign col = blank
     endif
   endif
 
@@ -75,7 +81,7 @@
     font-size: var(--migas-size, 13px);
     font-weight: 600;
     line-height: 1.5;
-    color: var(--migas-color, var(--la-wine-soft, var(--color-foreground)));
+    color: var(--migas-color, var(--la-wine, var(--color-foreground)));
   }
 
   .migas a {
