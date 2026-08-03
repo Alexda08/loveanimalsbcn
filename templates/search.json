@@ -167,27 +167,6 @@
               },
               "blocks": {}
             },
-            "precio": {
-              "type": "price",
-              "settings": {
-                "show_sale_price_first": true,
-                "show_installments": false,
-                "show_tax_info": false,
-                "type_preset": "custom",
-                "width": "100%",
-                "alignment": "left",
-                "font": "var(--font-heading--family)",
-                "font_size": "1.25rem",
-                "line_height": "tight",
-                "letter_spacing": "normal",
-                "case": "none",
-                "padding-block-start": 12,
-                "padding-block-end": 0,
-                "padding-inline-start": 16,
-                "padding-inline-end": 16
-              },
-              "blocks": {}
-            },
             "boton": {
               "type": "_product-card-group",
               "name": "Botón de la tarjeta",
@@ -211,7 +190,7 @@
                   "type": "button",
                   "name": "Botón de la tarjeta",
                   "settings": {
-                    "label": "Lo quiero",
+                    "label": "Ver el diseño",
                     "link": "{{ closest.product.url }}",
                     "open_in_new_tab": false,
                     "style_class": "button",
@@ -237,7 +216,6 @@
             "banda",
             "titulo",
             "tipo",
-            "precio",
             "boton"
           ]
         }

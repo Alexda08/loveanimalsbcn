@@ -81,22 +81,22 @@
         "c1": {
           "type": "cifra",
           "settings": {
-            "numero": "100%",
-            "texto": "del beneficio va directo a los animales"
+            "numero": "2019",
+            "texto": "desde entonces vistiendo a la familia LAB"
           }
         },
         "c2": {
           "type": "cifra",
           "settings": {
-            "numero": "0",
-            "texto": "intermediarios: gestionamos nosotras la tienda"
+            "numero": "1",
+            "texto": "chica lo prepara todo a mano: El Armario de Pris"
           }
         },
         "c3": {
           "type": "cifra",
           "settings": {
-            "numero": "2019",
-            "texto": "desde entonces vistiendo a la familia LAB"
+            "numero": "6 €",
+            "texto": "de envío a toda España"
           }
         }
       },
@@ -297,27 +297,6 @@
               },
               "blocks": {}
             },
-            "precio": {
-              "type": "price",
-              "settings": {
-                "show_sale_price_first": true,
-                "show_installments": false,
-                "show_tax_info": false,
-                "type_preset": "custom",
-                "width": "100%",
-                "alignment": "left",
-                "font": "var(--font-heading--family)",
-                "font_size": "1.25rem",
-                "line_height": "tight",
-                "letter_spacing": "normal",
-                "case": "none",
-                "padding-block-start": 12,
-                "padding-block-end": 0,
-                "padding-inline-start": 16,
-                "padding-inline-end": 16
-              },
-              "blocks": {}
-            },
             "boton": {
               "type": "_product-card-group",
               "name": "Botón de la tarjeta",
@@ -341,7 +320,7 @@
                   "type": "button",
                   "name": "Botón de la tarjeta",
                   "settings": {
-                    "label": "Lo quiero",
+                    "label": "Ver el diseño",
                     "link": "{{ closest.product.url }}",
                     "open_in_new_tab": false,
                     "style_class": "button",
@@ -367,7 +346,6 @@
             "banda",
             "titulo",
             "tipo",
-            "precio",
             "boton"
           ]
         }
@@ -392,11 +370,11 @@
     "donde": {
       "type": "franja-impacto",
       "settings": {
-        "cifra": "15 €",
-        "titulo": "¿A dónde va exactamente tu compra?",
-        "texto": "<p>Una camiseta cubre <strong>una semana de pienso</strong> de un perro grande. Una sudadera, <strong>una desparasitación completa</strong>. Un totebag, <strong>una vacuna</strong>. No es marketing: es la cuenta que hacemos cada mes para que ninguno se quede sin lo suyo.</p>",
-        "boton_texto": "Ver a quién ayudas",
-        "boton_enlace": "/pages/nuestros-animales",
+        "cifra": "",
+        "titulo": "Los pedidos se hacen por Instagram",
+        "texto": "<p>Estos diseños los prepara <strong>El Armario de Pris</strong>. Elige lo que te guste, escríbele por Instagram diciéndole el diseño y la talla, y ella se encarga del resto. Parte de cada pedido vuelve a la protectora.</p>",
+        "boton_texto": "Compra aquí",
+        "boton_enlace": "https://www.instagram.com/el_armario_de_pris",
         "boton_estilo": "primario",
         "max_width": 1400,
         "corner_radius": 4,
@@ -461,8 +439,8 @@
     "cabecera",
     "cifras",
     "chips",
-    "main",
     "donde",
+    "main",
     "cierre"
   ]
 }

@@ -5,7 +5,9 @@
   @param {string} section_id - The section ID
   @param {object} [block] - The block object
 {%- enddoc -%}
-
+{% comment %} LA START - en modo escaparate no se añade al carrito desde la tarjeta {% endcomment %}
+{% unless settings.escaparate %}
+{% comment %} LA END {% endcomment %}
 {% liquid
   assign product_form_id = 'QuickAdd-ProductForm-' | append: product.id | append: '-' | append: block.id
   assign add_to_cart_text = 'actions.add' | t
@@ -154,3 +156,7 @@
 {% render 'video-background-styles' %}
 {% render 'video-placeholder-styles' %}
 {% render 'deferred-media-product-model-styles' %}
+
+{% comment %} LA START {% endcomment %}
+{% endunless %}
+{% comment %} LA END {% endcomment %}

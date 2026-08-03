@@ -2164,5 +2164,24 @@
         "default": "equal-width-buttons"
       }
     ]
+  },
+  {
+    "name": "Tienda solidaria",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "escaparate",
+        "label": "Modo escaparate (sin compra online)",
+        "default": false,
+        "info": "Oculta el carrito y los botones de compra: la tienda enseña los productos y los pedidos se hacen fuera de la web."
+      },
+      {
+        "type": "checkbox",
+        "id": "ocultar_precios",
+        "label": "Ocultar los precios",
+        "default": false,
+        "info": "Para cuando los precios no los pone la web (los lleva quien prepara los pedidos)."
+      }
+    ]
   }
 ]

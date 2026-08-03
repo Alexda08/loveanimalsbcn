@@ -149,67 +149,6 @@
               },
               "blocks": {}
             },
-            "precio_fila": {
-              "type": "group",
-              "name": "Precio",
-              "settings": {
-                "content_direction": "row",
-                "vertical_on_mobile": false,
-                "horizontal_alignment": "flex-start",
-                "vertical_alignment": "center",
-                "align_baseline": true,
-                "gap": 12,
-                "width": "fill",
-                "custom_width": 100,
-                "height": "fit",
-                "background_media": "none",
-                "border": "none",
-                "border_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {
-                "precio": {
-                  "type": "price",
-                  "settings": {
-                    "show_sale_price_first": true,
-                    "show_installments": false,
-                    "show_tax_info": false,
-                    "type_preset": "custom",
-                    "width": "fit-content",
-                    "alignment": "left",
-                    "font": "var(--font-heading--family)",
-                    "font_size": "2rem",
-                    "line_height": "tight",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {}
-                },
-                "ahorro": {
-                  "type": "ahorro",
-                  "settings": {
-                    "prefijo": "Ahorras",
-                    "formato": "importe",
-                    "tamano": 11,
-                    "corner_radius": 2,
-                    "background_color": "{{ settings.color_palette.color3 }}",
-                    "color": "{{ settings.color_palette.foreground }}"
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "precio",
-                "ahorro"
-              ]
-            },
             "impacto": {
               "type": "impacto-caja",
               "settings": {
@@ -226,69 +165,36 @@
               },
               "blocks": {}
             },
-            "variantes": {
-              "type": "variant-picker",
-              "settings": {
-                "variant_style": "buttons",
-                "show_swatches": true,
-                "variant_style_class": "default",
-                "selected_variant_style_class": "default",
-                "alignment": "left",
-                "padding-block-start": 4,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "comprar": {
-              "type": "buy-buttons",
-              "settings": {
-                "stacking": false,
-                "show_pickup_availability": false,
-                "gift_card_form": true,
-                "padding-block-start": 8,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {
-                "quantity": {
-                  "type": "quantity",
-                  "static": true,
-                  "settings": {},
-                  "blocks": {}
-                },
-                "add-to-cart": {
-                  "type": "add-to-cart",
-                  "static": true,
-                  "settings": {
-                    "style_class": "button-custom",
-                    "custom_button_background": "{{ settings.color_palette.color1 }}",
-                    "custom_button_text": "{{ settings.color_palette.color4 }}",
-                    "custom_button_border": "{{ settings.color_palette.color1 }}"
-                  },
-                  "blocks": {}
-                },
-                "accelerated-checkout": {
-                  "type": "accelerated-checkout",
-                  "static": true,
-                  "settings": {},
-                  "blocks": {}
-                }
-              },
-              "block_order": []
-            },
             "garantias": {
               "type": "garantias",
               "settings": {
                 "icono": "✓",
-                "linea_1": "<strong>100% del beneficio</strong> va a veterinario, pienso y residencias.",
+                "linea_1": "Cada pedido deja algo para <strong>veterinario, pienso y residencias</strong>.",
                 "linea_2": "Algodón ecológico certificado <strong>PETA, Fair Wear y Oeko-Tex</strong>.",
-                "linea_3": "Envíos a toda España · pago seguro con Shopify.",
+                "linea_3": "Envío a toda España · gastos de envío aparte.",
                 "linea_4": "",
                 "tamano": 14,
                 "gap": 8,
+                "padding-block-start": 0,
+                "padding-block-end": 0
+              },
+              "blocks": {}
+            },
+            "compra": {
+              "type": "compra-externa",
+              "name": "Cómo comprarlo",
+              "settings": {
+                "titulo": "Cómo conseguirlo",
+                "texto": "<p>Este diseño lo prepara <strong>El Armario de Pris</strong>: escríbele por Instagram diciéndole qué quieres y qué talla y ella se encarga del resto. Parte de cada pedido vuelve a la protectora.</p>",
+                "boton_texto": "Compra aquí",
+                "boton_enlace": "https://www.instagram.com/el_armario_de_pris",
+                "boton_estilo": "primario",
+                "enlace_texto": "ver el catálogo con precios",
+                "enlace_url": "https://www.canva.com/design/DAFpS5kxTqo/O18dCNZNGhcp2cTfY5Ijrw/view",
+                "nota": "Los pedidos se hacen por mensaje directo, no desde esta web.",
+                "background_color": "{{ settings.color_palette.color4 }}",
+                "borde": true,
+                "corner_radius": 4,
                 "padding-block-start": 0,
                 "padding-block-end": 0
               },
@@ -299,10 +205,8 @@
             "etiqueta",
             "titulo",
             "claim",
-            "precio_fila",
             "impacto",
-            "variantes",
-            "comprar",
+            "compra",
             "garantias"
           ]
         },
@@ -486,34 +390,12 @@
                 "padding-inline-end": 14
               },
               "blocks": {}
-            },
-            "precio": {
-              "type": "price",
-              "settings": {
-                "show_sale_price_first": true,
-                "show_installments": false,
-                "show_tax_info": false,
-                "type_preset": "custom",
-                "width": "100%",
-                "alignment": "left",
-                "font": "var(--font-heading--family)",
-                "font_size": "1.25rem",
-                "line_height": "tight",
-                "letter_spacing": "normal",
-                "case": "none",
-                "padding-block-start": 6,
-                "padding-block-end": 0,
-                "padding-inline-start": 14,
-                "padding-inline-end": 14
-              },
-              "blocks": {}
             }
           },
           "block_order": [
             "galeria",
             "banda",
-            "titulo",
-            "precio"
+            "titulo"
           ]
         }
       },

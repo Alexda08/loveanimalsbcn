@@ -1,0 +1,232 @@
+{% doc %}
+  Cómo comprarlo: el bloque que sustituye al botón de compra cuando los pedidos
+  se hacen fuera de la web (ahora mismo, por Instagram a El Armario de Pris).
+
+  Título + explicación + botón principal + enlace secundario (catálogo con precios).
+{% enddoc %}
+
+{% style %}
+  .compra-{{ block.id }} {
+    --compra-radius: {{ block.settings.corner_radius | default: 4 }}px;
+    {% if block.settings.background_color != blank %}
+      --compra-bg: {{ block.settings.background_color }};
+    {% endif %}
+    {% if block.settings.color != blank %}
+      --compra-color: {{ block.settings.color }};
+    {% endif %}
+    {% unless block.settings.borde %}
+      border-color: transparent;
+    {% endunless %}
+    margin-block: {{ block.settings.padding-block-start | default: 0 }}px {{ block.settings.padding-block-end | default: 0 }}px;
+  }
+{% endstyle %}
+
+<div class="compra compra-{{ block.id }}" {{ block.shopify_attributes }}>
+  {%- if block.settings.titulo != blank -%}
+    <p class="compra__titulo">{{ block.settings.titulo }}</p>
+  {%- endif -%}
+
+  {%- if block.settings.texto != blank -%}
+    <div class="compra__texto rte">{{ block.settings.texto }}</div>
+  {%- endif -%}
+
+  {%- if block.settings.boton_texto != blank and block.settings.boton_enlace != blank -%}
+    <a
+      class="compra__btn button{% if block.settings.boton_estilo == 'secundario' %} button-secondary{% endif %}"
+      href="{{ block.settings.boton_enlace }}"
+      target="_blank"
+      rel="noopener"
+    >
+      {{ block.settings.boton_texto }}
+    </a>
+  {%- endif -%}
+
+  {%- if block.settings.enlace_texto != blank and block.settings.enlace_url != blank -%}
+    <a class="compra__enlace" href="{{ block.settings.enlace_url }}" target="_blank" rel="noopener">
+      {{ block.settings.enlace_texto }}
+    </a>
+  {%- endif -%}
+
+  {%- if block.settings.nota != blank -%}
+    <p class="compra__nota">{{ block.settings.nota }}</p>
+  {%- endif -%}
+</div>
+
+{% stylesheet %}
+  .compra {
+    background: var(--compra-bg, var(--la-cream, var(--color-background)));
+    color: var(--compra-color, var(--color-foreground));
+    border: 1px solid rgb(var(--color-foreground-rgb) / var(--opacity-15));
+    border-radius: var(--compra-radius, 4px);
+    padding: 22px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .compra__titulo {
+    margin: 0;
+    font-family: var(--font-accent--family);
+    font-weight: 500;
+    font-size: 0.82rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--la-wine, var(--color-foreground));
+  }
+
+  .compra__texto {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .compra__texto p {
+    margin: 0;
+  }
+
+  .compra__texto p + p {
+    margin-block-start: 0.6em;
+  }
+
+  .compra__btn {
+    align-self: stretch;
+    text-align: center;
+  }
+
+  .compra__enlace {
+    font-family: var(--font-heading--family);
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--la-wine, var(--color-foreground));
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .compra__nota {
+    margin: 0;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-muted-text));
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Cómo comprarlo",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "titulo",
+      "label": "Título",
+      "default": "Cómo conseguirlo"
+    },
+    {
+      "type": "richtext",
+      "id": "texto",
+      "label": "Explicación",
+      "default": "<p>Los pedidos de nuestros productos solidarios los prepara <strong>El Armario de Pris</strong>. Escríbele por Instagram diciéndole qué diseño y qué talla quieres y ella se encarga del resto.</p>"
+    },
+    {
+      "type": "text",
+      "id": "boton_texto",
+      "label": "Texto del botón",
+      "default": "Compra aquí"
+    },
+    {
+      "type": "url",
+      "id": "boton_enlace",
+      "label": "Enlace del botón"
+    },
+    {
+      "type": "select",
+      "id": "boton_estilo",
+      "label": "Estilo del botón",
+      "options": [
+        { "value": "primario", "label": "t:options.primary" },
+        { "value": "secundario", "label": "t:options.secondary" }
+      ],
+      "default": "primario"
+    },
+    {
+      "type": "text",
+      "id": "enlace_texto",
+      "label": "Enlace secundario",
+      "default": "ver el catálogo con precios"
+    },
+    {
+      "type": "url",
+      "id": "enlace_url",
+      "label": "URL del enlace secundario"
+    },
+    {
+      "type": "text",
+      "id": "nota",
+      "label": "Nota",
+      "default": "Envío a toda España · gastos de envío aparte"
+    },
+    {
+      "type": "header",
+      "content": "t:content.appearance"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
+      "id": "color",
+      "label": "t:settings.text_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "checkbox",
+      "id": "borde",
+      "label": "Borde",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "label": "t:settings.corner_radius",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cómo comprarlo",
+      "category": "t:categories.product"
+    }
+  ]
+}
+{% endschema %}

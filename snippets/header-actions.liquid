@@ -19,6 +19,9 @@
 ></script>
 
 {% capture cart_icon %}
+  {% comment %} LA START - en modo escaparate no hay carrito {% endcomment %}
+  {% unless settings.escaparate %}
+  {% comment %} LA END {% endcomment %}
   <cart-icon
     class="header-actions__cart-icon{% if display_style == 'text' %} header-actions__cart-icon--text{% endif %}{% unless cart == empty %} header-actions__cart-icon--has-cart{% endunless %}"
     data-testid="cart-icon"
@@ -36,6 +39,9 @@
 
     {% render 'cart-bubble', limit: 100 %}
   </cart-icon>
+  {% comment %} LA START {% endcomment %}
+  {% endunless %}
+  {% comment %} LA END {% endcomment %}
 {% endcapture %}
 
 {% capture account_icon %}

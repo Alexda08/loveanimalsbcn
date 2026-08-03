@@ -6,7 +6,9 @@
   @param {boolean} [show_unit_price] - Whether to show the unit price
   @param {boolean} [show_sale_price_first] - Whether to show the sale price first
 {%- enddoc -%}
-
+{% comment %} LA START - con «ocultar precios» la web no enseña importes (los pone quien prepara el pedido) {% endcomment %}
+{% unless settings.ocultar_precios %}
+{% comment %} LA END {% endcomment %}
 {%- liquid
   assign show_unit_price = show_unit_price | default: false
   assign show_sale_price_first = show_sale_price_first | default: false
@@ -130,3 +132,6 @@
     {{- 'content.volume_pricing_available' | t -}}
   </small>
 {%- endif -%}
+{% comment %} LA START {% endcomment %}
+{% endunless %}
+{% comment %} LA END {% endcomment %}

@@ -1,3 +1,6 @@
+{% comment %} LA START - en modo escaparate la ficha no vende: nada de botones de compra {% endcomment %}
+{% unless settings.escaparate %}
+{% comment %} LA END {% endcomment %}
 {% render 'theme-drawer-styles' %}
 {% liquid
   assign block_settings = block.settings
@@ -381,6 +384,9 @@
 {% endif %}
 
 {% render 'buy-buttons-styles' %}
+{% comment %} LA START {% endcomment %}
+{% endunless %}
+{% comment %} LA END {% endcomment %}
 
 {% schema %}
 {

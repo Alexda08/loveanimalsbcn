@@ -128,7 +128,38 @@ Scripts en el scratchpad de la sesión: `import_products.py`, `import_collection
 
 ---
 
-## 5. Diferencias conscientes con el diseño
+## 5. Modo escaparate (sin compra online)
+
+Desde agosto de 2026 **no se compra por la web**: los pedidos los prepara
+[El Armario de Pris](https://www.instagram.com/el_armario_de_pris) y se piden por Instagram.
+Su catálogo con precios está en Canva:
+<https://www.canva.com/design/DAFpS5kxTqo/O18dCNZNGhcp2cTfY5Ijrw/view>.
+
+Dos interruptores en **Ajustes del tema → Tienda solidaria**:
+
+| Ajuste | Qué hace |
+| --- | --- |
+| «Modo escaparate (sin compra online)» | Quita el carrito de la cabecera, los botones de compra de la ficha y el añadir rápido de las tarjetas. |
+| «Ocultar los precios» | Deja de pintar importes en toda la web (tarjetas, ficha, buscador, carrito). |
+
+La ficha lleva en su lugar el bloque **«Cómo comprarlo»** (`blocks/compra-externa.liquid`):
+explicación + botón «Compra aquí» al Instagram de Pris + enlace al catálogo con precios.
+En la colección, la franja de arriba cuenta lo mismo.
+
+Con volver a desmarcar los dos ajustes, la tienda vuelve a vender: los bloques de precio y compra
+siguen en su sitio en las plantillas (solo hay que añadirlos otra vez a la ficha desde el
+personalizador, porque ahí sí se quitaron del `product.json`).
+
+**Catálogo actual de Pris** (sacado de su Canva, agosto 2026): tazas de cerámica 10 € (nº 3 «De la
+jaula a la vida», nº 5 «Si tú me dices MIAU», nº 6 «Yo también soy de raza(s)», nº 10 «Stop Ley PPP»),
+tazas personalizables con foto 11 € (nº 11 y nº 12), mochila-saco 10 €, funda de móvil 14,95 €,
+envío 6 €. El catálogo dice «10% será donado para la asociación».
+
+> ⚠️ **Pendiente de confirmar con Carla:** qué parte de cada pedido vuelve a la protectora.
+> De eso dependen las bandas «= 1 semana de pienso» de las tarjetas, la caja de impacto de la ficha
+> y las cifras de la cabecera. Mientras tanto la web no afirma ningún porcentaje.
+
+## 6. Diferencias conscientes con el diseño
 
 - **La franja «¿a dónde va tu compra?» va después de la rejilla**, no intercalada tras la primera fila:
   la rejilla de Horizon no admite meter contenido entre tarjetas sin reescribirla.
@@ -141,7 +172,7 @@ Scripts en el scratchpad de la sesión: `import_products.py`, `import_collection
 - Los números y destacados sobre granate usan `color8` (#E3C08D, el dorado claro del diseño) en vez del
   dorado normal: el dorado oscuro sobre granate no llega al contraste mínimo.
 
-## 6. Pendiente / a mano
+## 7. Pendiente / a mano
 
 - **Moneda:** la tienda de pruebas está en dólares, así que los precios salen como `$15.00`.
   Es un ajuste del panel (Configuración → Datos de la tienda → Moneda), no del theme;
