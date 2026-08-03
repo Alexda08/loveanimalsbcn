@@ -30,7 +30,7 @@
       {%- liquid
         assign elegido = block.settings.animal
         if elegido != blank
-          render 'animal-card', animal: elegido, mostrar_cta: false
+          render 'animal-card', animal: elegido, mostrar_cta: false, shopify_attributes: block.shopify_attributes
         elsif request.design_mode
           echo '<div class="animal-card animal-card--vacia" '
           echo block.shopify_attributes

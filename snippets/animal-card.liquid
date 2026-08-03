@@ -11,6 +11,7 @@
     (botón chocolate "Conocer a {nombre}", como en el panel de álbum de la home)
   @param {boolean} [mostrar_frase] - Mostrar la frase del animal (default: false)
   @param {boolean} [mostrar_cta] - Mostrar la llamada a la acción inferior (default: true)
+  @param {string} [shopify_attributes] - block.shopify_attributes cuando la tarjeta es un bloque
 
   Ejemplo:
     {% render 'animal-card', animal: a, mostrar_frase: true, cta_estilo: 'boton' %}
@@ -35,7 +36,7 @@
   assign cta = cta_label | default: 'Conocerle →'
 -%}
 
-<a class="animal-card" href="{{ animal.system.url }}">
+<a class="animal-card" href="{{ animal.system.url }}" {{ shopify_attributes }}>
   <div class="animal-card__ph">
     {%- if foto != blank -%}
       {{

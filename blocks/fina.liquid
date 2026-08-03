@@ -13,9 +13,24 @@
   endif
 %}
 
+{% liquid
+  # las frases grandes encogen con la pantalla (como en el diseño); las pequeñas no
+  assign fina_px = block.settings.tamano | default: 20
+  assign fina_min = fina_px | times: 0.74 | round
+  if fina_px >= 24
+    capture fina_size
+      echo 'clamp(' | append: fina_min | append: 'px, 2.8vw, ' | append: fina_px | append: 'px)'
+    endcapture
+  else
+    capture fina_size
+      echo fina_px | append: 'px'
+    endcapture
+  endif
+%}
+
 {% style %}
   .fina-{{ block.id }} {
-    --fina-size: {{ block.settings.tamano | default: 20 }}px;
+    --fina-size: {{ fina_size }};
     --fina-color: {% if block.settings.color != blank %}{{ block.settings.color }}{% else %}var(--la-wine, var(--color-foreground)){% endif %};
     --fina-max: {% if block.settings.max_width > 0 %}{{ block.settings.max_width }}em{% else %}none{% endif %};
     text-align: {{ block.settings.alineacion | default: 'center' }};
@@ -84,7 +99,7 @@
     {
       "type": "range",
       "id": "tamano",
-      "label": "t:settings.font_size",
+      "label": "t:settings.size",
       "min": 12,
       "max": 48,
       "step": 1,

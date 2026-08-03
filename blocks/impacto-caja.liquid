@@ -12,10 +12,8 @@
   assign frase = producto.metafields.custom.impacto_frase.value | default: block.settings.frase
   assign icono = producto.metafields.custom.impacto_icono.value | default: block.settings.icono
 
+  # el texto se parte por ** y se alterna normal / destacado (admite varios destacados)
   assign partes = frase | split: '**'
-  assign antes = partes[0] | strip
-  assign destacado = partes[1] | strip
-  assign despues = partes[2] | strip
 %}
 
 {% style %}
@@ -44,9 +42,13 @@
       <span class="impacto-caja__ico" aria-hidden="true">{{ icono }}</span>
     {% endif %}
     <p class="impacto-caja__txt">
-      {%- if antes != blank %}{{ antes }} {% endif -%}
-      {%- if destacado != blank %}<b>{{ destacado }}</b>{% endif -%}
-      {%- if despues != blank %} {{ despues }}{% endif -%}
+      {%- for parte in partes -%}
+        {%- assign trozo = parte | strip -%}
+        {%- if trozo != blank -%}
+          {%- assign impar = forloop.index0 | modulo: 2 -%}
+          {%- if impar == 1 -%}<b>{{ trozo }}</b>{{ ' ' }}{%- else -%}{{ trozo }}{{ ' ' }}{%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
     </p>
   </div>
 {% elsif request.design_mode %}
@@ -120,7 +122,7 @@
     {
       "type": "range",
       "id": "tamano",
-      "label": "t:settings.font_size",
+      "label": "t:settings.size",
       "min": 12,
       "max": 22,
       "step": 1,
