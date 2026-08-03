@@ -80,6 +80,7 @@
           "settings": {
             "product_card_gap": 0,
             "background_color": "{{ settings.color_palette.color5 }}",
+            "alinear_pie": true,
             "shadow": "suave",
             "border": "solid",
             "border_width": 1,
@@ -88,14 +89,16 @@
             "padding-block-start": 0,
             "padding-block-end": 18,
             "padding-inline-start": 0,
-            "padding-inline-end": 0,
-            "alinear_pie": true
+            "padding-inline-end": 0
           },
           "blocks": {
             "card-gallery": {
               "type": "_product-card-gallery",
               "settings": {
                 "image_ratio": "square",
+                "media_background": "{{ settings.color_palette.color4 }}",
+                "media_padding": 10,
+                "ocultar_sello_rebaja": true,
                 "border": "none",
                 "border_width": 1,
                 "border_opacity": 100,
@@ -103,10 +106,7 @@
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0,
-                "media_background": "{{ settings.color_palette.color4 }}",
-                "media_padding": 10,
-                "ocultar_sello_rebaja": true
+                "padding-inline-end": 0
               },
               "blocks": {}
             },
@@ -197,11 +197,7 @@
                     "width": "custom",
                     "custom_width": 100,
                     "width_mobile": "custom",
-                    "custom_width_mobile": 100,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
+                    "custom_width_mobile": 100
                   },
                   "blocks": {}
                 }
@@ -231,8 +227,7 @@
         "padding-inline-start": 0,
         "padding-inline-end": 0,
         "padding-block-start": 40,
-        "padding-block-end": 40,
-        "desktop_columns": "4"
+        "padding-block-end": 40
       }
     }
   },
