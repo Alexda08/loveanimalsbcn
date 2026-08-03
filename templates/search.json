@@ -187,23 +187,47 @@
               "blocks": {}
             },
             "boton": {
-              "type": "button",
+              "type": "_product-card-group",
               "name": "Botón de la tarjeta",
               "settings": {
-                "label": "Lo quiero",
-                "link": "{{ closest.product.url }}",
-                "open_in_new_tab": false,
-                "style_class": "button",
-                "width": "custom",
-                "custom_width": 100,
-                "width_mobile": "custom",
-                "custom_width_mobile": 100,
+                "content_direction": "column",
+                "horizontal_alignment_flex_direction_column": "center",
+                "vertical_alignment_flex_direction_column": "center",
+                "gap": 0,
+                "width": "fill",
+                "height": "fit",
+                "background_media": "none",
+                "border": "none",
+                "border_radius": 0,
                 "padding-block-start": 12,
                 "padding-block-end": 0,
                 "padding-inline-start": 16,
                 "padding-inline-end": 16
               },
-              "blocks": {}
+              "blocks": {
+                "enlace": {
+                  "type": "button",
+                  "name": "Botón de la tarjeta",
+                  "settings": {
+                    "label": "Lo quiero",
+                    "link": "{{ closest.product.url }}",
+                    "open_in_new_tab": false,
+                    "style_class": "button",
+                    "width": "custom",
+                    "custom_width": 100,
+                    "width_mobile": "custom",
+                    "custom_width_mobile": 100,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "enlace"
+              ]
             }
           },
           "block_order": [
