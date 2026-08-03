@@ -46,7 +46,9 @@ Son inteligentes: los productos entran solos.
 | `tienda-solidaria` | Tienda | proveedor = `Love Animals BCN` |
 | `camisetas` | Camisetas | tipo = `Camiseta` |
 | `sudaderas` | Sudaderas | tipo = `Sudadera` |
-| `totebags` | Totebags | tipo = `Totebag` |
+| `tazas` | Tazas | tipo = `Taza` |
+| `bolsas` | Bolsas | tipo = `Totebag` **o** `Mochila` |
+| `fundas` | Fundas de móvil | tipo = `Funda de móvil` |
 | `infantil` | Infantil | etiqueta `infantil` |
 | `causa-stop-ley-ppp` | Stop Ley PPP | etiqueta `ppp` |
 
@@ -115,8 +117,19 @@ marcadores** (se reconocen porque las etiquetas están en español):
 
 ## 4. Datos de la tienda de muestra
 
-31 productos reales importados de `loveanimalsbcn.com` (títulos, descripciones, precios,
-variantes y fotos reales), con los metacampos rellenados a partir de esa información:
+**31 productos** (agosto 2026, tras la limpieza):
+
+- **21 de la tienda antigua** (camisetas, sudaderas, infantil y totebags) con sus fotos, textos y
+  precios reales de `loveanimalsbcn.com`. Fuera: la campaña del Día de la Madre 2022, las
+  «sorpresa» de última talla y los diseños repetidos con otra colocación del estampado.
+- **10 del catálogo actual de El Armario de Pris** (6 tazas, 2 mochilas-saco, 2 fundas de móvil),
+  con los precios de su Canva y las fotos recortadas de ese mismo catálogo. Cada uno hereda la
+  historia del diseño de su prenda hermana.
+
+Todos tienen **una sola variante**: en escaparate no se elige talla en la web (las tallas y colores
+reales siguen contados en el metacampo «ficha»).
+
+Los metacampos se rellenaron a partir de esa información:
 
 - el impacto se calcula por tipo y precio (camiseta 15 € = una semana de pienso, sudadera =
   desparasitación, totebag = vacuna, sorpresa 8 € = media semana);
@@ -177,5 +190,7 @@ envío 6 €. El catálogo dice «10% será donado para la asociación».
 - **Moneda:** la tienda de pruebas está en dólares, así que los precios salen como `$15.00`.
   Es un ajuste del panel (Configuración → Datos de la tienda → Moneda), no del theme;
   en la tienda real de la protectora saldrá en euros.
-- Fotos: son las reales de su tienda, pero solo las 4 primeras de cada producto.
+- Fotos: las de ropa son las reales de su tienda (las 4 primeras de cada producto). Las de tazas,
+  mochilas y fundas están recortadas del catálogo en Canva y son pequeñas (393 px de origen):
+  en cuanto Pris pase las suyas, se cambian en un minuto.
 - Los textos de «Envíos y dudas» están escritos en la propia section: cámbialos ahí, no por producto.

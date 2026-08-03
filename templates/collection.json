@@ -140,11 +140,25 @@
             "etiqueta": ""
           }
         },
-        "totebags": {
+        "tazas": {
           "type": "chip",
           "settings": {
-            "coleccion": "totebags",
+            "coleccion": "tazas",
             "etiqueta": ""
+          }
+        },
+        "bolsas": {
+          "type": "chip",
+          "settings": {
+            "coleccion": "bolsas",
+            "etiqueta": ""
+          }
+        },
+        "fundas": {
+          "type": "chip",
+          "settings": {
+            "coleccion": "fundas",
+            "etiqueta": "Fundas"
           }
         },
         "infantil": {
@@ -158,7 +172,7 @@
           "type": "chip",
           "settings": {
             "coleccion": "causa-stop-ley-ppp",
-            "etiqueta": "Causa · Stop Ley PPP"
+            "etiqueta": "Stop Ley PPP"
           }
         }
       },
@@ -166,7 +180,9 @@
         "todo",
         "camisetas",
         "sudaderas",
-        "totebags",
+        "tazas",
+        "bolsas",
+        "fundas",
         "infantil",
         "causa"
       ],
