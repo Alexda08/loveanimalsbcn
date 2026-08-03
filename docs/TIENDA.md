@@ -83,14 +83,26 @@ un bloque por colección, con texto propio opcional («Todo», «Causa · Stop L
 `a-quien-ayudas` funciona con bloques (eliges tú) o sin bloques (salen los que llevan
 más tiempo esperando, saltándose a los adoptados).
 
-### Ediciones al theme original (entre marcadores `LA START` / `LA END`)
+### Ediciones al theme original
 
-- `blocks/_product-card.liquid`: acepta los bloques nuevos y el botón, y añade el ajuste «Sombra».
+En Liquid y CSS van entre marcadores `LA START` / `LA END`:
+
 - `snippets/product-card.liquid`: clases de sombra y recorte de la tarjeta.
+- `snippets/card-gallery.liquid`: fondo de la foto de la tarjeta.
 - `blocks/_product-card-gallery.liquid`: sello de `custom.etiqueta` junto a los del theme.
 - `snippets/product-badges-styles.liquid`: estilos de ese sello.
-- `snippets/product-media-gallery-content.liquid`: sello ecológico sobre la foto principal.
-- `snippets/theme-styles-variables.liquid`: la paleta `--la-*` disponible en todo el documento.
+- `snippets/product-media-gallery-content.liquid`: panel de la foto (fondo, borde, sombra) y sello ecológico.
+- `snippets/theme-styles-variables.liquid`: paleta `--la-*` en `:root` y trackings anchos.
+
+Dentro de un `{% schema %}` no se pueden poner comentarios, así que **estos añadidos van sin
+marcadores** (se reconocen porque las etiquetas están en español):
+
+- `blocks/_product-card.liquid`: acepta los bloques nuevos (`impacto-banda`, `etiqueta`, `fina`, `button`)
+  y añade el ajuste «Sombra».
+- `blocks/_product-card-gallery.liquid`: ajuste «Fondo de la foto».
+- `blocks/_product-media-gallery.liquid`: ajustes «Fondo de las fotos», «Borde en las fotos», «Sombra de las fotos».
+- `blocks/text.liquid`: opciones de separación «Ancho (0.1em)» y «Display (0.24em)».
+- `config/settings_schema.json`: esas mismas dos opciones en la tipografía global (de la fase anterior).
 
 ---
 
