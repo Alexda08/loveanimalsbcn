@@ -101,6 +101,7 @@
       {% comment %} LA START - sombra y recorte de la tarjeta (setting «shadow» añadido en blocks/_product-card) {% endcomment %}
       {% if block_settings.shadow != blank and block_settings.shadow != 'none' %} product-card__content--sombra-{{ block_settings.shadow }}{% endif %}
       {% if block_settings.border_radius > 0 %} product-card__content--recortada{% endif %}
+      {% if block_settings.alinear_pie %} product-card__content--pie-abajo{% endif %}
       {% comment %} LA END {% endcomment %}
     "
     style="
@@ -127,6 +128,20 @@
 {% stylesheet %}
   .product-card__content--recortada {
     overflow: hidden;
+  }
+
+  /* el precio y lo que venga detrás (botón) se van abajo del todo:
+     así los pies de todas las tarjetas de la fila quedan a la misma altura */
+  .product-card__content--pie-abajo {
+    height: 100%;
+  }
+
+  .product-card__content--pie-abajo > product-price {
+    margin-block-start: auto;
+  }
+
+  .product-card__content--pie-abajo > product-price ~ * {
+    margin-block-start: 0;
   }
 
   .product-card__content--sombra-suave {

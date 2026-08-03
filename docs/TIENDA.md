@@ -98,7 +98,8 @@ Dentro de un `{% schema %}` no se pueden poner comentarios, así que **estos añ
 marcadores** (se reconocen porque las etiquetas están en español):
 
 - `blocks/_product-card.liquid`: acepta los bloques nuevos (`impacto-banda`, `etiqueta`, `fina`, `button`)
-  y añade el ajuste «Sombra».
+  y añade los ajustes «Sombra» y «Alinear el pie de la tarjeta» (precio y botón abajo del todo, para
+  que queden a la misma altura en toda la fila).
 - `blocks/_product-card-gallery.liquid`: ajustes «Fondo de la foto», «Margen interior de la foto» y
   «Ocultar el sello de rebaja del theme».
 - `blocks/_product-media-gallery.liquid`: ajustes «Fondo de las fotos», «Margen interior de las fotos»,
