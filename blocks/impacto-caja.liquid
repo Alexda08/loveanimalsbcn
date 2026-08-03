@@ -1,0 +1,196 @@
+{% doc %}
+  Caja de impacto de la ficha de producto: el «por qué» en granate con el icono
+  y la parte destacada en dorado («Con esta camiseta pagas **una semana de pienso**
+  para un perro grande de la protectora»).
+
+  Lee custom.impacto_frase y custom.impacto_icono del producto; lo que va entre
+  dobles asteriscos sale destacado.
+{% enddoc %}
+
+{% liquid
+  assign producto = closest.product
+  assign frase = producto.metafields.custom.impacto_frase.value | default: block.settings.frase
+  assign icono = producto.metafields.custom.impacto_icono.value | default: block.settings.icono
+
+  assign partes = frase | split: '**'
+  assign antes = partes[0] | strip
+  assign destacado = partes[1] | strip
+  assign despues = partes[2] | strip
+%}
+
+{% style %}
+  .impacto-caja-{{ block.id }} {
+    --caja-radius: {{ block.settings.corner_radius | default: 4 }}px;
+    --caja-size: {{ block.settings.tamano | default: 15 }}px;
+    {% if block.settings.background_color != blank %}
+      --caja-bg: {{ block.settings.background_color }};
+    {% endif %}
+    {% if block.settings.color != blank %}
+      --caja-color: {{ block.settings.color }};
+    {% endif %}
+    {% if block.settings.accent_color != blank %}
+      --caja-accent: {{ block.settings.accent_color }};
+    {% endif %}
+    {% unless block.settings.sombra %}
+      box-shadow: none;
+    {% endunless %}
+    margin-block: {{ block.settings.padding-block-start | default: 0 }}px {{ block.settings.padding-block-end | default: 0 }}px;
+  }
+{% endstyle %}
+
+{% if frase != blank %}
+  <div class="impacto-caja impacto-caja-{{ block.id }}" {{ block.shopify_attributes }}>
+    {% if icono != blank %}
+      <span class="impacto-caja__ico" aria-hidden="true">{{ icono }}</span>
+    {% endif %}
+    <p class="impacto-caja__txt">
+      {%- if antes != blank %}{{ antes }} {% endif -%}
+      {%- if destacado != blank %}<b>{{ destacado }}</b>{% endif -%}
+      {%- if despues != blank %} {{ despues }}{% endif -%}
+    </p>
+  </div>
+{% elsif request.design_mode %}
+  <div class="impacto-caja impacto-caja-{{ block.id }}" {{ block.shopify_attributes }}>
+    <p class="impacto-caja__txt">
+      Rellena el metacampo «Impacto (frase)» del producto o escribe un texto de reserva.
+    </p>
+  </div>
+{% endif %}
+
+{% stylesheet %}
+  .impacto-caja {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    background: var(--caja-bg, var(--la-wine, var(--color-foreground)));
+    color: var(--caja-color, var(--la-cream, var(--color-background)));
+    border-radius: var(--caja-radius, 4px);
+    padding: 18px 22px;
+    box-shadow: 0 10px 24px rgb(var(--color-foreground-rgb) / var(--opacity-20));
+  }
+
+  .impacto-caja__ico {
+    font-size: 1.8rem;
+    flex: 0 0 auto;
+    line-height: 1;
+  }
+
+  .impacto-caja__txt {
+    margin: 0;
+    font-size: var(--caja-size, 15px);
+    line-height: 1.5;
+  }
+
+  .impacto-caja__txt b {
+    display: block;
+    font-family: var(--font-heading--family);
+    font-style: italic;
+    font-weight: 600;
+    font-size: 1.35em;
+    line-height: 1.25;
+    color: var(--caja-accent, var(--la-gold, currentcolor));
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Caja de impacto",
+  "tag": null,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "El texto sale de los metacampos «Impacto (frase)» e «Impacto (icono)» del producto. Lo que va entre **dobles asteriscos** se destaca."
+    },
+    {
+      "type": "textarea",
+      "id": "frase",
+      "label": "Frase de reserva",
+      "info": "Para los productos que aún no tengan metacampo."
+    },
+    {
+      "type": "text",
+      "id": "icono",
+      "label": "Icono de reserva",
+      "default": "🐾"
+    },
+    {
+      "type": "header",
+      "content": "t:content.appearance"
+    },
+    {
+      "type": "range",
+      "id": "tamano",
+      "label": "t:settings.font_size",
+      "min": 12,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
+      "id": "color",
+      "label": "t:settings.text_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Color de la parte destacada",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "label": "t:settings.corner_radius",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "checkbox",
+      "id": "sombra",
+      "label": "Sombra",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Caja de impacto",
+      "category": "t:categories.product"
+    }
+  ]
+}
+{% endschema %}

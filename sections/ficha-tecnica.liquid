@@ -1,0 +1,298 @@
+{% comment %}
+  Ficha técnica: las tarjetas de «El producto» y «Envíos y dudas».
+  Cada tarjeta puede leer sus puntos del metacampo custom.ficha del producto o
+  llevarlos escritos a mano (una línea por punto).
+{% endcomment %}
+
+{% liquid
+  assign producto = section.settings.producto | default: product
+
+  if section.settings.background_color != blank
+    render 'contrast-override', background_color: section.settings.background_color, section_id: section.id
+  endif
+%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    {% render 'paleta-vars' %}
+    --tec-padding-top: {{ section.settings.padding-block-start }}px;
+    --tec-padding-bottom: {{ section.settings.padding-block-end }}px;
+    --tec-max: {{ section.settings.max_width }}px;
+    --tec-gap: {{ section.settings.columns_gap }}px;
+    --tec-radius: {{ section.settings.corner_radius }}px;
+    --tec-cols: {{ section.blocks.size | at_least: 1 | at_most: 3 }};
+    {%- if section.settings.background_color != blank %}
+    --tec-bg: var(--color-background);
+    {%- endif %}
+    {%- if section.settings.card_color != blank %}
+    --tec-card-bg: {{ section.settings.card_color }};
+    {%- endif %}
+  }
+</style>
+
+{% if section.blocks.size > 0 %}
+  <div class="tecnica{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}">
+    <div class="tecnica__grid">
+      {% for block in section.blocks %}
+        {% liquid
+          assign puntos = ''
+          if block.settings.origen == 'producto'
+            assign puntos = producto.metafields.custom.ficha.value
+          endif
+          if puntos == blank and block.settings.puntos != blank
+            assign puntos = block.settings.puntos | strip | newline_to_br | split: '<br />'
+          endif
+          assign certs = producto.metafields.custom.certificaciones.value
+        %}
+        <div class="tec" {{ block.shopify_attributes }}>
+          {% if block.settings.titulo != blank %}
+            <h3 class="tec__titulo">{{ block.settings.titulo }}</h3>
+          {% endif %}
+
+          {% if puntos != blank %}
+            <ul class="tec__lista">
+              {% for punto in puntos %}
+                {% assign linea = punto | strip %}
+                {% if linea != blank %}
+                  <li>{{ linea }}</li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          {% elsif request.design_mode %}
+            <p class="tec__vacio">
+              Sin puntos: rellena el metacampo «Ficha técnica» del producto o escríbelos en el bloque.
+            </p>
+          {% endif %}
+
+          {% if block.settings.mostrar_certificaciones and certs != blank %}
+            <div class="certs">
+              {% for cert in certs %}
+                <span class="cert">{{ cert }}</span>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}
+
+{% stylesheet %}
+  .tecnica {
+    background: var(--tec-bg, transparent);
+    color: var(--color-foreground);
+    padding-block: var(--tec-padding-top, 60px) var(--tec-padding-bottom, 60px);
+    padding-inline: var(--page-margin);
+  }
+
+  .tecnica__grid {
+    display: grid;
+    grid-template-columns: repeat(var(--tec-cols, 2), 1fr);
+    gap: var(--tec-gap, 26px);
+    max-width: var(--tec-max, 900px);
+    margin-inline: auto;
+  }
+
+  .tec {
+    background: var(--tec-card-bg, var(--la-white, var(--color-background)));
+    border: 1px solid rgb(var(--color-foreground-rgb) / var(--opacity-15));
+    border-radius: var(--tec-radius, 4px);
+    padding: 26px 28px;
+  }
+
+  .tec__titulo {
+    display: inline-block;
+    margin: 0;
+    font-family: var(--font-accent--family);
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 1rem;
+    letter-spacing: 0.08em;
+    border-bottom: 2px solid var(--la-wine, var(--color-foreground));
+    padding-bottom: 5px;
+  }
+
+  .tec__lista {
+    list-style: none;
+    margin: 14px 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    font-size: 0.92rem;
+    line-height: 1.5;
+  }
+
+  .tec__lista li {
+    display: flex;
+    gap: 0.6em;
+  }
+
+  .tec__lista li::before {
+    content: "—";
+    color: var(--la-gold, currentcolor);
+    flex: 0 0 auto;
+  }
+
+  .tec__vacio {
+    margin: 14px 0 0;
+    font-size: 0.9rem;
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-muted-text));
+  }
+
+  .certs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+  }
+
+  .cert {
+    font-family: var(--font-accent--family);
+    font-weight: 400;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: 1px solid var(--la-green, var(--color-foreground));
+    color: var(--la-green, var(--color-foreground));
+    border-radius: 999px;
+    padding: 0.4em 0.9em;
+  }
+
+  @media (max-width: 760px) {
+    .tecnica__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Ficha técnica",
+  "settings": [
+    {
+      "type": "product",
+      "id": "producto",
+      "label": "t:names.product",
+      "info": "Solo hace falta fuera de la plantilla de producto."
+    },
+    {
+      "type": "header",
+      "content": "t:content.appearance"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Ancho máximo",
+      "min": 600,
+      "max": 1300,
+      "step": 20,
+      "unit": "px",
+      "default": 900
+    },
+    {
+      "type": "range",
+      "id": "columns_gap",
+      "label": "t:settings.horizontal_gap",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 26
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "label": "t:settings.corner_radius",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
+      "id": "card_color",
+      "label": "Color de las tarjetas",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tarjeta",
+      "name": "Tarjeta",
+      "settings": [
+        {
+          "type": "text",
+          "id": "titulo",
+          "label": "Título",
+          "default": "El producto"
+        },
+        {
+          "type": "select",
+          "id": "origen",
+          "label": "Puntos",
+          "options": [
+            { "value": "producto", "label": "Metacampo del producto" },
+            { "value": "manual", "label": "Escritos a mano" }
+          ],
+          "default": "producto"
+        },
+        {
+          "type": "textarea",
+          "id": "puntos",
+          "label": "Puntos escritos a mano",
+          "info": "Una línea por punto. También sirven de reserva si el producto no tiene metacampo."
+        },
+        {
+          "type": "checkbox",
+          "id": "mostrar_certificaciones",
+          "label": "Mostrar certificaciones del producto",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [
+    {
+      "name": "Ficha técnica",
+      "category": "t:categories.product",
+      "blocks": [
+        { "type": "tarjeta" },
+        { "type": "tarjeta" }
+      ]
+    }
+  ]
+}
+{% endschema %}

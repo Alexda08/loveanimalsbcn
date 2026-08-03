@@ -1,0 +1,182 @@
+{% doc %}
+  Garantías: las líneas de tranquilidad bajo el botón de compra
+  («✓ 100% del beneficio va a veterinario, pienso y residencias»).
+{% enddoc %}
+
+{% style %}
+  .garantias-{{ block.id }} {
+    --garantias-size: {{ block.settings.tamano | default: 14 }}px;
+    --garantias-gap: {{ block.settings.gap | default: 8 }}px;
+    {% if block.settings.color != blank %}
+      --garantias-color: {{ block.settings.color }};
+    {% endif %}
+    {% if block.settings.accent_color != blank %}
+      --garantias-accent: {{ block.settings.accent_color }};
+    {% endif %}
+    padding-block: {{ block.settings.padding-block-start | default: 0 }}px {{ block.settings.padding-block-end | default: 0 }}px;
+  }
+{% endstyle %}
+
+{% capture lineas %}
+  {% for i in (1..4) %}
+    {% liquid
+      case i
+        when 1
+          assign linea = block.settings.linea_1
+        when 2
+          assign linea = block.settings.linea_2
+        when 3
+          assign linea = block.settings.linea_3
+        when 4
+          assign linea = block.settings.linea_4
+      endcase
+    %}
+    {% if linea != blank %}
+      <li class="garantias__item">
+        <span class="garantias__ico" aria-hidden="true">{{ block.settings.icono | default: '✓' }}</span>
+        <span class="garantias__txt">{{ linea }}</span>
+      </li>
+    {% endif %}
+  {% endfor %}
+{% endcapture %}
+
+{% assign lineas_limpias = lineas | strip %}
+{% if lineas_limpias != blank %}
+  <ul class="garantias garantias-{{ block.id }}" {{ block.shopify_attributes }}>
+    {{ lineas }}
+  </ul>
+{% endif %}
+
+{% stylesheet %}
+  .garantias {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--garantias-gap, 8px);
+    font-size: var(--garantias-size, 14px);
+    line-height: 1.5;
+    color: var(--garantias-color, var(--la-wine-soft, var(--color-foreground)));
+  }
+
+  .garantias__item {
+    display: flex;
+    gap: 0.6em;
+    align-items: flex-start;
+  }
+
+  .garantias__ico {
+    flex: 0 0 auto;
+    color: var(--garantias-accent, var(--la-green, currentcolor));
+  }
+
+  .garantias__txt strong,
+  .garantias__txt b {
+    color: var(--color-foreground);
+    font-weight: 600;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Garantías",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "icono",
+      "label": "Icono",
+      "default": "✓"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "linea_1",
+      "label": "Línea 1",
+      "default": "<strong>100% del beneficio</strong> va a veterinario, pienso y residencias."
+    },
+    {
+      "type": "inline_richtext",
+      "id": "linea_2",
+      "label": "Línea 2",
+      "default": "Algodón ecológico certificado <strong>PETA, Fair Wear y Oeko-Tex</strong>."
+    },
+    {
+      "type": "inline_richtext",
+      "id": "linea_3",
+      "label": "Línea 3",
+      "default": "Envíos a toda España · pago seguro con Shopify."
+    },
+    {
+      "type": "inline_richtext",
+      "id": "linea_4",
+      "label": "Línea 4"
+    },
+    {
+      "type": "header",
+      "content": "t:content.appearance"
+    },
+    {
+      "type": "range",
+      "id": "tamano",
+      "label": "t:settings.font_size",
+      "min": 11,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "t:settings.vertical_gap",
+      "min": 0,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "color",
+      "id": "color",
+      "label": "t:settings.text_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Color del icono",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Garantías",
+      "category": "t:categories.product"
+    }
+  ]
+}
+{% endschema %}

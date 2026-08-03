@@ -1,0 +1,193 @@
+{% doc %}
+  Etiqueta del producto: el sello pequeño en mayúsculas del diseño
+  («Aniversario 2022», «Causa», «Algodón orgánico»).
+
+  Por defecto lee el metacampo del producto (custom.etiqueta) y se pinta en verde
+  cuando el producto está marcado como ecológico (custom.etiqueta_eco).
+{% enddoc %}
+
+{% liquid
+  assign producto = closest.product
+  assign texto = block.settings.texto
+  assign estilo = block.settings.estilo
+
+  if block.settings.origen == 'producto'
+    assign texto = producto.metafields.custom.etiqueta.value | default: block.settings.texto
+    if producto.metafields.custom.etiqueta_eco.value == true and estilo != 'solido'
+      assign estilo = 'verde'
+    endif
+  endif
+%}
+
+{% style %}
+  .etiqueta-{{ block.id }} {
+    --etiqueta-size: {{ block.settings.tamano | default: 11 }}px;
+    --etiqueta-radius: {{ block.settings.corner_radius | default: 2 }}px;
+    {% if block.settings.color != blank %}
+      --etiqueta-color: {{ block.settings.color }};
+    {% endif %}
+    {% if block.settings.background_color != blank %}
+      --etiqueta-bg: {{ block.settings.background_color }};
+    {% endif %}
+  }
+
+  .etiqueta-wrap-{{ block.id }} {
+    text-align: {{ block.settings.alineacion | default: 'left' }};
+    padding-block: {{ block.settings.padding-block-start | default: 0 }}px {{ block.settings.padding-block-end | default: 0 }}px;
+  }
+{% endstyle %}
+
+{% if texto != blank %}
+  <div class="etiqueta-wrap etiqueta-wrap-{{ block.id }}" {{ block.shopify_attributes }}>
+    <span class="etiqueta etiqueta--{{ estilo }} etiqueta-{{ block.id }}">{{ texto }}</span>
+  </div>
+{% elsif request.design_mode %}
+  <div class="etiqueta-wrap etiqueta-wrap-{{ block.id }}" {{ block.shopify_attributes }}>
+    <span class="etiqueta etiqueta--borde etiqueta-{{ block.id }}">sin etiqueta</span>
+  </div>
+{% endif %}
+
+{% stylesheet %}
+  .etiqueta {
+    display: inline-block;
+    font-family: var(--font-accent--family);
+    font-weight: 500;
+    font-size: var(--etiqueta-size, 11px);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    line-height: 1.2;
+    padding: 0.45em 0.9em;
+    border-radius: var(--etiqueta-radius, 2px);
+    border: 1px solid transparent;
+  }
+
+  .etiqueta--borde {
+    color: var(--etiqueta-color, var(--la-wine, var(--color-foreground)));
+    border-color: var(--etiqueta-bg, var(--la-wine, var(--color-foreground)));
+    background: transparent;
+  }
+
+  .etiqueta--solido {
+    color: var(--etiqueta-color, var(--la-cream, var(--color-background)));
+    background: var(--etiqueta-bg, var(--la-wine, var(--color-foreground)));
+  }
+
+  .etiqueta--verde {
+    color: var(--etiqueta-color, var(--la-cream, var(--color-background)));
+    background: var(--etiqueta-bg, var(--la-green, var(--color-foreground)));
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Etiqueta",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "origen",
+      "label": "Texto",
+      "options": [
+        { "value": "producto", "label": "Metacampo del producto" },
+        { "value": "manual", "label": "Escrito a mano" }
+      ],
+      "default": "producto",
+      "info": "El metacampo es «Etiqueta» (custom.etiqueta) de cada producto."
+    },
+    {
+      "type": "text",
+      "id": "texto",
+      "label": "Texto",
+      "info": "También sirve de reserva si el producto no tiene metacampo."
+    },
+    {
+      "type": "header",
+      "content": "t:content.appearance"
+    },
+    {
+      "type": "select",
+      "id": "estilo",
+      "label": "t:settings.style",
+      "options": [
+        { "value": "borde", "label": "Contorno" },
+        { "value": "solido", "label": "Sólido" },
+        { "value": "verde", "label": "Verde (ecológico)" }
+      ],
+      "default": "borde"
+    },
+    {
+      "type": "range",
+      "id": "tamano",
+      "label": "t:settings.font_size",
+      "min": 9,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "default": 11
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "label": "t:settings.corner_radius",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 2
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
+      "id": "color",
+      "label": "t:settings.text_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "select",
+      "id": "alineacion",
+      "label": "t:settings.alignment",
+      "options": [
+        { "value": "left", "label": "t:options.left" },
+        { "value": "center", "label": "t:options.center" },
+        { "value": "right", "label": "t:options.right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Etiqueta",
+      "category": "t:categories.product"
+    }
+  ]
+}
+{% endschema %}

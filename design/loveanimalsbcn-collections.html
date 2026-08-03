@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tienda solidaria — Love Animals BCN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Oswald:wght@400;500;600&family=Figtree:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --nude:#D8CDBB;
+  --nude-soft:#E6DECF;
+  --cream:#F7F2E8;
+  --white:#FDFBF6;
+  --choco:#4A3628;
+  --wine:#6E4A44;
+  --wine-soft:#8A625B;
+  --gold:#B08D57;
+  --green:#5F7A5B;
+  --line:rgba(74,54,40,.16);
+  --f-serif:'Cormorant Garamond',serif;
+  --f-cond:'Oswald',sans-serif;
+  --f-body:'Figtree',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--f-body);background:var(--nude-soft);color:var(--choco);line-height:1.6}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+.fina{font-family:var(--f-serif);font-style:italic;font-weight:500}
+.btn{
+  display:inline-block;font-family:var(--f-cond);font-weight:500;text-transform:uppercase;
+  font-size:.85rem;letter-spacing:.08em;padding:.85em 1.8em;border-radius:3px;
+  background:var(--choco);color:var(--cream);transition:background .14s ease,transform .12s ease;
+  border:none;cursor:pointer;text-align:center;
+}
+.btn:hover{background:#35261B;transform:translateY(-2px)}
+.btn:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.btn--wine{background:var(--wine)}
+.btn--wine:hover{background:#573833}
+.btn--light{background:var(--white);color:var(--choco);border:1px solid var(--line)}
+
+/* header */
+.ticker{background:var(--choco);color:var(--cream);font-size:.82rem;font-weight:600;padding:8px 0;text-align:center}
+.ticker b{color:#E3C08D}
+header{position:sticky;top:0;z-index:50;background:rgba(230,222,207,.95);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:13px 0}
+.logo{font-family:var(--f-serif);font-style:italic;font-weight:600;font-size:1.5rem}
+.nav-links{display:flex;gap:26px;font-weight:600;font-size:.9rem}
+.nav-links a:hover{color:var(--wine)}
+.nav .btn{font-size:.75rem;padding:.6em 1.2em}
+@media(max-width:900px){.nav-links{display:none}}
+
+/* ---------- cabecera de colección ---------- */
+.chead{padding:52px 0 40px;text-align:center;position:relative}
+.chead .fina{font-size:clamp(1.4rem,2.8vw,1.9rem);color:var(--wine)}
+.chead h1{
+  font-family:var(--f-serif);font-weight:500;text-transform:uppercase;
+  font-size:clamp(2.2rem,5.4vw,3.6rem);letter-spacing:.3em;margin-right:-.3em;margin-top:4px;
+}
+.chead .lead{max-width:44em;margin:16px auto 0;font-size:1rem}
+.chead .lead b{color:var(--wine)}
+
+/* barra de impacto */
+.impacto{
+  max-width:900px;margin:30px auto 0;background:var(--wine);color:var(--cream);
+  border-radius:4px;padding:22px 26px;display:grid;grid-template-columns:repeat(3,1fr);
+  gap:20px;box-shadow:0 10px 26px rgba(74,54,40,.18);
+}
+@media(max-width:700px){.impacto{grid-template-columns:1fr;text-align:center}}
+.imp{text-align:center}
+.imp .n{font-family:var(--f-serif);font-weight:500;font-size:2.2rem;line-height:1;color:#E3C08D}
+.imp p{font-size:.82rem;margin-top:4px;opacity:.92}
+
+/* ---------- filtros ---------- */
+.toolbar{
+  position:sticky;top:56px;z-index:40;background:var(--nude-soft);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 0;
+}
+.toolbar-in{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{
+  font-family:var(--f-cond);font-weight:400;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;
+  background:transparent;border:1px solid var(--line);border-radius:999px;padding:.55em 1.1em;
+  cursor:pointer;transition:all .13s ease;color:var(--choco);
+}
+.chip:hover{border-color:var(--wine)}
+.chip.on{background:var(--choco);color:var(--cream);border-color:var(--choco)}
+.count{font-size:.85rem;color:var(--wine-soft);font-weight:600}
+
+/* ---------- grid ---------- */
+.grid-sec{padding:44px 0 70px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:26px}
+@media(max-width:1000px){.grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:760px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:460px){.grid{grid-template-columns:1fr;max-width:340px;margin:0 auto}}
+
+.card{
+  background:var(--white);border:1px solid var(--line);border-radius:4px;
+  overflow:hidden;box-shadow:0 8px 22px rgba(74,54,40,.1);
+  transition:transform .15s ease,box-shadow .15s ease;
+  display:flex;flex-direction:column;position:relative;
+}
+.card:hover{transform:translateY(-6px);box-shadow:0 16px 34px rgba(74,54,40,.16)}
+.card .ph{position:relative;background:var(--cream);overflow:hidden}
+.card .ph img{aspect-ratio:1/1;object-fit:contain;width:100%;padding:10px;transition:transform .4s ease}
+.card:hover .ph img{transform:scale(1.05)}
+.card .tag{
+  position:absolute;top:10px;left:10px;font-family:var(--f-cond);font-weight:500;
+  font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;
+  background:var(--wine);color:var(--cream);padding:.4em .8em;border-radius:2px;
+}
+.card .tag.eco{background:var(--green)}
+/* banda de impacto, el elemento firma */
+.card .impact-band{
+  background:var(--cream);border-top:1px solid var(--line);
+  font-family:var(--f-serif);font-style:italic;font-size:1rem;color:var(--wine);
+  text-align:center;padding:.6em .8em;
+}
+.card .body{padding:14px 16px 18px;display:flex;flex-direction:column;flex:1}
+.card h3{font-size:.95rem;font-weight:700;line-height:1.35}
+.card .type{
+  font-family:var(--f-cond);font-weight:400;font-size:.65rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--wine-soft);margin-top:2px;
+}
+.card .price{margin-top:auto;padding-top:12px;display:flex;align-items:baseline;gap:8px}
+.card .price .now{font-family:var(--f-serif);font-weight:600;font-size:1.35rem}
+.card .price .was{font-size:.85rem;color:var(--wine-soft);text-decoration:line-through}
+.card .add{
+  margin-top:12px;width:100%;font-family:var(--f-cond);font-weight:500;font-size:.72rem;
+  letter-spacing:.12em;text-transform:uppercase;background:var(--choco);color:var(--cream);
+  border:none;border-radius:3px;padding:.85em;cursor:pointer;transition:background .13s ease;
+}
+.card .add:hover{background:var(--wine)}
+
+/* ---------- franja intermedia: a dónde va tu dinero ---------- */
+.donde{
+  margin:20px 0 0;grid-column:1 / -1;background:var(--nude);border:1px solid var(--line);
+  border-radius:4px;padding:34px 36px;display:grid;grid-template-columns:auto 1fr auto;
+  gap:26px;align-items:center;
+}
+@media(max-width:820px){.donde{grid-template-columns:1fr;text-align:center;padding:26px 22px}}
+.donde .big{font-family:var(--f-serif);font-weight:500;font-size:3.4rem;line-height:1;color:var(--wine)}
+.donde h3{font-family:var(--f-cond);font-weight:500;text-transform:uppercase;font-size:1.15rem;letter-spacing:.06em}
+.donde p{font-size:.94rem;margin-top:8px;max-width:44em}
+
+/* ---------- cierre ---------- */
+.cierre{background:var(--nude);padding:60px 0;text-align:center}
+.cierre .fina{display:block;font-size:clamp(1.4rem,3vw,2rem);color:var(--wine);line-height:1.3}
+.cierre .btn{margin-top:22px}
+
+footer{background:var(--choco);color:rgba(247,242,232,.8);padding:44px 0 26px}
+.foot-bottom{font-size:.78rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.foot-bottom .fina{color:var(--cream);font-size:1.1rem}
+
+@media (prefers-reduced-motion: reduce){*{transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<div class="ticker">Ahora mismo <b>necesitamos casas de acogida</b> · puedes salvar una vida sin adoptar</div>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#">Love Animals BCN</a>
+    <nav class="nav-links" aria-label="Navegación principal">
+      <a href="#">Quiero adoptar</a>
+      <a href="#">Quiero acoger</a>
+      <a href="#">Nuestros animales</a>
+      <a href="#">Tienda solidaria</a>
+    </nav>
+    <a class="btn btn--wine" href="#">Quiero acoger</a>
+  </div>
+</header>
+
+<!-- CABECERA -->
+<section class="chead">
+  <div class="wrap">
+    <p class="fina">mientras esperan, puedes ayudarles con la…</p>
+    <h1>Tienda</h1>
+    <p class="lead">Camisetas, sudaderas y totebags de <b>algodón 100% orgánico y vegano</b>, con certificación PETA, Fair Wear y Oeko-Tex. No vendemos ropa: vendemos días de pienso, vacunas y noches a cubierto.</p>
+
+    <div class="impacto">
+      <div class="imp"><span class="n">100%</span><p>del beneficio va directo a los animales</p></div>
+      <div class="imp"><span class="n">0</span><p>intermediarios: gestionamos nosotras la tienda</p></div>
+      <div class="imp"><span class="n">2019</span><p>desde entonces vistiendo a la familia LAB</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FILTROS -->
+<div class="toolbar">
+  <div class="wrap toolbar-in">
+    <div class="chips">
+      <button class="chip on">Todo</button>
+      <button class="chip">Camisetas</button>
+      <button class="chip">Sudaderas</button>
+      <button class="chip">Totebags</button>
+      <button class="chip">Infantil</button>
+      <button class="chip">Causa · Stop Ley PPP</button>
+    </div>
+    <span class="count">24 artículos</span>
+  </div>
+</div>
+
+<!-- GRID -->
+<section class="grid-sec">
+  <div class="wrap grid">
+
+    <article class="card">
+      <div class="ph">
+        <span class="tag">Aniversario</span>
+        <img src="https://loveanimalsbcn.com/cdn/shop/products/loveanimalsbcn-siluetaadoptar_dark-us002-bk-xx__a.png?v=1641306241&width=600" alt="Camiseta Adoptar es vida">
+      </div>
+      <div class="impact-band">= 1 semana de pienso</div>
+      <div class="body">
+        <h3>Adoptar es vida · 2022 Aniversario</h3>
+        <span class="type">Camiseta · unisex y mujer</span>
+        <div class="price"><span class="now">15,00 €</span><span class="was">19,90 €</span></div>
+        <button class="add">Añadir al carrito</button>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="ph">
+        <span class="tag">Clásico</span>
+        <img src="https://loveanimalsbcn.com/cdn/shop/products/loveanimalsbcn-siluetaadoptar_dark-us002-bk-xx__a.png?v=1641306241&width=600" alt="De la jaula a la vida" style="opacity:.9">
+      </div>
+      <div class="impact-band">= 1 semana de pienso</div>
+      <div class="body">
+        <h3>De la jaula a la vida</h3>
+        <span class="type">Camiseta · delantero y trasero</span>
+        <div class="price"><span class="now">15,00 €</span><span class="was">19,90 €</span></div>
+        <button class="add">Añadir al carrito</button>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="ph">
+        <span class="tag">Causa</span>
+        <img src="https://loveanimalsbcn.com/cdn/shop/products/loveanimalsbcn-siluetaadoptar_dark-us002-bk-xx__a.png?v=1641306241&width=600" alt="Stop Ley PPP" style="opacity:.85">
+      </div>
+      <div class="impact-band">= 1 desparasitación</div>
+      <div class="body">
+        <h3>Stop Ley PPP</h3>
+        <span class="type">Camiseta · unisex</span>
+        <div class="price"><span class="now">15,00 €</span><span class="was">17,90 €</span></div>
+        <button class="add">Añadir al carrito</button>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="ph">
+        <span class="tag eco">Algodón orgánico</span>
+        <img src="https://loveanimalsbcn.com/cdn/shop/products/loveanimalsbcn-siluetaadoptar_dark-us002-bk-xx__a.png?v=1641306241&width=600" alt="El amor no se compra" style="opacity:.8">
+      </div>
+      <div class="impact-band">= 1 vacuna para un gatito</div>
+      <div class="body">
+        <h3>El amor no se compra · Versión Perro</h3>
+        <span class="type">Camiseta · unisex</span>
+        <div class="price"><span class="now">15,00 €</span><span class="was">17,90 €</span></div>
+        <button class="add">Añadir al carrito</button>
+      </div>
+    </article>
+
+    <!-- FRANJA: A DÓNDE VA TU DINERO -->
+    <div class="donde">
+      <span class="big">15 €</span>
+      <div>
+        <h3>¿A dónde va exactamente tu compra?</h3>
+        <p>Una camiseta cubre <b>una semana de pienso</b> de un perro grande. Una sudadera, <b>una desparasitación completa</b>. Un totebag, <b>una vacuna</b>. No es marketing: es la cuenta que hacemos cada mes para que ninguno se quede sin lo suyo.</p>
+      </div>
+      <a class="btn btn--wine" href="#">Ver a quién ayudas</a>
+    </div>
+
+    <article class="card">
+      <div class="ph">
+        <span class="tag">Sudadera</span>
+        <img src="https://loveanimalsbcn.com/cdn/shop/products/loveanimalsbcn-siluetaadoptar_dark-us002-bk-xx__a.png?v=1641306241&width=600" alt="Si tú me dices MIAU" style="opacity:.75">
+      </div>
+      <div class="impact-band">= 1 desparasitación completa</div>
+      <div class="body">
+        <h3>Si tú me dices MIAU lo dejo TODO</h3>
+        <span class="type">Sudadera · unisex</span>
+        <div class="price"><span class="now">25,00 €</span><span class="was">29,90 €</span></div>
+        <button class="add">Añadir al carrito</button>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="ph">
+        <span class="tag">Totebag</span>
+        <img src="https://loveanimalsbcn.com/cdn/shop/products/loveanimalsbcn-siluetaadoptar_dark-us002-bk-xx__a.png?v=1641306241&width=600" alt="Mestizos totebag" style="opacity:.72">
+      </div>
+      <div class="impact-band">= 1 vacuna para un gatito</div>
+      <div class="body">
+        <h3>Mestizos · Totebag</h3>
+        <span class="type">Bolsa de algodón</span>
+        <div class="price"><span class="now">15,00 €</span><span class="was">19,90 €</span></div>
+        <button class="add">Añadir al carrito</button>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="ph">
+        <span class="tag">Infantil</span>
+        <img src="https://loveanimalsbcn.com/cdn/shop/products/loveanimalsbcn-siluetaadoptar_dark-us002-bk-xx__a.png?v=1641306241&width=600" alt="Infantil el amor no se compra" style="opacity:.7">
+      </div>
+      <div class="impact-band">= 1 semana de pienso</div>
+      <div class="body">
+        <h3>Infantil · El amor no se compra</h3>
+        <span class="type">Camiseta niño/a</span>
+        <div class="price"><span class="now">15,00 €</span><span class="was">19,90 €</span></div>
+        <button class="add">Añadir al carrito</button>
+      </div>
+    </article>
+
+    <article class="card">
+      <div class="ph">
+        <span class="tag">Sorpresa</span>
+        <img src="https://loveanimalsbcn.com/cdn/shop/products/loveanimalsbcn-siluetaadoptar_dark-us002-bk-xx__a.png?v=1641306241&width=600" alt="Camiseta sorpresa" style="opacity:.65">
+      </div>
+      <div class="impact-band">= media semana de pienso</div>
+      <div class="body">
+        <h3>Camiseta Sorpresa</h3>
+        <span class="type">Diseño aleatorio · última talla</span>
+        <div class="price"><span class="now">8,00 €</span><span class="was">15,00 €</span></div>
+        <button class="add">Añadir al carrito</button>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- CIERRE -->
+<div class="cierre">
+  <div class="wrap">
+    <span class="fina">Cada prenda que sale de aquí<br>es un día menos esperando para alguno de ellos.</span>
+    <br><a class="btn btn--wine" href="#">Conoce a nuestros peludos</a>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap foot-bottom">
+    <span class="fina">Love Animals BCN</span>
+    <span>© 2026 · Instagram · TikTok · Facebook</span>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('.chip').forEach(c=>{
+  c.addEventListener('click',()=>{
+    document.querySelectorAll('.chip').forEach(x=>x.classList.remove('on'));
+    c.classList.add('on');
+  });
+});
+</script>
+
+</body>
+</html>

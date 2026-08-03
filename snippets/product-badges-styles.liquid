@@ -48,4 +48,27 @@
     padding-block: var(--badge-rectangle-padding-block);
     padding-inline: var(--badge-rectangle-padding-inline);
   }
+
+  /* LA START - sello con la etiqueta del producto (custom.etiqueta / custom.etiqueta_eco) */
+  .product-badges {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--padding-xs, 6px);
+  }
+
+  .product-badges--top-right {
+    align-items: flex-end;
+  }
+
+  .product-badges__badge--etiqueta {
+    background: var(--la-wine, var(--color-foreground));
+    color: var(--la-cream, var(--color-background));
+    letter-spacing: 0.12em;
+  }
+
+  .product-badges__badge--eco {
+    background: var(--la-green, var(--color-foreground));
+  }
+  /* LA END */
 {% endstylesheet %}

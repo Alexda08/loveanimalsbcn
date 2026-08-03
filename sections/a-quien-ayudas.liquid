@@ -1,0 +1,310 @@
+{% comment %}
+  A quién ayudas: los peludos que hay detrás de cada compra, con su contador de
+  días esperando. Con bloques eliges tú a quién sale; sin bloques se rellena solo
+  con los que llevan más tiempo esperando.
+{% endcomment %}
+
+{% liquid
+  if section.settings.background_color != blank
+    render 'contrast-override', background_color: section.settings.background_color, section_id: section.id
+  endif
+%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    {% render 'paleta-vars' %}
+    --ayudas-padding-top: {{ section.settings.padding-block-start }}px;
+    --ayudas-padding-bottom: {{ section.settings.padding-block-end }}px;
+    --ayudas-cols: {{ section.settings.columns | default: 3 }};
+    --ayudas-gap: {{ section.settings.columns_gap | default: 22 }}px;
+    --ayudas-max: {{ section.settings.max_width }}px;
+    {%- if section.settings.background_color != blank %}
+    --ayudas-bg: var(--color-background);
+    {%- endif %}
+  }
+</style>
+
+{%- capture peludos -%}
+  {%- if section.blocks.size > 0 -%}
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign elegido = block.settings.animal
+        if elegido != blank
+          render 'animal-card', animal: elegido, mostrar_cta: false
+        elsif request.design_mode
+          echo '<div class="animal-card animal-card--vacia" '
+          echo block.shopify_attributes
+          echo '><span>🐾<br>Elige un animal en los ajustes del bloque</span></div>'
+        endif
+      -%}
+    {%- endfor -%}
+  {%- else -%}
+    {%- liquid
+      # sin bloques: los que llevan más tiempo esperando, de más antiguo a más reciente
+      assign max = section.settings.columns | default: 3
+      assign usados = ','
+      for ronda in (1..max)
+        assign mejor = blank
+        assign mejor_fecha = '9999-99-99'
+        for a in shop.metaobjects.animal.values
+          assign estado = a.estado.value | downcase | strip
+          if estado == 'adoptado' or a.fecha_entrada.value == blank
+            continue
+          endif
+          assign clave = ',' | append: a.system.handle | append: ','
+          if usados contains clave
+            continue
+          endif
+          assign fecha_txt = a.fecha_entrada.value | append: ''
+          if fecha_txt < mejor_fecha
+            assign mejor_fecha = fecha_txt
+            assign mejor = a
+          endif
+        endfor
+        if mejor == blank
+          break
+        endif
+        assign usados = usados | append: mejor.system.handle | append: ','
+        render 'animal-card', animal: mejor, mostrar_cta: false
+      endfor
+    -%}
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- assign peludos_limpio = peludos | strip -%}
+{%- if peludos_limpio != blank -%}
+  <div class="ayudas{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}">
+    <div class="ayudas__in">
+      {%- if section.settings.fina != blank or section.settings.titulo != blank -%}
+        <div class="ayudas__head">
+          {%- if section.settings.fina != blank -%}
+            <span class="ayudas__fina">{{ section.settings.fina }}</span>
+          {%- endif -%}
+          {%- if section.settings.titulo != blank -%}
+            <h2 class="ayudas__titulo">{{ section.settings.titulo }}</h2>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <div class="ayudas__grid">{{ peludos }}</div>
+
+      {%- if section.settings.boton_texto != blank -%}
+        <div class="ayudas__cta">
+          <a
+            class="button{% if section.settings.boton_estilo == 'secundario' %} button-secondary{% endif %}"
+            href="{{ section.settings.boton_enlace | default: '#' }}"
+          >
+            {{ section.settings.boton_texto }}
+          </a>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .ayudas {
+    background: var(--ayudas-bg, var(--la-nude, var(--color-background)));
+    color: var(--color-foreground);
+    padding-block: var(--ayudas-padding-top, 64px) var(--ayudas-padding-bottom, 64px);
+    padding-inline: var(--page-margin);
+  }
+
+  .ayudas__in {
+    max-width: var(--ayudas-max, 900px);
+    margin-inline: auto;
+  }
+
+  .ayudas__head {
+    text-align: center;
+    margin-bottom: 34px;
+  }
+
+  .ayudas__fina {
+    display: block;
+    font-family: var(--font-heading--family);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.2rem;
+    color: var(--la-wine, var(--color-foreground));
+  }
+
+  .ayudas__titulo {
+    font-family: var(--font-heading--family);
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: clamp(1.6rem, 1.2rem + 1.8vw, 2.4rem);
+    letter-spacing: 0.24em;
+    margin: 4px 0 0;
+    margin-right: -0.24em;
+  }
+
+  .ayudas__grid {
+    display: grid;
+    grid-template-columns: repeat(var(--ayudas-cols, 3), 1fr);
+    gap: var(--ayudas-gap, 22px);
+  }
+
+  .ayudas__cta {
+    text-align: center;
+    margin-top: 30px;
+  }
+
+  .animal-card--vacia {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 220px;
+    border-style: dashed;
+    box-shadow: none;
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-muted-text));
+  }
+
+  @media (max-width: 760px) {
+    .ayudas__grid {
+      grid-template-columns: 1fr;
+      max-width: 380px;
+      margin-inline: auto;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "A quién ayudas",
+  "settings": [
+    {
+      "type": "text",
+      "id": "fina",
+      "label": "Entradilla (cursiva)",
+      "default": "tu compra les llega directamente a…"
+    },
+    {
+      "type": "text",
+      "id": "titulo",
+      "label": "Título",
+      "default": "Ellos"
+    },
+    {
+      "type": "text",
+      "id": "boton_texto",
+      "label": "Texto del botón",
+      "default": "Conocerlos a todos"
+    },
+    {
+      "type": "url",
+      "id": "boton_enlace",
+      "label": "Enlace del botón"
+    },
+    {
+      "type": "select",
+      "id": "boton_estilo",
+      "label": "Estilo del botón",
+      "options": [
+        { "value": "primario", "label": "t:options.primary" },
+        { "value": "secundario", "label": "t:options.secondary" }
+      ],
+      "default": "primario"
+    },
+    {
+      "type": "header",
+      "content": "t:content.cards_layout"
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "t:settings.columns",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "columns_gap",
+      "label": "t:settings.horizontal_gap",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Ancho máximo",
+      "min": 600,
+      "max": 1300,
+      "step": 20,
+      "unit": "px",
+      "default": 900
+    },
+    {
+      "type": "paragraph",
+      "content": "Sin bloques «Animal», salen los que llevan más tiempo esperando (los adoptados nunca aparecen)."
+    },
+    {
+      "type": "header",
+      "content": "t:content.appearance"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 64
+    }
+  ],
+  "blocks": [
+    {
+      "type": "animal",
+      "name": "Animal",
+      "settings": [
+        {
+          "type": "metaobject",
+          "id": "animal",
+          "metaobject_type": "animal",
+          "label": "Animal"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 5,
+  "presets": [
+    {
+      "name": "A quién ayudas",
+      "category": "t:categories.storytelling",
+      "blocks": [
+        { "type": "animal" },
+        { "type": "animal" },
+        { "type": "animal" }
+      ]
+    }
+  ]
+}
+{% endschema %}

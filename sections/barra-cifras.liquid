@@ -1,0 +1,214 @@
+{% comment %}
+  Barra de cifras: la franja granate con los números que explican la tienda
+  (100% del beneficio · 0 intermediarios · desde 2019).
+{% endcomment %}
+
+{% liquid
+  if section.settings.background_color != blank
+    render 'contrast-override', background_color: section.settings.background_color, section_id: section.id
+  endif
+%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    {% render 'paleta-vars' %}
+    --cifras-padding-top: {{ section.settings.padding-block-start }}px;
+    --cifras-padding-bottom: {{ section.settings.padding-block-end }}px;
+    --cifras-max: {{ section.settings.max_width }}px;
+    --cifras-cols: {{ section.blocks.size | at_least: 1 }};
+    --cifras-radius: {{ section.settings.corner_radius }}px;
+    --cifras-gap: {{ section.settings.columns_gap }}px;
+    {%- if section.settings.background_color != blank %}
+    --cifras-bg: var(--color-background);
+    {%- endif %}
+    {%- if section.settings.number_color != blank %}
+    --cifras-number: {{ section.settings.number_color }};
+    {%- endif %}
+  }
+</style>
+
+{% if section.blocks.size > 0 %}
+  <div class="cifras-wrap">
+    <div
+      class="cifras{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}{% unless section.settings.sombra %} cifras--sin-sombra{% endunless %}"
+    >
+      {% for block in section.blocks %}
+        <div class="cifra" {{ block.shopify_attributes }}>
+          {% if block.settings.numero != blank %}
+            <span class="cifra__n">{{ block.settings.numero }}</span>
+          {% endif %}
+          {% if block.settings.texto != blank %}
+            <p class="cifra__t">{{ block.settings.texto }}</p>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endif %}
+
+{% stylesheet %}
+  .cifras-wrap {
+    padding-block: var(--cifras-padding-top, 0) var(--cifras-padding-bottom, 0);
+    padding-inline: var(--page-margin);
+  }
+
+  .cifras {
+    max-width: var(--cifras-max, 900px);
+    margin-inline: auto;
+    background: var(--cifras-bg, var(--la-wine, var(--color-foreground)));
+    color: var(--color-foreground);
+    border-radius: var(--cifras-radius, 4px);
+    padding: 22px 26px;
+    display: grid;
+    grid-template-columns: repeat(var(--cifras-cols, 3), 1fr);
+    gap: var(--cifras-gap, 20px);
+    box-shadow: 0 10px 26px rgb(var(--color-foreground-rgb) / var(--opacity-20));
+  }
+
+  .cifras--sin-sombra {
+    box-shadow: none;
+  }
+
+  .cifra {
+    text-align: center;
+  }
+
+  .cifra__n {
+    display: block;
+    font-family: var(--font-heading--family);
+    font-weight: 500;
+    font-size: clamp(1.7rem, 1.4rem + 1.2vw, 2.2rem);
+    line-height: 1;
+    color: var(--cifras-number, var(--la-gold, currentcolor));
+  }
+
+  .cifra__t {
+    margin: 4px 0 0;
+    font-size: 0.82rem;
+    line-height: 1.45;
+    opacity: 0.92;
+  }
+
+  @media (max-width: 700px) {
+    .cifras {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Barra de cifras",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:content.appearance"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Ancho máximo",
+      "min": 500,
+      "max": 1200,
+      "step": 20,
+      "unit": "px",
+      "default": 900
+    },
+    {
+      "type": "range",
+      "id": "columns_gap",
+      "label": "t:settings.horizontal_gap",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "label": "t:settings.corner_radius",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 4
+    },
+    {
+      "type": "checkbox",
+      "id": "sombra",
+      "label": "Sombra",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
+      "id": "number_color",
+      "label": "Color de los números",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "blocks": [
+    {
+      "type": "cifra",
+      "name": "Cifra",
+      "settings": [
+        {
+          "type": "text",
+          "id": "numero",
+          "label": "Número",
+          "default": "100%"
+        },
+        {
+          "type": "text",
+          "id": "texto",
+          "label": "Texto",
+          "default": "del beneficio va directo a los animales"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Barra de cifras",
+      "category": "t:categories.storytelling",
+      "blocks": [
+        { "type": "cifra" },
+        { "type": "cifra" },
+        { "type": "cifra" }
+      ]
+    }
+  ]
+}
+{% endschema %}

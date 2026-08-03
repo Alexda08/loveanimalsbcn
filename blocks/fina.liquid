@@ -1,0 +1,154 @@
+{% doc %}
+  Línea fina: la entradilla en cursiva que abre casi todas las secciones del diseño
+  («mientras esperan, puedes ayudarles con la…»). Sirve también de cierre y de claim.
+
+  Acepta variables de producto/colección en el texto:
+  {{ closest.product.metafields.custom.claim }}
+{% enddoc %}
+
+{% liquid
+  assign texto = block.settings.texto
+  if texto == blank
+    assign texto = block.settings.texto_alternativo
+  endif
+%}
+
+{% style %}
+  .fina-{{ block.id }} {
+    --fina-size: {{ block.settings.tamano | default: 20 }}px;
+    --fina-color: {% if block.settings.color != blank %}{{ block.settings.color }}{% else %}var(--la-wine, var(--color-foreground)){% endif %};
+    --fina-max: {% if block.settings.max_width > 0 %}{{ block.settings.max_width }}em{% else %}none{% endif %};
+    text-align: {{ block.settings.alineacion | default: 'center' }};
+    padding-block: {{ block.settings.padding-block-start | default: 0 }}px {{ block.settings.padding-block-end | default: 0 }}px;
+    {% if block.settings.alineacion == 'center' %}margin-inline: auto;{% endif %}
+  }
+{% endstyle %}
+
+{% if texto != blank %}
+  <p class="fina fina-{{ block.id }}" {{ block.shopify_attributes }}>
+    {{- texto -}}
+    {%- if block.settings.segunda_linea != blank -%}
+      <br>{{ block.settings.segunda_linea }}
+    {%- endif -%}
+  </p>
+{% elsif request.design_mode %}
+  <p class="fina fina-{{ block.id }} fina--vacia" {{ block.shopify_attributes }}>
+    Escribe la línea en cursiva en los ajustes del bloque
+  </p>
+{% endif %}
+
+{% stylesheet %}
+  .fina {
+    margin: 0;
+    max-width: var(--fina-max, none);
+    font-family: var(--font-heading--family);
+    font-style: italic;
+    font-weight: 500;
+    font-size: var(--fina-size, 20px);
+    line-height: 1.35;
+    color: var(--fina-color, var(--color-foreground));
+  }
+
+  .fina--vacia {
+    opacity: 0.5;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Línea fina",
+  "tag": null,
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "texto",
+      "label": "Texto",
+      "default": "mientras esperan, puedes ayudarles con la…"
+    },
+    {
+      "type": "text",
+      "id": "segunda_linea",
+      "label": "Segunda línea",
+      "info": "Opcional: se pinta debajo, en la misma frase."
+    },
+    {
+      "type": "text",
+      "id": "texto_alternativo",
+      "label": "Texto de reserva",
+      "info": "Se usa si el de arriba queda vacío (útil cuando el texto viene de un metacampo)."
+    },
+    {
+      "type": "header",
+      "content": "t:content.appearance"
+    },
+    {
+      "type": "range",
+      "id": "tamano",
+      "label": "t:settings.font_size",
+      "min": 12,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "color",
+      "id": "color",
+      "label": "t:settings.text_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "select",
+      "id": "alineacion",
+      "label": "t:settings.alignment",
+      "options": [
+        { "value": "left", "label": "t:options.left" },
+        { "value": "center", "label": "t:options.center" },
+        { "value": "right", "label": "t:options.right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Ancho máximo",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "em",
+      "default": 0,
+      "info": "0 = sin límite."
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Línea fina",
+      "category": "t:categories.storytelling"
+    }
+  ]
+}
+{% endschema %}

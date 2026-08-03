@@ -1,0 +1,133 @@
+{% doc %}
+  Banda de impacto de la tarjeta de producto: la franja crema bajo la foto que
+  traduce el precio a cuidados («= 1 semana de pienso»).
+
+  Lee el metacampo custom.impacto_corto del producto; si el producto no lo tiene,
+  usa el texto de reserva del bloque (y si tampoco hay, no pinta nada).
+{% enddoc %}
+
+{% liquid
+  assign producto = closest.product
+  assign texto = producto.metafields.custom.impacto_corto.value | default: block.settings.texto
+
+  if producto == blank and request.design_mode
+    assign texto = texto | default: '= 1 semana de pienso'
+  endif
+%}
+
+{% style %}
+  .impacto-banda-{{ block.id }} {
+    --banda-size: {{ block.settings.tamano | default: 16 }}px;
+    {% if block.settings.background_color != blank %}
+      --banda-bg: {{ block.settings.background_color }};
+    {% endif %}
+    {% if block.settings.color != blank %}
+      --banda-color: {{ block.settings.color }};
+    {% endif %}
+    padding-block: {{ block.settings.padding-block-start | default: 9 }}px {{ block.settings.padding-block-end | default: 9 }}px;
+    {% unless block.settings.borde_superior %}
+      border-top: 0;
+    {% endunless %}
+  }
+{% endstyle %}
+
+{% if texto != blank %}
+  <p class="impacto-banda impacto-banda-{{ block.id }}" {{ block.shopify_attributes }}>{{ texto }}</p>
+{% endif %}
+
+{% stylesheet %}
+  .impacto-banda {
+    margin: 0;
+    width: 100%;
+    text-align: center;
+    background: var(--banda-bg, var(--la-cream, var(--color-background)));
+    color: var(--banda-color, var(--la-wine, var(--color-foreground)));
+    border-top: 1px solid rgb(var(--color-foreground-rgb) / var(--opacity-15));
+    font-family: var(--font-heading--family);
+    font-style: italic;
+    font-size: var(--banda-size, 16px);
+    line-height: 1.4;
+    padding-inline: 0.8em;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Banda de impacto",
+  "tag": null,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "El texto sale del metacampo «Impacto (banda)» de cada producto."
+    },
+    {
+      "type": "text",
+      "id": "texto",
+      "label": "Texto de reserva",
+      "info": "Para los productos que aún no tengan metacampo."
+    },
+    {
+      "type": "header",
+      "content": "t:content.appearance"
+    },
+    {
+      "type": "range",
+      "id": "tamano",
+      "label": "t:settings.font_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
+      "id": "color",
+      "label": "t:settings.text_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "checkbox",
+      "id": "borde_superior",
+      "label": "Línea superior",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 9
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 9
+    }
+  ],
+  "presets": [
+    {
+      "name": "Banda de impacto",
+      "category": "t:categories.product"
+    }
+  ]
+}
+{% endschema %}

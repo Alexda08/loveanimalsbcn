@@ -1,0 +1,258 @@
+{% comment %}
+  La historia detrás del diseño: el texto largo de cada producto, con su frase
+  destacada y su firma. Se alimenta de los metacampos del producto
+  (custom.historia_*) y desaparece sola en los productos que no tienen historia.
+{% endcomment %}
+
+{% liquid
+  assign producto = section.settings.producto | default: product
+  assign mf = producto.metafields.custom
+
+  assign fina = mf.historia_fina.value | default: section.settings.fina
+  assign titulo = mf.historia_titulo.value | default: section.settings.titulo
+  assign cuerpo = mf.historia_a.value
+  assign destacada = mf.historia_destacada.value
+  assign cierre = mf.historia_b.value
+  assign firma = mf.historia_firma.value | default: section.settings.firma
+
+  if cuerpo == blank and cierre == blank
+    assign vacia = true
+  endif
+
+  if section.settings.background_color != blank
+    render 'contrast-override', background_color: section.settings.background_color, section_id: section.id
+  endif
+%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    {% render 'paleta-vars' %}
+    --hist-padding-top: {{ section.settings.padding-block-start }}px;
+    --hist-padding-bottom: {{ section.settings.padding-block-end }}px;
+    --hist-max: {{ section.settings.max_width }}px;
+    --hist-tracking: {{ section.settings.tracking | divided_by: 100.0 }}em;
+    {%- if section.settings.background_color != blank %}
+    --hist-bg: var(--color-background);
+    {%- endif %}
+    {%- if section.settings.accent_color != blank %}
+    --hist-accent: {{ section.settings.accent_color }};
+    {%- endif %}
+  }
+</style>
+
+{% unless vacia and request.design_mode == false %}
+  <div class="historia{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}">
+    <div class="historia__in">
+      {% if fina != blank %}
+        <span class="historia__fina">{{ fina }}</span>
+      {% endif %}
+      {% if titulo != blank %}
+        <h2 class="historia__titulo">{{ titulo }}</h2>
+      {% endif %}
+
+      {% if cuerpo != blank %}
+        {% assign parrafos = cuerpo | strip | newline_to_br | split: '<br />' %}
+        {% for p in parrafos %}
+          {% assign linea = p | strip %}
+          {% if linea != blank %}
+            <p class="historia__p">{{ linea }}</p>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+
+      {% if destacada != blank %}
+        <p class="historia__dest">{{ destacada | strip | newline_to_br }}</p>
+      {% endif %}
+
+      {% if cierre != blank %}
+        {% assign parrafos_b = cierre | strip | newline_to_br | split: '<br />' %}
+        {% for p in parrafos_b %}
+          {% assign linea = p | strip %}
+          {% if linea != blank %}
+            <p class="historia__p">{{ linea }}</p>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+
+      {% if vacia and request.design_mode %}
+        <p class="historia__p historia__p--aviso">
+          Este producto todavía no tiene historia: rellena los metacampos «Historia · texto»
+          y «Historia · frase destacada» en su ficha del panel de Shopify.
+        </p>
+      {% endif %}
+
+      {% if firma != blank %}
+        <p class="historia__firma">{{ firma }}</p>
+      {% endif %}
+    </div>
+  </div>
+{% endunless %}
+
+{% stylesheet %}
+  .historia {
+    background: var(--hist-bg, var(--la-nude, var(--color-background)));
+    color: var(--color-foreground);
+    padding-block: var(--hist-padding-top, 64px) var(--hist-padding-bottom, 64px);
+    padding-inline: var(--page-margin);
+  }
+
+  .historia__in {
+    max-width: var(--hist-max, 760px);
+    margin-inline: auto;
+  }
+
+  .historia__fina {
+    display: block;
+    text-align: center;
+    font-family: var(--font-heading--family);
+    font-style: italic;
+    font-weight: 500;
+    font-size: 1.2rem;
+    color: var(--hist-accent, var(--la-wine, var(--color-foreground)));
+  }
+
+  .historia__titulo {
+    font-family: var(--font-heading--family);
+    font-weight: 500;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: clamp(1.6rem, 1.2rem + 1.8vw, 2.4rem);
+    letter-spacing: var(--hist-tracking, 0.26em);
+    margin: 4px 0 26px;
+    margin-right: calc(var(--hist-tracking, 0.26em) * -1);
+  }
+
+  .historia__p {
+    font-size: 1.02rem;
+    line-height: 1.75;
+    margin: 1em 0 0;
+  }
+
+  .historia__p--aviso {
+    text-align: center;
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-muted-text));
+  }
+
+  .historia__dest {
+    font-family: var(--font-heading--family);
+    font-style: italic;
+    font-size: clamp(1.2rem, 1rem + 0.9vw, 1.5rem);
+    color: var(--hist-accent, var(--la-wine, var(--color-foreground)));
+    text-align: center;
+    margin: 28px 0;
+    line-height: 1.35;
+  }
+
+  .historia__firma {
+    text-align: center;
+    margin: 24px 0 0;
+    font-family: var(--font-accent--family);
+    font-weight: 400;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--la-wine-soft, var(--color-foreground));
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Historia del diseño",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "El contenido sale de los metacampos «Historia · …» de cada producto."
+    },
+    {
+      "type": "product",
+      "id": "producto",
+      "label": "t:names.product",
+      "info": "Solo hace falta fuera de la plantilla de producto."
+    },
+    {
+      "type": "text",
+      "id": "fina",
+      "label": "Entradilla de reserva",
+      "default": "la historia detrás de este diseño"
+    },
+    {
+      "type": "text",
+      "id": "titulo",
+      "label": "Título de reserva"
+    },
+    {
+      "type": "text",
+      "id": "firma",
+      "label": "Firma de reserva",
+      "default": "— el equipo de Love Animals BCN"
+    },
+    {
+      "type": "header",
+      "content": "t:content.appearance"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Ancho del texto",
+      "min": 500,
+      "max": 1100,
+      "step": 20,
+      "unit": "px",
+      "default": 760
+    },
+    {
+      "type": "range",
+      "id": "tracking",
+      "label": "Separación del título",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "%",
+      "default": 26,
+      "info": "En centésimas de em: 26 = 0,26em."
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Color de acento",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 64
+    }
+  ],
+  "presets": [
+    {
+      "name": "Historia del diseño",
+      "category": "t:categories.storytelling"
+    }
+  ]
+}
+{% endschema %}

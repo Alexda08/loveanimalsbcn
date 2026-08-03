@@ -1,0 +1,134 @@
+{% doc %}
+  Sello de ahorro: «Ahorras 4,90 €» en dorado, junto al precio.
+  Se calcula con el precio comparativo de la variante elegida y desaparece solo
+  cuando el producto no está rebajado.
+{% enddoc %}
+
+{% liquid
+  assign producto = closest.product
+  assign variante = producto.selected_or_first_available_variant
+  assign precio = variante.price | default: producto.price
+  assign comparado = variante.compare_at_price | default: producto.compare_at_price
+  assign ahorro = 0
+  if comparado > precio
+    assign ahorro = comparado | minus: precio
+    assign porcentaje = ahorro | times: 100 | divided_by: comparado
+  endif
+%}
+
+{% style %}
+  .ahorro-{{ block.id }} {
+    --ahorro-size: {{ block.settings.tamano | default: 11 }}px;
+    --ahorro-radius: {{ block.settings.corner_radius | default: 2 }}px;
+    {% if block.settings.background_color != blank %}
+      --ahorro-bg: {{ block.settings.background_color }};
+    {% endif %}
+    {% if block.settings.color != blank %}
+      --ahorro-color: {{ block.settings.color }};
+    {% endif %}
+  }
+{% endstyle %}
+
+{% if ahorro > 0 %}
+  <span class="ahorro ahorro-{{ block.id }}" {{ block.shopify_attributes }}>
+    {%- if block.settings.formato == 'porcentaje' -%}
+      {{ block.settings.prefijo }} {{ porcentaje }}%
+    {%- else -%}
+      {{ block.settings.prefijo }} {{ ahorro | money }}
+    {%- endif -%}
+  </span>
+{% elsif request.design_mode %}
+  <span class="ahorro ahorro-{{ block.id }} ahorro--vacio" {{ block.shopify_attributes }}>
+    sin rebaja
+  </span>
+{% endif %}
+
+{% stylesheet %}
+  .ahorro {
+    display: inline-block;
+    font-family: var(--font-accent--family);
+    font-weight: 500;
+    font-size: var(--ahorro-size, 11px);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    line-height: 1.2;
+    padding: 0.4em 0.8em;
+    border-radius: var(--ahorro-radius, 2px);
+    background: var(--ahorro-bg, var(--la-gold, var(--color-foreground)));
+    color: var(--ahorro-color, var(--la-white, var(--color-background)));
+    white-space: nowrap;
+  }
+
+  .ahorro--vacio {
+    background: transparent;
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-muted-text));
+    border: 1px dashed rgb(var(--color-foreground-rgb) / var(--opacity-15));
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Ahorro",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "prefijo",
+      "label": "Texto",
+      "default": "Ahorras"
+    },
+    {
+      "type": "select",
+      "id": "formato",
+      "label": "Formato",
+      "options": [
+        { "value": "importe", "label": "Importe" },
+        { "value": "porcentaje", "label": "Porcentaje" }
+      ],
+      "default": "importe"
+    },
+    {
+      "type": "header",
+      "content": "t:content.appearance"
+    },
+    {
+      "type": "range",
+      "id": "tamano",
+      "label": "t:settings.font_size",
+      "min": 9,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 11
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "label": "t:settings.corner_radius",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 2
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
+      "id": "color",
+      "label": "t:settings.text_color",
+      "placeholder": "t:settings.default"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ahorro",
+      "category": "t:categories.product"
+    }
+  ]
+}
+{% endschema %}

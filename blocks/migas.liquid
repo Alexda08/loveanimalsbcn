@@ -1,0 +1,201 @@
+{% doc %}
+  Migas de pan: «Tienda solidaria › Camisetas › Adoptar es vida».
+
+  En una ficha de producto pone sola la colección desde la que se ha llegado
+  (o la primera colección real del producto, saltándose la raíz).
+{% enddoc %}
+
+{% liquid
+  assign producto = closest.product | default: product
+  assign raiz_url = block.settings.enlace_raiz
+  assign raiz_texto = block.settings.texto_raiz
+
+  assign col = blank
+  if block.settings.mostrar_coleccion
+    if collection != blank and collection.handle != blank
+      assign col = collection
+    elsif producto != blank
+      for c in producto.collections
+        if c.handle == blank
+          continue
+        endif
+        if raiz_url contains c.handle
+          continue
+        endif
+        assign col = c
+        break
+      endfor
+    endif
+  endif
+
+  assign actual = block.settings.texto_actual
+  if actual == blank
+    if producto != blank
+      assign actual = producto.title
+    elsif collection != blank
+      assign actual = collection.title
+    else
+      assign actual = page.title
+    endif
+  endif
+%}
+
+{% style %}
+  .migas-{{ block.id }} {
+    --migas-size: {{ block.settings.tamano | default: 13 }}px;
+    text-align: {{ block.settings.alineacion | default: 'left' }};
+    padding-block: {{ block.settings.padding-block-start | default: 0 }}px {{ block.settings.padding-block-end | default: 0 }}px;
+    {% if block.settings.color != blank %}
+      --migas-color: {{ block.settings.color }};
+    {% endif %}
+    {% if block.settings.separator_color != blank %}
+      --migas-sep: {{ block.settings.separator_color }};
+    {% endif %}
+  }
+{% endstyle %}
+
+<nav class="migas migas-{{ block.id }}" aria-label="Migas de pan" {{ block.shopify_attributes }}>
+  {%- if raiz_texto != blank -%}
+    {%- if raiz_url != blank -%}
+      <a href="{{ raiz_url }}">{{ raiz_texto }}</a>
+    {%- else -%}
+      <span class="migas__txt">{{ raiz_texto }}</span>
+    {%- endif -%}
+    <span class="migas__sep" aria-hidden="true">{{ block.settings.separador | default: '›' }}</span>
+  {%- endif -%}
+  {%- if col != blank -%}
+    <a href="{{ col.url }}">{{ col.title }}</a>
+    <span class="migas__sep" aria-hidden="true">{{ block.settings.separador | default: '›' }}</span>
+  {%- endif -%}
+  <b>{{ actual }}</b>
+</nav>
+
+{% stylesheet %}
+  .migas {
+    font-size: var(--migas-size, 13px);
+    font-weight: 600;
+    line-height: 1.5;
+    color: var(--migas-color, var(--la-wine-soft, var(--color-foreground)));
+  }
+
+  .migas a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .migas a:hover {
+    color: var(--la-wine, var(--color-foreground));
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .migas__sep {
+    margin-inline: 0.5em;
+    color: var(--migas-sep, var(--la-gold, currentcolor));
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Migas de pan",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "texto_raiz",
+      "label": "Primer nivel",
+      "default": "Tienda solidaria"
+    },
+    {
+      "type": "url",
+      "id": "enlace_raiz",
+      "label": "Enlace del primer nivel"
+    },
+    {
+      "type": "checkbox",
+      "id": "mostrar_coleccion",
+      "label": "Añadir la colección",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "texto_actual",
+      "label": "Último nivel",
+      "info": "Si lo dejas vacío se usa el nombre del producto o de la colección."
+    },
+    {
+      "type": "text",
+      "id": "separador",
+      "label": "Separador",
+      "default": "›"
+    },
+    {
+      "type": "header",
+      "content": "t:content.appearance"
+    },
+    {
+      "type": "range",
+      "id": "tamano",
+      "label": "t:settings.font_size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 13
+    },
+    {
+      "type": "color",
+      "id": "color",
+      "label": "t:settings.text_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
+      "id": "separator_color",
+      "label": "Color del separador",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "select",
+      "id": "alineacion",
+      "label": "t:settings.alignment",
+      "options": [
+        { "value": "left", "label": "t:options.left" },
+        { "value": "center", "label": "t:options.center" },
+        { "value": "right", "label": "t:options.right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Migas de pan",
+      "category": "t:categories.storytelling"
+    }
+  ]
+}
+{% endschema %}

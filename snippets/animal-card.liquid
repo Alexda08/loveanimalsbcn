@@ -10,6 +10,7 @@
   @param {string} [cta_estilo] - "link" (enlace subrayado, default) o "boton"
     (botón chocolate "Conocer a {nombre}", como en el panel de álbum de la home)
   @param {boolean} [mostrar_frase] - Mostrar la frase del animal (default: false)
+  @param {boolean} [mostrar_cta] - Mostrar la llamada a la acción inferior (default: true)
 
   Ejemplo:
     {% render 'animal-card', animal: a, mostrar_frase: true, cta_estilo: 'boton' %}
@@ -64,11 +65,13 @@
   {%- if mostrar_frase and animal.frase.value != blank -%}
     <p class="animal-card__frase">"{{ animal.frase.value }}"</p>
   {%- endif -%}
-  {%- if cta_estilo == 'boton' -%}
-    <span class="animal-card__btn">{{ cta_label | default: 'Conocer a' }} {{ nombre }}</span>
-  {%- else -%}
-    <span class="animal-card__go">{{ cta }}</span>
-  {%- endif -%}
+  {%- unless mostrar_cta == false -%}
+    {%- if cta_estilo == 'boton' -%}
+      <span class="animal-card__btn">{{ cta_label | default: 'Conocer a' }} {{ nombre }}</span>
+    {%- else -%}
+      <span class="animal-card__go">{{ cta }}</span>
+    {%- endif -%}
+  {%- endunless -%}
 </a>
 
 {% stylesheet %}

@@ -9,6 +9,39 @@
  */
 {
   "sections": {
+    "migas": {
+      "type": "section",
+      "blocks": {
+        "migas": {
+          "type": "migas",
+          "settings": {
+            "texto_raiz": "Tienda solidaria",
+            "enlace_raiz": "/collections/tienda-solidaria",
+            "mostrar_coleccion": true,
+            "separador": "›",
+            "tamano": 13,
+            "alineacion": "left",
+            "padding-block-start": 18,
+            "padding-block-end": 0
+          }
+        }
+      },
+      "block_order": [
+        "migas"
+      ],
+      "name": "Migas de pan",
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "horizontal_alignment_flex_direction_column": "flex-start",
+        "gap": 0,
+        "section_width": "page-width",
+        "border": "none",
+        "padding-block-start": 0,
+        "padding-block-end": 0
+      }
+    },
     "main": {
       "type": "product-information",
       "blocks": {
@@ -16,19 +49,20 @@
           "type": "_product-media-gallery",
           "static": true,
           "settings": {
-            "media_presentation": "grid",
-            "media_columns": "two",
-            "image_gap": 4,
+            "media_presentation": "carousel",
+            "media_columns": "one",
+            "image_gap": 10,
             "large_first_image": false,
             "icons_style": "arrow",
-            "slideshow_controls_style": "counter",
+            "slideshow_controls_style": "thumbnails",
             "slideshow_mobile_controls_style": "dots",
-            "thumbnail_position": "right",
-            "thumbnail_width": 44,
-            "aspect_ratio": "adapt",
-            "constrain_to_viewport": true,
+            "thumbnail_position": "bottom",
+            "thumbnail_width": 72,
+            "thumbnail_radius": 3,
+            "aspect_ratio": "1",
+            "constrain_to_viewport": false,
             "media_fit": "contain",
-            "media_radius": 0,
+            "media_radius": 4,
             "extend_media": false,
             "zoom": true,
             "video_loop": false,
@@ -36,7 +70,10 @@
             "padding-block-start": 0,
             "padding-block-end": 0,
             "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-inline-end": 0,
+            "media_background": "{{ settings.color_palette.color4 }}",
+            "media_border": true,
+            "media_shadow": "media"
           },
           "blocks": {}
         },
@@ -50,77 +87,102 @@
             "custom_width_mobile": 100,
             "height": "fit",
             "details_position": "flex-start",
-            "gap": 28,
+            "gap": 18,
             "sticky_details_desktop": true,
             "background_media": "none",
-            "video_position": "cover",
-            "background_image_position": "cover",
             "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
             "border_radius": 0,
-            "padding-block-start": 24,
+            "padding-block-start": 8,
             "padding-block-end": 24,
             "padding-inline-start": 0,
             "padding-inline-end": 0
           },
           "blocks": {
-            "group_icgrde": {
-              "type": "group",
-              "name": "t:names.header",
+            "etiqueta": {
+              "type": "etiqueta",
+              "name": "Etiqueta de la edición",
               "settings": {
-                "content_direction": "column",
-                "vertical_on_mobile": true,
+                "origen": "producto",
+                "texto": "",
+                "estilo": "borde",
+                "tamano": 11,
+                "corner_radius": 2,
+                "alineacion": "left",
+                "padding-block-start": 0,
+                "padding-block-end": 0
+              },
+              "blocks": {}
+            },
+            "titulo": {
+              "type": "product-title",
+              "name": "t:names.product_title",
+              "settings": {
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-heading--family)",
+                "font_size": "2.6rem",
+                "line_height": "tight",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "balance",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "claim": {
+              "type": "fina",
+              "name": "Claim",
+              "settings": {
+                "texto": "{{ closest.product.metafields.custom.claim.value }}",
+                "tamano": 20,
+                "alineacion": "left",
+                "max_width": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0
+              },
+              "blocks": {}
+            },
+            "precio_fila": {
+              "type": "group",
+              "name": "Precio",
+              "settings": {
+                "content_direction": "row",
+                "vertical_on_mobile": false,
                 "horizontal_alignment": "flex-start",
                 "vertical_alignment": "center",
-                "align_baseline": false,
-                "horizontal_alignment_flex_direction_column": "flex-start",
-                "vertical_alignment_flex_direction_column": "center",
+                "align_baseline": true,
                 "gap": 12,
                 "width": "fill",
                 "custom_width": 100,
-                "width_mobile": "fill",
-                "custom_width_mobile": 100,
                 "height": "fit",
-                "custom_height": 100,
                 "background_media": "none",
-                "video_position": "cover",
-                "background_image_position": "cover",
-                "toggle_overlay": false,
-                "overlay_color": "#00000026",
-                "overlay_style": "solid",
-                "gradient_direction": "to top",
                 "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
                 "border_radius": 0,
-                "link": "",
-                "open_in_new_tab": false,
-                "placeholder": "",
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
               },
               "blocks": {
-                "text_xpVMaM": {
-                  "type": "text",
-                  "name": "t:names.title",
+                "precio": {
+                  "type": "price",
                   "settings": {
-                    "text": "<h1>{{ closest.product.title }}</h1>",
+                    "show_sale_price_first": true,
+                    "show_installments": false,
+                    "show_tax_info": false,
+                    "type_preset": "custom",
                     "width": "fit-content",
-                    "max_width": "normal",
                     "alignment": "left",
-                    "type_preset": "h3",
-                    "font": "var(--font-body--family)",
-                    "font_size": "1rem",
-                    "line_height": "normal",
+                    "font": "var(--font-heading--family)",
+                    "font_size": "2.2rem",
+                    "line_height": "tight",
                     "letter_spacing": "normal",
                     "case": "none",
-                    "wrap": "pretty",
-                    "background": false,
-                    "background_color": "#00000026",
-                    "corner_radius": 0,
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
@@ -128,66 +190,62 @@
                   },
                   "blocks": {}
                 },
-                "price_tVjtKg": {
-                  "type": "price",
+                "ahorro": {
+                  "type": "ahorro",
                   "settings": {
-                    "show_sale_price_first": true,
-                    "show_installments": true,
-                    "show_tax_info": true,
-                    "type_preset": "paragraph",
-                    "width": "100%",
-                    "alignment": "left",
-                    "font": "var(--font-body--family)",
-                    "font_size": "1rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "padding-block-start": 4,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
+                    "prefijo": "Ahorras",
+                    "formato": "importe",
+                    "tamano": 11,
+                    "corner_radius": 2,
+                    "background_color": "{{ settings.color_palette.color3 }}",
+                    "color": "{{ settings.color_palette.color5 }}"
                   },
                   "blocks": {}
                 }
               },
               "block_order": [
-                "text_xpVMaM",
-                "price_tVjtKg"
+                "precio",
+                "ahorro"
               ]
             },
-            "divider_VJhene": {
-              "type": "_divider",
-              "name": "t:names.divider",
+            "impacto": {
+              "type": "impacto-caja",
               "settings": {
-                "thickness": 1,
-                "corner_radius": "square",
-                "divider_color": "{{ settings.color_palette.color3 }}",
-                "width_percent": 100,
+                "frase": "",
+                "icono": "🐾",
+                "tamano": 15,
+                "background_color": "{{ settings.color_palette.color1 }}",
+                "color": "{{ settings.color_palette.color4 }}",
+                "accent_color": "{{ settings.color_palette.color3 }}",
+                "corner_radius": 4,
+                "sombra": true,
                 "padding-block-start": 0,
                 "padding-block-end": 0
               },
               "blocks": {}
             },
-            "variant_picker_R3rGDr": {
+            "variantes": {
               "type": "variant-picker",
               "settings": {
                 "variant_style": "buttons",
-                "show_swatches": false,
+                "show_swatches": true,
+                "variant_style_class": "default",
+                "selected_variant_style_class": "default",
                 "alignment": "left",
-                "padding-block-start": 0,
+                "padding-block-start": 4,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
               },
               "blocks": {}
             },
-            "buy_buttons_eYQEYi": {
+            "comprar": {
               "type": "buy-buttons",
               "settings": {
-                "stacking": true,
+                "stacking": false,
                 "show_pickup_availability": false,
                 "gift_card_form": true,
-                "padding-block-start": 0,
+                "padding-block-start": 8,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
@@ -203,7 +261,10 @@
                   "type": "add-to-cart",
                   "static": true,
                   "settings": {
-                    "style_class": "button"
+                    "style_class": "button-custom",
+                    "custom_button_background": "{{ settings.color_palette.color1 }}",
+                    "custom_button_text": "{{ settings.color_palette.color4 }}",
+                    "custom_button_border": "{{ settings.color_palette.color1 }}"
                   },
                   "blocks": {}
                 },
@@ -216,38 +277,31 @@
               },
               "block_order": []
             },
-            "text_aEtTtq": {
-              "type": "text",
-              "name": "t:names.product_description",
+            "garantias": {
+              "type": "garantias",
               "settings": {
-                "text": "{{ closest.product.description }}",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
+                "icono": "✓",
+                "linea_1": "<strong>100% del beneficio</strong> va a veterinario, pienso y residencias.",
+                "linea_2": "Algodón ecológico certificado <strong>PETA, Fair Wear y Oeko-Tex</strong>.",
+                "linea_3": "Envíos a toda España · pago seguro con Shopify.",
+                "linea_4": "",
+                "tamano": 14,
+                "gap": 8,
                 "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-block-end": 0
               },
               "blocks": {}
             }
           },
           "block_order": [
-            "group_icgrde",
-            "divider_VJhene",
-            "variant_picker_R3rGDr",
-            "buy_buttons_eYQEYi",
-            "text_aEtTtq"
+            "etiqueta",
+            "titulo",
+            "claim",
+            "precio_fila",
+            "impacto",
+            "variantes",
+            "comprar",
+            "garantias"
           ]
         },
         "disclosures": {
@@ -268,35 +322,92 @@
         "equal_columns": false,
         "limit_details_width": false,
         "gap": 48,
-        "padding-block-start": 0,
-        "padding-block-end": 0
+        "enable_sticky_add_to_cart": true,
+        "padding-block-start": 26,
+        "padding-block-end": 66
       }
     },
-    "product_recommendations_qggXJq": {
+    "historia": {
+      "type": "historia-producto",
+      "settings": {
+        "fina": "la historia detrás de este diseño",
+        "titulo": "",
+        "firma": "— el equipo de Love Animals BCN",
+        "max_width": 760,
+        "tracking": 26,
+        "background_color": "{{ settings.color_palette.color2 }}",
+        "accent_color": "{{ settings.color_palette.color1 }}",
+        "padding-block-start": 64,
+        "padding-block-end": 64
+      }
+    },
+    "tecnica": {
+      "type": "ficha-tecnica",
+      "blocks": {
+        "producto": {
+          "type": "tarjeta",
+          "settings": {
+            "titulo": "El producto",
+            "origen": "producto",
+            "puntos": "Algodón ecológico / orgánico, más suave y más responsable\nEstampación duradera, apta para lavadora a 30°",
+            "mostrar_certificaciones": true
+          }
+        },
+        "envios": {
+          "type": "tarjeta",
+          "settings": {
+            "titulo": "Envíos y dudas",
+            "origen": "manual",
+            "puntos": "Preparamos los pedidos las voluntarias: dános unos días 🤍\nEnvío a toda España\n¿Dudas con la talla? Escríbenos por DM y te ayudamos\nCambios y devoluciones según nuestra política de reembolso",
+            "mostrar_certificaciones": false
+          }
+        }
+      },
+      "block_order": [
+        "producto",
+        "envios"
+      ],
+      "settings": {
+        "max_width": 900,
+        "columns_gap": 26,
+        "corner_radius": 4,
+        "card_color": "{{ settings.color_palette.color5 }}",
+        "padding-block-start": 60,
+        "padding-block-end": 60
+      }
+    },
+    "ayudas": {
+      "type": "a-quien-ayudas",
+      "settings": {
+        "fina": "tu compra les llega directamente a…",
+        "titulo": "Ellos",
+        "boton_texto": "Conocerlos a todos",
+        "boton_enlace": "/pages/nuestros-animales",
+        "boton_estilo": "primario",
+        "columns": 3,
+        "columns_gap": 22,
+        "max_width": 900,
+        "background_color": "{{ settings.color_palette.color2 }}",
+        "padding-block-start": 64,
+        "padding-block-end": 64
+      }
+    },
+    "relacionados": {
       "type": "product-recommendations",
       "blocks": {
-        "text_cbcgyb": {
+        "titulo": {
           "type": "text",
           "name": "t:names.header",
           "settings": {
-            "text": "<h2>You may also like </h2>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "h4",
-            "font": "var(--font-body--family)",
-            "font_size": "",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
+            "text": "<h2>También te puede gustar</h2>",
+            "width": "100%",
+            "max_width": "none",
+            "alignment": "center",
+            "type_preset": "h2",
+            "font_size": "1.8rem",
+            "wrap": "balance",
             "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "padding-block-end": 0
           },
           "blocks": {}
         },
@@ -305,88 +416,101 @@
           "name": "t:names.product_card",
           "static": true,
           "settings": {
-            "product_card_gap": 8,
-            "border": "none",
+            "product_card_gap": 0,
+            "background_color": "{{ settings.color_palette.color5 }}",
+            "shadow": "suave",
+            "border": "solid",
             "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
+            "border_opacity": 16,
+            "border_color": "{{ settings.color_palette.foreground }}",
+            "border_radius": 4,
             "padding-block-start": 0,
-            "padding-block-end": 8,
+            "padding-block-end": 16,
             "padding-inline-start": 0,
             "padding-inline-end": 0
           },
           "blocks": {
-            "product_card_gallery_DNizbJ": {
+            "galeria": {
               "type": "_product-card-gallery",
               "name": "t:names.product_card_media",
               "settings": {
-                "image_ratio": "adapt",
+                "image_ratio": "square",
                 "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
                 "border_radius": 0,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-end": 0,
+                "media_background": "{{ settings.color_palette.color4 }}"
               },
               "blocks": {}
             },
-            "product_title_M7MJkb": {
+            "banda": {
+              "type": "impacto-banda",
+              "settings": {
+                "texto": "",
+                "tamano": 15,
+                "background_color": "{{ settings.color_palette.color4 }}",
+                "color": "{{ settings.color_palette.color1 }}",
+                "borde_superior": true,
+                "padding-block-start": 8,
+                "padding-block-end": 8
+              },
+              "blocks": {}
+            },
+            "titulo": {
               "type": "product-title",
               "name": "t:names.product_title",
               "settings": {
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
-                "type_preset": "paragraph",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
+                "type_preset": "custom",
+                "font": "var(--font-subheading--family)",
+                "font_size": "0.9rem",
+                "line_height": "tight",
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 4,
+                "padding-block-start": 12,
                 "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-start": 14,
+                "padding-inline-end": 14
               },
               "blocks": {}
             },
-            "price_gLWgA6": {
+            "precio": {
               "type": "price",
               "settings": {
                 "show_sale_price_first": true,
                 "show_installments": false,
                 "show_tax_info": false,
-                "type_preset": "h6",
+                "type_preset": "custom",
                 "width": "100%",
                 "alignment": "left",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
+                "font": "var(--font-heading--family)",
+                "font_size": "1.2rem",
+                "line_height": "tight",
                 "letter_spacing": "normal",
                 "case": "none",
-                "padding-block-start": 0,
+                "padding-block-start": 6,
                 "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-start": 14,
+                "padding-inline-end": 14
               },
               "blocks": {}
             }
           },
           "block_order": [
-            "product_card_gallery_DNizbJ",
-            "product_title_M7MJkb",
-            "price_gLWgA6"
+            "galeria",
+            "banda",
+            "titulo",
+            "precio"
           ]
         }
       },
       "block_order": [
-        "text_cbcgyb"
+        "titulo"
       ],
       "name": "t:names.product_recommendations",
       "settings": {
@@ -397,19 +521,23 @@
         "max_products": 4,
         "columns": 4,
         "mobile_columns": "2",
-        "columns_gap": 12,
-        "rows_gap": 24,
+        "columns_gap": 22,
+        "rows_gap": 22,
         "icons_style": "arrow",
         "icons_shape": "none",
         "section_width": "page-width",
-        "gap": 28,
-        "padding-block-start": 48,
-        "padding-block-end": 48
+        "gap": 32,
+        "padding-block-start": 60,
+        "padding-block-end": 60
       }
     }
   },
   "order": [
+    "migas",
     "main",
-    "product_recommendations_qggXJq"
+    "historia",
+    "tecnica",
+    "ayudas",
+    "relacionados"
   ]
 }

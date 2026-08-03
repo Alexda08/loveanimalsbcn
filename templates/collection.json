@@ -9,90 +9,175 @@
  */
 {
   "sections": {
-    "section": {
+    "cabecera": {
       "type": "section",
       "blocks": {
-        "text_tqQTNE": {
+        "fina": {
+          "type": "fina",
+          "name": "Entradilla",
+          "settings": {
+            "texto": "{{ collection.metafields.custom.fina.value }}",
+            "texto_alternativo": "mientras esperan, puedes ayudarles con la…",
+            "tamano": 30,
+            "alineacion": "center",
+            "max_width": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0
+          }
+        },
+        "titulo": {
           "type": "text",
           "name": "t:names.title",
           "settings": {
             "text": "<h1>{{ closest.collection.title }}</h1>",
-            "width": "fit-content",
+            "width": "100%",
             "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "h2",
-            "font": "var(--font-body--family)",
-            "font_size": "",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
+            "alignment": "center",
+            "type_preset": "h1",
+            "wrap": "balance",
+            "padding-block-start": 4,
+            "padding-block-end": 0
+          }
         },
-        "text_twGGkJ": {
+        "lead": {
           "type": "text",
           "name": "t:names.description",
           "settings": {
             "text": "{{ closest.collection.description }}",
-            "width": "fit-content",
+            "width": "100%",
             "max_width": "normal",
-            "alignment": "left",
+            "alignment": "center",
             "type_preset": "rte",
-            "font": "var(--font-body--family)",
-            "font_size": "",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
             "wrap": "pretty",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
+            "padding-block-start": 12,
+            "padding-block-end": 0
+          }
         }
       },
       "block_order": [
-        "text_tqQTNE",
-        "text_twGGkJ"
+        "fina",
+        "titulo",
+        "lead"
       ],
-      "name": "t:names.heading",
+      "name": "Cabecera de la tienda",
       "settings": {
         "content_direction": "column",
         "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
+        "horizontal_alignment": "center",
         "vertical_alignment": "center",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "flex-start",
+        "horizontal_alignment_flex_direction_column": "center",
         "vertical_alignment_flex_direction_column": "center",
-        "gap": 12,
+        "gap": 0,
         "section_width": "page-width",
         "section_height": "",
-        "section_height_custom": 50,
-        "background_media": "none",
-        "video_position": "cover",
-        "background_image_position": "cover",
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
         "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_radius": 0,
-        "padding-block-start": 48,
-        "padding-block-end": 48
+        "padding-block-start": 52,
+        "padding-block-end": 0
+      }
+    },
+    "cifras": {
+      "type": "barra-cifras",
+      "blocks": {
+        "c1": {
+          "type": "cifra",
+          "settings": {
+            "numero": "100%",
+            "texto": "del beneficio va directo a los animales"
+          }
+        },
+        "c2": {
+          "type": "cifra",
+          "settings": {
+            "numero": "0",
+            "texto": "intermediarios: gestionamos nosotras la tienda"
+          }
+        },
+        "c3": {
+          "type": "cifra",
+          "settings": {
+            "numero": "2019",
+            "texto": "desde entonces vistiendo a la familia LAB"
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3"
+      ],
+      "settings": {
+        "max_width": 900,
+        "columns_gap": 20,
+        "corner_radius": 4,
+        "sombra": true,
+        "background_color": "{{ settings.color_palette.color1 }}",
+        "number_color": "{{ settings.color_palette.color3 }}",
+        "padding-block-start": 30,
+        "padding-block-end": 40
+      }
+    },
+    "chips": {
+      "type": "chips-colecciones",
+      "blocks": {
+        "todo": {
+          "type": "chip",
+          "settings": {
+            "coleccion": "tienda-solidaria",
+            "etiqueta": "Todo"
+          }
+        },
+        "camisetas": {
+          "type": "chip",
+          "settings": {
+            "coleccion": "camisetas",
+            "etiqueta": ""
+          }
+        },
+        "sudaderas": {
+          "type": "chip",
+          "settings": {
+            "coleccion": "sudaderas",
+            "etiqueta": ""
+          }
+        },
+        "totebags": {
+          "type": "chip",
+          "settings": {
+            "coleccion": "totebags",
+            "etiqueta": ""
+          }
+        },
+        "infantil": {
+          "type": "chip",
+          "settings": {
+            "coleccion": "infantil",
+            "etiqueta": ""
+          }
+        },
+        "causa": {
+          "type": "chip",
+          "settings": {
+            "coleccion": "causa-stop-ley-ppp",
+            "etiqueta": "Causa · Stop Ley PPP"
+          }
+        }
+      },
+      "block_order": [
+        "todo",
+        "camisetas",
+        "sudaderas",
+        "totebags",
+        "infantil",
+        "causa"
+      ],
+      "settings": {
+        "fijar": true,
+        "mostrar_contador": true,
+        "palabra_contador": "artículos",
+        "lineas": true,
+        "background_color": "{{ settings.color_palette.background }}",
+        "padding-block-start": 14,
+        "padding-block-end": 14
       }
     },
     "main": {
@@ -102,16 +187,16 @@
           "type": "filters",
           "static": true,
           "settings": {
-            "enable_filtering": true,
+            "enable_filtering": false,
             "filter_style": "horizontal",
             "filter_width": "centered",
             "text_label_case": "default",
             "show_swatch_label": false,
             "show_filter_label": false,
-            "enable_sorting": true,
-            "enable_grid_density": true,
-            "padding-block-start": 8,
-            "padding-block-end": 8,
+            "enable_sorting": false,
+            "enable_grid_density": false,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
             "padding-inline-start": 0,
             "padding-inline-end": 0,
             "facets_margin_bottom": 8,
@@ -123,13 +208,16 @@
           "type": "_product-card",
           "static": true,
           "settings": {
-            "product_card_gap": 4,
-            "border": "none",
+            "product_card_gap": 0,
+            "background_color": "{{ settings.color_palette.color5 }}",
+            "shadow": "suave",
+            "border": "solid",
             "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
+            "border_opacity": 16,
+            "border_color": "{{ settings.color_palette.foreground }}",
+            "border_radius": 4,
             "padding-block-start": 0,
-            "padding-block-end": 0,
+            "padding-block-end": 18,
             "padding-inline-start": 0,
             "padding-inline-end": 0
           },
@@ -137,7 +225,7 @@
             "card-gallery": {
               "type": "_product-card-gallery",
               "settings": {
-                "image_ratio": "adapt",
+                "image_ratio": "square",
                 "border": "none",
                 "border_width": 1,
                 "border_opacity": 100,
@@ -145,92 +233,209 @@
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-end": 0,
+                "media_background": "{{ settings.color_palette.color4 }}"
               },
               "blocks": {}
             },
-            "product_title_4nY4eT": {
+            "banda": {
+              "type": "impacto-banda",
+              "settings": {
+                "texto": "",
+                "tamano": 16,
+                "background_color": "{{ settings.color_palette.color4 }}",
+                "color": "{{ settings.color_palette.color1 }}",
+                "borde_superior": true,
+                "padding-block-start": 9,
+                "padding-block-end": 9
+              },
+              "blocks": {}
+            },
+            "titulo": {
               "type": "product-title",
               "name": "t:names.product_title",
               "settings": {
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
-                "type_preset": "paragraph",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
+                "type_preset": "custom",
+                "font": "var(--font-subheading--family)",
+                "font_size": "0.95rem",
+                "line_height": "tight",
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 4,
+                "padding-block-start": 14,
                 "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-start": 16,
+                "padding-inline-end": 16
               },
               "blocks": {}
             },
-            "price_EzJzMm": {
+            "tipo": {
+              "type": "text",
+              "name": "Tipo de prenda",
+              "settings": {
+                "text": "<p>{{ closest.product.metafields.custom.tipo_prenda.value }}</p>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-accent--family)",
+                "font_size": "0.65rem",
+                "line_height": "normal",
+                "letter_spacing": "loose",
+                "case": "uppercase",
+                "wrap": "pretty",
+                "text_color": "{{ settings.color_palette.color7 }}",
+                "padding-block-start": 2,
+                "padding-block-end": 0,
+                "padding-inline-start": 16,
+                "padding-inline-end": 16
+              },
+              "blocks": {}
+            },
+            "precio": {
               "type": "price",
               "settings": {
                 "show_sale_price_first": true,
                 "show_installments": false,
                 "show_tax_info": false,
-                "type_preset": "h6",
+                "type_preset": "custom",
                 "width": "100%",
                 "alignment": "left",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
+                "font": "var(--font-heading--family)",
+                "font_size": "1.35rem",
+                "line_height": "tight",
                 "letter_spacing": "normal",
                 "case": "none",
-                "padding-block-start": 0,
+                "padding-block-start": 12,
                 "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
+                "padding-inline-start": 16,
+                "padding-inline-end": 16
               },
               "blocks": {}
             },
-            "swatches": {
-              "type": "swatches",
-              "name": "t:names.swatches",
+            "boton": {
+              "type": "button",
+              "name": "Botón de la tarjeta",
               "settings": {
-                "product_swatches_alignment": "flex-start",
-                "product_swatches_padding_top": 4,
-                "product_swatches_padding_bottom": 0,
-                "product_swatches_padding_left": 0,
-                "product_swatches_padding_right": 0
-              }
+                "label": "Elegir talla",
+                "link": "{{ closest.product.url }}",
+                "open_in_new_tab": false,
+                "style_class": "button",
+                "width": "custom",
+                "custom_width": 100,
+                "width_mobile": "custom",
+                "custom_width_mobile": 100,
+                "padding-block-start": 12,
+                "padding-block-end": 0,
+                "padding-inline-start": 16,
+                "padding-inline-end": 16
+              },
+              "blocks": {}
             }
           },
           "block_order": [
             "card-gallery",
-            "product_title_4nY4eT",
-            "price_EzJzMm",
-            "swatches"
+            "banda",
+            "titulo",
+            "tipo",
+            "precio",
+            "boton"
           ]
         }
       },
       "settings": {
         "layout_type": "grid",
-        "product_card_size": "medium",
+        "product_card_size": "large",
         "mobile_product_card_size": "small",
+        "enable_infinite_scroll": false,
+        "products_per_page": 24,
         "product_grid_width": "centered",
-        "full_width_on_mobile": true,
-        "columns_gap_horizontal": 16,
-        "columns_gap_vertical": 24,
+        "full_width_on_mobile": false,
+        "columns_gap_horizontal": 26,
+        "columns_gap_vertical": 26,
         "padding-inline-start": 0,
         "padding-inline-end": 0,
+        "padding-block-start": 44,
+        "padding-block-end": 44
+      }
+    },
+    "donde": {
+      "type": "franja-impacto",
+      "settings": {
+        "cifra": "15 €",
+        "titulo": "¿A dónde va exactamente tu compra?",
+        "texto": "<p>Una camiseta cubre <strong>una semana de pienso</strong> de un perro grande. Una sudadera, <strong>una desparasitación completa</strong>. Un totebag, <strong>una vacuna</strong>. No es marketing: es la cuenta que hacemos cada mes para que ninguno se quede sin lo suyo.</p>",
+        "boton_texto": "Ver a quién ayudas",
+        "boton_enlace": "/pages/nuestros-animales",
+        "boton_estilo": "primario",
+        "max_width": 1180,
+        "corner_radius": 4,
+        "borde": true,
+        "background_color": "{{ settings.color_palette.color2 }}",
+        "number_color": "{{ settings.color_palette.color1 }}",
         "padding-block-start": 0,
-        "padding-block-end": 32
+        "padding-block-end": 26
+      }
+    },
+    "cierre": {
+      "type": "section",
+      "blocks": {
+        "fina": {
+          "type": "fina",
+          "name": "Frase de cierre",
+          "settings": {
+            "texto": "Cada prenda que sale de aquí",
+            "segunda_linea": "es un día menos esperando para alguno de ellos.",
+            "tamano": 32,
+            "alineacion": "center",
+            "max_width": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0
+          }
+        },
+        "boton": {
+          "type": "button",
+          "settings": {
+            "label": "Conoce a nuestros peludos",
+            "link": "/pages/nuestros-animales",
+            "style_class": "button",
+            "width": "fit-content",
+            "width_mobile": "fit-content",
+            "padding-block-start": 22,
+            "padding-block-end": 0
+          }
+        }
+      },
+      "block_order": [
+        "fina",
+        "boton"
+      ],
+      "name": "Cierre",
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "center",
+        "vertical_alignment": "center",
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 0,
+        "section_width": "page-width",
+        "background_color": "{{ settings.color_palette.color2 }}",
+        "border": "none",
+        "padding-block-start": 60,
+        "padding-block-end": 60
       }
     }
   },
   "order": [
-    "section",
-    "main"
+    "cabecera",
+    "cifras",
+    "chips",
+    "main",
+    "donde",
+    "cierre"
   ]
 }

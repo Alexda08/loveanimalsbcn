@@ -98,6 +98,10 @@
       border-style
       gap-style
       {% if block_settings.background_color != blank %} color-custom-{{ block.id }}{% endif %}
+      {% comment %} LA START - sombra y recorte de la tarjeta (setting «shadow» añadido en blocks/_product-card) {% endcomment %}
+      {% if block_settings.shadow != blank and block_settings.shadow != 'none' %} product-card__content--sombra-{{ block_settings.shadow }}{% endif %}
+      {% if block_settings.border_radius > 0 %} product-card__content--recortada{% endif %}
+      {% comment %} LA END {% endcomment %}
     "
     style="
       {% render 'border-override', settings: block_settings %}
@@ -118,3 +122,31 @@
 </product-card>
 
 {% render 'product-card-styles' %}
+
+{% comment %} LA START - sombra y recorte de tarjeta (mismas sombras que los grupos) {% endcomment %}
+{% stylesheet %}
+  .product-card__content--recortada {
+    overflow: hidden;
+  }
+
+  .product-card__content--sombra-suave {
+    box-shadow: 0 8px 22px rgb(var(--color-foreground-rgb) / 0.1);
+  }
+
+  .product-card__content--sombra-media {
+    box-shadow: 0 12px 28px rgb(var(--color-foreground-rgb) / 0.12);
+  }
+
+  .product-card__content--sombra-intensa {
+    box-shadow: 0 16px 34px rgb(var(--color-foreground-rgb) / 0.18);
+  }
+
+  product-card:is(:hover, :focus-within) .product-card__content--sombra-suave {
+    box-shadow: 0 16px 34px rgb(var(--color-foreground-rgb) / 0.16);
+  }
+
+  product-card:is(:hover, :focus-within) .product-card__content--sombra-media {
+    box-shadow: 0 18px 38px rgb(var(--color-foreground-rgb) / 0.18);
+  }
+{% endstylesheet %}
+{% comment %} LA END {% endcomment %}

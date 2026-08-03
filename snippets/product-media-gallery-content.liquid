@@ -349,8 +349,19 @@
       {% if block_settings.extend_media %}
         media-gallery--extend
       {% endif %}
+      {% comment %} LA START - panel de foto del diseño (fondo, borde y sombra) {% endcomment %}
+      {% if block_settings.media_background != blank %}
+        media-gallery--panel
+      {% endif %}
+      {% if block_settings.media_border %}
+        media-gallery--borde
+      {% endif %}
+      {% if block_settings.media_shadow != blank and block_settings.media_shadow != 'none' %}
+        media-gallery--sombra-{{ block_settings.media_shadow }}
+      {% endif %}
+      {% comment %} LA END {% endcomment %}
     "
-    style="{% render 'spacing-style', settings: block_settings %} --thumbnail-width: {{ block_settings.thumbnail_width }}px; --media-radius: {{ block_settings.media_radius }}px;{% if block_settings.icons_style contains 'large' %} --slideshow-icon-padding: 0px;{% endif %}--image-gap: {{ block_settings.image_gap }}px;{% unless block_settings.aspect_ratio == 'adapt' %} --gallery-aspect-ratio: {{ block_settings.aspect_ratio }};{% endunless %}"
+    style="{% render 'spacing-style', settings: block_settings %} --thumbnail-width: {{ block_settings.thumbnail_width }}px; --media-radius: {{ block_settings.media_radius }}px;{% if block_settings.media_background != blank %} --la-media-bg: {{ block_settings.media_background }};{% endif %}{% if block_settings.icons_style contains 'large' %} --slideshow-icon-padding: 0px;{% endif %}--image-gap: {{ block_settings.image_gap }}px;{% unless block_settings.aspect_ratio == 'adapt' %} --gallery-aspect-ratio: {{ block_settings.aspect_ratio }};{% endunless %}"
     data-presentation="{{ media_presentation }}"
     {{ block_shopify_attributes }}
   >
@@ -372,6 +383,11 @@
           {% else %}
             {%- render 'product-media', media: media, sizes: media_sizes, is_main_product_media: forloop.first -%}
           {% endif %}
+          {% comment %} LA START - sello ecológico sobre la foto principal (metacampo custom.eco_badge) {% endcomment %}
+          {%- if forloop.first and selected_product.metafields.custom.eco_badge.value != blank -%}
+            <span class="eco-sello">{{ selected_product.metafields.custom.eco_badge.value }}</span>
+          {%- endif -%}
+          {% comment %} LA END {% endcomment %}
         {% endcapture %}
         {% capture class %}
           {{ product_media_container_class }} product-media-container--{{ media.media_type }}{% if block_settings.zoom %} product-media-container--zoomable{% endif %}{% if forloop.index0 == lowest_aspect_ratio_index and block_settings.aspect_ratio == 'adapt' %} product-media-container--tallest{% endif %}
@@ -1048,4 +1064,55 @@
   slideshow-slide.product-media-container--tallest {
     content-visibility: visible;
   }
+
+  /* LA START - sello ecológico sobre la foto principal (metacampo custom.eco_badge) */
+  .eco-sello {
+    position: absolute;
+    bottom: 14px;
+    left: 14px;
+    z-index: var(--layer-flat, 1);
+    background: var(--la-green, var(--color-foreground));
+    color: var(--la-white, var(--color-background));
+    font-family: var(--font-accent--family);
+    font-weight: 500;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    line-height: 1.2;
+    padding: 0.5em 0.9em;
+    border-radius: 2px;
+    pointer-events: none;
+  }
+
+  .dialog-zoomed-gallery .eco-sello {
+    display: none;
+  }
+
+  /* panel de foto del diseño: fondo crema, borde fino y sombra */
+  .media-gallery--panel :where(.product-media-container),
+  .media-gallery--panel .slideshow-controls__thumbnail {
+    background: var(--la-media-bg, transparent);
+  }
+
+  .media-gallery--borde :where(.product-media-container),
+  .media-gallery--borde .slideshow-controls__thumbnail {
+    border: 1px solid rgb(var(--color-foreground-rgb) / var(--opacity-15));
+  }
+
+  .media-gallery--sombra-suave :where(.product-media-container) {
+    box-shadow: 0 8px 22px rgb(var(--color-foreground-rgb) / 0.1);
+  }
+
+  .media-gallery--sombra-media :where(.product-media-container) {
+    box-shadow: 0 12px 30px rgb(var(--color-foreground-rgb) / 0.13);
+  }
+
+  .media-gallery--sombra-intensa :where(.product-media-container) {
+    box-shadow: 0 16px 36px rgb(var(--color-foreground-rgb) / 0.18);
+  }
+
+  .dialog-zoomed-gallery .product-media-container {
+    box-shadow: none;
+  }
+  /* LA END */
 {% endstylesheet %}

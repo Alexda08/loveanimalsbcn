@@ -1,0 +1,243 @@
+{% comment %}
+  Barra de píldoras para saltar entre colecciones de la tienda, con el contador
+  de artículos de la colección que se está viendo. La píldora de la colección
+  actual se marca sola.
+{% endcomment %}
+
+{% liquid
+  if section.settings.background_color != blank
+    render 'contrast-override', background_color: section.settings.background_color, section_id: section.id
+  endif
+
+  assign total = collection.products_count | default: collection.all_products_count
+%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    {% render 'paleta-vars' %}
+    --chips-padding-top: {{ section.settings.padding-block-start }}px;
+    --chips-padding-bottom: {{ section.settings.padding-block-end }}px;
+    {%- if section.settings.background_color != blank %}
+    --chips-bg: var(--color-background);
+    {%- endif %}
+  }
+
+  {%- if section.settings.fijar %}
+  #shopify-section-{{ section.id }} .chips-barra {
+    position: sticky;
+    top: var(--header-height, 56px);
+    z-index: 3;
+  }
+  {%- endif %}
+</style>
+
+{% if section.blocks.size > 0 %}
+  <div
+    class="chips-barra{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}{% unless section.settings.lineas %} chips-barra--sin-lineas{% endunless %}"
+  >
+    <div class="chips-barra__in">
+      <div class="chips">
+        {% for block in section.blocks %}
+          {% liquid
+            assign col = block.settings.coleccion
+            assign etiqueta = block.settings.etiqueta | default: col.title
+            assign activo = false
+            if col != blank and collection != blank and col.handle == collection.handle
+              assign activo = true
+            endif
+          %}
+          {% if col != blank %}
+            <a
+              class="chip{% if activo %} chip--on{% endif %}"
+              href="{{ col.url }}"
+              {% if activo %}
+                aria-current="page"
+              {% endif %}
+              {{ block.shopify_attributes }}
+            >
+              {{ etiqueta }}
+            </a>
+          {% elsif request.design_mode %}
+            <span class="chip chip--vacio" {{ block.shopify_attributes }}>elige una colección</span>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      {% if section.settings.mostrar_contador and total > 0 %}
+        <span class="chips-barra__count">{{ total }} {{ section.settings.palabra_contador }}</span>
+      {% endif %}
+    </div>
+  </div>
+{% endif %}
+
+{% stylesheet %}
+  .chips-barra {
+    background: var(--chips-bg, var(--la-nude, var(--color-background)));
+    color: var(--color-foreground);
+    border-block: 1px solid rgb(var(--color-foreground-rgb) / var(--opacity-15));
+    padding-block: var(--chips-padding-top, 14px) var(--chips-padding-bottom, 14px);
+  }
+
+  .chips-barra--sin-lineas {
+    border-block-color: transparent;
+  }
+
+  .chips-barra__in {
+    max-width: var(--page-width);
+    margin-inline: auto;
+    padding-inline: var(--page-margin);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .chips {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .chip {
+    font-family: var(--font-accent--family);
+    font-weight: 400;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    line-height: 1.2;
+    background: transparent;
+    color: var(--color-foreground);
+    border: 1px solid rgb(var(--color-foreground-rgb) / var(--opacity-15));
+    border-radius: 999px;
+    padding: 0.55em 1.1em;
+    text-decoration: none;
+    transition: background var(--animation-speed, 0.14s) var(--animation-easing, ease),
+      color var(--animation-speed, 0.14s) var(--animation-easing, ease),
+      border-color var(--animation-speed, 0.14s) var(--animation-easing, ease);
+  }
+
+  .chip:hover {
+    border-color: var(--la-wine, var(--color-foreground));
+  }
+
+  .chip--on {
+    background: var(--color-foreground);
+    color: var(--color-background);
+    border-color: var(--color-foreground);
+  }
+
+  .chip--vacio {
+    opacity: 0.5;
+    border-style: dashed;
+  }
+
+  .chips-barra__count {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--la-wine-soft, var(--color-foreground));
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .chip {
+      transition: none;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Píldoras de colección",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "fijar",
+      "label": "Fijar al hacer scroll",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "mostrar_contador",
+      "label": "Mostrar contador de artículos",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "palabra_contador",
+      "label": "Palabra del contador",
+      "default": "artículos"
+    },
+    {
+      "type": "header",
+      "content": "t:content.appearance"
+    },
+    {
+      "type": "checkbox",
+      "id": "lineas",
+      "label": "Líneas arriba y abajo",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    }
+  ],
+  "blocks": [
+    {
+      "type": "chip",
+      "name": "Píldora",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "coleccion",
+          "label": "t:names.collection"
+        },
+        {
+          "type": "text",
+          "id": "etiqueta",
+          "label": "Texto",
+          "info": "Si lo dejas vacío se usa el nombre de la colección."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 10,
+  "presets": [
+    {
+      "name": "Píldoras de colección",
+      "category": "t:categories.collections",
+      "blocks": [
+        { "type": "chip" },
+        { "type": "chip" },
+        { "type": "chip" }
+      ]
+    }
+  ]
+}
+{% endschema %}
