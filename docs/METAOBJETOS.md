@@ -119,7 +119,45 @@ Los animales viven hoy como artículos del blog (Ciclone, Tuco, Rocky, Jhonny, W
 - Los importes de la licencia PPP del snippet son genéricos a propósito — pendientes
   los reales de Carla.
 
-## 6. Pendiente de Carla
+## 6. El Excel de los animales
+
+Para no pedirle a Carla que rellene 139 fichas a mano en el admin, los datos se piden en un
+Excel y se importan de una tacada: **`Love Animals BCN - fichas de los animales.xlsx`**
+(se genera con `excel_animales.py`, que lee las entradas de la tienda de pruebas).
+
+Sale **prerrellenado con los 139 animales** que ya tenemos, para que ella solo corrija y
+complete. Tres hojas: «Cómo se rellena» (instrucciones + qué va en cada columna),
+«Animales» (la tabla) y «Listas» (los valores válidos).
+
+Convenciones que hacen que la vuelta sea automática:
+
+| Columna del Excel | Campo del metaobjeto | Traducción al importar |
+|---|---|---|
+| Nombre * | `nombre` | tal cual |
+| Álbum(es) | (lista `animales` del `album`) | separados por `;`, por título de álbum |
+| Estado * | `estado` | En adopción→`en_adopcion`, En acogida→`en_acogida`, Adoptado→`adoptado` |
+| Fecha de entrada * | `fecha_entrada` | fecha de Excel → `AAAA-MM-DD` |
+| Fecha de adopción | `fecha_adopcion` | ídem |
+| Sexo | `sexo` | Macho→`macho`, Hembra→`hembra` |
+| Edad | `edad` | tal cual (texto libre) |
+| Tamaño | `tamano` | minúsculas sin tilde |
+| PPP | `ppp` | Sí→`true`, No→`false` |
+| Convive con niños/perros/gatos | `convive_ninos` / `_perros` / `_gatos` | Sí→`si`, No→`no`, Consultar→`consultar` |
+| Carácter | `caracter` | separado por comas → lista JSON |
+| Frase | `frase` | tal cual |
+| Historia | `historia` | texto → `rich_text_field` (un párrafo por línea) |
+| Fotos | `galeria` | nombres de archivo; las fotos llegan aparte y se suben a Archivos |
+| Notas | — | solo para hablar entre nosotras (`ya no está` = quitar de la web) |
+| código (no tocar) | `handle` | **la clave del upsert**: con código actualiza, sin código crea |
+
+- Las cabeceras **doradas** son los campos imprescindibles; las **granates**, opcionales.
+- Las casillas con fondo crema son datos que ya teníamos (para que se vea qué falta).
+- Las fechas solo van prerrellenadas cuando son fiables (24 de 139): las estimadas y el
+  placeholder `2025-01-01` se dejan en blanco a propósito, para que no las dé por buenas.
+- Las fotos no se pegan en el Excel: se piden aparte con el nombre del animal y un número
+  (`woody1.jpg`), y la 1 es la principal. Hoy 131 de 139 llevan foto de muestra.
+
+## 7. Pendiente de Carla
 
 - Email / WhatsApp de contacto (settings de la sección Ficha de animal)
 - Fechas de entrada reales de cada animal
