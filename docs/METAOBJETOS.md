@@ -125,9 +125,9 @@ Para no pedirle a Carla que rellene 139 fichas a mano en el admin, los datos se 
 Excel y se importan de una tacada: **`Love Animals BCN - fichas de los animales.xlsx`**
 (se genera con `excel_animales.py`, que lee las entradas de la tienda de pruebas).
 
-Sale **prerrellenado con los 139 animales** que ya tenemos, para que ella solo corrija y
-complete. Tres hojas: «Cómo se rellena» (instrucciones + qué va en cada columna),
-«Animales» (la tabla) y «Listas» (los valores válidos).
+Va **en blanco**: la fila 2 es un ejemplo (Woody, en verde y cursiva) para que se vea el
+formato, y debajo quedan 199 filas listas. Tres hojas: «Cómo se rellena» (instrucciones +
+qué va en cada columna), «Animales» (la tabla) y «Listas» (los valores válidos).
 
 Convenciones que hacen que la vuelta sea automática:
 
@@ -151,11 +151,11 @@ Convenciones que hacen que la vuelta sea automática:
 | código (no tocar) | `handle` | **la clave del upsert**: con código actualiza, sin código crea |
 
 - Las cabeceras **doradas** son los campos imprescindibles; las **granates**, opcionales.
-- Las casillas con fondo crema son datos que ya teníamos (para que se vea qué falta).
-- Las fechas solo van prerrellenadas cuando son fiables (24 de 139): las estimadas y el
-  placeholder `2025-01-01` se dejan en blanco a propósito, para que no las dé por buenas.
+- Los desplegables llevan validación con aviso (no bloquean, pero avisan si se escribe otra cosa).
 - Las fotos no se pegan en el Excel: se piden aparte con el nombre del animal y un número
-  (`woody1.jpg`), y la 1 es la principal. Hoy 131 de 139 llevan foto de muestra.
+  (`woody1.jpg`), y la 1 es la principal.
+- Los 139 animales scrapeados siguen en la tienda de pruebas: cuando vuelva el Excel se cruzan
+  por nombre para no duplicar (`dump_animales.py` los vuelca a JSON).
 
 ## 7. Pendiente de Carla
 
