@@ -488,8 +488,8 @@
             "color": "",
             "alineacion": "center",
             "max_width": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0
+            "padding-block-start": 24,
+            "padding-block-end": 24
           },
           "blocks": {}
         },
