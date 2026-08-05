@@ -194,6 +194,6 @@ envío 6 €. El catálogo dice «10% será donado para la asociación».
   mochilas y fundas están recortadas del catálogo en Canva y son pequeñas (393 px de origen):
   en cuanto Pris pase las suyas, se cambian en un minuto.
 - Los textos de «Envíos y dudas» están escritos en la propia section: cámbialos ahí, no por producto.
-- **La cifra `2019`** de la barra de la colección («desde entonces vistiendo a la familia LAB») no
-  sale de ningún sitio documentado: es la única de las tres sin fuente (el `1` y los `6 €` de envío
-  salen del catálogo de Pris). Confirmar el año de fundación con Carla o quitarla.
+- **La cifra `2019`** de la barra de la colección sí tiene fuente: la página «Sobre Love Animals BCN»
+  de la tienda real dice que la primera publicación de @adopta.loveanimals.bcn fue el **9 de enero de
+  2019**. El `1` y los `6 €` de envío salen del catálogo de Pris.
