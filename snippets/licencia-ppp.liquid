@@ -9,7 +9,7 @@
   @param {string} [nombre] - Nombre del animal (modo caja: personaliza el titular)
   @param {string} [guia_url] - Enlace a la guía completa (modo caja)
 
-  NOTA: los importes son orientativos, pendientes de confirmar con Carla.
+  Los pasos y los importes salen del apartado 6 de docs/CONTENIDO-CARLA.md.
 {% enddoc %}
 {%- liquid
   assign modo = modo | default: 'desplegable'
@@ -25,32 +25,73 @@
       {%- endif -%}
     </h3>
     <p>
-      Certificado de capacidad (como el del carnet de conducir), antecedentes penales (gratis, online),
-      un seguro de responsabilidad civil y la solicitud en tu ayuntamiento. Se resuelve en unas semanas y
-      <b>te acompañamos en todo el papeleo</b>.
-      {%- if guia_url != blank %}
-        <a href="{{ guia_url }}">Ver la guía completa de la licencia →</a>
-      {%- endif %}
+      Son tres documentos: certificado médico-psicotécnico (<b class="licencia-ppp__euro">25–60 €</b>
+      según el centro), certificado de antecedentes penales (<b class="licencia-ppp__euro">3,86 €</b>
+      de tasa oficial) y seguro de responsabilidad civil (<b class="licencia-ppp__euro">40–50 €</b>
+      al año). Sumando los tres, unos <b class="licencia-ppp__euro">69–114 €</b>. Se presentan en el
+      Ayuntamiento de tu localidad, normalmente por vía telemática.
     </p>
+    <p class="licencia-ppp__clave">
+      Con la <b>licencia provisional ya te
+      {%- if nombre != blank %} puedes llevar a {{ nombre }} a casa{% else %} lo puedes llevar a casa{% endif -%}
+      </b>. La definitiva es un carnet físico que te expiden después a tu domicilio.
+    </p>
+    {%- if guia_url != blank %}
+      <p class="licencia-ppp__mas">
+        <a href="{{ guia_url }}">Ver la guía completa de la licencia →</a>
+      </p>
+    {%- endif %}
   </div>
 {%- else -%}
   <details class="licencia-ppp licencia-ppp--desplegable">
     <summary class="licencia-ppp__summary">¿Cómo se tramita la licencia PPP?</summary>
     <div class="licencia-ppp__body">
       <p>
-        "PPP" significa "perro potencialmente peligroso": una etiqueta que la ley pone
-        <b>por raza, no por comportamiento</b>. La licencia asusta de primeras, pero es un trámite
-        sencillo que se resuelve en unas semanas:
+        "PPP" significa "perro potencialmente peligroso". Aunque para nosotras más bien son
+        <b>"perros potencialmente prejuzgados"</b>: es una etiqueta impuesta por la ley que se
+        determina <b>por raza, no por comportamiento</b>. Para poder adoptarles hay que hacer el
+        trámite, que puede parecer pesado al principio, pero es sencillo y se resuelve en pocos días
+        o semanas según cada Ayuntamiento.
       </p>
       <ol>
-        <li><b>Certificado de capacidad física y psicológica</b> — se hace en centros de reconocimiento (como el del carnet de conducir).</li>
-        <li><b>Certificado de antecedentes penales</b> — gratuito, se pide online en minutos.</li>
-        <li><b>Seguro de responsabilidad civil</b> — desde unos pocos euros al año.</li>
-        <li><b>Solicitud en tu ayuntamiento</b> — con los tres documentos anteriores y una tasa municipal.</li>
+        <li>
+          <b>Primero de todo, realiza la visita en la protectora</b> — necesitarás los datos del
+          perrito que vayas a adoptar.
+        </li>
+        <li>
+          <b>La licencia se tramita en el Ayuntamiento de tu localidad</b>, normalmente por vía
+          telemática, aunque puedes coger cita previa si prefieres ir personalmente.
+        </li>
+        <li>
+          <b>Documentos que deberás preparar:</b>
+          <ul class="licencia-ppp__docs">
+            <li>
+              <b>Certificado médico-psicotécnico</b> — puedes realizarlo en cualquier centro médico
+              que lo tenga disponible: busca en Google «certificado licencia PPP centro médico» y te
+              saldrán los más cercanos a ti. El precio depende del centro y oscila entre los
+              <b class="licencia-ppp__euro">25 y 60 €</b>.
+            </li>
+            <li>
+              <b>Certificado de antecedentes penales</b> — se expide por internet o puedes
+              solicitarlo a una gestoría. Tasa oficial de <b class="licencia-ppp__euro">3,86 €</b>.
+            </li>
+            <li>
+              <b>Seguro de responsabilidad civil</b> — suelen estar disponibles en cualquier
+              aseguradora. Normalmente es un pago único anual que oscila entre
+              <b class="licencia-ppp__euro">40 y 50 €</b>.
+            </li>
+          </ul>
+        </li>
+        <li>
+          <b>Presentas todos los documentos y te expiden la licencia provisional</b> — con ella ya
+          puedes adoptar al perrito y llevártelo a casa. La definitiva, que es un carnet físico, la
+          expiden a tu domicilio.
+        </li>
       </ol>
       <p class="licencia-ppp__nota">
-        Y no estás sola/o: te acompañamos en cada paso del papeleo. Muchas familias lo han hecho
-        antes que tú — pregúntanos sin compromiso.
+        No estás solo/a: desde el CAACB te envían un email con toda la información necesaria y te
+        resuelven cualquier duda desde administración. Muchas familias lo han hecho antes que tú
+        — pregúntanos lo que necesites.
       </p>
     </div>
   </details>
@@ -153,5 +194,57 @@
     font-style: italic;
     font-size: 1.05rem;
     color: var(--la-wine, var(--color-foreground));
+  }
+
+  .licencia-ppp__body ol > li {
+    line-height: 1.55;
+  }
+
+  .licencia-ppp__docs {
+    list-style: disc;
+    margin: 8px 0 0 1.1em;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .licencia-ppp__docs li {
+    line-height: 1.55;
+  }
+
+  .licencia-ppp__docs li::marker {
+    color: var(--la-gold, var(--color-foreground));
+  }
+
+  .licencia-ppp__euro {
+    white-space: nowrap;
+  }
+
+  .licencia-ppp__clave {
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid rgb(var(--color-foreground-rgb) / var(--opacity-15));
+  }
+
+  .licencia-ppp__mas {
+    margin-top: 12px;
+  }
+
+  .licencia-ppp__summary:focus-visible,
+  .licencia-ppp--caja a:focus-visible {
+    outline: 2px solid var(--la-wine, var(--color-foreground));
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  @media (max-width: 640px) {
+    .licencia-ppp__body ol {
+      margin-left: 1.05em;
+    }
+
+    .licencia-ppp__docs {
+      margin-left: 0.95em;
+    }
   }
 {% endstylesheet %}

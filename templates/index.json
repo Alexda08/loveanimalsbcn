@@ -99,7 +99,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>Somos una protectora de Barcelona. Sacamos a perros y gatos de la jaula, los cuidamos como se merecen y les buscamos lo más importante:<br/><strong>una familia para siempre</strong>.</p>",
+                "text": "<p>Somos una asociación animalista sin ánimo de lucro que nació para ayudar a los animales que se cruzan en nuestro camino y que forman parte de nuestra vida e historia. Además de nuestros propios rescates, nuestra mayor labor es dar visibilidad a los perros y gatos que viven en el <strong>CAACB</strong> (Centro de Acogida de Animales de Compañía de Barcelona) para encontrarles familia. Somos su ventana al mundo para que no queden en el olvido.</p><p>Porque una protectora no es un hogar, es solo el <strong>PUENTE</strong> hacia la felicidad. Y tú eres su <strong>DESTINO</strong>.</p>",
                 "width": "100%",
                 "max_width": "none",
                 "alignment": "left",
@@ -1207,11 +1207,37 @@
             "padding-inline-end": 0
           },
           "blocks": {
+            "text_LA_rot_perros": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p><em>si te llevas un perro 🐶</em></p>",
+                "width": "fill",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-heading--family)",
+                "font_size": "1.25rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "{{ settings.color_palette.color1 }}",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 20,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
             "text_qcAc6w": {
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<p>1. Rellena el formulario</p>",
+                "text": "<p>1. Ponte en contacto por WhatsApp o email</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -1237,7 +1263,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>Cuéntanos cómo es tu vida, tu casa y tu experiencia con animales. Con esa información, nuestro <strong>equipo de etología canina</strong> valora qué compañeros encajan mejor contigo.</p>",
+                "text": "<p>Empieza la aventura mandando un mensajito 💌</p><p><strong>644 47 78 97</strong> · <strong>adopcionscaacb@bcn.cat</strong></p><p><em>* Si tardan en contestar, escríbenos por Instagram para ayudarte: @adopta.loveanimals.bcn</em></p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -1263,7 +1289,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<p>2. Nos conocemos con cita previa</p>",
+                "text": "<p>2. Rellena el formulario</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -1289,7 +1315,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>Hablamos contigo y organizamos una visita para que os conozcáis en persona, con el asesoramiento del equipo. <strong>Sin ningún compromiso.</strong></p>",
+                "text": "<p>Queremos saber de ti 😏 Una vez envíes el email o el WhatsApp, te contestarán adjuntando el <strong>formulario de pre-adopción</strong>. Debes rellenarlo y reenviarlo. Así, desde el equipo de etología canina te conocerán mejor y sabrán qué perritos encajan contigo.</p><p><em>* Si te has fijado en algún perrito o en varios, podrás señalarlo en el formulario y te asesorarán sobre ellos. Si no, no pasa nada: muchos te esperan e igualmente te asesorarán sobre cuáles pueden encajar.</em></p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -1315,7 +1341,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<p>3. Acogida de adaptación</p>",
+                "text": "<p>3. Cita previa</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -1341,7 +1367,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>Un periodo de prueba en tu casa con nuestro acompañamiento en todo momento, para asegurar que la unión funciona.</p>",
+                "text": "<p>¡Hora de conocernos! 😍 Recibido tu formulario, te facilitarán las citas disponibles para hacer la visita con el <strong>equipo de etología canina</strong>, que son quienes te guiarán en los paseos de vinculación, en el proceso de adopción y, después, durante el periodo de adaptación.</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -1365,9 +1391,9 @@
             },
             "text_LA_paso4t": {
               "type": "text",
-              "name": "t:names.text",
+              "name": "t:names.heading",
               "settings": {
-                "text": "<p>4. ¡Salida por la puerta grande!</p>",
+                "text": "<p>4. Realiza las visitas 🐶</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -1393,7 +1419,345 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>Firmamos el contrato de adopción. Llegan <strong>vacunados, con chip y esterilizados</strong> — y tú ganas un mejor amigo.</p>",
+                "text": "<p>Según el caso y las necesidades de cada animal y cada familia, podrán darse más o menos <strong>paseos de vinculación</strong>. Déjate guiar y asesorar por el equipo de etología canina. Si es un perro <strong>PPP</strong>, os darán los datos e información necesarios para ir tramitando la licencia mientras tanto.</p><p><a href=\"#shopify-section-section_nwhiLi\">Cómo se tramita la licencia PPP →</a></p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 48,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_LA_p5t": {
+              "type": "text",
+              "name": "t:names.heading",
+              "settings": {
+                "text": "<p>5. ¡Papeleo y a casa! 🍀</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h3",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_LA_p5b": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p>En la última visita rellenarás la documentación en la recepción del CAACB y ya podrás irte a casa con el amor de tu vida. La tasa de adopción son <strong>32 €</strong> e incluye chip, vacunas, esterilización y desparasitación interna y externa.</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 48,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_LA_p6t": {
+              "type": "text",
+              "name": "t:names.heading",
+              "settings": {
+                "text": "<p>6. Periodo de adaptación 🏠</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h3",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_LA_p6b": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p>Desde el CAACB te otorgan <strong>21 días</strong> con seguimiento del equipo veterinario y del de etología canina. Si necesitas ayuda: <strong>veterinaria.caacb@bcn.cat</strong> para temas veterinarios y <strong>servei.etologia.caacb@bcn.cat</strong> para temas conductuales. Pasado ese periodo, la tutela legal del perro pasa a ser tuya y te envían la documentación del Registro a tu domicilio.</p><p><em>* IMPORTANTE: si pasado este tiempo surgen o siguen habiendo problemas en la adaptación, escríbenos por @adopta.loveanimals.bcn y te ayudaremos. Desde las asociaciones del voluntariado ayudamos más allá del periodo que cubre el Centro y os ofrecemos educadores caninos privados de confianza. En caso de que sea necesario, correremos con los gastos.</em></p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 48,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_LA_rot_gatos": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p><em>si te llevas un gato 😼</em></p>",
+                "width": "fill",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-heading--family)",
+                "font_size": "1.25rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "{{ settings.color_palette.color1 }}",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 20,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_LA_g1t": {
+              "type": "text",
+              "name": "t:names.heading",
+              "settings": {
+                "text": "<p>1. No es necesaria cita previa: vente ya 😼</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h3",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_LA_g1b": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p>Para adoptar gatos no hace falta cita previa: las visitas las realiza el equipo de <strong>ATV</strong> (auxiliar técnico veterinario) y cubren todo el horario de visita. Solo tienes que venir personalmente al centro con tu <strong>DNI</strong> y lo demás se formaliza allí.</p><p>Lunes a viernes, de 11 a 14 h y de 15 a 18 h<br/>Sábados, domingos y festivos, de 10:30 a 14:30 h</p><p>Carretera de l’Arrabassada km 3,8, 08035 Barcelona · en Google Maps: <strong>CAAC BCN</strong></p><p><em>* Ven siempre media hora antes del cierre como mínimo, así da tiempo de realizar la visita.<br/>* Tráete un transportín por si encuentras al amor de tu vida. Si no tienes, tranqui, te prestaremos uno.</em></p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 48,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_LA_g2t": {
+              "type": "text",
+              "name": "t:names.heading",
+              "settings": {
+                "text": "<p>2. ¡Papeleo y a casa! 😻</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h3",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_LA_g2b": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p>En la visita rellenarás la documentación en la recepción del CAACB y ya podrás irte a casa con el amor de tu vida. La tasa de adopción son <strong>32 €</strong> e incluye chip, vacunas, esterilización y desparasitación interna y externa.</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 48,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_LA_g3t": {
+              "type": "text",
+              "name": "t:names.heading",
+              "settings": {
+                "text": "<p>3. La adaptación empieza desde el hogar 😸</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h3",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_LA_g3b": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p>En la visita te darán las pautas necesarias de presentación y adaptación, tanto al hogar como a otros animales si los tenéis. A diferencia de los perros, cuya vinculación empieza en la protectora, los gatos deben comenzar su periodo de adaptación en el que será su entorno tranquilo y seguro: <strong>su nueva casa</strong>.</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 48,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_LA_g4t": {
+              "type": "text",
+              "name": "t:names.heading",
+              "settings": {
+                "text": "<p>4. Periodo de adaptación 🏠</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h3",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "text_LA_g4b": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<p>Desde el CAACB te otorgan <strong>21 días</strong> con seguimiento del equipo veterinario. Si necesitas ayuda: <strong>veterinaria.caacb@bcn.cat</strong>. Pasado ese periodo, la tutela legal del gato pasa a ser tuya y te envían la documentación del Registro a tu domicilio.</p><p><em>* IMPORTANTE: si pasado este tiempo surgen o siguen habiendo problemas en la adaptación, escríbenos por Instagram a @adopta.loveanimals.bcn o a @lagatayogui_gatscaacb y te ayudaremos. Desde las asociaciones del voluntariado ayudamos más allá del periodo que cubre el Centro y os ofrecemos servicio con etóloga felina privada. En caso de que sea necesario, correremos con los gastos.</em></p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -1417,6 +1781,7 @@
             }
           },
           "block_order": [
+            "text_LA_rot_perros",
             "text_qcAc6w",
             "text_EttcMR",
             "text_yXfbK6",
@@ -1424,14 +1789,27 @@
             "text_nDMDpU",
             "text_axhMDx",
             "text_LA_paso4t",
-            "text_LA_paso4p"
+            "text_LA_paso4p",
+            "text_LA_p5t",
+            "text_LA_p5b",
+            "text_LA_p6t",
+            "text_LA_p6b",
+            "text_LA_rot_gatos",
+            "text_LA_g1t",
+            "text_LA_g1b",
+            "text_LA_g2t",
+            "text_LA_g2b",
+            "text_LA_g3t",
+            "text_LA_g3b",
+            "text_LA_g4t",
+            "text_LA_g4b"
           ]
         },
         "text_qC6KUi": {
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<p><em>¿te animas? escríbenos y empezamos</em></p>",
+            "text": "<p><em>¿te animas? empieza la aventura mandando un mensajito 💌</em></p>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "center",
@@ -1457,8 +1835,8 @@
           "type": "button",
           "name": "t:names.button",
           "settings": {
-            "label": "Contactar para adoptar",
-            "link": "shopify://collections/all",
+            "label": "Escribir para adoptar",
+            "link": "mailto:adopcionscaacb@bcn.cat",
             "open_in_new_tab": false,
             "style_class": "button-custom",
             "custom_button_background": "{{ settings.color_palette.color1 }}",
@@ -1517,8 +1895,8 @@
               "type": "button",
               "name": "t:names.button",
               "settings": {
-                "label": "✉ [email de la protectora]",
-                "link": "shopify://collections/all",
+                "label": "✉ adopcionscaacb@bcn.cat",
+                "link": "mailto:adopcionscaacb@bcn.cat",
                 "open_in_new_tab": false,
                 "style_class": "button-unstyled",
                 "custom_button_background": "{{ settings.color_palette.foreground }}",
@@ -1536,7 +1914,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p><strong>📱 DM a @adopta.loveanimals.bcn</strong></p>",
+                "text": "<p>📱 DM a @adopta.loveanimals.bcn</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -1562,8 +1940,8 @@
               "type": "button",
               "name": "t:names.button",
               "settings": {
-                "label": "💬 [WhatsApp si tienen]",
-                "link": "shopify://collections/all",
+                "label": "💬 644 47 78 97",
+                "link": "https://wa.me/34644477897",
                 "open_in_new_tab": false,
                 "style_class": "button-unstyled",
                 "custom_button_background": "{{ settings.color_palette.foreground }}",
@@ -1682,7 +2060,7 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<p>Una casa de acogida es un hogar temporal donde el animal vive, se recupera y aprende, mientras le buscamos familia definitiva. Sin acogidas, muchos rescates no serían posibles.</p>",
+            "text": "<p>Las casas de acogida son para animales con necesidades especiales: por ejemplo, que estén en periodo de lactancia, sufran una enfermedad o tengan avanzada edad. Pueden ser <strong>temporales</strong> o <strong>indefinidas</strong>; las indefinidas son como una adopción (el animal SIEMPRE estará contigo).</p><p>Las que más falta nos hacen son <strong>las indefinidas</strong>. Es una manera de darles un hogar y una familia para siempre sin preocuparte de absolutamente nada más.</p>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "center",
@@ -1775,7 +2153,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>te cuesta acoger: la protectora cubre<strong>todos los gastos veterinarios</strong>y te acompañamos durante toda la estancia. Tú pones el sofá y el cariño.</p>",
+                "text": "<p>te cuesta acoger: el centro cubre <strong>comida, medicamentos, visitas veterinarias y urgencias 24 h</strong> en el hospital veterinario con el que tenemos convenio. Tú pon mucho AMOR, acompáñales en el camino sin soltar su patita, y el CAACB pone todo el resto.</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "center",
@@ -1914,7 +2292,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<p>Nos escribes</p>",
+                "text": "<p>Escríbenos</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "center",
@@ -1940,7 +2318,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>Nos cuentas tu situación: espacio, tiempo, otros animales en casa, experiencia.</p>",
+                "text": "<p>Si quieres ser casa de acogida, escribe al <strong>664 52 51 86</strong> o a <strong>adopcionscaacb@bcn.cat</strong>. Si tardan en contestar, escríbenos por Instagram a @adopta.loveanimals.bcn.</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "center",
@@ -2040,7 +2418,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<p>Buscamos el encaje</p>",
+                "text": "<p>Buscamos el que encaje</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "center",
@@ -2066,7 +2444,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>El equipo te propone el animal que mejor encaja con tu casa y tu ritmo de vida.</p>",
+                "text": "<p>Según tu disponibilidad, tu entorno, tu tipo de familia (si tienes otros perros, niños…) y tu experiencia, se te asesorará sobre qué perro o gato de acogida puede encajar contigo.</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "center",
@@ -2192,7 +2570,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>Con todo lo necesario cubierto y nuestro apoyo constante hasta que encuentre familia.</p>",
+                "text": "<p>Con todo lo necesario cubierto y nuestro apoyo constante durante toda la acogida.</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "center",
@@ -2291,7 +2669,7 @@
           "name": "t:names.button",
           "settings": {
             "label": "Quiero ser casa de acogida",
-            "link": "shopify://collections/all",
+            "link": "mailto:adopcionscaacb@bcn.cat",
             "open_in_new_tab": false,
             "style_class": "button-custom",
             "custom_button_background": "{{ settings.color_palette.color1 }}",
@@ -2350,8 +2728,8 @@
               "type": "button",
               "name": "t:names.button",
               "settings": {
-                "label": "✉ [email de la protectora]",
-                "link": "shopify://collections/all",
+                "label": "✉ adopcionscaacb@bcn.cat",
+                "link": "mailto:adopcionscaacb@bcn.cat",
                 "open_in_new_tab": false,
                 "style_class": "button-unstyled",
                 "custom_button_background": "{{ settings.color_palette.foreground }}",
@@ -2369,7 +2747,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p><strong>📱 DM a @adopta.loveanimals.bcn</strong></p>",
+                "text": "<p>📱 DM a @adopta.loveanimals.bcn</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -2390,10 +2768,30 @@
                 "padding-inline-end": 0
               },
               "blocks": {}
+            },
+            "button_LA_wa_acogida": {
+              "type": "button",
+              "name": "t:names.button",
+              "settings": {
+                "label": "💬 664 52 51 86",
+                "link": "https://wa.me/34664525186",
+                "open_in_new_tab": false,
+                "style_class": "button-unstyled",
+                "custom_button_background": "{{ settings.color_palette.foreground }}",
+                "custom_button_text": "{{ settings.color_palette.background }}",
+                "custom_button_border": "{{ settings.color_palette.background }}",
+                "link_text_color": "{{ settings.color_palette.color7 }}",
+                "width": "fit-content",
+                "custom_width": 100,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 100
+              },
+              "blocks": {}
             }
           },
           "block_order": [
             "button_jGfL3t",
+            "button_LA_wa_acogida",
             "text_UeQwEp"
           ]
         }
@@ -2627,7 +3025,7 @@
                 "text_fELJz3": {
                   "type": "text",
                   "settings": {
-                    "text": "<p>\"PPP\" significa \"perro potencialmente peligroso\": una etiqueta que la ley pone <strong>por raza, no por comportamiento</strong>. La licencia asusta de primeras, pero es un trámite sencillo que se resuelve en unas semanas:</p><ol><li><strong>Certificado de capacidad física y psicológica</strong> — se hace en centros de reconocimiento (como el del carnet de conducir, ~40-60 €).</li><li><strong>Certificado de antecedentes penales</strong> — gratuito, se pide online en minutos.</li><li><strong>Seguro de responsabilidad civil</strong> — desde ~40 €/año.</li><li><strong>Solicitud en tu ayuntamiento</strong> — con los tres documentos anteriores y una tasa municipal.</li></ol><p>Y no estás sola/o: te acompañamos en cada paso del papeleo. Muchas familias lo han hecho antes que tú — pregúntanos sin compromiso.</p>",
+                    "text": "<p>\"PPP\" significa \"perro potencialmente peligroso\". Aunque para nosotras más bien son <strong>\"perros potencialmente prejuzgados\"</strong>: es una etiqueta que impone la ley y que se determina <strong>por raza, no por comportamiento</strong>. Para poder adoptarles hay que hacer el trámite, y aunque parezca pesado al principio, se resuelve en pocos días o semanas según cada ayuntamiento.</p><ol><li><strong>Primero, ven a conocerle.</strong> Haz la visita en la protectora: necesitarás los datos del perrito que vayas a adoptar.</li><li><strong>La licencia se tramita en el ayuntamiento de tu localidad</strong>, normalmente por vía telemática, aunque puedes pedir cita previa si prefieres ir en persona.</li><li><strong>Prepara los tres documentos:</strong><ul><li><strong>Certificado médico-psicotécnico</strong> — en cualquier centro médico que lo tenga disponible (busca en Google \"certificado licencia PPP centro médico\"). Entre <strong>25 y 60 €</strong> según el centro.</li><li><strong>Certificado de antecedentes penales</strong> — se pide por internet o en una gestoría. Tasa oficial de <strong>3,86 €</strong>.</li><li><strong>Seguro de responsabilidad civil</strong> — disponible en cualquier aseguradora. Pago anual de entre <strong>40 y 50 €</strong>.</li></ul></li><li><strong>Presenta los documentos y listo.</strong> Te expiden la <strong>licencia provisional</strong>, con la que ya puedes adoptar al perrito y llevártelo a casa. La definitiva, que es un carnet físico, te llega al domicilio.</li></ol><p>No estás solo/a: en el CAACB te envían un email con toda la información necesaria y te resuelven cualquier duda desde administración. Muchas familias lo han hecho antes que tú — pregúntanos lo que necesites.</p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "left",
@@ -2887,7 +3285,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>Camisetas de algodón orgánico desde 17,90 €. Cada compra equivale a una semana de pienso.</p>",
+                    "text": "<p>Productos solidarios hechos de forma artesanal por <strong>@el_armario_de_pris</strong>. Encontrarás desde ropa hasta llaveros, tazas, fundas de móvil, mochilas, tote-bags, jabones, bolígrafos… ¡Gran variedad de productos y diseños!</p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "center",
@@ -2913,9 +3311,28 @@
                   "type": "button",
                   "name": "t:names.button",
                   "settings": {
-                    "label": "Ir a la tienda",
+                    "label": "Ver el catálogo",
                     "link": "/collections/all",
                     "open_in_new_tab": false,
+                    "style_class": "button",
+                    "custom_button_background": "{{ settings.color_palette.foreground }}",
+                    "custom_button_text": "{{ settings.color_palette.background }}",
+                    "custom_button_border": "{{ settings.color_palette.background }}",
+                    "link_text_color": "{{ settings.color_palette.color1 }}",
+                    "width": "fit-content",
+                    "custom_width": 100,
+                    "width_mobile": "fit-content",
+                    "custom_width_mobile": 100
+                  },
+                  "blocks": {}
+                },
+                "button_LA_ig_pris": {
+                  "type": "button",
+                  "name": "t:names.button",
+                  "settings": {
+                    "label": "Escribir por Instagram",
+                    "link": "https://www.instagram.com/el_armario_de_pris/",
+                    "open_in_new_tab": true,
                     "style_class": "button",
                     "custom_button_background": "{{ settings.color_palette.foreground }}",
                     "custom_button_text": "{{ settings.color_palette.background }}",
@@ -2933,7 +3350,8 @@
                 "text_THKetK",
                 "text_JF99gk",
                 "text_mkwc3q",
-                "button_8U9n6a"
+                "button_8U9n6a",
+                "button_LA_ig_pris"
               ]
             },
             "group_PFCD9d": {
@@ -3033,7 +3451,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>1 € al mes que cambia vidas. Súmate a nuestro grupo de teaming y ayuda cada mes sin darte ni cuenta.</p>",
+                    "text": "<p>Súmate a nuestro grupo Teaming por solo <strong>1 euro al mes</strong>. Para ti no es nada, para ellos es mucho. ¡Ayudas sin notarlo apenas en tu bolsillo!</p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "center",
@@ -3060,7 +3478,7 @@
                   "name": "t:names.button",
                   "settings": {
                     "label": "Unirme por 1 €/mes",
-                    "link": "#",
+                    "link": "",
                     "open_in_new_tab": false,
                     "style_class": "button",
                     "custom_button_background": "{{ settings.color_palette.foreground }}",
@@ -3179,7 +3597,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>Una aportación única para veterinario, pienso o residencias. Rendimos cuentas de todo lo que entra.</p>",
+                    "text": "<p>Si quieres hacer una aportación única del importe que tú elijas, puedes hacernos una transferencia bancaria.</p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "center",
@@ -3201,22 +3619,29 @@
                   },
                   "blocks": {}
                 },
-                "button_AVbPLU": {
-                  "type": "button",
-                  "name": "t:names.button",
+                "text_LA_iban": {
+                  "type": "text",
+                  "name": "t:names.text",
                   "settings": {
-                    "label": "Donar ahora",
-                    "link": "#",
-                    "open_in_new_tab": false,
-                    "style_class": "button",
-                    "custom_button_background": "{{ settings.color_palette.foreground }}",
-                    "custom_button_text": "{{ settings.color_palette.background }}",
-                    "custom_button_border": "{{ settings.color_palette.background }}",
-                    "link_text_color": "{{ settings.color_palette.color1 }}",
-                    "width": "fit-content",
-                    "custom_width": 100,
-                    "width_mobile": "fit-content",
-                    "custom_width_mobile": 100
+                    "text": "<p><strong>ES19 0182 5870 8102 0194 2037</strong></p>",
+                    "width": "fill",
+                    "max_width": "normal",
+                    "alignment": "center",
+                    "type_preset": "custom",
+                    "font": "var(--font-body--family)",
+                    "font_size": "0.95rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "text_color": "{{ settings.color_palette.color7 }}",
+                    "background": true,
+                    "background_color": "{{ settings.color_palette.color4 }}",
+                    "corner_radius": 4,
+                    "padding-block-start": 12,
+                    "padding-block-end": 12,
+                    "padding-inline-start": 14,
+                    "padding-inline-end": 14
                   },
                   "blocks": {}
                 }
@@ -3225,7 +3650,7 @@
                 "text_PeBGPx",
                 "text_W9jLbA",
                 "text_8iMLYF",
-                "button_AVbPLU"
+                "text_LA_iban"
               ]
             },
             "group_pJPWWh": {
@@ -3325,7 +3750,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>Muchas adopciones empiezan con un repost. Síguenos y comparte a nuestros peludos.</p>",
+                    "text": "<p>Sin duda, lo que más nos ha ayudado a cambiar vidas. Muchas adopciones empiezan con un <strong>like</strong> o un <strong>repost</strong>. Síguenos y comparte las historias de nuestros peludos.</p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "center",
@@ -3393,36 +3818,14 @@
                       "name": "Píldora (enlace)",
                       "settings": {
                         "texto": "Instagram",
-                        "enlace": "https://www.instagram.com/adopta.loveanimals.bcn",
-                        "nueva_pestana": true
-                      },
-                      "blocks": {}
-                    },
-                    "pildora_LA_tt": {
-                      "type": "pildora",
-                      "name": "Píldora (enlace)",
-                      "settings": {
-                        "texto": "TikTok",
-                        "enlace": "#",
-                        "nueva_pestana": true
-                      },
-                      "blocks": {}
-                    },
-                    "pildora_LA_fb": {
-                      "type": "pildora",
-                      "name": "Píldora (enlace)",
-                      "settings": {
-                        "texto": "Facebook",
-                        "enlace": "#",
+                        "enlace": "https://www.instagram.com/adopta.loveanimals.bcn/",
                         "nueva_pestana": true
                       },
                       "blocks": {}
                     }
                   },
                   "block_order": [
-                    "pildora_LA_ig",
-                    "pildora_LA_tt",
-                    "pildora_LA_fb"
+                    "pildora_LA_ig"
                   ]
                 }
               },
@@ -3440,11 +3843,38 @@
             "group_zYWige",
             "group_pJPWWh"
           ]
+        },
+        "text_LA_colabora_lead": {
+          "type": "text",
+          "name": "t:names.text",
+          "settings": {
+            "text": "<p>Si quieres formar parte de esta gran familia y ayudarnos a que todos ellos pasen de la jaula a la vida, pero no puedes adoptar ni acoger, puedes…</p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "center",
+            "type_preset": "rte",
+            "font": "var(--font-body--family)",
+            "font_size": "",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
         }
       },
       "block_order": [
         "text_TtcLFf",
         "text_kx4NDC",
+        "text_LA_colabora_lead",
         "group_aDkWMk"
       ],
       "name": "t:names.multicolumn",

@@ -79,7 +79,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>Protectora de animales en Barcelona. De la jaula a la vida: rescatamos, cuidamos y buscamos familia para perros y gatos abandonados.</p>",
+                "text": "<p>Asociación animalista sin ánimo de lucro de Barcelona. Damos visibilidad a los perros y gatos del CAACB, además de a nuestros propios rescates, para que pasen de la jaula a la vida.</p>",
                 "width": "fit-content",
                 "max_width": "narrow",
                 "alignment": "left",
@@ -205,10 +205,10 @@
           "name": "t:names.social_media_links",
           "settings": {
             "icon_color": "",
-            "facebook_url": "#",
-            "instagram_url": "#",
+            "facebook_url": "",
+            "instagram_url": "https://www.instagram.com/adopta.loveanimals.bcn/",
             "youtube_url": "",
-            "tiktok_url": "#",
+            "tiktok_url": "",
             "twitter_url": "",
             "threads_url": "",
             "linkedin_url": "",

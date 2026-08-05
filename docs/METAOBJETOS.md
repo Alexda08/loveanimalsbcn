@@ -159,7 +159,11 @@ Convenciones que hacen que la vuelta sea automática:
 
 ## 7. Pendiente de Carla
 
-- Email / WhatsApp de contacto (settings de la sección Ficha de animal)
-- Fechas de entrada reales de cada animal
-- Importes reales de la licencia PPP
+Los textos de la web (procesos de adopción y acogida, colabora, guía PPP y datos de contacto) ya
+están: salen de **`docs/CONTENIDO-CARLA.md`**, que es la transcripción literal de su documento.
+Lo que sigue abierto:
+
+- Fechas de entrada reales de cada animal (es lo que trae el Excel)
+- Enlace del grupo de Teaming y titular de la cuenta del IBAN
+- Qué parte de cada pedido vuelve a la protectora
 - Logo vectorial oficial (hay wordmark SVG provisional: `logo-loveanimalsbcn.svg` / `-blanco.svg`)
