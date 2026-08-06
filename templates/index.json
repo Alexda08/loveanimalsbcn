@@ -2337,11 +2337,11 @@
             "vertical_alignment_flex_direction_column": "flex-start",
             "gap": 8,
             "display": "both",
-            "width": "fit-content",
+            "width": "custom",
             "custom_width": 25,
             "width_mobile": "fit-content",
             "custom_width_mobile": 100,
-            "height": "fit",
+            "height": "fill",
             "custom_height": 100,
             "background_media": "none",
             "background_color": "{{ settings.color_palette.color4 }}",
@@ -2464,11 +2464,11 @@
             "vertical_alignment_flex_direction_column": "flex-start",
             "gap": 8,
             "display": "both",
-            "width": "fit-content",
+            "width": "custom",
             "custom_width": 25,
             "width_mobile": "fit-content",
             "custom_width_mobile": 100,
-            "height": "fit",
+            "height": "fill",
             "custom_height": 100,
             "background_media": "none",
             "background_color": "{{ settings.color_palette.color4 }}",
@@ -2591,11 +2591,11 @@
             "vertical_alignment_flex_direction_column": "flex-start",
             "gap": 8,
             "display": "both",
-            "width": "fit-content",
+            "width": "custom",
             "custom_width": 25,
             "width_mobile": "fit-content",
             "custom_width_mobile": 100,
-            "height": "fit",
+            "height": "fill",
             "custom_height": 100,
             "background_media": "none",
             "background_color": "{{ settings.color_palette.color4 }}",
@@ -3461,33 +3461,13 @@
                     "custom_width_mobile": 100
                   },
                   "blocks": {}
-                },
-                "button_LA_ig_pris": {
-                  "type": "button",
-                  "name": "t:names.button",
-                  "settings": {
-                    "label": "Escribir por Instagram",
-                    "link": "https://www.instagram.com/el_armario_de_pris/",
-                    "open_in_new_tab": true,
-                    "style_class": "button",
-                    "custom_button_background": "{{ settings.color_palette.foreground }}",
-                    "custom_button_text": "{{ settings.color_palette.background }}",
-                    "custom_button_border": "{{ settings.color_palette.background }}",
-                    "link_text_color": "{{ settings.color_palette.color1 }}",
-                    "width": "fit-content",
-                    "custom_width": 100,
-                    "width_mobile": "fit-content",
-                    "custom_width_mobile": 100
-                  },
-                  "blocks": {}
                 }
               },
               "block_order": [
                 "text_THKetK",
                 "text_JF99gk",
                 "text_mkwc3q",
-                "button_8U9n6a",
-                "button_LA_ig_pris"
+                "button_8U9n6a"
               ]
             },
             "group_PFCD9d": {
