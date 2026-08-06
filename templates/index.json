@@ -370,7 +370,7 @@
                   "type": "button",
                   "name": "t:names.button",
                   "settings": {
-                    "label": "Ver nuestros animales",
+                    "label": "Colabora",
                     "link": "/pages/nuestros-animales",
                     "open_in_new_tab": false,
                     "style_class": "button",
