@@ -115,4 +115,15 @@
     box-shadow: 0 14px 36px rgb(var(--color-foreground-rgb) / 0.18);
   }
   /* LA END */
+
+  /* LA START - «Altura en móviles»: base.css fija la altura del grupo con la de escritorio,
+     así que en móvil hay que dejar mandar a --size-style-height-mobile cuando exista */
+  @media screen and (max-width: 749px) {
+    .group-block--height-fit,
+    .group-block--height-fill,
+    .group-block--height-custom {
+      height: var(--size-style-height-mobile, var(--size-style-height));
+    }
+  }
+  /* LA END */
 {% endstylesheet %}

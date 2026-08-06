@@ -214,7 +214,7 @@
     {
       "type": "range",
       "id": "custom_width",
-      "label": "t:settings.custom_width",
+      "label": "Ancho personalizado (escritorio)",
       "min": 0,
       "max": 100,
       "step": 1,
@@ -226,6 +226,7 @@
       "type": "select",
       "id": "width_mobile",
       "label": "t:settings.width_mobile",
+      "info": "Ponlo en «Personalizado» para darle al móvil un ancho distinto del de escritorio.",
       "options": [
         {
           "value": "fit-content",
@@ -245,7 +246,7 @@
     {
       "type": "range",
       "id": "custom_width_mobile",
-      "label": "t:settings.custom_width",
+      "label": "Ancho personalizado (móvil)",
       "min": 0,
       "max": 100,
       "step": 1,
@@ -276,13 +277,49 @@
     {
       "type": "range",
       "id": "custom_height",
-      "label": "t:settings.custom_height",
+      "label": "Altura personalizada (escritorio)",
       "min": 0,
       "max": 100,
       "step": 1,
       "unit": "%",
       "default": 100,
       "visible_if": "{{ block.settings.height == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "height_mobile",
+      "label": "Altura en móviles",
+      "info": "Ponla en «Personalizada» para darle al móvil una altura distinta de la de escritorio.",
+      "options": [
+        {
+          "value": "",
+          "label": "Igual que en escritorio"
+        },
+        {
+          "value": "fit",
+          "label": "t:options.fit_content"
+        },
+        {
+          "value": "fill",
+          "label": "t:options.fill"
+        },
+        {
+          "value": "custom",
+          "label": "t:options.custom"
+        }
+      ],
+      "default": ""
+    },
+    {
+      "type": "range",
+      "id": "custom_height_mobile",
+      "label": "Altura personalizada (móvil)",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 100,
+      "visible_if": "{{ block.settings.height_mobile == 'custom' }}"
     },
     {
       "type": "header",

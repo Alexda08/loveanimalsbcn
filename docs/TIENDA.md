@@ -95,8 +95,11 @@ En Liquid y CSS van entre marcadores `LA START` / `LA END`:
 - `snippets/product-badges-styles.liquid`: estilos de ese sello.
 - `snippets/product-media-gallery-content.liquid`: panel de la foto (fondo, borde, sombra) y sello ecológico.
 - `snippets/theme-styles-variables.liquid`: paleta `--la-*` en `:root` y trackings anchos.
-- `snippets/group.liquid`: sombras del grupo y la clase de «Dónde se ve» (reutiliza las utilidades
-  `hidden--mobile` / `hidden--desktop` que ya trae `base.css`, así que no añade CSS).
+- `snippets/group.liquid`: sombras del grupo, la clase de «Dónde se ve» (reutiliza las utilidades
+  `hidden--mobile` / `hidden--desktop` que ya trae `base.css`, así que no añade CSS) y la regla que
+  deja mandar a la altura de móvil.
+- `snippets/size-style.liquid`: escribe `--size-style-height-mobile`. `base.css` ya la leía, pero no
+  la escribía nadie.
 
 Dentro de un `{% schema %}` no se pueden poner comentarios, así que **estos añadidos van sin
 marcadores** (se reconocen porque las etiquetas están en español):
@@ -116,6 +119,10 @@ marcadores** (se reconocen porque las etiquetas están en español):
 - `blocks/group.liquid`: ajustes «Sombra» y **«Dónde se ve → Pantallas»** (móvil y escritorio / solo
   móvil / solo escritorio; por defecto los dos). Sirve para montar dos versiones de un mismo bloque,
   una para cada tamaño de pantalla. El corte es el del theme: 750 px.
+  En **Tamaño**, los dos rangos de ancho («escritorio» y «móvil») ya venían del theme pero se
+  llamaban igual los dos; ahora llevan el apellido. Y se ha añadido **«Altura en móviles»** con su
+  propio rango, que faltaba. Ojo: el rango de móvil de cada uno solo aparece cuando pones
+  «Personalizado» en el selector de móvil correspondiente; si lo dejas como está, manda escritorio.
 - `config/settings_schema.json`: esas mismas dos opciones en la tipografía global (de la fase anterior).
 
 ---
