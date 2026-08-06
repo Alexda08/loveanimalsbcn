@@ -7,10 +7,39 @@
  * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
+/* auto-generated */
 {
   "sections": {
     "hero": {
       "type": "section",
+      "settings": {
+        "content_direction": "column",
+        "vertical_on_mobile": true,
+        "horizontal_alignment": "flex-start",
+        "vertical_alignment": "flex-start",
+        "align_baseline": false,
+        "horizontal_alignment_flex_direction_column": "center",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 18,
+        "section_width": "page-width",
+        "section_height": "",
+        "section_height_custom": 50,
+        "background_media": "none",
+        "background_color": "",
+        "video_position": "cover",
+        "background_image_position": "cover",
+        "toggle_overlay": false,
+        "overlay_color": "#00000026",
+        "overlay_style": "solid",
+        "gradient_direction": "to top",
+        "border": "none",
+        "border_width": 1,
+        "border_opacity": 100,
+        "border_color": "",
+        "border_radius": 0,
+        "padding-block-start": 76,
+        "padding-block-end": 60
+      },
       "blocks": {
         "hero_entradilla": {
           "type": "fina",
@@ -21,6 +50,7 @@
             "texto_alternativo": "",
             "tamano": 26,
             "color": "{{ settings.color_palette.color1 }}",
+            "color_destacado": "",
             "alineacion": "center",
             "max_width": 0,
             "padding-block-start": 0,
@@ -74,11 +104,11 @@
               "settings": {
                 "text": "<p>Nacimos para ayudar a los animales que se cruzan en nuestro camino</p>",
                 "width": "100%",
-                "max_width": "normal",
+                "max_width": "none",
                 "alignment": "center",
                 "type_preset": "custom",
                 "font": "var(--font-heading--family)",
-                "font_size": "2.5rem",
+                "font_size": "3.5rem",
                 "line_height": "tight",
                 "letter_spacing": "normal",
                 "case": "none",
@@ -99,11 +129,11 @@
               "settings": {
                 "text": "<p><em>y que forman parte de nuestra vida e historia.</em></p>",
                 "width": "100%",
-                "max_width": "normal",
+                "max_width": "none",
                 "alignment": "center",
                 "type_preset": "custom",
                 "font": "var(--font-heading--family)",
-                "font_size": "2.5rem",
+                "font_size": "3.5rem",
                 "line_height": "tight",
                 "letter_spacing": "normal",
                 "case": "none",
@@ -180,7 +210,10 @@
         "hero_titular",
         "hero_intro",
         "hero_fecha"
-      ],
+      ]
+    },
+    "puente": {
+      "type": "section",
       "settings": {
         "content_direction": "column",
         "vertical_on_mobile": true,
@@ -189,12 +222,12 @@
         "align_baseline": false,
         "horizontal_alignment_flex_direction_column": "center",
         "vertical_alignment_flex_direction_column": "center",
-        "gap": 18,
+        "gap": 16,
         "section_width": "page-width",
         "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "",
+        "background_color": "{{ settings.color_palette.color1 }}",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
@@ -206,12 +239,9 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 76,
-        "padding-block-end": 60
-      }
-    },
-    "puente": {
-      "type": "section",
+        "padding-block-start": 62,
+        "padding-block-end": 62
+      },
       "blocks": {
         "puente_frase": {
           "type": "fina",
@@ -222,6 +252,7 @@
             "texto_alternativo": "",
             "tamano": 40,
             "color": "{{ settings.color_palette.color4 }}",
+            "color_destacado": "{{ settings.color_palette.color8 }}",
             "alineacion": "center",
             "max_width": 20,
             "padding-block-start": 0,
@@ -257,7 +288,10 @@
       "block_order": [
         "puente_frase",
         "puente_pie"
-      ],
+      ]
+    },
+    "hacemos": {
+      "type": "section",
       "settings": {
         "content_direction": "column",
         "vertical_on_mobile": true,
@@ -271,7 +305,7 @@
         "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "{{ settings.color_palette.color1 }}",
+        "background_color": "",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
@@ -283,12 +317,9 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 62,
-        "padding-block-end": 62
-      }
-    },
-    "hacemos": {
-      "type": "section",
+        "padding-block-start": 80,
+        "padding-block-end": 80
+      },
       "blocks": {
         "hacemos_entradilla": {
           "type": "fina",
@@ -299,6 +330,7 @@
             "texto_alternativo": "",
             "tamano": 24,
             "color": "{{ settings.color_palette.color1 }}",
+            "color_destacado": "",
             "alineacion": "center",
             "max_width": 0,
             "padding-block-start": 0,
@@ -342,8 +374,8 @@
             "horizontal_alignment_flex_direction_column": "center",
             "vertical_alignment_flex_direction_column": "flex-start",
             "gap": 22,
-            "width": "fill",
-            "custom_width": 100,
+            "width": "custom",
+            "custom_width": 88,
             "width_mobile": "fill",
             "custom_width_mobile": 100,
             "height": "fit",
@@ -1079,8 +1111,8 @@
             "horizontal_alignment_flex_direction_column": "flex-start",
             "vertical_alignment_flex_direction_column": "flex-start",
             "gap": 10,
-            "width": "fill",
-            "custom_width": 100,
+            "width": "custom",
+            "custom_width": 88,
             "width_mobile": "fill",
             "custom_width_mobile": 100,
             "height": "fit",
@@ -1196,7 +1228,10 @@
         "hacemos_titulo",
         "hacemos_rejilla",
         "hacemos_masalla"
-      ],
+      ]
+    },
+    "solo": {
+      "type": "section",
       "settings": {
         "content_direction": "column",
         "vertical_on_mobile": true,
@@ -1210,7 +1245,7 @@
         "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "",
+        "background_color": "{{ settings.color_palette.color4 }}",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
@@ -1222,12 +1257,9 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 80,
-        "padding-block-end": 80
-      }
-    },
-    "solo": {
-      "type": "section",
+        "padding-block-start": 76,
+        "padding-block-end": 76
+      },
       "blocks": {
         "solo_titular": {
           "type": "group",
@@ -1280,7 +1312,7 @@
                 "alignment": "center",
                 "type_preset": "custom",
                 "font": "var(--font-heading--family)",
-                "font_size": "2rem",
+                "font_size": "2.5rem",
                 "line_height": "tight",
                 "letter_spacing": "normal",
                 "case": "none",
@@ -1305,7 +1337,7 @@
                 "alignment": "center",
                 "type_preset": "custom",
                 "font": "var(--font-heading--family)",
-                "font_size": "2rem",
+                "font_size": "2.5rem",
                 "line_height": "tight",
                 "letter_spacing": "normal",
                 "case": "none",
@@ -1363,8 +1395,8 @@
             "horizontal_alignment_flex_direction_column": "center",
             "vertical_alignment_flex_direction_column": "flex-start",
             "gap": 16,
-            "width": "fill",
-            "custom_width": 100,
+            "width": "custom",
+            "custom_width": 73,
             "width_mobile": "fill",
             "custom_width_mobile": 100,
             "height": "fit",
@@ -1773,7 +1805,10 @@
         "solo_titular",
         "solo_texto",
         "solo_contactos"
-      ],
+      ]
+    },
+    "colabora": {
+      "type": "section",
       "settings": {
         "content_direction": "column",
         "vertical_on_mobile": true,
@@ -1787,7 +1822,7 @@
         "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "{{ settings.color_palette.color4 }}",
+        "background_color": "",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
@@ -1799,12 +1834,9 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 76,
-        "padding-block-end": 76
-      }
-    },
-    "colabora": {
-      "type": "section",
+        "padding-block-start": 78,
+        "padding-block-end": 78
+      },
       "blocks": {
         "colabora_entradilla": {
           "type": "fina",
@@ -1815,6 +1847,7 @@
             "texto_alternativo": "",
             "tamano": 24,
             "color": "{{ settings.color_palette.color1 }}",
+            "color_destacado": "",
             "alineacion": "center",
             "max_width": 0,
             "padding-block-start": 0,
@@ -2418,7 +2451,10 @@
         "colabora_entradilla",
         "colabora_titulo",
         "colabora_tarjetas"
-      ],
+      ]
+    },
+    "cierre": {
+      "type": "section",
       "settings": {
         "content_direction": "column",
         "vertical_on_mobile": true,
@@ -2432,7 +2468,7 @@
         "section_height": "",
         "section_height_custom": 50,
         "background_media": "none",
-        "background_color": "",
+        "background_color": "{{ settings.color_palette.color2 }}",
         "video_position": "cover",
         "background_image_position": "cover",
         "toggle_overlay": false,
@@ -2444,12 +2480,9 @@
         "border_opacity": 100,
         "border_color": "",
         "border_radius": 0,
-        "padding-block-start": 78,
-        "padding-block-end": 78
-      }
-    },
-    "cierre": {
-      "type": "section",
+        "padding-block-start": 72,
+        "padding-block-end": 72
+      },
       "blocks": {
         "cierre_frase": {
           "type": "group",
@@ -2654,35 +2687,7 @@
       "block_order": [
         "cierre_frase",
         "cierre_botones"
-      ],
-      "settings": {
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "flex-start",
-        "vertical_alignment": "flex-start",
-        "align_baseline": false,
-        "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "center",
-        "gap": 16,
-        "section_width": "page-width",
-        "section_height": "",
-        "section_height_custom": 50,
-        "background_media": "none",
-        "background_color": "{{ settings.color_palette.color2 }}",
-        "video_position": "cover",
-        "background_image_position": "cover",
-        "toggle_overlay": false,
-        "overlay_color": "#00000026",
-        "overlay_style": "solid",
-        "gradient_direction": "to top",
-        "border": "none",
-        "border_width": 1,
-        "border_opacity": 100,
-        "border_color": "",
-        "border_radius": 0,
-        "padding-block-start": 72,
-        "padding-block-end": 72
-      }
+      ]
     }
   },
   "order": [
