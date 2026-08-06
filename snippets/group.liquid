@@ -27,6 +27,9 @@
     group-block--height-{{ settings.height }}
     group-block--width-{{ settings.width }}
     {% if settings.shadow != blank and settings.shadow != 'none' %}group-block--sombra-{{ settings.shadow }}{% endif %}
+    {%- comment -%} LA START - ajuste «Dónde se ve» (setting «display» añadido en blocks/group) {%- endcomment -%}
+    {% if settings.display == 'mobile' %}hidden--desktop{% elsif settings.display == 'desktop' %}hidden--mobile{% endif %}
+    {%- comment -%} LA END {%- endcomment -%}
     border-style
     spacing-style
     size-style
