@@ -2,12 +2,32 @@
   {% content_for 'blocks' %}
 {% endcapture %}
 
+{%- comment -%}
+  LA START - «Igual que en escritorio» en el tamaño del móvil.
+
+  Las variables CSS se heredan: un grupo metido dentro de otro recibía el
+  --size-style-width-mobile del padre, así que «igual que en escritorio» nunca llegaba
+  a aplicarse. Cuando el ajuste está vacío, se reescribe aquí apuntando al valor de
+  escritorio de este mismo bloque y así corta la herencia.
+{%- endcomment -%}
+{%- capture tamano_movil -%}
+  {%- if block.settings.width_mobile == blank -%}
+    --size-style-width-mobile: var(--size-style-width);
+    --size-style-width-mobile-min: var(--size-style-width);
+  {%- endif -%}
+  {%- if block.settings.height_mobile == blank -%}
+    --size-style-height-mobile: var(--size-style-height);
+  {%- endif -%}
+{%- endcapture -%}
+{%- comment -%} LA END {%- endcomment -%}
+
 {% render 'group',
   children: children,
   settings: block.settings,
   shopify_attributes: block.shopify_attributes,
   background_color: block.settings.background_color,
-  block_id: block.id
+  block_id: block.id,
+  style: tamano_movil
 %}
 
 {% schema %}
@@ -228,6 +248,10 @@
       "label": "t:settings.width_mobile",
       "info": "Ponlo en «Personalizado» para darle al móvil un ancho distinto del de escritorio.",
       "options": [
+        {
+          "value": "",
+          "label": "Igual que en escritorio"
+        },
         {
           "value": "fit-content",
           "label": "t:options.fit_content"

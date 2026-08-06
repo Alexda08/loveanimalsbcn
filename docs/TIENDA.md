@@ -119,10 +119,23 @@ marcadores** (se reconocen porque las etiquetas están en español):
 - `blocks/group.liquid`: ajustes «Sombra» y **«Dónde se ve → Pantallas»** (móvil y escritorio / solo
   móvil / solo escritorio; por defecto los dos). Sirve para montar dos versiones de un mismo bloque,
   una para cada tamaño de pantalla. El corte es el del theme: 750 px.
-  En **Tamaño**, los dos rangos de ancho («escritorio» y «móvil») ya venían del theme pero se
-  llamaban igual los dos; ahora llevan el apellido. Y se ha añadido **«Altura en móviles»** con su
-  propio rango, que faltaba. Ojo: el rango de móvil de cada uno solo aparece cuando pones
-  «Personalizado» en el selector de móvil correspondiente; si lo dejas como está, manda escritorio.
+  En **Tamaño**, ancho y altura tienen cada uno su selector de móvil con las mismas opciones:
+  *igual que en escritorio · ajustar al contenido · rellenar · personalizado*, y el rango de móvil
+  aparece al elegir «personalizado». Los dos rangos de ancho ya venían del theme (se llamaban igual
+  los dos, ahora llevan apellido); **«Altura en móviles»** y las dos opciones «igual que en
+  escritorio» son nuestras.
+
+  Dos cosas del theme que había que arreglar para que esto se comportara:
+
+  - **El ancho mandaba en la altura del móvil.** Con «Apilar en el móvil» el grupo pasa a columna
+    pero conserva la clase `layout-panel-flex--row`, así que seguían aplicando las reglas de ancho
+    de `base.css` (`flex: 0` / `flex: 1` / `flex-basis: var(--size-style-width)`) — y en vertical el
+    `flex-basis` no es el ancho, es la altura. Se devuelven a `flex: 0 1 auto` solo en móvil y solo
+    si el grupo apila.
+  - **Las variables CSS se heredan.** Un grupo dentro de otro cogía el `--size-style-width-mobile`
+    del padre, así que «igual que en escritorio» nunca llegaba a aplicarse. Cuando el ajuste está
+    vacío, `blocks/group.liquid` reescribe la variable apuntando al valor de escritorio del propio
+    bloque y corta la herencia.
 - `config/settings_schema.json`: esas mismas dos opciones en la tipografía global (de la fase anterior).
 
 ---

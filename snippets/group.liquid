@@ -116,9 +116,24 @@
   }
   /* LA END */
 
-  /* LA START - «Altura en móviles»: base.css fija la altura del grupo con la de escritorio,
-     así que en móvil hay que dejar mandar a --size-style-height-mobile cuando exista */
+  /* LA START - tamaño del grupo en el móvil.
+
+     Con «Apilar en el móvil» el grupo pasa a columna pero conserva la clase
+     .layout-panel-flex--row, así que las reglas de ancho de base.css
+     (flex: 0 / flex: 1 / flex-basis: var(--size-style-width)) siguen aplicando… solo que
+     en vertical el flex-basis ya no es el ancho, es la ALTURA. Resultado: el ancho de
+     escritorio acababa mandando en la altura del móvil.
+
+     Aquí se devuelven al valor de fábrica del flexbox: el ancho lo pone `width` y la
+     altura, `height`. Sin apilar (sigue en fila) no se toca nada. */
   @media screen and (max-width: 749px) {
+    .layout-panel-flex--row.mobile-column > .group-block--width-fit,
+    .layout-panel-flex--row.mobile-column > .group-block--width-fill,
+    .layout-panel-flex--row.mobile-column > .group-block--width-custom {
+      flex: 0 1 auto;
+    }
+
+    /* base.css fija la altura del grupo con la de escritorio: que mande la del móvil si la hay */
     .group-block--height-fit,
     .group-block--height-fill,
     .group-block--height-custom {
