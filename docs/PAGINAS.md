@@ -31,20 +31,49 @@ hiciera falta recuperar alguna.
 
 ## La plantilla «Quiénes somos»
 
-`templates/page.sobre-nosotras.json` — se pinta clonando secciones que ya existían, sin código nuevo:
-el molde de «Acoger» para los bloques narrativos, el de los tres pasos para «nuestra labor», la
-**Barra de cifras** de la colección y el muro de **Finales felices**.
+`templates/page.sobre-nosotras.json` — implementa `design/loveanimalsbcn-about-us.html` **sin crear
+ninguna section ni bloque nuevo**: todo son `section`, `group`, `text`, `button` y el bloque `fina`
+del proyecto, con los mismos moldes que la home (tarjeta blanca de «Colabora», caja de la cuenta,
+franja de color a sangre).
 
-Orden: intro · cifras · labor · equipo · realidad · solidaria · compitruenos · finales felices · cierre.
+Orden: hero · el puente · qué hacemos · no estás solo/a · colaborar · cierre.
 
-El texto sale literal de la página `/pages/sobre-nosotras` de la tienda real (el que escribieron
-Amanda, Carla y Lara). Como la plantilla no lleva la sección `main-page`, **el cuerpo que haya en el
-admin no se pinta**: para cambiar el texto se toca la plantilla, igual que en la home.
+| Sección | Qué es | Fondo |
+|---|---|---|
+| `hero` | entradilla, titular a dos voces y la intro del docx | el de la página |
+| `puente` | la frase del PUENTE y el DESTINO | granate (`color1`) |
+| `hacemos` | 4 tarjetas 2×2 + la caja «no te soltamos la mano» | el de la página |
+| `solo` | «adoptar impone, pero no estás solo/a» + 3 tarjetas de contacto | crema (`color4`) |
+| `colabora` | las 4 formas de ayudar, con la cuenta bancaria | el de la página |
+| `cierre` | «de la jaula a la vida» + tres botones a la home | nude (`color2`) |
+
+Detalles del montaje que no son evidentes:
+
+- **Las filas de 2 tarjetas** son dos grupos en fila dentro de un grupo en columna: una sección en
+  fila no hace salto de línea (`--flex-wrap: nowrap`), así que 2×2 solo sale anidando.
+- **Los titulares a dos voces** (una línea chocolate y otra granate en cursiva) son dos bloques de
+  texto con el mismo tamaño dentro de un grupo con separación 0. No se puede colorear media frase
+  dentro de un solo bloque.
+- **Las anchuras** salen de la proporción del diseño sobre su lienzo (`.hace-grid` 920 px de 1036 →
+  88 %; `.solo-in` 760 px → 73 %), no de píxeles fijos.
+- **Los teléfonos y correos son enlaces** (WhatsApp y mailto); en el diseño eran texto plano.
+- Diferencias conscientes: la caja «no te soltamos la mano» lleva borde granate por los cuatro lados
+  en vez de solo a la izquierda, y la cuenta bancaria sale en caja crema en vez de con borde dorado
+  discontinuo (el bloque de texto no tiene borde).
+
+> ⚠️ **El texto que escribieron Amanda, Carla y Lara ya no se pinta aquí.** La versión anterior de
+> esta plantilla (commit `a354060`) contaba el origen de la cuenta, el equipo, la ley de sacrificio
+> cero, la lista de protectoras ayudadas y la historia de Javi el Rey Chatarrero. El diseño nuevo no
+> los incluye. El texto sigue estando en el cuerpo de `/pages/sobre-nosotras` de la tienda real y en
+> el historial de git; si se quiere recuperar, lo suyo sería una página aparte («Nuestra historia»).
 
 Para verla hay que tener una página con handle `sobre-nosotras` y plantilla `sobre-nosotras`:
 - **Tienda de pruebas:** ya creada → `/pages/sobre-nosotras`
 - **Tienda real:** la página existe pero sin plantilla asignada. Cuando se publique el theme, hay que
   ponerle la plantilla «sobre-nosotras» desde el admin.
+
+Como la plantilla no lleva la sección `main-page`, **el cuerpo que haya en el admin no se pinta**:
+para cambiar el texto se toca la plantilla, igual que en la home.
 
 ## Menús de la tienda real
 

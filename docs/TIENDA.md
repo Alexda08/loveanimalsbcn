@@ -63,7 +63,7 @@ un bloque por colección, con texto propio opcional («Todo», «Causa · Stop L
 
 | Bloque | Para qué | Dónde se puede usar |
 | --- | --- | --- |
-| `fina` | La línea en cursiva del diseño (entradillas, claim, cierre) | Secciones, grupos, ficha, tarjeta |
+| `fina` | La línea en cursiva del diseño (entradillas, claim, cierre). Lo que va **en negrita** sale recto y en el color destacado (dorado claro por defecto) | Secciones, grupos, ficha, tarjeta |
 | `etiqueta` | Sello en mayúsculas (contorno, sólido o verde) | Ficha y tarjeta |
 | `impacto-banda` | Banda «= 1 semana de pienso» | Tarjeta de producto |
 | `impacto-caja` | Caja granate del «por qué» | Ficha |

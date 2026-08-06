@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiénes somos — Love Animals BCN</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Oswald:wght@400;500;600&family=Figtree:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --nude:#D8CDBB;
+  --nude-soft:#E6DECF;
+  --cream:#F7F2E8;
+  --white:#FDFBF6;
+  --choco:#4A3628;
+  --wine:#6E4A44;
+  --wine-soft:#8A625B;
+  --gold:#B08D57;
+  --line:rgba(74,54,40,.16);
+  --f-serif:'Cormorant Garamond',serif;
+  --f-cond:'Oswald',sans-serif;
+  --f-body:'Figtree',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--f-body);background:var(--nude-soft);color:var(--choco);line-height:1.6}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+.fina{font-family:var(--f-serif);font-style:italic;font-weight:500}
+.btn{
+  display:inline-block;font-family:var(--f-cond);font-weight:500;text-transform:uppercase;
+  font-size:.88rem;letter-spacing:.08em;padding:.9em 1.9em;border-radius:3px;
+  background:var(--choco);color:var(--cream);transition:background .14s ease,transform .12s ease;
+  border:none;cursor:pointer;
+}
+.btn:hover{background:#35261B;transform:translateY(-2px)}
+.btn:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.btn--wine{background:var(--wine)}
+.btn--wine:hover{background:#573833}
+.btn--light{background:var(--white);color:var(--choco);border:1px solid var(--line)}
+
+.ticker{background:var(--choco);color:var(--cream);font-size:.82rem;font-weight:600;padding:8px 0;text-align:center}
+.ticker b{color:#E3C08D}
+header{position:sticky;top:0;z-index:50;background:rgba(230,222,207,.95);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:13px 0}
+.logo{font-family:var(--f-serif);font-style:italic;font-weight:600;font-size:1.5rem}
+.nav-links{display:flex;gap:26px;font-weight:600;font-size:.9rem}
+.nav-links a:hover{color:var(--wine)}
+.nav .btn{font-size:.75rem;padding:.6em 1.2em}
+@media(max-width:900px){.nav-links{display:none}}
+
+/* ---------- HERO ---------- */
+.hero{padding:76px 0 60px;text-align:center}
+.hero .fina{font-size:clamp(1.4rem,2.8vw,1.9rem);color:var(--wine)}
+.hero h1{
+  font-family:var(--f-serif);font-weight:500;
+  font-size:clamp(2.1rem,5.2vw,3.7rem);line-height:1.16;margin-top:14px;
+  max-width:18em;margin-left:auto;margin-right:auto;
+}
+.hero h1 em{font-style:italic;color:var(--wine)}
+.hero .sub{max-width:42em;margin:20px auto 0;font-size:1rem}
+.hero .sub b{color:var(--wine)}
+.hero .fecha{
+  margin-top:20px;font-family:var(--f-cond);font-weight:400;font-size:.75rem;
+  letter-spacing:.28em;text-transform:uppercase;color:var(--wine-soft);
+}
+
+/* ---------- PULL: el puente ---------- */
+.pull{background:var(--wine);color:var(--cream);padding:62px 0;text-align:center}
+.pull p{
+  font-family:var(--f-serif);font-style:italic;font-weight:500;
+  font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.35;max-width:20em;margin:0 auto;
+}
+.pull p b{color:#E3C08D;font-style:normal}
+.pull .quien{
+  margin-top:16px;font-family:var(--f-cond);font-weight:400;font-size:.72rem;
+  letter-spacing:.26em;text-transform:uppercase;color:rgba(247,242,232,.7);
+}
+
+/* ---------- QUÉ HACEMOS ---------- */
+.hacemos{padding:80px 0}
+.sec-intro{text-align:center;margin-bottom:44px}
+.sec-intro .fina{font-size:clamp(1.3rem,2.6vw,1.7rem);color:var(--wine)}
+.sec-intro h2{
+  font-family:var(--f-serif);font-weight:500;text-transform:uppercase;
+  font-size:clamp(1.9rem,4.4vw,3rem);letter-spacing:.3em;margin-right:-.3em;margin-top:4px;
+}
+.hace-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;max-width:920px;margin:0 auto}
+@media(max-width:760px){.hace-grid{grid-template-columns:1fr}}
+.hace{
+  background:var(--white);border:1px solid var(--line);border-radius:4px;padding:28px 30px;
+  box-shadow:0 8px 22px rgba(74,54,40,.08);
+}
+.hace .num{font-family:var(--f-serif);font-style:italic;font-size:1.1rem;color:var(--gold)}
+.hace h3{font-family:var(--f-cond);font-weight:500;text-transform:uppercase;font-size:1.05rem;letter-spacing:.07em;margin-top:4px}
+.hace p{font-size:.93rem;margin-top:10px}
+.hace p b{color:var(--wine)}
+.hace .lema{font-family:var(--f-serif);font-style:italic;font-size:1.05rem;color:var(--wine-soft);margin-top:12px}
+
+/* destacado: más allá */
+.masalla{
+  max-width:920px;margin:26px auto 0;background:var(--nude);border:1px solid var(--line);
+  border-left:4px solid var(--wine);border-radius:4px;padding:28px 32px;
+}
+.masalla h3{font-family:var(--f-cond);font-weight:500;text-transform:uppercase;font-size:1.05rem;letter-spacing:.07em}
+.masalla p{font-size:.95rem;margin-top:10px;max-width:52em}
+.masalla p b{color:var(--wine)}
+.masalla .lema{font-family:var(--f-serif);font-style:italic;font-size:1.25rem;color:var(--wine);margin-top:12px}
+
+/* ---------- NO ESTÁS SOLO/A ---------- */
+.solo{background:var(--cream);padding:76px 0}
+.solo-in{max-width:760px;margin:0 auto;text-align:center}
+.solo .grande{
+  font-family:var(--f-serif);font-weight:500;font-size:clamp(1.8rem,4.2vw,2.8rem);line-height:1.25;
+}
+.solo .grande em{font-style:italic;color:var(--wine)}
+.solo p.txt{margin-top:16px;font-size:1rem;max-width:38em;margin-left:auto;margin-right:auto}
+.contactos{
+  margin-top:30px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;
+}
+@media(max-width:700px){.contactos{grid-template-columns:1fr}}
+.contacto{
+  background:var(--white);border:1px solid var(--line);border-radius:4px;padding:20px 18px;
+}
+.contacto b{font-family:var(--f-cond);font-weight:500;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--wine-soft);display:block}
+.contacto .dato{font-weight:700;font-size:.95rem;margin-top:6px;display:block}
+.contacto .peque{font-size:.78rem;color:var(--wine-soft);margin-top:4px;display:block}
+
+/* ---------- COLABORA ---------- */
+.colabora{padding:78px 0}
+.cola-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media(max-width:960px){.cola-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:540px){.cola-grid{grid-template-columns:1fr}}
+.cola{
+  background:var(--white);border:1px solid var(--line);border-radius:4px;padding:24px 20px;
+  text-align:center;box-shadow:0 8px 22px rgba(74,54,40,.08);display:flex;flex-direction:column;
+}
+.cola .fina{font-size:1rem;color:var(--gold)}
+.cola h3{font-family:var(--f-cond);font-weight:500;text-transform:uppercase;font-size:.95rem;letter-spacing:.08em;margin-top:4px}
+.cola p{font-size:.83rem;margin-top:8px;flex:1}
+.cola p b{color:var(--wine)}
+.cola .iban{font-family:var(--f-cond);font-weight:400;font-size:.7rem;letter-spacing:.04em;background:var(--cream);border:1px dashed var(--gold);border-radius:3px;padding:.6em;margin-top:10px;word-break:break-all}
+
+/* ---------- CIERRE ---------- */
+.cierre{background:var(--nude);padding:72px 0;text-align:center}
+.cierre .fina{display:block;font-size:clamp(1.5rem,3.4vw,2.2rem);color:var(--wine);line-height:1.35;max-width:24em;margin:0 auto}
+.cierre .fina b{color:var(--choco);font-style:normal}
+.cierre-ctas{display:flex;justify-content:center;gap:14px;margin-top:26px;flex-wrap:wrap}
+
+footer{background:var(--choco);color:rgba(247,242,232,.8);padding:44px 0 26px}
+.foot-bottom{font-size:.78rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.foot-bottom .fina{color:var(--cream);font-size:1.1rem}
+
+@media (prefers-reduced-motion: reduce){*{transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<div class="ticker">Ahora mismo <b>necesitamos casas de acogida</b> · sobre todo indefinidas</div>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#">Love Animals BCN</a>
+    <nav class="nav-links" aria-label="Navegación principal">
+      <a href="#">Quiero adoptar</a>
+      <a href="#">Quiero acoger</a>
+      <a href="#">Nuestros animales</a>
+      <a href="#">Colabora</a>
+    </nav>
+    <a class="btn btn--wine" href="#">Quiero acoger</a>
+  </div>
+</header>
+
+<!-- HERO: la intro del docx, casi literal -->
+<section class="hero">
+  <div class="wrap">
+    <p class="fina">quiénes somos</p>
+    <h1>Nacimos para ayudar a los animales que se cruzan en nuestro camino<br><em>y que forman parte de nuestra vida e historia.</em></h1>
+    <p class="sub">Somos una asociación animalista <b>sin ánimo de lucro</b>. Además de nuestros propios rescates, nuestra mayor labor es dar visibilidad a los perros y gatos que viven en el <b>CAACB</b> — el Centro de Acogida de Animales de Compañía de Barcelona — para encontrarles familia. <b>Somos su ventana al mundo</b>, para que no queden en el olvido.</p>
+    <p class="fecha">Barcelona · desde el 9 de enero de 2019</p>
+  </div>
+</section>
+
+<!-- PULL: el puente (literal del docx) -->
+<section class="pull">
+  <div class="wrap">
+    <p>"Una protectora no es un hogar: es solo el <b>puente</b> hacia la felicidad. Y tú eres su <b>destino</b>."</p>
+    <span class="quien">— por eso existimos</span>
+  </div>
+</section>
+
+<!-- QUÉ HACEMOS: todo sale del docx -->
+<section class="hacemos">
+  <div class="wrap">
+    <div class="sec-intro">
+      <p class="fina">nuestra labor, sin adornos</p>
+      <h2>Qué hacemos</h2>
+    </div>
+
+    <div class="hace-grid">
+      <div class="hace">
+        <span class="num">i.</span>
+        <h3>Les damos visibilidad</h3>
+        <p>Contamos sus historias en redes para que encuentren familia. Es lo que <b>más vidas ha cambiado</b>: muchas adopciones empiezan con un like o un repost.</p>
+        <p class="lema">compartir también salva</p>
+      </div>
+      <div class="hace">
+        <span class="num">ii.</span>
+        <h3>Tejemos la red de acogida</h3>
+        <p>Buscamos casas de acogida —temporales o indefinidas— para los que tienen necesidades especiales: lactancia, enfermedad o edad avanzada. <b>Acoger cuesta 0 €</b>: el centro cubre comida, medicamentos, veterinario y urgencias 24 h.</p>
+        <p class="lema">tú pon mucho amor; el CAACB pone todo el resto</p>
+      </div>
+      <div class="hace">
+        <span class="num">iii.</span>
+        <h3>Luchamos contra el prejuicio</h3>
+        <p>"PPP" significa perro potencialmente peligroso. Para nosotras son <b>perros potencialmente prejuzgados</b>: la etiqueta la determina la raza, no el comportamiento. Te guiamos con la licencia para que ningún papel se interponga entre vosotros.</p>
+        <p class="lema">la licencia se resuelve en días; el prejuicio cuesta más</p>
+      </div>
+      <div class="hace">
+        <span class="num">iv.</span>
+        <h3>Sostenemos la causa</h3>
+        <p>Con la <b>tienda solidaria artesanal</b> de @el_armario_de_pris, el grupo de <b>Teaming a 1 €/mes</b> y las donaciones puntuales financiamos aquello que haga falta.</p>
+        <p class="lema">para ti no es nada; para ellos es mucho</p>
+      </div>
+    </div>
+
+    <!-- EL DIFERENCIAL: acompañamos más allá -->
+    <div class="masalla">
+      <h3>Y sobre todo: no te soltamos la mano</h3>
+      <p>El CAACB cubre 21 días de seguimiento tras cada adopción. Nosotras <b>ayudamos más allá del periodo que cubre el centro</b>: si surgen problemas de adaptación, os ofrecemos educadores caninos y etóloga felina privados de confianza. Y si es necesario, <b>corremos con los gastos</b>.</p>
+      <p class="lema">acompáñales en el camino sin soltar su patita — nosotras hacemos lo mismo contigo</p>
+    </div>
+  </div>
+</section>
+
+<!-- NO ESTÁS SOLO/A -->
+<section class="solo">
+  <div class="wrap solo-in">
+    <p class="grande">Adoptar o acoger impone.<br><em>Pero no estás solo/a.</em></p>
+    <p class="txt">Muchas familias lo han hecho antes que tú. Desde el centro te resuelven cualquier duda, y nosotras estamos al otro lado de Instagram para lo que necesites. Pregúntanos lo que sea.</p>
+    <div class="contactos">
+      <div class="contacto">
+        <b>Adopciones</b>
+        <span class="dato">📱 644 47 78 97</span>
+        <span class="peque">adopcionscaacb@bcn.cat</span>
+      </div>
+      <div class="contacto">
+        <b>Casas de acogida</b>
+        <span class="dato">📱 664 52 51 86</span>
+        <span class="peque">adopcionscaacb@bcn.cat</span>
+      </div>
+      <div class="contacto">
+        <b>Nosotras, en Instagram</b>
+        <span class="dato">@adopta.loveanimals.bcn</span>
+        <span class="peque">si tardan en contestar, te echamos un cable</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COLABORA (resumen del docx) -->
+<section class="colabora">
+  <div class="wrap">
+    <div class="sec-intro">
+      <p class="fina">¿no puedes adoptar ni acoger? aún puedes…</p>
+      <h2>Colaborar</h2>
+    </div>
+    <div class="cola-grid">
+      <div class="cola">
+        <span class="fina">i.</span>
+        <h3>Tienda solidaria</h3>
+        <p>Productos artesanales de <b>@el_armario_de_pris</b>: ropa, llaveros, tazas, mochilas, totebags, jabones…</p>
+      </div>
+      <div class="cola">
+        <span class="fina">ii.</span>
+        <h3>Teaming</h3>
+        <p>Solo <b>1 € al mes</b>. Ayudas sin notarlo apenas en tu bolsillo.</p>
+      </div>
+      <div class="cola">
+        <span class="fina">iii.</span>
+        <h3>Donación puntual</h3>
+        <p>El importe que tú elijas, por transferencia:</p>
+        <span class="iban">ES19 0182 5870 8102 0194 2037</span>
+      </div>
+      <div class="cola">
+        <span class="fina">iv.</span>
+        <h3>Comparte en redes</h3>
+        <p>Síguenos y comparte sus historias. <b>Es lo que más nos ha ayudado a cambiar vidas.</b></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CIERRE -->
+<section class="cierre">
+  <div class="wrap">
+    <span class="fina">Ayúdanos a que todos ellos pasen<br><b>de la jaula a la vida.</b></span>
+    <div class="cierre-ctas">
+      <a class="btn btn--wine" href="#">Quiero adoptar</a>
+      <a class="btn" href="#">Quiero acoger</a>
+      <a class="btn btn--light" href="#">Quiero colaborar</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-bottom">
+    <span class="fina">Love Animals BCN</span>
+    <span>© 2026 · Instagram · TikTok · Facebook</span>
+  </div>
+</footer>
+
+</body>
+</html>

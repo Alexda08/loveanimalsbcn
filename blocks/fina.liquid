@@ -4,6 +4,9 @@
 
   Acepta variables de producto/colección en el texto:
   {{ closest.product.metafields.custom.claim }}
+
+  Lo que se escriba en negrita sale sin cursiva y en el color destacado
+  (por defecto el dorado claro), como el «puente» y el «destino» del diseño.
 {% enddoc %}
 
 {% liquid
@@ -32,6 +35,7 @@
   .fina-{{ block.id }} {
     --fina-size: {{ fina_size }};
     --fina-color: {% if block.settings.color != blank %}{{ block.settings.color }}{% else %}var(--la-wine, var(--color-foreground)){% endif %};
+    --fina-destacado: {% if block.settings.color_destacado != blank %}{{ block.settings.color_destacado }}{% else %}var(--la-gold-soft, currentcolor){% endif %};
     --fina-max: {% if block.settings.max_width > 0 %}{{ block.settings.max_width }}em{% else %}none{% endif %};
     text-align: {{ block.settings.alineacion | default: 'center' }};
     padding-block: {{ block.settings.padding-block-start | default: 0 }}px {{ block.settings.padding-block-end | default: 0 }}px;
@@ -62,6 +66,13 @@
     font-size: var(--fina-size, 20px);
     line-height: 1.35;
     color: var(--fina-color, var(--color-foreground));
+  }
+
+  /* la parte destacada sale recta y en dorado, como en el diseño */
+  .fina :is(b, strong) {
+    font-style: normal;
+    font-weight: 600;
+    color: var(--fina-destacado, currentcolor);
   }
 
   .fina--vacia {
@@ -110,6 +121,13 @@
       "type": "color",
       "id": "color",
       "label": "t:settings.text_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "color",
+      "id": "color_destacado",
+      "label": "Color de la parte en negrita",
+      "info": "Lo que escribas en negrita sale de este color y sin cursiva. Por defecto, el dorado claro.",
       "placeholder": "t:settings.default"
     },
     {
