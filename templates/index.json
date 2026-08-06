@@ -124,6 +124,7 @@
             "group_hjbEEM": {
               "type": "group",
               "name": "t:names.group",
+              "disabled": true,
               "settings": {
                 "content_direction": "row",
                 "vertical_on_mobile": true,
@@ -255,7 +256,7 @@
                 "link": "",
                 "open_in_new_tab": false,
                 "placeholder": "",
-                "padding-block-start": 0,
+                "padding-block-start": 16,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
@@ -284,7 +285,7 @@
                   "type": "button",
                   "name": "t:names.button",
                   "settings": {
-                    "label": "Quiero acoger",
+                    "label": "Quiero adoptar",
                     "link": "#shopify-section-section_Jmdaay",
                     "open_in_new_tab": false,
                     "style_class": "button-secondary",
@@ -305,9 +306,95 @@
                 "button_wtaxhb"
               ]
             },
+            "group_8cxgAz": {
+              "type": "group",
+              "name": "t:names.group",
+              "settings": {
+                "content_direction": "row",
+                "vertical_on_mobile": true,
+                "horizontal_alignment": "flex-start",
+                "vertical_alignment": "center",
+                "align_baseline": false,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "center",
+                "gap": 12,
+                "width": "fill",
+                "custom_width": 100,
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "height": "fit",
+                "custom_height": 100,
+                "background_media": "none",
+                "background_color": "",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_color": "",
+                "border_radius": 0,
+                "shadow": "none",
+                "link": "",
+                "open_in_new_tab": false,
+                "placeholder": "",
+                "padding-block-start": 16,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "button_RYVgJf": {
+                  "type": "button",
+                  "name": "t:names.button",
+                  "settings": {
+                    "label": "Quiero acoger",
+                    "link": "#shopify-section-section_Jmdaay",
+                    "open_in_new_tab": false,
+                    "style_class": "button-secondary",
+                    "custom_button_background": "{{ settings.color_palette.foreground }}",
+                    "custom_button_text": "{{ settings.color_palette.background }}",
+                    "custom_button_border": "{{ settings.color_palette.background }}",
+                    "link_text_color": "",
+                    "width": "fit-content",
+                    "custom_width": 100,
+                    "width_mobile": "fit-content",
+                    "custom_width_mobile": 100
+                  },
+                  "blocks": {}
+                },
+                "button_kUEehX": {
+                  "type": "button",
+                  "name": "t:names.button",
+                  "settings": {
+                    "label": "Ver nuestros animales",
+                    "link": "/pages/nuestros-animales",
+                    "open_in_new_tab": false,
+                    "style_class": "button",
+                    "custom_button_background": "{{ settings.color_palette.foreground }}",
+                    "custom_button_text": "{{ settings.color_palette.background }}",
+                    "custom_button_border": "{{ settings.color_palette.background }}",
+                    "link_text_color": "",
+                    "width": "fit-content",
+                    "custom_width": 100,
+                    "width_mobile": "fit-content",
+                    "custom_width_mobile": 100
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "button_RYVgJf",
+                "button_kUEehX"
+              ]
+            },
             "text_GVfqCT": {
               "type": "text",
               "name": "t:names.text",
+              "disabled": true,
               "settings": {
                 "text": "<p>Todo el beneficio de la tienda solidaria va a veterinario, pienso y residencias.</p>",
                 "width": "fit-content",
@@ -338,6 +425,7 @@
             "text_xwhLMp",
             "group_hjbEEM",
             "group_xeRpPC",
+            "group_8cxgAz",
             "text_GVfqCT"
           ]
         },
@@ -1104,9 +1192,12 @@
         "cta_label": "Conocer a",
         "texto_todos": "ver a todos los peludos →",
         "pagina_animales": "/pages/nuestros-animales",
+        "coletilla": "…y hoy suma uno más",
+        "texto_compartir": "preséntale a alguien 💬",
+        "mostrar_sello": true,
         "velocidad": 6,
         "max_animales": 4,
-        "background_color": "#D8CDBB",
+        "background_color": "#d8cdbb",
         "padding-block-start": 78,
         "padding-block-end": 78
       }
@@ -2743,6 +2834,25 @@
               },
               "blocks": {}
             },
+            "button_LA_wa_acogida": {
+              "type": "button",
+              "name": "t:names.button",
+              "settings": {
+                "label": "💬 664 52 51 86",
+                "link": "https://wa.me/34664525186",
+                "open_in_new_tab": false,
+                "style_class": "button-unstyled",
+                "custom_button_background": "{{ settings.color_palette.foreground }}",
+                "custom_button_text": "{{ settings.color_palette.background }}",
+                "custom_button_border": "{{ settings.color_palette.background }}",
+                "link_text_color": "{{ settings.color_palette.color7 }}",
+                "width": "fit-content",
+                "custom_width": 100,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 100
+              },
+              "blocks": {}
+            },
             "text_UeQwEp": {
               "type": "text",
               "name": "t:names.text",
@@ -2766,25 +2876,6 @@
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "button_LA_wa_acogida": {
-              "type": "button",
-              "name": "t:names.button",
-              "settings": {
-                "label": "💬 664 52 51 86",
-                "link": "https://wa.me/34664525186",
-                "open_in_new_tab": false,
-                "style_class": "button-unstyled",
-                "custom_button_background": "{{ settings.color_palette.foreground }}",
-                "custom_button_text": "{{ settings.color_palette.background }}",
-                "custom_button_border": "{{ settings.color_palette.background }}",
-                "link_text_color": "{{ settings.color_palette.color7 }}",
-                "width": "fit-content",
-                "custom_width": 100,
-                "width_mobile": "fit-content",
-                "custom_width_mobile": 100
               },
               "blocks": {}
             }
@@ -2919,7 +3010,7 @@
         "fina": "podéis conocer a nuestros...",
         "titulo": "Peludos",
         "lead": "Organizados por álbumes, como en nuestro Instagram. Dentro de cada álbum encontrarás la ficha de cada animal con sus fotos, su historia y su carácter.",
-        "background_color": "#D8CDBB",
+        "background_color": "#d8cdbb",
         "padding-block-start": 78,
         "padding-block-end": 56
       }
@@ -3132,6 +3223,32 @@
             "type_preset": "h2",
             "font": "var(--font-body--family)",
             "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "text_LA_colabora_lead": {
+          "type": "text",
+          "name": "t:names.text",
+          "settings": {
+            "text": "<p>Si quieres formar parte de esta gran familia y ayudarnos a que todos ellos pasen de la jaula a la vida, pero no puedes adoptar ni acoger, puedes…</p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "center",
+            "type_preset": "rte",
+            "font": "var(--font-body--family)",
+            "font_size": "",
             "line_height": "normal",
             "letter_spacing": "normal",
             "case": "none",
@@ -3843,32 +3960,6 @@
             "group_zYWige",
             "group_pJPWWh"
           ]
-        },
-        "text_LA_colabora_lead": {
-          "type": "text",
-          "name": "t:names.text",
-          "settings": {
-            "text": "<p>Si quieres formar parte de esta gran familia y ayudarnos a que todos ellos pasen de la jaula a la vida, pero no puedes adoptar ni acoger, puedes…</p>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "center",
-            "type_preset": "rte",
-            "font": "var(--font-body--family)",
-            "font_size": "",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "text_color": "",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
         }
       },
       "block_order": [
