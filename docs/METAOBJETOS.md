@@ -3,13 +3,18 @@
 El theme ya tiene todo el código. Lo único que hay que hacer en el **admin de Shopify**
 es crear las dos definiciones de metaobjetos, activar sus web pages y dar de alta el contenido.
 
-> **Estado (12-08-2026): el contenido bueno ya está en la TIENDA REAL.** Carla devolvió el
-> Excel relleno y de ahí salen **111 fichas `animal` + 10 álbumes** dados de alta en
-> `loveanimalsbcn.myshopify.com` con todos los campos puestos (nombre, fecha de entrada,
-> edad, tamaño, sexo, PPP, convivencias, carácter, frase, historia y estado). Están en
-> **borrador** a propósito: no se ven en la web pública hasta que se publique el tema.
-> **Lo único que falta son las fotos.** Cada ficha con su ID y su enlace de edición está en
+> **Estado (12-08-2026): hay una PRIMERA TANDA de contenido en la TIENDA REAL.** Carla
+> devolvió el Excel con lo que le dio tiempo a rellenar y de ahí salen **111 fichas `animal`
+> + 10 álbumes** dados de alta en `loveanimalsbcn.myshopify.com`, con todos los campos
+> puestos menos las fotos (nombre, fecha de entrada, edad, tamaño, sexo, PPP, convivencias,
+> carácter, frase, historia y estado). Están en **borrador**: no se ven en la web pública
+> hasta que se publique el tema. Cada ficha con su ID y su enlace de edición está en
 > **[`INDICE-ANIMALES.md`](INDICE-ANIMALES.md)**.
+>
+> **Ojo: no es el censo del refugio.** Faltan animales, faltan fotos y cualquier dato puede
+> cambiar cuando Carla mande más información. Está subido **para ir tirando**, para poder
+> montar y mirar la web con contenido de verdad. Como el alta va por `handle`, la tanda
+> siguiente se carga encima sin duplicar ni rehacer nada.
 >
 > La tienda de pruebas (`test-shop-kv2uh85k`) sigue con los **139 animales scrapeados** del
 > blog antiguo y 11 álbumes (los 10 + GATOS), con fotos de muestra de dog.ceo/thecatapi.
@@ -131,9 +136,12 @@ Se mandó **en blanco**: la fila 2 es un ejemplo (Woody, en verde y cursiva) par
 formato, y debajo quedaban 199 filas listas. Tres hojas: «Cómo se rellena» (instrucciones +
 qué va en cada columna), «Animales» (la tabla) y «Listas» (los valores válidos).
 
-**Volvió relleno el 12-08-2026 con 111 animales** y todas las columnas puestas menos «Fotos»
-y «Notas». La copia buena está en `docs/`. De ahí sale el alta de la tienda real; el detalle
+**Volvió con 111 animales el 12-08-2026** y todas las columnas puestas menos «Fotos» y
+«Notas». La copia buena está en `docs/`. De ahí sale el alta de la tienda real; el detalle
 del cruce, en [`INDICE-ANIMALES.md`](INDICE-ANIMALES.md).
+
+No es la lista entera del refugio: es lo que a Carla le dio tiempo a rellenar. **Se espera al
+menos otra tanda**, así que el Excel sigue vivo — se le añaden filas y se vuelve a cargar.
 
 Convenciones que hacen que la vuelta sea automática:
 
@@ -176,10 +184,13 @@ Los textos de la web (procesos de adopción y acogida, colabora, guía PPP y dat
 están: salen de **`docs/CONTENIDO-CARLA.md`**, que es la transcripción literal de su documento.
 Lo que sigue abierto:
 
-- **Las fotos de los 111 animales** (lo único que falta de las fichas). Se piden con el nombre
-  del animal y un número; se suben a Contenido → Archivos y se enlazan siguiendo
-  [`INDICE-ANIMALES.md`](INDICE-ANIMALES.md)
+- **Los animales que faltan**: el Excel volvió con 111 y en el refugio hay más. Se le añaden
+  filas al mismo Excel y se vuelve a cargar
+- **Las fotos de los 111 que ya están.** Se piden con el nombre del animal y un número; se
+  suben a Contenido → Archivos y se enlazan siguiendo [`INDICE-ANIMALES.md`](INDICE-ANIMALES.md)
 - Las portadas de los 6 álbumes que no son «desde XXXX»
+- Adopciones con foto para el muro de **Finales felices**: en esta tanda no hay ni un animal
+  en estado «adoptado», así que la sección se esconde sola
 - Enlace del grupo de Teaming y titular de la cuenta del IBAN
 - Qué parte de cada pedido vuelve a la protectora
 - Logo vectorial oficial (hay wordmark SVG provisional: `logo-loveanimalsbcn.svg` / `-blanco.svg`)

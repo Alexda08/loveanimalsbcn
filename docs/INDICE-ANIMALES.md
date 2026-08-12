@@ -3,11 +3,23 @@
 Las 111 fichas del Excel de Carla, ya dadas de alta como metaobjetos `animal` en
 **loveanimalsbcn.myshopify.com**, más los 10 álbumes que las agrupan.
 
-> **Están en BORRADOR a propósito.** No se ven en la web pública (el tema en vivo
-> sigue siendo el Horizon de serie). El día que se publique el tema hay que pasarlas
-> a activas: `python crea_animales.py publica`.
+> ### Esto es una primera tanda, no el censo
+>
+> **Faltan animales y faltan datos.** El Excel volvió con lo que a Carla le dio
+> tiempo a rellenar; hay más peludos en el refugio que no están aquí, y de los que
+> sí están puede cambiar cualquier cosa cuando nos pase más información.
+>
+> Se han dado de alta igualmente **para ir tirando**: así se puede montar y mirar la
+> web con contenido de verdad en vez de con relleno. Nada de esto es definitivo.
+>
+> Como el alta va por `handle`, cuando llegue la tanda siguiente se relanza y punto:
+> las que ya están se actualizan y las nuevas se crean. No hay que rehacer nada.
 
-**Lo único que falta son las fotos.** El campo `galeria` está vacío en las 111.
+**Están en BORRADOR a propósito.** No se ven en la web pública (el tema en vivo
+sigue siendo el Horizon de serie). El día que se publique el tema hay que pasarlas
+a activas: `python crea_animales.py publica`.
+
+**Y falta todo el tema fotos.** El campo `galeria` está vacío en las 111.
 Para ponerlas: se suben a Contenido → Archivos y se enlazan en la ficha; la primera
 de la lista es la que sale grande. El enlace directo a cada ficha está en la tabla.
 
