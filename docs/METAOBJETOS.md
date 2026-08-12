@@ -3,17 +3,17 @@
 El theme ya tiene todo el código. Lo único que hay que hacer en el **admin de Shopify**
 es crear las dos definiciones de metaobjetos, activar sus web pages y dar de alta el contenido.
 
-> **Estado (30-07-2026): HECHO por Admin API en la dev store.** Definiciones `animal` y
-> `album` creadas y con web pages activas; 11 álbumes (los 10 de Carla + **GATOS**, que
-> existe en la web actual) y **135 animales reales** scrapeados del blog de
-> loveanimalsbcn.com: nombres, edades, álbum(es) de cada uno, PPP sí/no y fechas de
-> entrada (21 reales del artículo "Los más veteranos", 20 estimadas por "N años en una
-> jaula", el resto placeholder `2025-01-01`). Las 8 imágenes del CDN están subidas a
-> Archivos (portadas de álbum + galería de Thor, Ciclone, Tuco, Johnny y Rocky).
-> Los 130 animales sin foto propia llevan **fotos de muestra** (dog.ceo / thecatapi:
-> PPP con razas tipo staffordshire, álbum GATOS con gatos; 10 veteranos con galería de 3
-> fotos para probar la ficha). **Pendiente:** sustituirlas por las reales de Instagram,
-> historias y carácter por animal, y las fechas reales de Carla.
+> **Estado (12-08-2026): el contenido bueno ya está en la TIENDA REAL.** Carla devolvió el
+> Excel relleno y de ahí salen **111 fichas `animal` + 10 álbumes** dados de alta en
+> `loveanimalsbcn.myshopify.com` con todos los campos puestos (nombre, fecha de entrada,
+> edad, tamaño, sexo, PPP, convivencias, carácter, frase, historia y estado). Están en
+> **borrador** a propósito: no se ven en la web pública hasta que se publique el tema.
+> **Lo único que falta son las fotos.** Cada ficha con su ID y su enlace de edición está en
+> **[`INDICE-ANIMALES.md`](INDICE-ANIMALES.md)**.
+>
+> La tienda de pruebas (`test-shop-kv2uh85k`) sigue con los **139 animales scrapeados** del
+> blog antiguo y 11 álbumes (los 10 + GATOS), con fotos de muestra de dog.ceo/thecatapi.
+> Eso es material de preview, no contenido bueno: no se migra, se borrará.
 
 ## 1. Crear las definiciones (Configuración → Datos personalizados → Metaobjetos)
 
@@ -28,8 +28,8 @@ Nombre: **Animal** · tipo: `animal`
 | Galería | `galeria` | Archivo → **lista** | la 1ª imagen es la principal |
 | Fecha de entrada | `fecha_entrada` | Fecha | **requerido** — alimenta el contador de días |
 | Edad | `edad` | Texto de una línea | texto libre ("joven (1–4 años)", "+9 años") |
-| Tamaño | `tamano` | Texto de una línea | pequeño / mediano / grande — **key sin ñ** |
-| Sexo | `sexo` | Texto de una línea | macho / hembra ("hembra" activa "Adoptada" en el muro) |
+| Tamaño | `tamano` | Texto de una línea | **key sin ñ**; el valor se pinta tal cual, así que va como en el diseño: `Pequeño` / `Mediano` / `Grande` |
+| Sexo | `sexo` | Texto de una línea | `macho` / `hembra` en minúscula (lo exige la validación); la ficha lo pinta con `capitalize`. "hembra" activa "Adoptada" en el muro |
 | PPP | `ppp` | Verdadero o falso | activa el dato PPP y la caja de licencia |
 | Convive con niños | `convive_ninos` | Texto de una línea | valores: `si` / `no` / `consultar` — **key sin ñ** |
 | Convive con perros | `convive_perros` | Texto de una línea | `si` / `no` / `consultar` |
@@ -98,17 +98,19 @@ Nombre: **Álbum** · tipo: `album`
 
 ## 4. Migración de los animales actuales
 
-Los animales viven hoy como artículos del blog (Ciclone, Tuco, Rocky, Jhonny, Woody, Thor, gatos…).
+Los animales vivían como artículos del blog (Ciclone, Tuco, Rocky, Jhonny, Woody, Thor, gatos…).
 
-1. Crear una entrada de metaobjeto `animal` por cada uno **reutilizando las imágenes ya
-   subidas** (están en Contenido → Archivos si se subieron ahí; si solo están en los
-   artículos, re-subirlas a Archivos desde el CDN).
-2. Pedir a Carla las **fechas de entrada reales** (las de los mockups son estimaciones,
-   salvo Thor/Rocky ≈ 2021).
-3. Crear los álbumes y arrastrar cada animal a los suyos (el urgente arriba).
-4. **No borrar los artículos antiguos** hasta validar todo con Carla.
-5. Después: redirects 301 (Navegación → Redirecciones de URL) de cada URL de blog antigua
+1. ~~Crear una entrada `animal` por cada uno~~ — **hecho el 12-08-2026**, pero no desde el blog:
+   desde el Excel que devolvió Carla, que trae 111 animales con datos mucho mejores que los del
+   blog (historia, carácter, convivencias, fechas reales). Ver [`INDICE-ANIMALES.md`](INDICE-ANIMALES.md).
+2. ~~Pedir a Carla las fechas de entrada reales~~ — **vinieron en el Excel**, una por animal.
+3. ~~Crear los álbumes~~ — **hecho**: los 10, con sus animales en el orden del Excel.
+4. Subir las **fotos** a Contenido → Archivos y enlazarlas en el campo `galeria` de cada ficha.
+   Es lo único que queda.
+5. **No borrar los artículos antiguos** hasta validar todo con Carla.
+6. Después: redirects 301 (Navegación → Redirecciones de URL) de cada URL de blog antigua
    a la nueva URL del metaobjeto.
+7. Al publicar el tema: pasar las 121 entradas de borrador a activas (`crea_animales.py publica`).
 
 ## 5. Límites conocidos
 
@@ -125,9 +127,13 @@ Para no pedirle a Carla que rellene 139 fichas a mano en el admin, los datos se 
 Excel y se importan de una tacada: **`Love Animals BCN - fichas de los animales.xlsx`**
 (se genera con `excel_animales.py`, que lee las entradas de la tienda de pruebas).
 
-Va **en blanco**: la fila 2 es un ejemplo (Woody, en verde y cursiva) para que se vea el
-formato, y debajo quedan 199 filas listas. Tres hojas: «Cómo se rellena» (instrucciones +
+Se mandó **en blanco**: la fila 2 es un ejemplo (Woody, en verde y cursiva) para que se vea el
+formato, y debajo quedaban 199 filas listas. Tres hojas: «Cómo se rellena» (instrucciones +
 qué va en cada columna), «Animales» (la tabla) y «Listas» (los valores válidos).
+
+**Volvió relleno el 12-08-2026 con 111 animales** y todas las columnas puestas menos «Fotos»
+y «Notas». La copia buena está en `docs/`. De ahí sale el alta de la tienda real; el detalle
+del cruce, en [`INDICE-ANIMALES.md`](INDICE-ANIMALES.md).
 
 Convenciones que hacen que la vuelta sea automática:
 
@@ -140,7 +146,7 @@ Convenciones que hacen que la vuelta sea automática:
 | Fecha de adopción | `fecha_adopcion` | ídem |
 | Sexo | `sexo` | Macho→`macho`, Hembra→`hembra` |
 | Edad | `edad` | tal cual (texto libre) |
-| Tamaño | `tamano` | minúsculas sin tilde |
+| Tamaño | `tamano` | tal cual: `Pequeño` / `Mediano` / `Grande` |
 | PPP | `ppp` | Sí→`true`, No→`false` |
 | Convive con niños/perros/gatos | `convive_ninos` / `_perros` / `_gatos` | Sí→`si`, No→`no`, Consultar→`consultar` |
 | Carácter | `caracter` | separado por comas → lista JSON |
@@ -153,9 +159,16 @@ Convenciones que hacen que la vuelta sea automática:
 - Las cabeceras **doradas** son los campos imprescindibles; las **granates**, opcionales.
 - Los desplegables llevan validación con aviso (no bloquean, pero avisan si se escribe otra cosa).
 - Las fotos no se pegan en el Excel: se piden aparte con el nombre del animal y un número
-  (`woody1.jpg`), y la 1 es la principal.
-- Los 139 animales scrapeados siguen en la tienda de pruebas: cuando vuelva el Excel se cruzan
-  por nombre para no duplicar (`dump_animales.py` los vuelca a JSON).
+  (`woody1.jpg`), y la 1 es la principal. **Es lo que sigue faltando.**
+- La columna «código» volvió vacía, así que en el alta la clave fue el **handle sacado del
+  nombre** (`simba-abuelo`, `rocky-marron`…). A partir de ahora esa es la clave: si Carla manda
+  otra versión del Excel, las fichas con el mismo nombre se actualizan en vez de duplicarse.
+- Dos faltas de tilde del Excel se corrigen solas al leerlo (`LOS MAS VETERANOS` →
+  `LOS MÁS VETERANOS`, `DESDE 2021 ESPERANDO` → `… ESPERANDO FAMILIA`).
+- No hay ningún gato en el Excel: por eso en la tienda real no se ha creado el álbum **GATOS**
+  que sí existe en la de pruebas.
+- Los 139 animales scrapeados se quedan en la tienda de pruebas y no se migran: eran
+  placeholders (`dump_animales.py` los vuelca a JSON si hiciera falta comparar).
 
 ## 7. Pendiente de Carla
 
@@ -163,7 +176,10 @@ Los textos de la web (procesos de adopción y acogida, colabora, guía PPP y dat
 están: salen de **`docs/CONTENIDO-CARLA.md`**, que es la transcripción literal de su documento.
 Lo que sigue abierto:
 
-- Fechas de entrada reales de cada animal (es lo que trae el Excel)
+- **Las fotos de los 111 animales** (lo único que falta de las fichas). Se piden con el nombre
+  del animal y un número; se suben a Contenido → Archivos y se enlazan siguiendo
+  [`INDICE-ANIMALES.md`](INDICE-ANIMALES.md)
+- Las portadas de los 6 álbumes que no son «desde XXXX»
 - Enlace del grupo de Teaming y titular de la cuenta del IBAN
 - Qué parte de cada pedido vuelve a la protectora
 - Logo vectorial oficial (hay wordmark SVG provisional: `logo-loveanimalsbcn.svg` / `-blanco.svg`)

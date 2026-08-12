@@ -146,7 +146,11 @@
             <div class="animal-main__dato"><dt>Tamaño</dt><dd>{{ animal.tamano.value }}</dd></div>
           {%- endif -%}
           {%- if animal.sexo.value != blank -%}
-            <div class="animal-main__dato"><dt>Sexo</dt><dd>{{ animal.sexo.value }}</dd></div>
+            {%- comment -%}
+              El metaobjeto guarda «macho»/«hembra» en minúscula (es la validación de la
+              definición); el diseño lo pinta con mayúscula inicial.
+            {%- endcomment -%}
+            <div class="animal-main__dato"><dt>Sexo</dt><dd>{{ animal.sexo.value | capitalize }}</dd></div>
           {%- endif -%}
           {%- if animal.ppp.value -%}
             <div class="animal-main__dato">
