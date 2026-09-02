@@ -112,8 +112,8 @@ Los animales vivían como artículos del blog (Ciclone, Tuco, Rocky, Jhonny, Woo
 4. ~~Subir las **fotos** y enlazarlas en el campo `galeria`~~ — **hecho el 02-09-2026**: 483
    fotos, renombradas por animal y con texto alternativo.
 5. **No borrar los artículos antiguos** hasta validar todo con Carla.
-6. Después: redirects 301 (Navegación → Redirecciones de URL) de cada URL de blog antigua
-   a la nueva URL del metaobjeto.
+6. ~~Redirects 301 de cada URL de blog antigua a la nueva URL del metaobjeto~~ — **hecho**:
+   12 redirecciones y los 8 artículos despublicados. Ver [`PAGINAS.md`](PAGINAS.md).
 7. ~~Al publicar el tema: pasar las entradas de borrador a activas~~ — **hecho el 02-09-2026**:
    las 211 están en ACTIVE. No se ven hasta publicar el tema, por lo del recuadro de §5.
 
