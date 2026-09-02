@@ -38,7 +38,11 @@
           <div class="animal-historia__block">
             <span class="animal-historia__head">Su historia</span>
             <div class="animal-historia__texto">
-              {{ animal.historia.value | metafield_tag }}
+              {%- comment -%}
+                `metafield_tag` quiere el campo entero, no su `.value`: en un rich_text
+                el `.value` ya es el árbol de texto y el filtro no sabe qué hacer con él.
+              {%- endcomment -%}
+              {{ animal.historia | metafield_tag }}
             </div>
           </div>
         {%- endif -%}
