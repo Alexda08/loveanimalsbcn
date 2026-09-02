@@ -3,7 +3,7 @@
 Los menús y las páginas **no son theme**: viven en el admin de Shopify (Contenido → Páginas y
 Navegación → Menús). El theme solo pone la plantilla con la que se pintan.
 
-## Estado de la tienda real (05-08-2026)
+## Estado de la tienda real (05-08-2026, menús y blog al 02-09-2026)
 
 El theme publicado en `loveanimalsbcn.myshopify.com` es **Horizon de serie**, no el nuestro:
 `loveanimalsbcn/main` está subido pero sin publicar. Todo lo de este repo entra en la web el día que
@@ -67,19 +67,60 @@ Detalles del montaje que no son evidentes:
 > los incluye. El texto sigue estando en el cuerpo de `/pages/sobre-nosotras` de la tienda real y en
 > el historial de git; si se quiere recuperar, lo suyo sería una página aparte («Nuestra historia»).
 
-Para verla hay que tener una página con handle `sobre-nosotras` y plantilla `sobre-nosotras`:
-- **Tienda de pruebas:** ya creada → `/pages/sobre-nosotras`
-- **Tienda real:** la página existe pero sin plantilla asignada. Cuando se publique el theme, hay que
-  ponerle la plantilla «sobre-nosotras» desde el admin.
+Para verla hay que tener una página con handle `sobre-nosotras` y plantilla `sobre-nosotras`.
+Las dos tiendas la tienen ya: en la real se le asignó la plantilla el 02-09-2026, junto con la
+página nueva `/pages/nuestros-animales` (publicada, plantilla «nuestros-animales»).
 
 Como la plantilla no lleva la sección `main-page`, **el cuerpo que haya en el admin no se pinta**:
 para cambiar el texto se toca la plantilla, igual que en la home.
 
 ## Menús de la tienda real
 
-- `main-menu` («CATALOGO»): Novedades · Colecciones · Productos · ¿Quiénes somos? · Adopta · Contacto
-- `footer-1` («Más información»): Envíos · Cambios y devoluciones · Legal · Cookies · Contacto
+Reescritos el 02-09-2026 con la estructura del diseño nuevo. Los anclajes `#shopify-section-…`
+apuntan a secciones de `templates/index.json`; están verificados uno a uno.
 
-Los menús de la tienda de pruebas (`main-menu`, `footer-adopcion`, `footer-colabora`, `footer-legal`)
-son los que espera el theme nuevo. **En la tienda real todavía no existen**: hay que crearlos allí
-antes de publicar el theme, o el pie saldrá con tres columnas vacías.
+- `main-menu`: Quiero adoptar · Quiero acoger · Nuestros animales · **Tienda solidaria**
+  (con Novedades, Camisetas, Sudaderas, Totebags y Niños colgando) · Colabora
+- `footer-adopcion` «Adopción y acogida»: Quiero adoptar · Quiero acoger · Nuestros animales ·
+  Licencia PPP · Quiénes somos
+- `footer-colabora` «Colabora»: Tienda solidaria · Teaming · Donación puntual · Redes sociales
+- `footer-legal` «Legal»: privacidad · envío · términos · aviso legal · Cookies · Contacto
+
+«Quiénes somos» y «Contacto» están en el pie porque el menú de arriba son cinco entradas y no
+caben; si no fuera por eso se quedarían sin ningún enlace en toda la web.
+
+Los menús `footer` y `footer-1` son del tema viejo y ya no los usa nadie. No se han borrado, pero
+tampoco se pintan. Con ellos dejan de estar enlazadas `/pages/envios`, `/pages/cambios-y-devoluciones`
+y `/pages/legal` — las dos primeras describen la operativa antigua de Role Clothing, así que
+tampoco convenía enlazarlas tal como están.
+
+## El blog viejo
+
+Los álbumes vivían como 11 artículos en `/blogs/animales-en-adopcion`, escritos a mano. Ahora
+son metaobjetos, así que el blog se ha **ocultado**: los 8 artículos publicados pasaron a
+borrador (no se han borrado) y hay **12 redirecciones 301** de cada URL vieja a su álbum nuevo.
+
+| Artículo viejo | Va a |
+|---|---|
+| `/blogs/animales-en-adopcion` | `/pages/nuestros-animales` |
+| `…/necesitamos-casas-de-acogida` | `/album/necesitamos-casa-de-acogida` |
+| `…/abuelos`, `…/abuelitos` | `/album/abuelos` |
+| `…/los-mas-veteranos` | `/album/los-mas-veteranos` |
+| `…/veteranos` | `/album/desde-2021-esperando-familia` |
+| `…/ppp-jovenes-1-a-4-anos` | `/album/ppp-jovenes` |
+| `…/ppp-adultos-5-a-9-anos`, `…/ppps-en-adopcion` | `/album/ppp-adultos` |
+| `…/no-ppps` | `/album/mestizos` |
+| `…/gatos`, `…/gatos-en-adopcion` | `/album/gatos` |
+
+> ⚠️ **Las redirecciones apuntan a un 404 hasta que se publiquen los metaobjetos.** Las fichas y
+> los álbumes están en borrador, así que `/album/abuelos` todavía no existe. Mientras tanto esas
+> 8 URLs, que es lo que Carla reparte por Instagram, están rotas en la web en vivo. O se publica
+> el contenido, o se vuelven a publicar los artículos hasta el día del lanzamiento (las 301 se
+> quedan puestas y entran solas en cuanto se oculten otra vez).
+
+## Qué queda para publicar
+
+1. Publicar el tema `loveanimalsbcn/main` (ahora el que manda es Horizon de serie, sin configurar:
+   ni siquiera pinta `main-menu`, por eso los cambios de menú todavía no se ven).
+2. Pasar las 211 entradas de borrador a publicadas: `crea_animales.py publica`.
+3. Repasar los *fallbacks* que miran `shop.metaobjects.animal.values`, que solo ven 50 de 200.
