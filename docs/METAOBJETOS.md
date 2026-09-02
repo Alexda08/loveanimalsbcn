@@ -3,18 +3,17 @@
 El theme ya tiene todo el código. Lo único que hay que hacer en el **admin de Shopify**
 es crear las dos definiciones de metaobjetos, activar sus web pages y dar de alta el contenido.
 
-> **Estado (12-08-2026): hay una PRIMERA TANDA de contenido en la TIENDA REAL.** Carla
-> devolvió el Excel con lo que le dio tiempo a rellenar y de ahí salen **111 fichas `animal`
-> + 10 álbumes** dados de alta en `loveanimalsbcn.myshopify.com`, con todos los campos
-> puestos menos las fotos (nombre, fecha de entrada, edad, tamaño, sexo, PPP, convivencias,
-> carácter, frase, historia y estado). Están en **borrador**: no se ven en la web pública
-> hasta que se publique el tema. Cada ficha con su ID y su enlace de edición está en
-> **[`INDICE-ANIMALES.md`](INDICE-ANIMALES.md)**.
+> **Estado (02-09-2026): el contenido bueno ya está en la TIENDA REAL, con fotos.** Del Excel
+> final de Carla salen **200 fichas `animal` + 11 álbumes + 483 fotos** en
+> `loveanimalsbcn.myshopify.com`, con todos los campos puestos (nombre, fecha de entrada, edad,
+> tamaño, sexo, PPP, convivencias, carácter, frase, historia, estado y galería). Están en
+> **borrador**: no se ven en la web pública hasta que se publiquen. Cada ficha con su ID y su
+> enlace de edición está en **[`INDICE-ANIMALES.md`](INDICE-ANIMALES.md)**.
 >
-> **Ojo: no es el censo del refugio.** Faltan animales, faltan fotos y cualquier dato puede
-> cambiar cuando Carla mande más información. Está subido **para ir tirando**, para poder
-> montar y mirar la web con contenido de verdad. Como el alta va por `handle`, la tanda
-> siguiente se carga encima sin duplicar ni rehacer nada.
+> **Sigue sin ser el censo cerrado.** Siete fichas se han quedado fuera porque no se sabe qué
+> foto les toca, doce están marcadas «NO PONERLO» en el Excel, y cualquier dato puede cambiar
+> cuando Carla mande más información. Como el alta va por `handle`, lo que venga después se
+> carga encima sin duplicar ni rehacer nada.
 >
 > La tienda de pruebas (`test-shop-kv2uh85k`) sigue con los **139 animales scrapeados** del
 > blog antiguo y 11 álbumes (los 10 + GATOS), con fotos de muestra de dog.ceo/thecatapi.
@@ -105,24 +104,25 @@ Nombre: **Álbum** · tipo: `album`
 
 Los animales vivían como artículos del blog (Ciclone, Tuco, Rocky, Jhonny, Woody, Thor, gatos…).
 
-1. ~~Crear una entrada `animal` por cada uno~~ — **hecho el 12-08-2026**, pero no desde el blog:
-   desde el Excel que devolvió Carla, que trae 111 animales con datos mucho mejores que los del
-   blog (historia, carácter, convivencias, fechas reales). Ver [`INDICE-ANIMALES.md`](INDICE-ANIMALES.md).
+1. ~~Crear una entrada `animal` por cada uno~~ — **hecho**, pero no desde el blog: desde el
+   Excel que devolvió Carla, con datos mucho mejores que los del blog (historia, carácter,
+   convivencias, fechas reales). Ver [`INDICE-ANIMALES.md`](INDICE-ANIMALES.md).
 2. ~~Pedir a Carla las fechas de entrada reales~~ — **vinieron en el Excel**, una por animal.
-3. ~~Crear los álbumes~~ — **hecho**: los 10, con sus animales en el orden del Excel.
-4. Subir las **fotos** a Contenido → Archivos y enlazarlas en el campo `galeria` de cada ficha.
-   Es lo único que queda.
+3. ~~Crear los álbumes~~ — **hecho**: los 11, con sus animales en el orden del Excel.
+4. ~~Subir las **fotos** y enlazarlas en el campo `galeria`~~ — **hecho el 02-09-2026**: 483
+   fotos, renombradas por animal y con texto alternativo.
 5. **No borrar los artículos antiguos** hasta validar todo con Carla.
 6. Después: redirects 301 (Navegación → Redirecciones de URL) de cada URL de blog antigua
    a la nueva URL del metaobjeto.
-7. Al publicar el tema: pasar las 121 entradas de borrador a activas (`crea_animales.py publica`).
+7. Al publicar el tema: pasar las 211 entradas de borrador a activas (`crea_animales.py publica`).
 
 ## 5. Límites conocidos
 
-- `shop.metaobjects.X.values` devuelve **máximo 50 entradas** por tipo. Con el volumen
-  actual sobra; si algún día hay +50 animales, el muro de finales felices y el fallback
-  del grid de álbumes habría que paginarlos de otra forma (los álbumes en sí no se ven
-  afectados: iteran su propia lista).
+- `shop.metaobjects.X.values` devuelve **máximo 50 entradas** por tipo, y ya hay 200 animales.
+  Solo afecta a los *fallbacks* automáticos (`a-quien-ayudas`, `peludo-destacado`,
+  `finales-felices` cuando no llevan bloques puestos a mano): elegirían «el que más lleva
+  esperando» mirando solo 50 de 200, así que el resultado sería falso. En la home no pasa
+  porque las tres secciones llevan sus bloques fijados. Con `album` no hay problema: son 11.
 - Los importes de la licencia PPP del snippet son genéricos a propósito — pendientes
   los reales de Carla.
 
@@ -136,12 +136,12 @@ Se mandó **en blanco**: la fila 2 es un ejemplo (Woody, en verde y cursiva) par
 formato, y debajo quedaban 199 filas listas. Tres hojas: «Cómo se rellena» (instrucciones +
 qué va en cada columna), «Animales» (la tabla) y «Listas» (los valores válidos).
 
-**Volvió con 111 animales el 12-08-2026** y todas las columnas puestas menos «Fotos» y
-«Notas». La copia buena está en `docs/`. De ahí sale el alta de la tienda real; el detalle
-del cruce, en [`INDICE-ANIMALES.md`](INDICE-ANIMALES.md).
+Volvió con 111 animales el 12-08-2026 y **con los 219 definitivos el 02-09-2026**, ya con la
+columna «Fotos» rellena. La copia buena está en `docs/`. De ahí sale el alta de la tienda real;
+el detalle del cruce, en [`INDICE-ANIMALES.md`](INDICE-ANIMALES.md).
 
-No es la lista entera del refugio: es lo que a Carla le dio tiempo a rellenar. **Se espera al
-menos otra tanda**, así que el Excel sigue vivo — se le añaden filas y se vuelve a cargar.
+Las fotos llegan aparte, en zips por álbum, dentro de `docs/img_loveanimalsbcn/`. Son 517
+ficheros y medio giga, así que **esa carpeta está en el `.gitignore`**: no entra en el repo.
 
 Convenciones que hacen que la vuelta sea automática:
 
@@ -166,15 +166,22 @@ Convenciones que hacen que la vuelta sea automática:
 
 - Las cabeceras **doradas** son los campos imprescindibles; las **granates**, opcionales.
 - Los desplegables llevan validación con aviso (no bloquean, pero avisan si se escribe otra cosa).
-- Las fotos no se pegan en el Excel: se piden aparte con el nombre del animal y un número
-  (`woody1.jpg`), y la 1 es la principal. **Es lo que sigue faltando.**
+- Las fotos no se pegan en el Excel: en la columna «Fotos» va el nombre del fichero, y la 1 es
+  la principal. Al subirlas se renombran a `handle-1.jpg`, `handle-2.jpg`… para poder buscarlas
+  por animal en Contenido → Archivos, y llevan texto alternativo.
 - La columna «código» volvió vacía, así que en el alta la clave fue el **handle sacado del
   nombre** (`simba-abuelo`, `rocky-marron`…). A partir de ahora esa es la clave: si Carla manda
   otra versión del Excel, las fichas con el mismo nombre se actualizan en vez de duplicarse.
-- Dos faltas de tilde del Excel se corrigen solas al leerlo (`LOS MAS VETERANOS` →
-  `LOS MÁS VETERANOS`, `DESDE 2021 ESPERANDO` → `… ESPERANDO FAMILIA`).
-- No hay ningún gato en el Excel: por eso en la tienda real no se ha creado el álbum **GATOS**
-  que sí existe en la de pruebas.
+- **«NO PONERLO» / «NO PONERLA» en la columna «Notas» saca al animal de la web.** Es como Carla
+  marca las adopciones cerradas y los que no quiere publicar; el lector los aparta solo.
+- Las erratas se corrigen solas al leer: los álbumes mal escritos (`LOS MAS VETERANOS`,
+  `DESDE 2021 ESPERANDO`, `ESPERANDO FAMILIA DESDE 2024`) y los nombres de foto copiados a mano
+  con la O por el 0 (`OC8F9B97…` → `0C8F9B97…`). Van listadas en `INDICE-ANIMALES.md`.
+- **Un mismo nombre de foto puede estar en dos zips y ser dos fotos distintas** de dos animales
+  distintos: `IMG_1352` es de Cay en el zip de abuelos y de Hedy Lamarr en el de 2023. El
+  reparto se deshace por el zip que corresponde al álbum del animal.
+- El álbum **GATOS** ya existe en la tienda real (`gatos`, 81 animales): el Excel final trae 95
+  gatos. Vienen sin tamaño ni PPP, que son campos opcionales.
 - Los 139 animales scrapeados se quedan en la tienda de pruebas y no se migran: eran
   placeholders (`dump_animales.py` los vuelca a JSON si hiciera falta comparar).
 
@@ -184,11 +191,14 @@ Los textos de la web (procesos de adopción y acogida, colabora, guía PPP y dat
 están: salen de **`docs/CONTENIDO-CARLA.md`**, que es la transcripción literal de su documento.
 Lo que sigue abierto:
 
-- **Los animales que faltan**: el Excel volvió con 111 y en el refugio hay más. Se le añaden
-  filas al mismo Excel y se vuelve a cargar
-- **Las fotos de los 111 que ya están.** Se piden con el nombre del animal y un número; se
-  suben a Contenido → Archivos y se enlazan siguiendo [`INDICE-ANIMALES.md`](INDICE-ANIMALES.md)
-- Las portadas de los 6 álbumes que no son «desde XXXX»
+- **Qué foto le toca a Behia, Crowley, Andrés, Chiquitita, Kaur, Rusty y Katsuki.** Son los
+  siete que no se han podido subir. Seis vinieron con la casilla «Fotos» vacía y Crowley pide
+  un fichero que no está en ningún zip. Sobran 43 fotos que nadie reclama, 22 de ellas en el
+  zip de gatos y en tandas de tres seguidas: pinta a que son justo esas
+- **La fecha de entrada de Muso**, que es obligatoria y vino vacía. Es lo único que le falta
+- **Qué pasa con Joker**: estaba en la primera tanda y ha desaparecido del Excel final. Se ha
+  borrado de la tienda; si es un despiste, se vuelve a añadir al Excel y entra solo
+- Las portadas de los 7 álbumes que no son «desde XXXX» (ahora también GATOS)
 - Adopciones con foto para el muro de **Finales felices**: en esta tanda no hay ni un animal
   en estado «adoptado», así que la sección se esconde sola
 - Enlace del grupo de Teaming y titular de la cuenta del IBAN
