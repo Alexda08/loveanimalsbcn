@@ -6,8 +6,8 @@ es crear las dos definiciones de metaobjetos, activar sus web pages y dar de alt
 > **Estado (02-09-2026): el contenido bueno ya está en la TIENDA REAL, con fotos.** Del Excel
 > final de Carla salen **200 fichas `animal` + 11 álbumes + 483 fotos** en
 > `loveanimalsbcn.myshopify.com`, con todos los campos puestos (nombre, fecha de entrada, edad,
-> tamaño, sexo, PPP, convivencias, carácter, frase, historia, estado y galería). Están en
-> **borrador**: no se ven en la web pública hasta que se publiquen. Cada ficha con su ID y su
+> tamaño, sexo, PPP, convivencias, carácter, frase, historia, estado y galería). Están
+> **publicadas**, pero no se ven todavía: falta publicar el tema (§5). Cada ficha con su ID y su
 > enlace de edición está en **[`INDICE-ANIMALES.md`](INDICE-ANIMALES.md)**.
 >
 > **Sigue sin ser el censo cerrado.** Siete fichas se han quedado fuera porque no se sabe qué
@@ -114,9 +114,21 @@ Los animales vivían como artículos del blog (Ciclone, Tuco, Rocky, Jhonny, Woo
 5. **No borrar los artículos antiguos** hasta validar todo con Carla.
 6. Después: redirects 301 (Navegación → Redirecciones de URL) de cada URL de blog antigua
    a la nueva URL del metaobjeto.
-7. Al publicar el tema: pasar las 211 entradas de borrador a activas (`crea_animales.py publica`).
+7. ~~Al publicar el tema: pasar las entradas de borrador a activas~~ — **hecho el 02-09-2026**:
+   las 211 están en ACTIVE. No se ven hasta publicar el tema, por lo del recuadro de §5.
 
 ## 5. Límites conocidos
+
+> **Las URLs `/album/…` y `/animal/…` dependen del tema PUBLICADO, no del contenido.**
+> Shopify decide si esa ruta existe mirando si el tema publicado tiene
+> `templates/metaobject/album.json` y `…/animal.json`. Mientras mande Horizon de serie, que no
+> las tiene, dan **404 aunque las entradas estén publicadas** — y tampoco valen la cookie de
+> vista previa (`?preview_theme_id=…`) ni el dominio de myshopify: la ruta se resuelve antes de
+> elegir tema. Comprobado el 02-09-2026 con las 211 entradas ya en ACTIVE.
+>
+> Para verlas sin publicar el tema: *Tienda online → Temas → `loveanimalsbcn/main` →
+> Personalizar*, y en el desplegable de arriba elegir la plantilla **Álbum** o **Animal**.
+
 
 - `shop.metaobjects.X.values` devuelve **máximo 50 entradas** por tipo, y ya hay 200 animales.
   Solo afecta a los *fallbacks* automáticos (`a-quien-ayudas`, `peludo-destacado`,

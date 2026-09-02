@@ -112,15 +112,22 @@ borrador (no se han borrado) y hay **12 redirecciones 301** de cada URL vieja a 
 | `…/no-ppps` | `/album/mestizos` |
 | `…/gatos`, `…/gatos-en-adopcion` | `/album/gatos` |
 
-> ⚠️ **Las redirecciones apuntan a un 404 hasta que se publiquen los metaobjetos.** Las fichas y
-> los álbumes están en borrador, así que `/album/abuelos` todavía no existe. Mientras tanto esas
-> 8 URLs, que es lo que Carla reparte por Instagram, están rotas en la web en vivo. O se publica
-> el contenido, o se vuelven a publicar los artículos hasta el día del lanzamiento (las 301 se
-> quedan puestas y entran solas en cuanto se oculten otra vez).
+> ⚠️ **Las redirecciones apuntan a un 404 hasta que se publique el TEMA.** Las entradas ya están
+> publicadas, pero `/album/abuelos` no existe mientras mande un tema sin las plantillas de
+> metaobjeto. Mientras tanto esas 8 URLs, que es lo que Carla reparte por Instagram, están rotas.
+> Si el lanzamiento se retrasa, lo suyo es volver a publicar los artículos: las 301 se quedan
+> puestas y entran solas en cuanto se oculten otra vez.
 
 ## Qué queda para publicar
 
-1. Publicar el tema `loveanimalsbcn/main` (ahora el que manda es Horizon de serie, sin configurar:
-   ni siquiera pinta `main-menu`, por eso los cambios de menú todavía no se ven).
-2. Pasar las 211 entradas de borrador a publicadas: `crea_animales.py publica`.
+1. **Publicar el tema `loveanimalsbcn/main`.** Es lo único que falta. Ahora manda Horizon de
+   serie, sin configurar: ni siquiera pinta `main-menu`, y como no tiene las plantillas de
+   metaobjeto, `/album/…` y `/animal/…` dan 404 aunque las entradas estén publicadas.
+   Comprobado el 02-09-2026 que lo subido coincide con el repo (solo cambian los saltos de línea).
+2. ~~Pasar las entradas a publicadas~~ — hecho: las 211 están en ACTIVE.
 3. Repasar los *fallbacks* que miran `shop.metaobjects.animal.values`, que solo ven 50 de 200.
+4. Decidir qué se hace con `/pages/envios` y `/pages/cambios-y-devoluciones`, que se quedan sin
+   enlace y siguen contando la operativa antigua de Role Clothing.
+
+Para revisar antes de publicar, sin tocar la web: *Temas → `loveanimalsbcn/main` → Personalizar*,
+y en el desplegable de plantillas elegir **Álbum** o **Animal**.
