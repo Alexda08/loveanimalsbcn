@@ -157,9 +157,28 @@ borrador (no se han borrado) y hay **12 redirecciones 301** de cada URL vieja a 
    producto en la tienda, solo hay fotos suyas. Hace falta darlos de alta con precio.
 6. Decidir si se borran los dos blogs archivados. Es lo único que los saca del sitemap; su
    texto ya está a salvo en [`BLOG-VIEJO.md`](BLOG-VIEJO.md).
-7. Montar la franja de fotos de la tienda solidaria que pidió Carla. Hay **63 fotos** listas en
-   `docs/img_loveanimalsbcn/_sin_dueno/2-para-la-tienda/`: gente con la ropa, prendas tendidas
-   y los mockups de tazas, fundas y bodys.
+7. ~~Montar la franja de fotos de la tienda solidaria~~ — hecha, ver abajo.
+
+## La franja de la tienda solidaria
+
+La pidió Carla: «fotos chulas de gente con la ropa o productos, que vayan cambiando». Es
+`sections/galeria-tienda.liquid`, y va en la página de colección entre los chips y la franja de
+«los pedidos se hacen por Instagram». **28 fotos** subidas como `tienda-01`…`tienda-28`,
+alternando el catálogo cuidado (`PRODUCTOS LAB CATÁLOGO BONITO.zip`) con la gente real que ha
+comprado (venía mezclada en `FOTOS WEB QUE FALTAN.zip`), y con texto alternativo escrito a mano
+una por una, que salen personas y animales.
+
+Es una cinta que se desplaza sola en bucle, con dos pistas iguales para que no dé tirones. Se
+para al pasar el ratón por encima o al llegar con el teclado, y con «reducir movimiento»
+activado no se mueve: se arrastra a mano. Las fotos son bloques, así que Carla puede quitar,
+añadir y reordenar desde el editor sin tocar nada más; cada una admite pie y enlace.
+
+> ⚠️ **Shopify renombra los `.jpeg` a `.jpg`** al guardar el fichero. Si en la plantilla se
+> escribe `shopify://shop_images/tienda-02.jpeg`, el bloque se queda en blanco y la foto no sale
+> — sin ningún error, ni en el log ni en la página. La mitad de la cinta estuvo así hasta que se
+> miró el HTML. Las referencias hay que sacarlas de los nombres que devuelve la tienda.
+
+Quedan sin usar 35 fotos más en `_sin_dueno/2-para-la-tienda/`, por si se quiere ampliar.
 
 Para revisar antes de publicar, sin tocar la web: *Temas → `loveanimalsbcn/main` → Personalizar*,
 y en el desplegable de plantillas elegir **Álbum** o **Animal**.

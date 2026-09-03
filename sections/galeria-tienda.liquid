@@ -1,0 +1,370 @@
+{% comment %}
+  Galería de la tienda solidaria: una cinta de fotos que va pasando sola, con
+  la gente que ha comprado, sus animales y el producto ya hecho.
+
+  Lo pidió Carla: «poner fotos chulas de gente con la ropa o productos que vayan
+  cambiando». Las fotos se ponen como bloques desde el editor, así que ella
+  puede cambiarlas sin tocar nada más.
+
+  La cinta se para al pasar el ratón por encima y al llegar con el teclado, y
+  con «reducir movimiento» activado no se mueve: se arrastra a mano.
+{% endcomment %}
+
+{% liquid
+  if section.settings.background_color != blank
+    render 'contrast-override', background_color: section.settings.background_color, section_id: section.id
+  endif
+%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    {% render 'paleta-vars' %}
+    --galeria-padding-top: {{ section.settings.padding-block-start }}px;
+    --galeria-padding-bottom: {{ section.settings.padding-block-end }}px;
+    --galeria-alto: {{ section.settings.alto }}px;
+    --galeria-hueco: {{ section.settings.hueco }}px;
+    --galeria-radio: {{ section.settings.corner_radius }}px;
+    --galeria-vuelta: {{ section.settings.segundos }}s;
+    {%- if section.settings.background_color != blank %}
+    --galeria-bg: var(--color-background);
+    {%- endif %}
+  }
+</style>
+
+{%- liquid
+  assign fotos = section.blocks | where: 'type', 'foto'
+  assign hay = 0
+  for f in fotos
+    if f.settings.imagen != blank
+      assign hay = hay | plus: 1
+    endif
+  endfor
+-%}
+
+{%- if hay > 0 -%}
+  <div class="galeria-tienda{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}">
+    {%- if section.settings.fina != blank or section.settings.titulo != blank -%}
+      <div class="galeria-tienda__cab">
+        {%- if section.settings.fina != blank -%}
+          <span class="galeria-tienda__fina">{{ section.settings.fina }}</span>
+        {%- endif -%}
+        {%- if section.settings.titulo != blank -%}
+          <h2 class="galeria-tienda__titulo">{{ section.settings.titulo }}</h2>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="galeria-tienda__cinta">
+      {%- comment -%}
+        Dos pistas iguales, una detrás de otra: cuando la primera se sale por la
+        izquierda la segunda ya está en su sitio, y el bucle no da tirones. La
+        copia va oculta para quien lee la página con un lector de pantalla.
+      {%- endcomment -%}
+      {%- for vuelta in (1..2) -%}
+        <ul
+          class="galeria-tienda__pista"
+          {% if vuelta == 2 %}
+            aria-hidden="true"
+          {% endif %}
+        >
+          {%- for bloque in fotos -%}
+            {%- assign img = bloque.settings.imagen -%}
+            {%- if img == blank -%}
+              {%- continue -%}
+            {%- endif -%}
+            {%- assign ancho = img.aspect_ratio | times: section.settings.alto | round -%}
+            <li class="galeria-tienda__foto" style="--foto-ancho: {{ ancho }}px" {{ bloque.shopify_attributes }}>
+              {%- if bloque.settings.enlace != blank and vuelta == 1 -%}
+                <a href="{{ bloque.settings.enlace }}">
+              {%- endif -%}
+              <img
+                src="{{ img | image_url: width: 900 }}"
+                srcset="{{ img | image_url: width: 450 }} 450w, {{ img | image_url: width: 900 }} 900w"
+                sizes="{{ ancho }}px"
+                alt="{{ img.alt | escape }}"
+                width="{{ ancho }}"
+                height="{{ section.settings.alto }}"
+                loading="lazy"
+              >
+              {%- if bloque.settings.pie != blank -%}
+                <span class="galeria-tienda__pie">{{ bloque.settings.pie }}</span>
+              {%- endif -%}
+              {%- if bloque.settings.enlace != blank and vuelta == 1 -%}
+                </a>
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.texto != blank -%}
+      <p class="galeria-tienda__nota">{{ section.settings.texto }}</p>
+    {%- endif -%}
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .galeria-tienda {
+    background: var(--galeria-bg, transparent);
+    color: var(--color-foreground);
+    padding-block: var(--galeria-padding-top) var(--galeria-padding-bottom);
+    overflow: hidden;
+  }
+
+  .galeria-tienda__cab {
+    max-width: var(--page-width);
+    margin-inline: auto;
+    padding-inline: var(--page-margin);
+    margin-bottom: 26px;
+    text-align: center;
+  }
+
+  .galeria-tienda__fina {
+    display: block;
+    font-family: var(--font-heading--family);
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--la-wine-soft, var(--color-foreground-muted));
+  }
+
+  .galeria-tienda__titulo {
+    font-family: var(--font-accent--family);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: clamp(1.2rem, 2.4vw, 1.6rem);
+    font-weight: 500;
+    margin: 6px 0 0;
+  }
+
+  .galeria-tienda__cinta {
+    display: flex;
+    width: max-content;
+    gap: var(--galeria-hueco);
+  }
+
+  .galeria-tienda__pista {
+    display: flex;
+    gap: var(--galeria-hueco);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    flex: 0 0 auto;
+    animation: galeria-correr var(--galeria-vuelta) linear infinite;
+  }
+
+  @keyframes galeria-correr {
+    to {
+      transform: translateX(calc(-100% - var(--galeria-hueco)));
+    }
+  }
+
+  .galeria-tienda__cinta:hover .galeria-tienda__pista,
+  .galeria-tienda__cinta:focus-within .galeria-tienda__pista {
+    animation-play-state: paused;
+  }
+
+  .galeria-tienda__foto {
+    position: relative;
+    flex: 0 0 auto;
+    width: var(--foto-ancho);
+  }
+
+  .galeria-tienda__foto img {
+    display: block;
+    width: 100%;
+    height: var(--galeria-alto);
+    object-fit: cover;
+    border-radius: var(--galeria-radio);
+  }
+
+  /* en el movil, 300 px de alto se comen media pantalla */
+  @media screen and (max-width: 749px) {
+    .galeria-tienda__foto {
+      width: calc(var(--foto-ancho) * 0.72);
+    }
+
+    .galeria-tienda__foto img {
+      height: calc(var(--galeria-alto) * 0.72);
+    }
+  }
+
+  .galeria-tienda__pie {
+    position: absolute;
+    left: 12px;
+    bottom: 12px;
+    background: rgb(var(--color-background-rgb) / 0.85);
+    color: var(--color-foreground);
+    font-size: 0.78rem;
+    padding: 0.3em 0.8em;
+    border-radius: 999px;
+  }
+
+  .galeria-tienda__nota {
+    max-width: var(--page-width);
+    margin: 22px auto 0;
+    padding-inline: var(--page-margin);
+    text-align: center;
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--la-wine-soft, var(--color-foreground-muted));
+  }
+
+  /* sin animación: la cinta se queda quieta y se arrastra a mano */
+  @media (prefers-reduced-motion: reduce) {
+    .galeria-tienda__cinta {
+      width: auto;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+    }
+
+    .galeria-tienda__pista {
+      animation: none;
+    }
+
+    .galeria-tienda__pista[aria-hidden='true'] {
+      display: none;
+    }
+
+    .galeria-tienda__foto {
+      scroll-snap-align: center;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Galería de la tienda",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Una cinta de fotos que va pasando sola. Se para al pasar el ratón por encima."
+    },
+    {
+      "type": "text",
+      "id": "fina",
+      "label": "Frase fina de arriba",
+      "default": "así la lleváis"
+    },
+    {
+      "type": "text",
+      "id": "titulo",
+      "label": "Título",
+      "default": "La familia LAB"
+    },
+    {
+      "type": "text",
+      "id": "texto",
+      "label": "Nota de abajo"
+    },
+    {
+      "type": "header",
+      "content": "La cinta"
+    },
+    {
+      "type": "range",
+      "id": "alto",
+      "label": "Alto de las fotos",
+      "min": 160,
+      "max": 480,
+      "step": 10,
+      "unit": "px",
+      "default": 300
+    },
+    {
+      "type": "range",
+      "id": "hueco",
+      "label": "Separación entre fotos",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "label": "Esquinas redondeadas",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "segundos",
+      "label": "Lo que tarda en dar la vuelta",
+      "min": 20,
+      "max": 180,
+      "step": 5,
+      "unit": "s",
+      "default": 90
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 56
+    }
+  ],
+  "blocks": [
+    {
+      "type": "foto",
+      "name": "Foto",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "imagen",
+          "label": "Foto"
+        },
+        {
+          "type": "text",
+          "id": "pie",
+          "label": "Pie de foto",
+          "info": "Opcional. Por ejemplo, el nombre de quien sale."
+        },
+        {
+          "type": "url",
+          "id": "enlace",
+          "label": "Enlace",
+          "info": "Opcional. A un producto o a una colección."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 40,
+  "presets": [
+    {
+      "name": "Galería de la tienda",
+      "category": "t:categories.storytelling",
+      "blocks": [{ "type": "foto" }, { "type": "foto" }, { "type": "foto" }]
+    }
+  ]
+}
+{% endschema %}

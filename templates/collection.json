@@ -545,12 +545,227 @@
         "padding-block-start": 60,
         "padding-block-end": 60
       }
+    },
+    "galeria": {
+      "type": "galeria-tienda",
+      "blocks": {
+        "foto_01": {
+          "type": "foto",
+          "settings": {
+            "imagen": "shopify://shop_images/tienda-01.png"
+          }
+        },
+        "foto_02": {
+          "type": "foto",
+          "settings": {
+            "imagen": "shopify://shop_images/tienda-02.jpg"
+          }
+        },
+        "foto_03": {
+          "type": "foto",
+          "settings": {
+            "imagen": "shopify://shop_images/tienda-03.png"
+          }
+        },
+        "foto_04": {
+          "type": "foto",
+          "settings": {
+            "imagen": "shopify://shop_images/tienda-04.jpg"
+          }
+        },
+        "foto_05": {
+          "type": "foto",
+          "settings": {
+            "imagen": "shopify://shop_images/tienda-05.png"
+          }
+        },
+        "foto_06": {
+          "type": "foto",
+          "settings": {
+            "imagen": "shopify://shop_images/tienda-06.jpg"
+          }
+        },
+        "foto_07": {
+          "type": "foto",
+          "settings": {
+            "imagen": "shopify://shop_images/tienda-07.png"
+          }
+        },
+        "foto_08": {
+          "type": "foto",
+          "settings": {
+            "imagen": "shopify://shop_images/tienda-08.jpg"
+          }
+        },
+        "foto_09": {
+          "type": "foto",
+          "settings": {
+            "imagen": "shopify://shop_images/tienda-09.png"
+          }
+        },
+        "foto_10": {
+          "type": "foto",
+          "settings": {
+            "imagen": "shopify://shop_images/tienda-10.jpg"
+          }
+        },
+        "foto_11": {
+          "type": "foto",
+          "settings": {
+            "imagen": "shopify://shop_images/tienda-11.png"
+          }
+        },
+        "foto_12": {
+          "type": "foto",
+          "settings": {
+            "imagen": "shopify://shop_images/tienda-12.jpg"
+          }
+        },
+        "foto_13": {
+          "type": "foto",
+          "settings": {
+            "imagen": "shopify://shop_images/tienda-13.png"
+          }
+        },
+        "foto_14": {
+          "type": "foto",
+          "settings": {
+            "imagen": "shopify://shop_images/tienda-14.jpg"
+          }
+        },
+        "foto_15": {
+          "type": "foto",
+          "settings": {
+            "imagen": "shopify://shop_images/tienda-15.png"
+          }
+        },
+        "foto_16": {
+          "type": "foto",
+          "settings": {
+            "imagen": "shopify://shop_images/tienda-16.jpg"
+          }
+        },
+        "foto_17": {
+          "type": "foto",
+          "settings": {
+            "imagen": "shopify://shop_images/tienda-17.png"
+          }
+        },
+        "foto_18": {
+          "type": "foto",
+          "settings": {
+            "imagen": "shopify://shop_images/tienda-18.jpg"
+          }
+        },
+        "foto_19": {
+          "type": "foto",
+          "settings": {
+            "imagen": "shopify://shop_images/tienda-19.png"
+          }
+        },
+        "foto_20": {
+          "type": "foto",
+          "settings": {
+            "imagen": "shopify://shop_images/tienda-20.jpg"
+          }
+        },
+        "foto_21": {
+          "type": "foto",
+          "settings": {
+            "imagen": "shopify://shop_images/tienda-21.png"
+          }
+        },
+        "foto_22": {
+          "type": "foto",
+          "settings": {
+            "imagen": "shopify://shop_images/tienda-22.jpg"
+          }
+        },
+        "foto_23": {
+          "type": "foto",
+          "settings": {
+            "imagen": "shopify://shop_images/tienda-23.png"
+          }
+        },
+        "foto_24": {
+          "type": "foto",
+          "settings": {
+            "imagen": "shopify://shop_images/tienda-24.jpg"
+          }
+        },
+        "foto_25": {
+          "type": "foto",
+          "settings": {
+            "imagen": "shopify://shop_images/tienda-25.png"
+          }
+        },
+        "foto_26": {
+          "type": "foto",
+          "settings": {
+            "imagen": "shopify://shop_images/tienda-26.jpg"
+          }
+        },
+        "foto_27": {
+          "type": "foto",
+          "settings": {
+            "imagen": "shopify://shop_images/tienda-27.jpg"
+          }
+        },
+        "foto_28": {
+          "type": "foto",
+          "settings": {
+            "imagen": "shopify://shop_images/tienda-28.png"
+          }
+        }
+      },
+      "block_order": [
+        "foto_01",
+        "foto_02",
+        "foto_03",
+        "foto_04",
+        "foto_05",
+        "foto_06",
+        "foto_07",
+        "foto_08",
+        "foto_09",
+        "foto_10",
+        "foto_11",
+        "foto_12",
+        "foto_13",
+        "foto_14",
+        "foto_15",
+        "foto_16",
+        "foto_17",
+        "foto_18",
+        "foto_19",
+        "foto_20",
+        "foto_21",
+        "foto_22",
+        "foto_23",
+        "foto_24",
+        "foto_25",
+        "foto_26",
+        "foto_27",
+        "foto_28"
+      ],
+      "settings": {
+        "fina": "así la lleváis",
+        "titulo": "La familia LAB",
+        "texto": "Fotos de quienes ya llevan la ropa, y de lo que sale de aquí.",
+        "alto": 300,
+        "hueco": 14,
+        "corner_radius": 8,
+        "segundos": 110,
+        "padding-block-start": 56,
+        "padding-block-end": 56
+      }
     }
   },
   "order": [
     "cabecera",
     "cifras",
     "chips",
+    "galeria",
     "donde",
     "main",
     "cierre"
