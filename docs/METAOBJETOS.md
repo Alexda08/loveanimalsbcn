@@ -122,13 +122,19 @@ Los animales vivían como artículos del blog (Ciclone, Tuco, Rocky, Jhonny, Woo
 
 ## 5. Límites conocidos
 
-> **Las URLs `/album/…` y `/animal/…` dependen del tema PUBLICADO, no del contenido.**
-> Shopify decide si esa ruta existe mirando si el tema publicado tiene
-> `templates/metaobject/album.json` y `…/animal.json`. Mientras mande Horizon de serie, que no
-> las tiene, dan **404 aunque las entradas estén publicadas** — y tampoco valen la cookie de
-> vista previa (`?preview_theme_id=…`) ni el dominio de myshopify: la ruta se resuelve antes de
-> elegir tema. Comprobado el 02-09-2026 con las 211 entradas ya en ACTIVE.
+> **Las páginas de los metaobjetos cuelgan de `/pages/`, no de la raíz.** La ficha de Perla es
+> `/pages/animal/perla` y su álbum `/pages/album/gatos`: ese prefijo lo pone la definición en el
+> admin y es el que devuelve `album.system.url`. El theme nunca escribe la ruta a mano, siempre
+> usa `system.url`, así que da igual lo que se configure; lo que sí importa es todo lo que se
+> escriba fuera del theme —**las redirecciones del blog viejo apuntaban a `/album/…` y llevaban
+> a un 404 que no se iba a arreglar ni publicando el tema**. Corregidas el 03-09-2026.
 >
+> **Y esas URLs dependen del tema PUBLICADO, no del contenido.** Shopify decide si la ruta
+> existe mirando si el tema publicado tiene `templates/metaobject/album.json` y `…/animal.json`.
+> Mientras mande Horizon de serie, que no las tiene, dan **404 para el público aunque las
+> entradas estén publicadas**. Con la cookie de vista previa (`?preview_theme_id=205275332939`)
+> sí se ven: es lo que está mirando Carla.
+
 > Para verlas sin publicar el tema: *Tienda online → Temas → `loveanimalsbcn/main` →
 > Personalizar*, y en el desplegable de arriba elegir la plantilla **Álbum** o **Animal**.
 
@@ -226,7 +232,11 @@ Lo que sigue abierto:
   ficheros solo 4 tenían nombre en el Excel. Las **100 fotos que no reclama nadie** están
   sacadas a `docs/img_loveanimalsbcn/_sin_dueno/`, cada una con el zip del que sale delante del
   nombre (`sin_dueno.py`); es cuestión de que ella las mire y escriba los nombres en el Excel
-- **Las portadas de los 11 álbumes.** Dijo que las mandaría diciendo qué foto es de cada uno
+- **La portada de «Necesitamos casa de acogida»**, la de Trans. Es la única que falta: mandó
+  `PORTADAS.zip` con siete fotos y la lista de a qué álbum va cada una, pero el fichero
+  `85F21429-41F2-4D26-AA52-49015579EC84` no viene en el zip. En su sitio sobra una segunda
+  foto de Leo (`E1BCDC46…`), que no está en su lista. Los otros seis álbumes ya la tienen;
+  los cuatro «DESDE XXXX» no llevan, que la card les pinta la cubierta con el año
 - **Adopciones con foto para el muro de Finales felices.** Ya hay once bajas esperando ahí en
   borrador (Behia, Bony, Dustin, Saitama, Thorin, Xulo y los que ni llegaron a subirse);
   faltan sus fotos de «después». Carla quiere aprender a añadirlos ella
@@ -238,6 +248,12 @@ Lo que sigue abierto:
 
 ### Resuelto el 03-09-2026
 
+- **Portadas de los álbumes**: seis puestas desde `PORTADAS.zip` con la lista que mandó Carla
+  (Ciclone en Abuelos, Leo en Los más veteranos, Rei en PPP jóvenes, Odín en PPP adultos, Nanu
+  en Mestizos y Perla en Gatos). Se suben con `sube_portadas.py`, que se puede relanzar: si el
+  álbum ya tiene portada, no la toca. Comprobado que un `upsert` de álbumes **no** las borra
+- **Papaya sí es PPP**: lo confirmó Alex. La corrección va en `CORRIGE`, dentro de
+  `lee_excel.py`, sobre la fila 64, sin tocar el Excel de Carla
 - **Teaming**: `https://www.teaming.net/adopta-loveanimals-bcn-delajaulaalavida-`, ya puesto en
   el botón de la home y en el menú del pie
 - **Titular del IBAN**: «Asociación animalista sin ánimo de lucro *De la jaula a la vida bcn*»,

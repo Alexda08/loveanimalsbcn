@@ -5,8 +5,10 @@
 > **198 fichas** y **11 álbumes** en la tienda real, con **488 fotos**.
 > Todo sale del Excel que rellenó Carla y de los zips que mandó aparte.
 >
-> Está **publicado**, pero no se ve todavía: `/album/…` y `/animal/…` los pinta
-> el tema, y `loveanimalsbcn/main` sigue sin publicar.
+> Está **publicado**. Para el público no se ve todavía: `/pages/album/…` y
+> `/pages/animal/…` los pinta el tema, y `loveanimalsbcn/main` sigue sin publicar.
+>
+> En vista previa sí se ven: `?preview_theme_id=205275332939`.
 >
 > Como el alta va por `handle`, esto se puede relanzar las veces que haga falta:
 > las fichas que ya están se actualizan y las nuevas se crean. No hay que

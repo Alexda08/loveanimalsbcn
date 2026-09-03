@@ -112,26 +112,33 @@ borrador (no se han borrado) y hay **12 redirecciones 301** de cada URL vieja a 
 | Artículo viejo | Va a |
 |---|---|
 | `/blogs/animales-en-adopcion` | `/pages/nuestros-animales` |
-| `…/necesitamos-casas-de-acogida` | `/album/necesitamos-casa-de-acogida` |
-| `…/abuelos`, `…/abuelitos` | `/album/abuelos` |
-| `…/los-mas-veteranos` | `/album/los-mas-veteranos` |
-| `…/veteranos` | `/album/desde-2021-esperando-familia` |
-| `…/ppp-jovenes-1-a-4-anos` | `/album/ppp-jovenes` |
-| `…/ppp-adultos-5-a-9-anos`, `…/ppps-en-adopcion` | `/album/ppp-adultos` |
-| `…/no-ppps` | `/album/mestizos` |
-| `…/gatos`, `…/gatos-en-adopcion` | `/album/gatos` |
+| `…/necesitamos-casas-de-acogida` | `/pages/album/necesitamos-casa-de-acogida` |
+| `…/abuelos`, `…/abuelitos` | `/pages/album/abuelos` |
+| `…/los-mas-veteranos` | `/pages/album/los-mas-veteranos` |
+| `…/veteranos` | `/pages/album/desde-2021-esperando-familia` |
+| `…/ppp-jovenes-1-a-4-anos` | `/pages/album/ppp-jovenes` |
+| `…/ppp-adultos-5-a-9-anos`, `…/ppps-en-adopcion` | `/pages/album/ppp-adultos` |
+| `…/no-ppps` | `/pages/album/mestizos` |
+| `…/gatos`, `…/gatos-en-adopcion` | `/pages/album/gatos` |
 
-> ⚠️ **Las redirecciones apuntan a un 404 hasta que se publique el TEMA.** Las entradas ya están
-> publicadas, pero `/album/abuelos` no existe mientras mande un tema sin las plantillas de
-> metaobjeto. Mientras tanto esas 8 URLs, que es lo que Carla reparte por Instagram, están rotas.
-> Si el lanzamiento se retrasa, lo suyo es volver a publicar los artículos: las 301 se quedan
-> puestas y entran solas en cuanto se oculten otra vez.
+> ⚠️ **Ojo con el destino: es `/pages/album/…`, no `/album/…`.** La página de un metaobjeto
+> cuelga de `/pages/`, y la primera tanda de 301 apuntaba a la raíz: llevaban a un 404 que no se
+> iba a arreglar ni publicando el tema. Corregidas el 03-09-2026 y comprobadas una a una.
+>
+> ⚠️ **Aun así siguen en 404 para el público hasta que se publique el TEMA**, porque la ruta la
+> decide el tema publicado. En vista previa funcionan. Esas 8 URLs son lo que Carla reparte por
+> Instagram; si el lanzamiento se retrasa, lo suyo es volver a publicar los artículos: las 301
+> se quedan puestas y entran solas en cuanto se oculten otra vez.
+>
+> `/blogs/animales-en-adopcion` **no redirige**: la portada del blog existe (vacía, sin
+> artículos) y las 301 solo saltan en un 404. Queda una página muerta con título pero sin nada.
 
 ## Qué queda para publicar
 
 1. **Publicar el tema `loveanimalsbcn/main`.** Es lo único que falta. Ahora manda Horizon de
    serie, sin configurar: ni siquiera pinta `main-menu`, y como no tiene las plantillas de
-   metaobjeto, `/album/…` y `/animal/…` dan 404 aunque las entradas estén publicadas.
+   metaobjeto, `/pages/album/…` y `/pages/animal/…` dan 404 aunque las entradas estén
+   publicadas. En vista previa sí se ven.
    Comprobado el 02-09-2026 que lo subido coincide con el repo (solo cambian los saltos de línea).
 2. ~~Pasar las entradas a publicadas~~ — hecho: las 211 están en ACTIVE.
 3. Repasar los *fallbacks* que miran `shop.metaobjects.animal.values`, que solo ven 50 de 200.
