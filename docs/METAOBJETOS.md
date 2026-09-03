@@ -197,6 +197,16 @@ Convenciones que hacen que la vuelta sea automática:
   reparto se deshace por el zip que corresponde al álbum del animal.
 - El álbum **GATOS** ya existe en la tienda real (`gatos`, 81 animales): el Excel final trae 95
   gatos. Vienen sin tamaño ni PPP, que son campos opcionales.
+- **Tres nombres se repiten y son animales distintos**: un perro PPP y un gato llamados
+  *Balder*, un perro abuelo y una gata llamados *Peque*, y dos *Zeus* PPP de distinta edad. El
+  segundo de cada par se lleva un `-2` en el handle, y hasta ahora ese `-2` se lo quedaba el que
+  apareciera después en la hoja: bastaba con que Carla moviera una fila para que se
+  intercambiaran las URLs y, como el alta va por handle, para que uno pisara los datos del
+  otro. Desde el 03-09-2026 van clavados en `HANDLES` por fecha de entrada, que es del animal
+  y no del sitio que ocupe en el Excel. Si sale un choque nuevo, el lector avisa.
+- **Las decisiones que Carla da por WhatsApp no se escriben en su Excel.** Viven en `BAJAS`,
+  `DUPLICADOS` y `DENTRO`, dentro de `lee_excel.py`, con su motivo al lado y la fila como clave.
+  Así su fichero sigue siendo suyo y aquí queda por qué falta cada uno.
 - Los 139 animales scrapeados se quedan en la tienda de pruebas y no se migran: eran
   placeholders (`dump_animales.py` los vuelca a JSON si hiciera falta comparar).
 
@@ -206,10 +216,16 @@ Los textos de la web (procesos de adopción y acogida, colabora, guía PPP y dat
 están: salen de **`docs/CONTENIDO-CARLA.md`**, que es la transcripción literal de su documento.
 Lo que sigue abierto:
 
+- **Si Papaya es PPP o no.** Carla la movió a «PPP ADULTOS», pero en su fila la casilla PPP
+  sigue diciendo *No*. Es la única del Excel con esa contradicción. Mientras no lo diga, la
+  ficha sale sin la línea de PPP ni la caja de licencia, aunque el álbum diga lo contrario: no
+  es cosa de deducirlo, que de ahí cuelgan licencia y seguro
 - **Qué foto le toca a Andrés, Chiquitita, Kaur y Katsuki.** Son los cuatro gatos que quedan
   sin subir: las cuatro casillas «Fotos» vinieron vacías. Carla dice que las mandó en
-  `FOTOS WEB QUE FALTAN.zip`, pero ahí no hay nada que diga cuál es de quién. Sobran 105
-  ficheros sin dueño, así que es cuestión de que ella escriba los nombres en el Excel
+  `FOTOS WEB QUE FALTAN.zip`, pero ahí no hay nada que diga cuál es de quién: de sus 60
+  ficheros solo 4 tenían nombre en el Excel. Las **100 fotos que no reclama nadie** están
+  sacadas a `docs/img_loveanimalsbcn/_sin_dueno/`, cada una con el zip del que sale delante del
+  nombre (`sin_dueno.py`); es cuestión de que ella las mire y escriba los nombres en el Excel
 - **Las portadas de los 11 álbumes.** Dijo que las mandaría diciendo qué foto es de cada uno
 - **Adopciones con foto para el muro de Finales felices.** Ya hay once bajas esperando ahí en
   borrador (Behia, Bony, Dustin, Saitama, Thorin, Xulo y los que ni llegaron a subirse);
