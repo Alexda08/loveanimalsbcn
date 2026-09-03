@@ -3,17 +3,20 @@
 El theme ya tiene todo el código. Lo único que hay que hacer en el **admin de Shopify**
 es crear las dos definiciones de metaobjetos, activar sus web pages y dar de alta el contenido.
 
-> **Estado (02-09-2026): el contenido bueno ya está en la TIENDA REAL, con fotos.** Del Excel
-> final de Carla salen **200 fichas `animal` + 11 álbumes + 483 fotos** en
+> **Estado (03-09-2026): el contenido bueno está en la TIENDA REAL, con fotos.** Del Excel
+> final de Carla salen **198 fichas `animal` + 11 álbumes + 488 fotos** en
 > `loveanimalsbcn.myshopify.com`, con todos los campos puestos (nombre, fecha de entrada, edad,
 > tamaño, sexo, PPP, convivencias, carácter, frase, historia, estado y galería). Están
 > **publicadas**, pero no se ven todavía: falta publicar el tema (§5). Cada ficha con su ID y su
 > enlace de edición está en **[`INDICE-ANIMALES.md`](INDICE-ANIMALES.md)**.
 >
-> **Sigue sin ser el censo cerrado.** Siete fichas se han quedado fuera porque no se sabe qué
-> foto les toca, doce están marcadas «NO PONERLO» en el Excel, y cualquier dato puede cambiar
-> cuando Carla mande más información. Como el alta va por `handle`, lo que venga después se
+> **Sigue sin ser el censo cerrado.** Cuatro gatos esperan a que Carla diga qué foto les toca,
+> once se han ido esta semana (diez adopciones y Muso, que no salió de la panleucopenia) y
+> seis están marcados «NO PONERLO». Como el alta va por `handle`, lo que venga después se
 > carga encima sin duplicar ni rehacer nada.
+>
+> Los que se van **no se borran**: pasan a borrador, porque Carla los quiere en el rincón
+> feliz en cuanto mande las fotos de las adopciones.
 >
 > La tienda de pruebas (`test-shop-kv2uh85k`) sigue con los **139 animales scrapeados** del
 > blog antiguo y 11 álbumes (los 10 + GATOS), con fotos de muestra de dog.ceo/thecatapi.
@@ -203,16 +206,29 @@ Los textos de la web (procesos de adopción y acogida, colabora, guía PPP y dat
 están: salen de **`docs/CONTENIDO-CARLA.md`**, que es la transcripción literal de su documento.
 Lo que sigue abierto:
 
-- **Qué foto le toca a Behia, Crowley, Andrés, Chiquitita, Kaur, Rusty y Katsuki.** Son los
-  siete que no se han podido subir. Seis vinieron con la casilla «Fotos» vacía y Crowley pide
-  un fichero que no está en ningún zip. Sobran 43 fotos que nadie reclama, 22 de ellas en el
-  zip de gatos y en tandas de tres seguidas: pinta a que son justo esas
-- **La fecha de entrada de Muso**, que es obligatoria y vino vacía. Es lo único que le falta
-- **Qué pasa con Joker**: estaba en la primera tanda y ha desaparecido del Excel final. Se ha
-  borrado de la tienda; si es un despiste, se vuelve a añadir al Excel y entra solo
-- Las portadas de los 7 álbumes que no son «desde XXXX» (ahora también GATOS)
-- Adopciones con foto para el muro de **Finales felices**: en esta tanda no hay ni un animal
-  en estado «adoptado», así que la sección se esconde sola
-- Enlace del grupo de Teaming y titular de la cuenta del IBAN
-- Qué parte de cada pedido vuelve a la protectora
+- **Qué foto le toca a Andrés, Chiquitita, Kaur y Katsuki.** Son los cuatro gatos que quedan
+  sin subir: las cuatro casillas «Fotos» vinieron vacías. Carla dice que las mandó en
+  `FOTOS WEB QUE FALTAN.zip`, pero ahí no hay nada que diga cuál es de quién. Sobran 105
+  ficheros sin dueño, así que es cuestión de que ella escriba los nombres en el Excel
+- **Las portadas de los 11 álbumes.** Dijo que las mandaría diciendo qué foto es de cada uno
+- **Adopciones con foto para el muro de Finales felices.** Ya hay once bajas esperando ahí en
+  borrador (Behia, Bony, Dustin, Saitama, Thorin, Xulo y los que ni llegaron a subirse);
+  faltan sus fotos de «después». Carla quiere aprender a añadirlos ella
+- **Los gatos que faltan del final del Excel.** Los dio por perdidos, pero están todos
+  subidos: xip, Kuka & Kuqui, Pitu, Patu, Ninu, Pepinillos, Canica, Mix & Max, Ron/Harry/
+  Hermione, Huran, Felipe, Reina, Aixa, Flipi, Tracy y Enzo salen en el índice. Lo que no
+  se veía eran los enlaces del menú, que no funcionaban (ver el commit de las anclas)
 - Logo vectorial oficial (hay wordmark SVG provisional: `logo-loveanimalsbcn.svg` / `-blanco.svg`)
+
+### Resuelto el 03-09-2026
+
+- **Teaming**: `https://www.teaming.net/adopta-loveanimals-bcn-delajaulaalavida-`, ya puesto en
+  el botón de la home y en el menú del pie
+- **Titular del IBAN**: «Asociación animalista sin ánimo de lucro *De la jaula a la vida bcn*»,
+  junto al número en la home y en «Quiénes somos»
+- **Qué parte de cada pedido vuelve**: no hay una cifra. Cambia con cada producto y lo calcula
+  la chica que los prepara, así que la web dice «parte de los beneficios se donan a la
+  asociación» y no promete porcentajes
+- **Muso**: falleció, no hacía falta la fecha de entrada
+- **Joker**: falleció también. El borrado estaba bien
+- **Sakura**: era la misma gata que «Nina (abuelita)», con dos nombres

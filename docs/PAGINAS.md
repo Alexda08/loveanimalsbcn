@@ -77,13 +77,22 @@ para cambiar el texto se toca la plantilla, igual que en la home.
 ## Menús de la tienda real
 
 Reescritos el 02-09-2026 con la estructura del diseño nuevo. Los anclajes `#shopify-section-…`
-apuntan a secciones de `templates/index.json`; están verificados uno a uno.
+apuntan a secciones de `templates/index.json`.
+
+> ⚠️ **Esos anclajes no funcionan solos.** Shopify no pinta el div con el nombre que la sección
+> tiene en la plantilla (`section_mG9zrt`), sino con `template--31409172316491__section_mG9zrt`:
+> el prefijo lo pone él y ese número cambia si se duplica el tema, así que no hay forma de
+> escribirlo a mano en un menú. Sin ayuda, el navegador no encuentra el destino y se queda
+> arriba del todo — que es lo que le pasaba a «Colabora» y al enlace de la licencia PPP de las
+> fichas. Lo resuelve `snippets/anclas-secciones.liquid`, que busca la sección por el final de
+> su id. Si algún día se dejan de usar anclas, ese snippet sobra.
 
 - `main-menu`: Quiero adoptar · Quiero acoger · Nuestros animales · **Tienda solidaria**
   (con Novedades, Camisetas, Sudaderas, Totebags y Niños colgando) · Colabora
 - `footer-adopcion` «Adopción y acogida»: Quiero adoptar · Quiero acoger · Nuestros animales ·
   Licencia PPP · Quiénes somos
-- `footer-colabora` «Colabora»: Tienda solidaria · Teaming · Donación puntual · Redes sociales
+- `footer-colabora` «Colabora»: Tienda solidaria · Teaming (al grupo de teaming.net, desde el
+  03-09-2026) · Donación puntual · Redes sociales
 - `footer-legal` «Legal»: privacidad · envío · términos · aviso legal · Cookies · Contacto
 
 «Quiénes somos» y «Contacto» están en el pie porque el menú de arriba son cinco entradas y no
@@ -128,6 +137,27 @@ borrador (no se han borrado) y hay **12 redirecciones 301** de cada URL vieja a 
 3. Repasar los *fallbacks* que miran `shop.metaobjects.animal.values`, que solo ven 50 de 200.
 4. Decidir qué se hace con `/pages/envios` y `/pages/cambios-y-devoluciones`, que se quedan sin
    enlace y siguen contando la operativa antigua de Role Clothing.
+5. Añadir «Otros productos» al menú de la tienda, como pidió Carla. **No se puede todavía**:
+   las tazas, fundas, llaveros, láminas, mochilas, bodys, bolis y jabones no existen como
+   producto en la tienda, solo hay fotos suyas. Hace falta darlos de alta con precio.
 
 Para revisar antes de publicar, sin tocar la web: *Temas → `loveanimalsbcn/main` → Personalizar*,
 y en el desplegable de plantillas elegir **Álbum** o **Animal**.
+
+## Prendas retiradas (03-09-2026)
+
+Carla marcó siete que ya no se venden. Están **en borrador**, no borradas: conservan fotos,
+precios y variantes, y se reactivan con un clic.
+
+| Producto | Por qué |
+|---|---|
+| Camiseta Sorpresa · Camiseta Sorpresa Día de la madre 2022 | solo para campañas de stock |
+| Sudadera Sorpresa · Sudadera Sorpresa Día de la madre 2022 | solo para campañas de stock |
+| De la jaula a la vida \| Diseño delantero y trasero (camiseta y sudadera) | diseño retirado |
+| Camiseta \| Adoptar es vida 2022 Aniversario | dibujo retirado |
+
+La **sudadera** «Adoptar es vida 2022 Aniversario» se queda a la venta: Carla solo tachó la
+camiseta y Alex prefirió ceñirse a eso. Si resulta que el dibujo va fuera del todo, es un clic.
+
+La colección automática `prendas-misteriosas` se queda casi vacía, pero no está enlazada en
+ningún menú.
