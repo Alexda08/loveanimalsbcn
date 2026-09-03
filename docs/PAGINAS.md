@@ -130,8 +130,16 @@ borrador (no se han borrado) y hay **12 redirecciones 301** de cada URL vieja a 
 > Instagram; si el lanzamiento se retrasa, lo suyo es volver a publicar los artículos: las 301
 > se quedan puestas y entran solas en cuanto se oculten otra vez.
 >
-> `/blogs/animales-en-adopcion` **no redirige**: la portada del blog existe (vacía, sin
-> artículos) y las 301 solo saltan en un 404. Queda una página muerta con título pero sin nada.
+> **Los blogs están fuera de circulación desde el 03-09-2026.** No los van a usar, y sus dos
+> portadas seguían vivas y vacías: `/blogs/news`, que Shopify crea de serie, y
+> `/blogs/animales-en-adopcion`, que es la que Carla reparte. Una 301 no las arreglaba, porque
+> solo salta en un 404 y esas páginas existían. Se les ha cambiado el handle a
+> `archivo-animales-en-adopcion` y `archivo-news` (`archiva_blogs.py`): ahora las URLs viejas
+> son 404 y entran las redirecciones. Los 11 artículos siguen ahí, en borrador, y su texto está
+> copiado en [`BLOG-VIEJO.md`](BLOG-VIEJO.md) por si algún día se borra el blog entero.
+>
+> Ningún menú ni plantilla del theme enlaza a un blog. Lo único que queda: los dos blogs
+> archivados **siguen apareciendo en `sitemap_blogs_1.xml`**, y de ahí solo salen borrándolos.
 
 ## Qué queda para publicar
 
@@ -147,6 +155,11 @@ borrador (no se han borrado) y hay **12 redirecciones 301** de cada URL vieja a 
 5. Añadir «Otros productos» al menú de la tienda, como pidió Carla. **No se puede todavía**:
    las tazas, fundas, llaveros, láminas, mochilas, bodys, bolis y jabones no existen como
    producto en la tienda, solo hay fotos suyas. Hace falta darlos de alta con precio.
+6. Decidir si se borran los dos blogs archivados. Es lo único que los saca del sitemap; su
+   texto ya está a salvo en [`BLOG-VIEJO.md`](BLOG-VIEJO.md).
+7. Montar la franja de fotos de la tienda solidaria que pidió Carla. Hay **63 fotos** listas en
+   `docs/img_loveanimalsbcn/_sin_dueno/2-para-la-tienda/`: gente con la ropa, prendas tendidas
+   y los mockups de tazas, fundas y bodys.
 
 Para revisar antes de publicar, sin tocar la web: *Temas → `loveanimalsbcn/main` → Personalizar*,
 y en el desplegable de plantillas elegir **Álbum** o **Animal**.

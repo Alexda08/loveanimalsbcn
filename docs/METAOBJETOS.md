@@ -201,6 +201,12 @@ Convenciones que hacen que la vuelta sea automática:
 - **Un mismo nombre de foto puede estar en dos zips y ser dos fotos distintas** de dos animales
   distintos: `IMG_1352` es de Cay en el zip de abuelos y de Hedy Lamarr en el de 2023. El
   reparto se deshace por el zip que corresponde al álbum del animal.
+- Y al revés: **la misma foto puede estar en dos zips con 322 bytes de diferencia**, que son los
+  metadatos de haberla reexportado. Las 13 fotos de gato de `FOTOS WEB QUE FALTAN.zip` están
+  también en el de gatos. Por eso `clasifica_fotos.py` empareja por nombre y no por md5.
+- **`clasifica_fotos.py` ordena todo lo que no usa nadie** en `_sin_dueno/`: lo que hay que
+  preguntar, lo que es de la tienda solidaria, lo que ya tiene nombre (porque el animal se fue)
+  y los dos vídeos, que la galería no admite. De 128 fotos sueltas, solo 31 hay que preguntarlas.
 - El álbum **GATOS** ya existe en la tienda real (`gatos`, 81 animales): el Excel final trae 95
   gatos. Vienen sin tamaño ni PPP, que son campos opcionales.
 - **Tres nombres se repiten y son animales distintos**: un perro PPP y un gato llamados
@@ -227,11 +233,11 @@ Lo que sigue abierto:
   ficha sale sin la línea de PPP ni la caja de licencia, aunque el álbum diga lo contrario: no
   es cosa de deducirlo, que de ahí cuelgan licencia y seguro
 - **Qué foto le toca a Andrés, Chiquitita, Kaur y Katsuki.** Son los cuatro gatos que quedan
-  sin subir: las cuatro casillas «Fotos» vinieron vacías. Carla dice que las mandó en
-  `FOTOS WEB QUE FALTAN.zip`, pero ahí no hay nada que diga cuál es de quién: de sus 60
-  ficheros solo 4 tenían nombre en el Excel. Las **100 fotos que no reclama nadie** están
-  sacadas a `docs/img_loveanimalsbcn/_sin_dueno/`, cada una con el zip del que sale delante del
-  nombre (`sin_dueno.py`); es cuestión de que ella las mire y escriba los nombres en el Excel
+  sin subir: las cuatro casillas «Fotos» vinieron vacías. Está preparado para que sea un
+  minuto: en **`docs/img_loveanimalsbcn/_sin_dueno/1-de-quien-es/`** hay **ocho gatos** y siete
+  perros, cada foto con su grupo en el nombre (`gato-2-atigrado-dorado__…`) y todas juntas en
+  `_todas-juntas.jpg`. Basta con que diga qué grupo es cada uno; los otros cuatro gatos serán
+  tomas de más de alguno que ya está publicado
 - **La portada de «Necesitamos casa de acogida»**, la de Trans. Es la única que falta: mandó
   `PORTADAS.zip` con siete fotos y la lista de a qué álbum va cada una, pero el fichero
   `85F21429-41F2-4D26-AA52-49015579EC84` no viene en el zip. En su sitio sobra una segunda
