@@ -1,0 +1,72 @@
+{% comment %}
+  Hace que funcionen los enlaces a secciones de la home.
+
+  Los menús y los botones apuntan a «#shopify-section-section_XXXX», que es como
+  se llama la sección dentro de templates/index.json. Pero Shopify pinta el div
+  con el id «shopify-section-template--31409172316491__section_XXXX»: ese prefijo
+  lo pone él y el número cambia si se duplica el tema, así que no se puede
+  escribir a mano en el menú. Resultado: el navegador no encuentra el destino y
+  se queda arriba del todo.
+
+  Aquí resolvemos el hash buscando la sección por el final de su id, y saltamos
+  dejando hueco para la cabecera pegajosa.
+{% endcomment %}
+
+<script>
+  (function () {
+    var CABECERA = 16; // margen extra para que el título no quede pegado
+
+    function alto() {
+      var v = getComputedStyle(document.documentElement).getPropertyValue('--header-height');
+      var n = parseFloat(v);
+      return (isNaN(n) ? 0 : n) + CABECERA;
+    }
+
+    function busca(hash) {
+      if (!hash || hash.length < 2) return null;
+      var id = decodeURIComponent(hash.slice(1));
+      var exacto = document.getElementById(id);
+      if (exacto) return exacto;
+      var clave = id.replace(/^shopify-section-/, '');
+      if (!/^[\w-]+$/.test(clave)) return null;
+      return document.querySelector('[id$="__' + clave + '"]');
+    }
+
+    function salta(el, suave) {
+      var y = el.getBoundingClientRect().top + window.pageYOffset - alto();
+      window.scrollTo({ top: Math.max(y, 0), behavior: suave ? 'smooth' : 'auto' });
+    }
+
+    // clic dentro de la misma página: el navegador no sabría a dónde ir
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href*="#shopify-section-"]');
+      if (!a) return;
+      var url = new URL(a.href, location.href);
+      if (url.pathname !== location.pathname || url.search !== location.search) return;
+      var el = busca(url.hash);
+      if (!el) return;
+      e.preventDefault();
+      history.replaceState(null, '', url.hash);
+      salta(el, true);
+    });
+
+    // llegando desde otra página: hay que esperar a que carguen las imágenes de
+    // arriba, o el sitio al que saltamos se mueve bajo los pies
+    function alLlegar() {
+      var el = busca(location.hash);
+      if (!el) return;
+      salta(el, false);
+      setTimeout(function () { salta(el, false); }, 350);
+    }
+
+    if (location.hash.indexOf('#shopify-section-') === 0) {
+      if (document.readyState === 'complete') alLlegar();
+      else window.addEventListener('load', alLlegar);
+    }
+
+    window.addEventListener('hashchange', function () {
+      var el = busca(location.hash);
+      if (el) salta(el, true);
+    });
+  })();
+</script>

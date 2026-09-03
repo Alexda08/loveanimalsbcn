@@ -295,7 +295,7 @@
                   "name": "t:names.button",
                   "settings": {
                     "label": "Quiero adoptar",
-                    "link": "#shopify-section-section_Jmdaay",
+                    "link": "#shopify-section-section_Yi4nCE",
                     "open_in_new_tab": false,
                     "style_class": "button-secondary",
                     "custom_button_background": "{{ settings.color_palette.foreground }}",
@@ -383,7 +383,7 @@
                   "name": "t:names.button",
                   "settings": {
                     "label": "Colabora",
-                    "link": "/pages/nuestros-animales",
+                    "link": "#shopify-section-section_mG9zrt",
                     "open_in_new_tab": false,
                     "style_class": "button",
                     "custom_button_background": "{{ settings.color_palette.foreground }}",
@@ -408,7 +408,7 @@
               "name": "t:names.text",
               "disabled": true,
               "settings": {
-                "text": "<p>Todo el beneficio de la tienda solidaria va a veterinario, pienso y residencias.</p>",
+                "text": "<p>Parte de los beneficios de la tienda solidaria se donan a la asociación y van a veterinario, pienso y residencias.</p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -2184,7 +2184,7 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<p>Las casas de acogida son para animales con necesidades especiales: por ejemplo, que estén en periodo de lactancia, sufran una enfermedad o tengan avanzada edad. Pueden ser <strong>temporales</strong> o <strong>indefinidas</strong>; las indefinidas son como una adopción (el animal SIEMPRE estará contigo).</p><p>Las que más falta nos hacen son <strong>las indefinidas</strong>. Es una manera de darles un hogar y una familia para siempre sin preocuparte de absolutamente nada más.</p>",
+            "text": "<p>Las casas de acogida son para animales con necesidades especiales: por ejemplo, que estén en periodo de lactancia, sufran una enfermedad o tengan avanzada edad. Todas nuestras acogidas son <strong>indefinidas</strong>: el animal se queda contigo para siempre, igual que en una adopción, pero sin ningún gasto a tu cargo.</p><p>Es una manera de darles un hogar y una familia sin preocuparte de absolutamente nada más.</p>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "center",
@@ -3635,7 +3635,7 @@
                   "name": "t:names.button",
                   "settings": {
                     "label": "Unirme por 1 €/mes",
-                    "link": "",
+                    "link": "https://www.teaming.net/adopta-loveanimals-bcn-delajaulaalavida-",
                     "open_in_new_tab": false,
                     "style_class": "button",
                     "custom_button_background": "{{ settings.color_palette.foreground }}",
@@ -3783,7 +3783,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p><strong>ES19 0182 5870 8102 0194 2037</strong></p>",
+                    "text": "<p><strong>ES19 0182 5870 8102 0194 2037</strong><br>Titular: Asociación animalista sin ánimo de lucro «De la jaula a la vida bcn»</p>",
                     "width": "fill",
                     "max_width": "normal",
                     "alignment": "center",

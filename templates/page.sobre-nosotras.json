@@ -687,7 +687,7 @@
                       "type": "text",
                       "name": "t:names.text",
                       "settings": {
-                        "text": "<p>Buscamos casas de acogida —temporales o indefinidas— para los que tienen necesidades especiales: lactancia, enfermedad o edad avanzada. <strong>Acoger cuesta 0 €</strong>: el centro cubre comida, medicamentos, veterinario y urgencias 24 h.</p>",
+                        "text": "<p>Buscamos casas de acogida indefinidas para los que tienen necesidades especiales: lactancia, enfermedad o edad avanzada. <strong>Acoger cuesta 0 €</strong>: el centro cubre comida, medicamentos, veterinario y urgencias 24 h.</p>",
                         "width": "100%",
                         "max_width": "normal",
                         "alignment": "left",
@@ -2285,7 +2285,7 @@
                   "type": "text",
                   "name": "Cuenta",
                   "settings": {
-                    "text": "<p><strong>ES19 0182 5870 8102 0194 2037</strong></p>",
+                    "text": "<p><strong>ES19 0182 5870 8102 0194 2037</strong><br>Titular: Asociación animalista sin ánimo de lucro «De la jaula a la vida bcn»</p>",
                     "width": "100%",
                     "max_width": "normal",
                     "alignment": "center",
