@@ -2,6 +2,10 @@
   Barra de píldoras para saltar entre colecciones de la tienda, con el contador
   de artículos de la colección que se está viendo. La píldora de la colección
   actual se marca sola.
+
+  Una píldora puede llevar un enlace suelto en vez de una colección, para lo
+  que no es una colección: el «Todo» apunta a /collections/all, que no se puede
+  elegir con el selector. Ahí la píldora se marca comparando la ruta.
 {% endcomment %}
 
 {% liquid
@@ -41,16 +45,32 @@
         {% for block in section.blocks %}
           {% liquid
             assign col = block.settings.coleccion
-            assign etiqueta = block.settings.etiqueta | default: col.title
+            assign suelto = block.settings.enlace
+            assign etiqueta = block.settings.etiqueta
+            assign destino = ''
+
+            if col != blank
+              assign destino = col.url
+              assign etiqueta = etiqueta | default: col.title
+            elsif suelto != blank
+              assign destino = suelto
+            endif
+
             assign activo = false
             if col != blank and collection != blank and col.handle == collection.handle
               assign activo = true
+            elsif col == blank and destino != blank
+              # sin colección detrás no hay handle que comparar: queda la ruta
+              assign ruta = destino | split: '?' | first | split: '#' | first
+              if ruta == request.path
+                assign activo = true
+              endif
             endif
           %}
-          {% if col != blank %}
+          {% if destino != blank and etiqueta != blank %}
             <a
               class="chip{% if activo %} chip--on{% endif %}"
-              href="{{ col.url }}"
+              href="{{ destino }}"
               {% if activo %}
                 aria-current="page"
               {% endif %}
@@ -229,6 +249,12 @@
           "id": "etiqueta",
           "label": "Texto",
           "info": "Si lo dejas vacío se usa el nombre de la colección."
+        },
+        {
+          "type": "url",
+          "id": "enlace",
+          "label": "Enlace suelto",
+          "info": "Sólo para lo que no es una colección: /collections/all para un «Todo», o una sección de esta misma página. Con esto hay que escribir el texto a mano."
         }
       ]
     }

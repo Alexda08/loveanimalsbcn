@@ -163,8 +163,16 @@
         "todo": {
           "type": "chip",
           "settings": {
-            "coleccion": "tienda-solidaria",
-            "etiqueta": "Todo"
+            "coleccion": "",
+            "etiqueta": "Todo",
+            "enlace": "/collections/all"
+          }
+        },
+        "novedades": {
+          "type": "chip",
+          "settings": {
+            "coleccion": "novedades",
+            "etiqueta": ""
           }
         },
         "camisetas": {
@@ -181,51 +189,28 @@
             "etiqueta": ""
           }
         },
-        "tazas": {
+        "totebags": {
           "type": "chip",
           "settings": {
-            "coleccion": "tazas",
+            "coleccion": "totebags",
             "etiqueta": ""
           }
         },
-        "bolsas": {
+        "ninos": {
           "type": "chip",
           "settings": {
-            "coleccion": "bolsas",
+            "coleccion": "ninos",
             "etiqueta": ""
-          }
-        },
-        "fundas": {
-          "type": "chip",
-          "settings": {
-            "coleccion": "fundas",
-            "etiqueta": "Fundas"
-          }
-        },
-        "infantil": {
-          "type": "chip",
-          "settings": {
-            "coleccion": "infantil",
-            "etiqueta": ""
-          }
-        },
-        "causa": {
-          "type": "chip",
-          "settings": {
-            "coleccion": "causa-stop-ley-ppp",
-            "etiqueta": "Stop Ley PPP"
           }
         }
       },
       "block_order": [
         "todo",
+        "novedades",
         "camisetas",
         "sudaderas",
-        "tazas",
-        "bolsas",
-        "fundas",
-        "infantil",
-        "causa"
+        "totebags",
+        "ninos"
       ],
       "settings": {
         "fijar": true,
@@ -242,7 +227,7 @@
       "settings": {
         "cifra": "",
         "titulo": "Los pedidos se hacen por Instagram",
-        "texto": "<p>Estos diseños los prepara <strong>El Armario de Pris</strong>. Elige lo que te guste, escríbele por Instagram diciéndole el diseño y la talla, y ella se encarga del resto. Parte de los beneficios se donan a la asociación <strong>De la jaula a la vida</strong>.</p>",
+        "texto": "<p>Estos diseños los prepara <strong>El Armario de Pris</strong>. Elige lo que te guste, escríbele por Instagram diciéndole el diseño y la talla, y ella se encarga del resto. Parte de los beneficios se donan a la asociación <strong>De la jaula a la vida</strong>.</p><p>Todos los pedidos y productos pueden PERSONALIZARSE: elige el COLOR de la prenda, el DISEÑO que más te guste e, incluso, podemos poner tus FOTOS favoritas en llaveros, tazas, fundas de móvil…</p>",
         "boton_texto": "Compra aquí",
         "boton_enlace": "https://www.instagram.com/el_armario_de_pris",
         "boton_estilo": "primario",
@@ -751,7 +736,7 @@
       "settings": {
         "fina": "así la lleváis",
         "titulo": "La familia LAB",
-        "texto": "Fotos de quienes ya llevan la ropa, y de lo que sale de aquí.",
+        "texto": "Fotos de quienes ya visten SOLIDARIDAD. Tú también puedes formar parte de este museo. ¡Haz tu pedido!",
         "alto": 300,
         "hueco": 14,
         "corner_radius": 8,

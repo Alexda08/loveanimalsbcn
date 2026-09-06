@@ -152,13 +152,17 @@ borrador (no se han borrado) y hay **12 redirecciones 301** de cada URL vieja a 
 3. Repasar los *fallbacks* que miran `shop.metaobjects.animal.values`, que solo ven 50 de 200.
 4. Decidir qué se hace con `/pages/envios` y `/pages/cambios-y-devoluciones`, que se quedan sin
    enlace y siguen contando la operativa antigua de Role Clothing.
-5. Añadir «Otros productos» al menú de la tienda, como pidió Carla. **No se puede todavía**:
-   las tazas, fundas, llaveros, láminas, mochilas, bodys, bolis y jabones no existen como
-   producto en la tienda, solo hay fotos suyas. Hace falta darlos de alta con precio.
+5. Añadir «Otros productos» a la tienda, como pidió Carla (lo repitió el 06-09). **Sigue sin
+   poderse**: las tazas, fundas, llaveros, láminas, mochilas, bodys, bolis y jabones no existen
+   como producto, solo hay fotos suyas, y las del «último enlace de Smash» que menciona no han
+   llegado al repo. La barra de píldoras ya acepta un enlace suelto, así que en cuanto haya
+   dónde apuntar es un bloque más.
 6. Decidir si se borran los dos blogs archivados. Es lo único que los saca del sitemap; su
    texto ya está a salvo en [`BLOG-VIEJO.md`](BLOG-VIEJO.md).
 7. ~~Montar la franja de fotos de la tienda solidaria~~ — hecha, ver abajo.
 8. ~~La ronda de revisión de Carla del 06-09-2026~~ — hecha, ver abajo.
+9. ~~La segunda ronda del 06-09-2026~~ — hecha salvo «Otros productos» (punto 5) y los dos
+   diseños nuevos de «Adoptar es vida», ver abajo.
 
 ## La franja de la tienda solidaria
 
@@ -196,8 +200,10 @@ precios y variantes, y se reactivan con un clic.
 | De la jaula a la vida \| Diseño delantero y trasero (camiseta y sudadera) | diseño retirado |
 | Camiseta \| Adoptar es vida 2022 Aniversario | dibujo retirado |
 
-La **sudadera** «Adoptar es vida 2022 Aniversario» se queda a la venta: Carla solo tachó la
-camiseta y Alex prefirió ceñirse a eso. Si resulta que el dibujo va fuera del todo, es un clic.
+La **sudadera** «Adoptar es vida 2022 Aniversario» se quedó a la venta en aquella ronda porque
+Carla solo había tachado la camiseta. En la segunda ronda la tachó también, así que ya está en
+borrador y el par vuelve a ir junto: el dibujo de 2022 (frase **y silueta**, `SILUETAADOPTAR` en
+los SKU) sale entero del catálogo.
 
 La colección automática `prendas-misteriosas` se queda casi vacía, pero no está enlazada en
 ningún menú.
@@ -282,3 +288,87 @@ la… PRODUCTOS», «con la… CAMISETAS», «con la… SUDADERAS». Ninguna col
 - El producto **«Mestizos - Diseño trasero.»** tiene un guion y un punto final que sus hermanos
   no tienen («Logo | Diseño trasero»). Es el título del producto, no del tema: se cambia desde
   el admin y cambia también su URL, por eso no se ha tocado.
+
+## La segunda ronda de Carla (06-09-2026, por la mañana)
+
+Llegó con cuatro capturas y un resumen. Lo que se ha hecho:
+
+### Dos cosas que ya estaban arregladas cuando escribió
+
+- **«Falta foto álbum acogidas».** La portada de Trans se subió a las **14:22**, y su captura es
+  de las **11:04**. Comprobado que el fichero responde 200 y que la tarjeta la pinta.
+- **«Palabras que se cortan en móvil: productos, novedades, camisetas, sudaderas».** Es lo mismo
+  que ya se arregló en la ronda anterior con `assets/titulares.css`; el CSS estaba servido en el
+  tema antes de su mensaje. Medidas las cuatro contra la propia Cormorant: la más apretada,
+  PRODUCTOS, cabe con un **31 %** de hueco de sobra a 320 px, y las otras con 34-44 %. La única
+  que no entra en una línea es «TIENDA SOLIDARIA», pero son dos palabras y parte por el espacio,
+  que es lo que tiene que hacer.
+
+Las dos son cuestión de que recargue del todo (Ctrl+F5, o cerrar y abrir la pestaña).
+
+### La barra de píldoras de la tienda
+
+Era peor de lo que ella vio. De las ocho píldoras **solo salían dos**: las otras seis apuntaban
+a colecciones que no existen en la tienda (`tienda-solidaria`, `tazas`, `bolsas`, `fundas`,
+`infantil`, `causa-stop-ley-ppp`). Una píldora sin colección detrás no pinta nada, sin aviso.
+
+Ahora son seis y son las mismas que el submenú de «Tienda solidaria»: **Todo · Novedades ·
+Camisetas · Sudaderas · Totebags · Niños**.
+
+El «Todo» no se podía hacer con el selector de colecciones, porque `/collections/all` no es una
+colección elegible. Por eso `sections/chips-colecciones.liquid` acepta ahora un **enlace suelto**
+en la píldora: si no hay colección, usa el enlace y se marca activa comparando `request.path`.
+Es también el hueco por donde entrará «Otros productos» cuando exista.
+
+### Textos
+
+| Dónde | Qué |
+|---|---|
+| Álbum PPP adultos | «caballeros con corazón grande» → **«caballeros de gran corazón»** |
+| Pie de la cinta de fotos | → **«Fotos de quienes ya visten SOLIDARIDAD. Tú también puedes formar parte de este museo. ¡Haz tu pedido!»** |
+| Franja «Los pedidos se hacen por Instagram» | segundo párrafo nuevo, el de **personalizar** color, diseño y fotos |
+| Texto del PPP en la home | «el trámite, y aunque parezca pesado» → **«el trámite y, aunque parezca pesado»** |
+
+Lo de personalizar va en esa franja y no en otro sitio porque es la que explica **cómo se pide**
+y está justo encima de la parrilla de productos, que es donde se lee «solo hay blanco y negro».
+El texto va tal cual lo escribió ella, mayúsculas incluidas.
+
+### Fichas
+
+- **«Reservados» se leía como «ya tiene familia».** Carla lo vio en Logan & Trunks, pero la
+  palabra estaba en tres fichas. Cambiadas las tres: Logan & Trunks (`reservados`→`tímidos`),
+  y **Blue** y **Nito** (`reservado`→`tímido`), que tenían el mismo malentendido y ella no llegó
+  a ver.
+- **Guiness** pasa de PPP adultos a **PPP jóvenes** (tiene 2 años). Era error suyo al montarlo.
+- **Gnar** se marca `estado: adoptado` con fecha 05-09-2026. Con eso desaparece del álbum de
+  gatos y entra en el grupo del que se nutre el muro de finales felices.
+
+### Los adoptados: cuidado con dos maneras distintas
+
+Gnar se ha marcado **adoptado y publicado**. Los diez de la semana pasada (Behia, Rusty, Kenia,
+Simba, Fabrizzio, Saitama, Dustin, Bony, Xulo, Thorin) están **en borrador**, que es otra cosa:
+un metaobjeto en borrador **no lo ve Liquid**, así que no puede salir en el rincón feliz aunque
+se quiera. Para que salgan hay que publicarlos y ponerles `estado: adoptado` y su fecha.
+
+No se ha hecho porque **no se sabe la fecha de adopción de ninguno** y `feliz-card` la usa para
+pintar el año. Es lo que Carla ofrece justo en este mensaje («¿organizo unos cuantos adoptados
+para empezar? No sé, 10-20?»): con nombre, foto y mes ya se montan.
+
+### Prendas
+
+La **«Sudadera | Adoptar es vida 2022 Aniversario»**, la que tachó en rojo, pasa a borrador.
+
+Los dos **diseños nuevos** que mandó («Adoptar es vida», camiseta y sudadera blancas) **no se han
+dado de alta todavía**: ver abajo.
+
+### Pendiente
+
+- **Las fotos del «último enlace de Smash»** (tazas, fundas de móvil, boli, punto de libro,
+  bodys de bebé). Sin ellas no hay «Otros productos» que montar.
+- **Los dos diseños «Adoptar es vida»**. El diseño existe en el catálogo de Pris: es
+  `ADOPTARESVIDA` en los SKU, distinto del `SILUETAADOPTAR` de 2022. Falta decidir si se dan de
+  alta a la venta o en borrador para que Carla los repase, y confirmar precio (15 € camiseta /
+  25 € sudadera, como el resto) y qué colores hace Pris — los mockups son todos blancos y la
+  foto que ya hay en la tienda de ese diseño es negra.
+- Sigue en pie lo de la ronda anterior: las 31 fotos sin dueño y el título de «Mestizos -
+  Diseño trasero.».
