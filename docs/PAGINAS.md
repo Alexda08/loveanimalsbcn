@@ -158,6 +158,7 @@ borrador (no se han borrado) y hay **12 redirecciones 301** de cada URL vieja a 
 6. Decidir si se borran los dos blogs archivados. Es lo único que los saca del sitemap; su
    texto ya está a salvo en [`BLOG-VIEJO.md`](BLOG-VIEJO.md).
 7. ~~Montar la franja de fotos de la tienda solidaria~~ — hecha, ver abajo.
+8. ~~La ronda de revisión de Carla del 06-09-2026~~ — hecha, ver abajo.
 
 ## La franja de la tienda solidaria
 
@@ -200,3 +201,84 @@ camiseta y Alex prefirió ceñirse a eso. Si resulta que el dibujo va fuera del 
 
 La colección automática `prendas-misteriosas` se queda casi vacía, pero no está enlazada en
 ningún menú.
+
+## La ronda de revisión de Carla (06-09-2026)
+
+Repasó la web entera y pasó cinco cosas. Están las cinco hechas.
+
+### El «Colabora» del menú llevaba al principio de la página
+
+Ya se había arreglado una vez, con `snippets/anclas-secciones.liquid`, y **seguía sin
+funcionar**: el snippet resolvía bien el id de la sección pero luego no conseguía mover la
+página. Tenía tres fallos, uno por cada trampa de Horizon:
+
+1. **A partir de 990 px el que hace scroll no es la ventana, es `.page-wrapper`**, que lleva
+   `height:100dvh; overflow-y:auto` (`base.css`). En escritorio `window.scrollTo` no hace
+   absolutamente nada. Ahora el snippet mira quién es el contenedor con scroll y le habla a él.
+2. **Con el menú de las rayitas abierto, el scroll está bloqueado**: el `<details>` del cajón
+   lleva el atributo `scroll-lock`, que pone `scroll-lock` en el `<html>` y de ahí sale un
+   `overflow:hidden`. Como el snippet hacía `preventDefault()`, el menú ni se cerraba: se
+   quedaba abierto y el scroll bloqueado. Justo lo que veía Carla. Ahora cierra el cajón,
+   **espera a que suelte el bloqueo** y entonces salta.
+3. **`--header-height` la escribe `header.js` en el `<body>`**, no en el `<html>`, así que el
+   hueco para la cabecera pegajosa salía siempre 0.
+
+Los enlaces del menú (`/#shopify-section-section_mG9zrt` y compañía) no hay que tocarlos: el
+prefijo real del id (`template--32056139120971__`) cambia cada vez que se duplica el tema, y por
+eso el snippet busca por el final del id y no por el id entero.
+
+### «PRODUCTOS» salía partido en el móvil
+
+`assets/titulares.css`, cargado el último desde `snippets/stylesheets.liquid`. El h1 del tema
+nunca baja de 48 px por estrecha que sea la pantalla — Horizon calcula el suelo del tamaño
+fluido a partir del siguiente tamaño de los ajustes, y aquí h1 vale 56 y h2 vale 48 — y con el
+espaciado de 0,24 em la palabra no cabía en los 358 px de un móvil. Como `base.css` pone
+`overflow-wrap: break-word` en los h1, se partía por la mitad.
+
+Los números están medidos con la propia Cormorant (`fontTools`), no a ojo, y contra el titular
+más ancho que existe en la web, que no es «PRODUCTOS» sino **LEWANDOWSKI**: 7,31 em de letras.
+Con `clamp(1.625rem, 10vw, 3rem)` y `0.1em` cabe en cualquier pantalla desde 320 px con un 7-10 %
+de hueco de sobra, y de 480 px en adelante vuelve a sus 48 px de siempre.
+
+### La portada de acogidas (Trans)
+
+Carla apuntó `85F21429-41F2-4D26-AA52-49015579EC84`, **y ese fichero no venía en el zip**. Lo que
+sí venía era `E1BCDC46-CDF2-49E2-8356-84032FB5B552`, que no reclamaba ningún álbum. Es Trans: el
+mismo perro atigrado, la misma oreja doblada, el mismo arnés lila y los ojos color miel de su
+propia frase («Ojitos color miel para endulzarte»). Comparado con las fotos de su ficha antes de
+ponerla. Los siete álbumes tienen ya su portada.
+
+### Ortografía
+
+**73 correcciones en 48 fichas** y 7 en el texto del tema. Solo ortografía: no se ha cambiado
+ni una palabra de sitio ni la manera de contar las cosas.
+
+Salieron sin diccionario — los de español que hay a mano marcan «fue» y «tiene» —, comparando
+cada palabra rara con el resto del corpus: si aparece una o dos veces y está a un carácter de
+otra que aparece muchas, casi siempre es errata. Los scripts quedan en el scratchpad
+(`corrector.py`, `arregla_erratas.py`), con la lista entera.
+
+Lo gordo, por si Carla quiere revisarlo: `rión`→`riñón` (Trans), `ship`→`chip` (Lewandowski),
+`sociavle`→`sociable` (Tristán), `deshaucio`→`desahucio` (Reina y Kintsugi), `familis`→`familia`
+(Reina), `hogara`→`hogar` (Guiness), `odas`→`Todas` (Betty, se comió la T inicial),
+`llegón`→`llegó` (Fígaro), `Charli`→`Charlie` (en su propia ficha), `mayoria`→`mayoría` (15
+fichas de gatos, venía de un párrafo copiado), `otroa`→`otros` (8 fichas, del mismo párrafo),
+y `porqué`→`por qué` donde tocaba — en Tuca se queda `el porqué`, que ahí sí lleva artículo.
+
+En el tema: «Tu carrito **esta** vacío» → «está» (`locales/es.json`), «siguen habiendo problemas»
+→ «sigue habiendo» (dos veces, *haber* impersonal siempre en singular), «pre-adopción» →
+«preadopción», «tote-bags» → «totebags» (el menú ya decía Totebags), y los `...` sueltos pasados
+a `…` para que no bailen con los del resto.
+
+Y una de concordancia: la entradilla de **todas** las páginas de colección decía «mientras
+esperan, puedes ayudarles con la…» y debajo el título de la colección, así que se leía «con
+la… PRODUCTOS», «con la… CAMISETAS», «con la… SUDADERAS». Ninguna colección tiene el metafield
+`custom.fina`, así que ese texto de reserva sale en todas. Ahora dice «puedes ayudarles con…».
+
+### Pendiente de Carla
+
+- **Las 31 fotos sin dueño** de `_sin_dueno/1-de-quien-es/`, agrupadas por animal en
+  `_todas-juntas.jpg`. Solo hace falta que diga qué grupo es Andrés, Chiquitita, Kaur y Katsuki.
+- El producto **«Mestizos - Diseño trasero.»** tiene un guion y un punto final que sus hermanos
+  no tienen («Logo | Diseño trasero»). Es el título del producto, no del tema: se cambia desde
+  el admin y cambia también su URL, por eso no se ha tocado.

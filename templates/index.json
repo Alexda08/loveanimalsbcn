@@ -1436,7 +1436,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>Queremos saber de ti 😏 Una vez envíes el email o el WhatsApp, te contestarán adjuntando el <strong>formulario de pre-adopción</strong>. Debes rellenarlo y reenviarlo. Así, desde el equipo de etología canina te conocerán mejor y sabrán qué perritos encajan contigo.</p><p><em>* Si te has fijado en algún perrito o en varios, podrás señalarlo en el formulario y te asesorarán sobre ellos. Si no, no pasa nada: muchos te esperan e igualmente te asesorarán sobre cuáles pueden encajar.</em></p>",
+                "text": "<p>Queremos saber de ti 😏 Una vez envíes el email o el WhatsApp, te contestarán adjuntando el <strong>formulario de preadopción</strong>. Debes rellenarlo y reenviarlo. Así, desde el equipo de etología canina te conocerán mejor y sabrán qué perritos encajan contigo.</p><p><em>* Si te has fijado en algún perrito o en varios, podrás señalarlo en el formulario y te asesorarán sobre ellos. Si no, no pasa nada: muchos te esperan e igualmente te asesorarán sobre cuáles pueden encajar.</em></p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -1644,7 +1644,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>Desde el CAACB te otorgan <strong>21 días</strong> con seguimiento del equipo veterinario y del de etología canina. Si necesitas ayuda: <strong>veterinaria.caacb@bcn.cat</strong> para temas veterinarios y <strong>servei.etologia.caacb@bcn.cat</strong> para temas conductuales. Pasado ese periodo, la tutela legal del perro pasa a ser tuya y te envían la documentación del Registro a tu domicilio.</p><p><em>* IMPORTANTE: si pasado este tiempo surgen o siguen habiendo problemas en la adaptación, escríbenos por @adopta.loveanimals.bcn y te ayudaremos. Desde las asociaciones del voluntariado ayudamos más allá del periodo que cubre el Centro y os ofrecemos educadores caninos privados de confianza. En caso de que sea necesario, correremos con los gastos.</em></p>",
+                "text": "<p>Desde el CAACB te otorgan <strong>21 días</strong> con seguimiento del equipo veterinario y del de etología canina. Si necesitas ayuda: <strong>veterinaria.caacb@bcn.cat</strong> para temas veterinarios y <strong>servei.etologia.caacb@bcn.cat</strong> para temas conductuales. Pasado ese periodo, la tutela legal del perro pasa a ser tuya y te envían la documentación del Registro a tu domicilio.</p><p><em>* IMPORTANTE: si pasado este tiempo surgen o sigue habiendo problemas en la adaptación, escríbenos por @adopta.loveanimals.bcn y te ayudaremos. Desde las asociaciones del voluntariado ayudamos más allá del periodo que cubre el Centro y os ofrecemos educadores caninos privados de confianza. En caso de que sea necesario, correremos con los gastos.</em></p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -1878,7 +1878,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>Desde el CAACB te otorgan <strong>21 días</strong> con seguimiento del equipo veterinario. Si necesitas ayuda: <strong>veterinaria.caacb@bcn.cat</strong>. Pasado ese periodo, la tutela legal del gato pasa a ser tuya y te envían la documentación del Registro a tu domicilio.</p><p><em>* IMPORTANTE: si pasado este tiempo surgen o siguen habiendo problemas en la adaptación, escríbenos por Instagram a @adopta.loveanimals.bcn o a @lagatayogui_gatscaacb y te ayudaremos. Desde las asociaciones del voluntariado ayudamos más allá del periodo que cubre el Centro y os ofrecemos servicio con etóloga felina privada. En caso de que sea necesario, correremos con los gastos.</em></p>",
+                "text": "<p>Desde el CAACB te otorgan <strong>21 días</strong> con seguimiento del equipo veterinario. Si necesitas ayuda: <strong>veterinaria.caacb@bcn.cat</strong>. Pasado ese periodo, la tutela legal del gato pasa a ser tuya y te envían la documentación del Registro a tu domicilio.</p><p><em>* IMPORTANTE: si pasado este tiempo surgen o sigue habiendo problemas en la adaptación, escríbenos por Instagram a @adopta.loveanimals.bcn o a @lagatayogui_gatscaacb y te ayudaremos. Desde las asociaciones del voluntariado ayudamos más allá del periodo que cubre el Centro y os ofrecemos servicio con etóloga felina privada. En caso de que sea necesario, correremos con los gastos.</em></p>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
@@ -3055,7 +3055,7 @@
       ],
       "name": "Grid de álbumes",
       "settings": {
-        "fina": "podéis conocer a nuestros...",
+        "fina": "podéis conocer a nuestros…",
         "titulo": "Peludos",
         "lead": "Organizados por álbumes, como en nuestro Instagram. Dentro de cada álbum encontrarás la ficha de cada animal con sus fotos, su historia y su carácter.",
         "background_color": "#d8cdbb",
@@ -3241,7 +3241,7 @@
           "type": "text",
           "name": "t:names.text",
           "settings": {
-            "text": "<p><em>no todo es adoptar...</em></p>",
+            "text": "<p><em>no todo es adoptar…</em></p>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "center",
@@ -3459,7 +3459,7 @@
                   "type": "text",
                   "name": "t:names.text",
                   "settings": {
-                    "text": "<p>Productos solidarios hechos de forma artesanal por <strong>@el_armario_de_pris</strong>. Encontrarás desde ropa hasta llaveros, tazas, fundas de móvil, mochilas, tote-bags, jabones, bolígrafos… ¡Gran variedad de productos y diseños!</p>",
+                    "text": "<p>Productos solidarios hechos de forma artesanal por <strong>@el_armario_de_pris</strong>. Encontrarás desde ropa hasta llaveros, tazas, fundas de móvil, mochilas, totebags, jabones, bolígrafos… ¡Gran variedad de productos y diseños!</p>",
                     "width": "fit-content",
                     "max_width": "normal",
                     "alignment": "center",

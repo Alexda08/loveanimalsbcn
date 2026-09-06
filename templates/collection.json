@@ -18,7 +18,7 @@
           "settings": {
             "texto": "{{ collection.metafields.custom.fina.value }}",
             "segunda_linea": "",
-            "texto_alternativo": "mientras esperan, puedes ayudarles con la…",
+            "texto_alternativo": "mientras esperan, puedes ayudarles con…",
             "tamano": 30,
             "color": "",
             "alineacion": "center",

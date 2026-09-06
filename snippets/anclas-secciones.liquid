@@ -9,17 +9,38 @@
   se queda arriba del todo.
 
   Aquí resolvemos el hash buscando la sección por el final de su id, y saltamos
-  dejando hueco para la cabecera pegajosa.
+  dejando hueco para la cabecera pegajosa. Hay tres trampas del tema Horizon:
+
+  1. A partir de 990 px el que hace scroll no es la ventana: es .page-wrapper,
+     que lleva height:100dvh y overflow-y:auto (base.css). window.scrollTo no
+     hace nada ahí.
+  2. Mientras el menú de las rayitas está abierto, el <details> pone el atributo
+     scroll-lock en <html> y eso bloquea el scroll. Hay que cerrar el menú y
+     esperar a que lo suelte antes de saltar.
+  3. --header-height la escribe header.js en el <body>, no en el <html>.
 {% endcomment %}
 
 <script>
   (function () {
-    var CABECERA = 16; // margen extra para que el título no quede pegado
+    var HUECO = 16; // margen extra para que el título no quede pegado
 
     function alto() {
-      var v = getComputedStyle(document.documentElement).getPropertyValue('--header-height');
+      var v = getComputedStyle(document.body).getPropertyValue('--header-height');
       var n = parseFloat(v);
-      return (isNaN(n) ? 0 : n) + CABECERA;
+      if (isNaN(n)) {
+        var cab = document.querySelector('.header');
+        n = cab ? cab.getBoundingClientRect().height : 0;
+      }
+      return n + HUECO;
+    }
+
+    // el que hace scroll: .page-wrapper en escritorio, la ventana en el móvil
+    function caja() {
+      var w = document.querySelector('.page-wrapper');
+      if (!w) return null;
+      var ov = getComputedStyle(w).overflowY;
+      if (ov !== 'auto' && ov !== 'scroll') return null;
+      return w.scrollHeight > w.clientHeight + 1 ? w : null;
     }
 
     function busca(hash) {
@@ -33,8 +54,42 @@
     }
 
     function salta(el, suave) {
-      var y = el.getBoundingClientRect().top + window.pageYOffset - alto();
-      window.scrollTo({ top: Math.max(y, 0), behavior: suave ? 'smooth' : 'auto' });
+      var c = caja();
+      var comportamiento = suave ? 'smooth' : 'auto';
+      if (c) {
+        var y = el.getBoundingClientRect().top - c.getBoundingClientRect().top + c.scrollTop - alto();
+        c.scrollTo({ top: Math.max(y, 0), behavior: comportamiento });
+      } else {
+        var v = el.getBoundingClientRect().top + window.pageYOffset - alto();
+        window.scrollTo({ top: Math.max(v, 0), behavior: comportamiento });
+      }
+    }
+
+    // cierra el menú de las rayitas si el clic venía de dentro
+    function cierra(a) {
+      var d = a.closest('details[scroll-lock][open]');
+      if (!d) return false;
+      var comp = d.closest('header-drawer');
+      if (comp && typeof comp.close === 'function') {
+        comp.close();
+        // close() quita el open al acabar la animación; si no llega, a mano
+        setTimeout(function () { if (d.open) d.open = false; }, 450);
+      } else {
+        d.open = false;
+      }
+      return true;
+    }
+
+    // el <details> suelta el scroll-lock al cerrarse, pero no en el mismo tic
+    function cuandoSuelte(fn) {
+      var limite = Date.now() + 900;
+      (function mira() {
+        if (!document.documentElement.hasAttribute('scroll-lock') || Date.now() > limite) {
+          fn();
+          return;
+        }
+        requestAnimationFrame(mira);
+      })();
     }
 
     // clic dentro de la misma página: el navegador no sabría a dónde ir
@@ -47,7 +102,8 @@
       if (!el) return;
       e.preventDefault();
       history.replaceState(null, '', url.hash);
-      salta(el, true);
+      if (cierra(a)) cuandoSuelte(function () { salta(el, true); });
+      else salta(el, true);
     });
 
     // llegando desde otra página: hay que esperar a que carguen las imágenes de

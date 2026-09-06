@@ -1,0 +1,32 @@
+/*
+  Titulares — el h1 en pantallas estrechas.
+
+  Carla avisó de que en el móvil «PRODUCTOS» le salía partido: PRODUCTO en una
+  línea y la S sola en la siguiente.
+
+  El motivo está en cómo Horizon calcula el tamaño fluido (theme-styles-variables):
+  para cada tamaño de fuente coge como suelo el siguiente tamaño más pequeño de
+  los ajustes. Aquí h1 vale 56 y h2 vale 48, así que el h1 queda en
+  clamp(3rem, 5.6vw, 3.5rem): por estrecha que sea la pantalla nunca baja de
+  48 px. Con el espaciado entre letras del tema (0.24em, «heading-display»)
+  «PRODUCTOS» mide 390 px, y en un móvil de 390 px sólo hay 358 px de hueco
+  (16 px de margen a cada lado). Como base.css pone overflow-wrap: break-word en
+  los h1, la palabra se parte por la mitad.
+
+  Aquí, hasta 749 px, dejamos que el titular baje con la pantalla y aflojamos el
+  espaciado. Los números están medidos con la propia Cormorant contra el titular
+  más ancho que existe en la web, que no es «PRODUCTOS» sino el nombre de un
+  perro: LEWANDOWSKI, 7,31 em de puras letras. Con 10vw y 0.10em mide 269 px en
+  una pantalla de 320 y 328 px en una de 390, siempre con un 7-10 % de hueco de
+  sobra. De 480 px en adelante el titular ya vuelve a sus 48 px.
+*/
+
+@media screen and (max-width: 749px) {
+  h1,
+  .h1.h1,
+  .text-block.h1 > *,
+  .text-block.h1 :is(h1, h2, h3, h4, h5, h6) {
+    font-size: clamp(1.625rem, 10vw, 3rem);
+    letter-spacing: 0.1em;
+  }
+}
