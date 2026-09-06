@@ -161,8 +161,7 @@ borrador (no se han borrado) y hay **12 redirecciones 301** de cada URL vieja a 
    texto ya está a salvo en [`BLOG-VIEJO.md`](BLOG-VIEJO.md).
 7. ~~Montar la franja de fotos de la tienda solidaria~~ — hecha, ver abajo.
 8. ~~La ronda de revisión de Carla del 06-09-2026~~ — hecha, ver abajo.
-9. ~~La segunda ronda del 06-09-2026~~ — hecha salvo «Otros productos» (punto 5) y los dos
-   diseños nuevos de «Adoptar es vida», ver abajo.
+9. ~~La segunda ronda del 06-09-2026~~ — hecha salvo «Otros productos» (punto 5), ver abajo.
 
 ## La franja de la tienda solidaria
 
@@ -358,17 +357,30 @@ para empezar? No sé, 10-20?»): con nombre, foto y mes ya se montan.
 
 La **«Sudadera | Adoptar es vida 2022 Aniversario»**, la que tachó en rojo, pasa a borrador.
 
-Los dos **diseños nuevos** que mandó («Adoptar es vida», camiseta y sudadera blancas) **no se han
-dado de alta todavía**: ver abajo.
+Y se dan de alta los dos **diseños nuevos** que mandó, a la venta y **sólo en blanco**, que es lo
+único que enseñan sus mockups:
+
+| | Precio | Opciones | SKU |
+|---|---|---|---|
+| Camiseta \| Adoptar es vida | 15 € | Unisex/Mujer · S-2XL · Blanco | `…ADOPTARESVIDA_LIGHT-US002-WH-…` / `-WS002-` |
+| Sudadera \| Adoptar es vida | 25 € | Unisex · XS-2XL · Blanco | `…ADOPTARESVIDA_LIGHT-SWH02-WH-…` |
+
+El diseño ya existía en el catálogo de Pris — es **`ADOPTARESVIDA`** en los SKU, la frase sola, y
+no hay que confundirlo con **`SILUETAADOPTAR`**, que es el de 2022 (frase *y* silueta) y el que
+acaba de salir. Se crearon primero en borrador para revisarlos y se publicaron después.
+
+Las colecciones de esta tienda son **todas automáticas por etiqueta**: con `camiseta`/`sudadera`
+y `novedades` entran solas donde tienen que entrar, no hay que añadirlas a mano. Y hay que
+publicarlos en los canales aparte del estado: Online Store, Buy Button y Shop, que es donde
+están sus hermanos.
 
 ### Pendiente
 
 - **Las fotos del «último enlace de Smash»** (tazas, fundas de móvil, boli, punto de libro,
   bodys de bebé). Sin ellas no hay «Otros productos» que montar.
-- **Los dos diseños «Adoptar es vida»**. El diseño existe en el catálogo de Pris: es
-  `ADOPTARESVIDA` en los SKU, distinto del `SILUETAADOPTAR` de 2022. Falta decidir si se dan de
-  alta a la venta o en borrador para que Carla los repase, y confirmar precio (15 € camiseta /
-  25 € sudadera, como el resto) y qué colores hace Pris — los mockups son todos blancos y la
-  foto que ya hay en la tienda de ese diseño es negra.
+- **Confirmar con Pris los dos diseños nuevos**: si los hace en más colores que el blanco, hay
+  que añadir el valor a la opción *Color* y su foto. La camiseta negra de ese mismo diseño ya
+  existe como foto en la tienda (`loveanimalsbcn-adoptaresvida_dark-us002-bk…`), de las prendas
+  del Giving Tuesday.
 - Sigue en pie lo de la ronda anterior: las 31 fotos sin dueño y el título de «Mestizos -
   Diseño trasero.».
