@@ -238,11 +238,6 @@ Lo que sigue abierto:
   perros, cada foto con su grupo en el nombre (`gato-2-atigrado-dorado__…`) y todas juntas en
   `_todas-juntas.jpg`. Basta con que diga qué grupo es cada uno; los otros cuatro gatos serán
   tomas de más de alguno que ya está publicado
-- **La portada de «Necesitamos casa de acogida»**, la de Trans. Es la única que falta: mandó
-  `PORTADAS.zip` con siete fotos y la lista de a qué álbum va cada una, pero el fichero
-  `85F21429-41F2-4D26-AA52-49015579EC84` no viene en el zip. En su sitio sobra una segunda
-  foto de Leo (`E1BCDC46…`), que no está en su lista. Los otros seis álbumes ya la tienen;
-  los cuatro «DESDE XXXX» no llevan, que la card les pinta la cubierta con el año
 - **Adopciones con foto para el muro de Finales felices.** Ya hay once bajas esperando ahí en
   borrador (Behia, Bony, Dustin, Saitama, Thorin, Xulo y los que ni llegaron a subirse);
   faltan sus fotos de «después». Carla quiere aprender a añadirlos ella
@@ -270,3 +265,13 @@ Lo que sigue abierto:
 - **Muso**: falleció, no hacía falta la fecha de entrada
 - **Joker**: falleció también. El borrado estaba bien
 - **Sakura**: era la misma gata que «Nina (abuelita)», con dos nombres
+
+### Resuelto el 12-09-2026
+
+- **La portada de «Necesitamos casa de acogida»**. El fichero que Carla apuntó
+  (`85F21429-41F2-4D26-AA52-49015579EC84`) nunca vino dentro de `PORTADAS.zip`; se puso el que
+  sobraba (`E1BCDC46…`) dando por hecho que era Trans, y era **una segunda foto de Leo**, con lo
+  que la misma cara salía en dos álbumes. Carla mandó la foto buena el 12-09 y ya está puesta
+  (`album-necesitamos-casa-de-acogida-trans.png`). Los **siete** álbumes con portada la tienen
+  correcta, comprobadas una a una contra las fotos de la ficha de cada animal; los cuatro «DESDE
+  XXXX» siguen sin portada a propósito

@@ -248,10 +248,14 @@ de hueco de sobra, y de 480 px en adelante vuelve a sus 48 px de siempre.
 ### La portada de acogidas (Trans)
 
 Carla apuntó `85F21429-41F2-4D26-AA52-49015579EC84`, **y ese fichero no venía en el zip**. Lo que
-sí venía era `E1BCDC46-CDF2-49E2-8356-84032FB5B552`, que no reclamaba ningún álbum. Es Trans: el
-mismo perro atigrado, la misma oreja doblada, el mismo arnés lila y los ojos color miel de su
-propia frase («Ojitos color miel para endulzarte»). Comparado con las fotos de su ficha antes de
-ponerla. Los siete álbumes tienen ya su portada.
+sí venía era `E1BCDC46-CDF2-49E2-8356-84032FB5B552`, que no reclamaba ningún álbum, y se puso ahí
+dando por hecho que era Trans.
+
+**No lo era: es Leo**, otra toma de la misma sesión que la portada de «LOS MÁS VETERANOS» — mismo
+arnés fucsia, misma oreja doblada, mismo fondo. Lo vio Carla el 12-09 («esta es la de los más
+veteranos, que ahora están repetidas») y mandó la foto que faltaba; está arreglado más abajo, en
+la ronda del 12-09-2026. Lo que enseña: cuando falta un fichero, falta. El que sobra en el zip no
+es «el que era», por mucho que el perro se parezca a la frase de su ficha.
 
 ### Ortografía
 
@@ -384,3 +388,34 @@ están sus hermanos.
   del Giving Tuesday.
 - Sigue en pie lo de la ronda anterior: las 31 fotos sin dueño y el título de «Mestizos -
   Diseño trasero.».
+
+## La tercera ronda de Carla (12-09-2026)
+
+### La portada de acogidas era Leo, no Trans
+
+Ella lo dijo en una línea: la foto de «NECESITAMOS CASA DE ACOGIDA» es la de «LOS MÁS VETERANOS»
+y «ahora están repetidas». Cierto: eran dos tomas del mismo perro, de la misma sesión y con el
+mismo arnés, una en cada álbum. Viene del zip que le faltaba una foto (ver arriba).
+
+Volvió a mandar la buena por WhatsApp. Es Trans, la del collar lila y la brida blanca, y mide
+**1086 × 1448**, lo mismo que las portadas de PPP jóvenes, PPP adultos y Gatos: es la foto de la
+sesión, no un recorte de pantalla. Se aplanó sobre blanco (venía en RGBA, pero opaca entera) y se
+subió como `album-necesitamos-casa-de-acogida-trans.png` →
+`gid://shopify/MediaImage/74044664512843`, enganchada al campo `portada` del álbum.
+
+La vieja se ha borrado, pero después de comprobar que no la apuntaba nadie: se recorrieron los
+**264 metaobjetos** de la tienda (204 animales, 11 álbumes y 49 de la base de conocimiento de
+Shopify) buscando su id, y no salía en ninguno. El original sigue guardado en
+`docs/img_loveanimalsbcn/PORTADAS.zip`, así que no se ha perdido ninguna foto.
+
+Comprobado renderizando sobre `loveanimalsbcn/main`: la tarjeta pinta el fichero nuevo en la home
+y en `/pages/nuestros-animales`, y del viejo no queda rastro en el HTML.
+
+### De paso, las otras seis
+
+Como el fallo era «esta cara ya sale en otro álbum», se revisaron **las siete portadas** contra
+las fotos de la ficha del animal que Carla dice que sale en cada una — una hoja de contactos con
+la portada al lado de dos fotos de su ficha. Ciclone en Abuelos, Leo en Los más veteranos, Rei en
+PPP jóvenes, Odín en PPP adultos, Nanu en Mestizos, Perla en Gatos y ahora Trans en Acogidas:
+**las siete son quien tienen que ser** y no se repite ninguna cara. Los cuatro álbumes «DESDE
+XXXX» siguen sin portada a propósito, que la card les pinta la cubierta con el año.
