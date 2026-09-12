@@ -419,3 +419,79 @@ la portada al lado de dos fotos de su ficha. Ciclone en Abuelos, Leo en Los más
 PPP jóvenes, Odín en PPP adultos, Nanu en Mestizos, Perla en Gatos y ahora Trans en Acogidas:
 **las siete son quien tienen que ser** y no se repite ninguna cara. Los cuatro álbumes «DESDE
 XXXX» siguen sin portada a propósito, que la card les pinta la cubierta con el año.
+
+## El repaso a fondo del 12-09-2026
+
+Alex pidió «una revisada a fondo de todo» antes de publicar. Se hizo así: se descargaron las
+**294 rutas** de la web servida por `loveanimalsbcn/main` (vista previa), se volcó la tienda
+entera a JSON (204 fichas, 11 álbumes, 48 productos, 12 colecciones, 8 páginas, 7 menús), se
+renderizó en un Chromium de verdad a 390 px para mirar lo que el HTML no dice, y se repartió el
+análisis en tres revisiones en paralelo: código del theme, HTML renderizado y datos de la tienda.
+Todo lo que sale aquí está comprobado a mano antes de darlo por bueno.
+
+### Lo gordo: 28 gatos que no estaban en la web
+
+El álbum GATOS tenía 78 gatos y la página pintaba 49. **Liquid sirve 50 referencias por lista y
+para.** Los 28 de la cola —los que entraron entre marzo y agosto de 2026, justo los últimos que
+mandó Carla y que le dijimos que ya estaban subidos— no salían en el álbum, no se enlazaban desde
+ninguna página y su propia ficha no sabía de qué álbum era, así que tampoco tenía ni miga de pan
+ni «otros peludos». El detalle técnico y el arreglo, en `METAOBJETOS.md` §5. Después: **77 fichas
+en el álbum** (78 menos Gnar, que está adoptado) y las tres fichas que se comprobaron ya llevan
+su álbum y sus relacionados.
+
+### Lo demás que se ha arreglado
+
+| Qué pasaba | Dónde se notaba | Arreglo |
+|---|---|---|
+| El muro «Finales felices» apuntaba a `luna`, `simba-3`, `kira` y `bruno`, de la tienda de pruebas | La sección entera desaparecía de la home, sin dejar hueco | Ahora lleva a Gnar; y el modo automático recorre los álbumes, que antes miraba una lista de 50 donde nunca caía un adoptado |
+| La miga de pan de producto apuntaba a `/collections/tienda-solidaria`, que no existe | Las 25 fichas de producto: el único enlace roto de la web | Va a `/collections/all` |
+| Al compartir una ficha no salía foto (`og:image` solo lo tenían los productos) | 180 fichas y álbumes, y la web pide justo eso: «muchas adopciones empiezan con un repost» | `meta-tags.liquid` saca la foto del propio metaobjeto; añadido también `twitter:image` |
+| `link_acoger` estaba vacío | El botón «Quiero acogerle» no salía en ninguna de las 198 fichas | Apunta al mismo ancla que el menú |
+| «Valoración realizada por nuestro equipo de etología **canina**» | Las 49 fichas de gato | «por el equipo del CAACB» |
+| «dános unos días» | Las 25 fichas de producto | «danos» |
+| El cuerpo de `nuestros-animales` era una nota nuestra («Este texto no sale en la web») | Shopify lo usaba de meta descripción: salía en Google y en cada enlace compartido | Descripción de verdad |
+| La guía de tallas estaba despublicada | La política de cambios y 15 productos la mandan leer; daba 404 | Publicada |
+| 27 erratas en 21 fichas (`a penas`, `transucrrido`, `deshauciado`, `papepelera`, `traqnuilo`…) | Texto de las historias | Corregidas |
+| El mensaje de WhatsApp decía «lleva  días esperando» si el animal no tenía fecha de entrada | Ninguno hoy, pero dentro de un carrusel heredaría la cifra del anterior | Frase alternativa |
+
+### La página de contacto (lo que Alex decía que estaba mal)
+
+Eran dos cosas. El cuerpo era HTML del tema viejo (clases `PageHeader`/`SectionHeader`) y el
+«formulario de contacto» era un **Typeform de `crowdence.typeform.com`**, o sea de otra empresa:
+lo que escribiera la gente no llegaba a la protectora. Y la plantilla con el formulario de verdad
+(`templates/page.contact.json`, que trae el theme) **no la usaba ninguna página**, porque a esta
+le faltaba el sufijo `contact`.
+
+Ahora la página usa esa plantilla y tiene formulario nativo (nombre, correo, teléfono y mensaje),
+que va al correo de contacto de la tienda —**Carla-mena@hotmail.com**—, y un texto que manda las
+adopciones y acogidas a los teléfonos del CAACB y deja el formulario para lo demás. El cuerpo
+viejo está guardado en el scratchpad por si hiciera falta.
+
+### Lo que NO se ha tocado, porque no es cosa nuestra
+
+1. **Las políticas de la tienda son de otra empresa.** «Crowdence, S.L.», con NIF y dirección en
+   Mairena del Aljarafe (Sevilla), aparece **26 veces**: 19 en el aviso legal, 5 en los términos
+   del servicio y 2 en la política de privacidad. En la página de cambios y devoluciones y en
+   `/pages/legal` manda otra distinta, **ROLE CLOTHING** (5 menciones). Es texto legal de una web
+   publicada: lo tiene que rehacer Carla con los datos de la asociación.
+2. **Dos precios se salen**: la camiseta `mestizos` a 17,90 € cuando las otras once van a 15, y
+   `sudadera-mestizos` a 27,90 € cuando las otras diez van a 25.
+3. **14 tallas salen agotadas** en 8 productos (las XL y 2XL negras de tres sudaderas, la S Khaki
+   de mujer de cuatro camisetas, la 2XL negra de la del Día de la Madre): tienen la política
+   «dejar de vender» mientras el resto del catálogo se hace bajo pedido.
+4. **Un nombre escrito de dos maneras**: la ficha dice «Silvy» y su historia «Silvi»; la ficha
+   dice «Dali» y su historia «Dalí». Cuál es el bueno lo dice Carla.
+5. **Tres productos con la URL `copia-de-…`** que además no corresponde al título
+   (`/copia-de-sudadera-love-animals` es «Sudadera: Stop Ley PPP»). Cambiar el handle cambia la
+   URL, así que se avisa y se decide.
+6. **Las seis fichas en borrador** (Behia, Bony, Saitama, Dustin, Thorin y Xulo) siguen en
+   tierra de nadie: en borrador no las ve nadie, y su `estado` dice «en adopción», no «adoptado».
+   Behia además no tiene ninguna foto.
+
+### Lo que se miró y está bien
+
+Cero errores de Liquid y cero traducciones sin poner en las 226 páginas. Cero fotos rotas. Las
+5.405 imágenes llevan `alt` y medidas. Ninguna página se desborda a lo ancho en el móvil: a
+390 px el documento mide exactamente 390. Las 292 tarjetas de álbum coinciden con sus fichas.
+Cero fechas imposibles. Cero SKU repetidos. Las siete portadas de álbum son de quien dicen ser.
+

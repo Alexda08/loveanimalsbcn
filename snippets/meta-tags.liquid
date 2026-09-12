@@ -54,23 +54,48 @@
   content="{{ og_description | escape }}"
 >
 
-{%- if page_image -%}
+{%- liquid
+  # LA START
+  # Shopify solo llena `page_image` en producto, colección y artículo. Las
+  # fichas de los animales y los álbumes son metaobjetos, así que al compartir
+  # una ficha por WhatsApp o Instagram salía sin foto — justo lo que la web
+  # pide hacer («muchas adopciones empiezan con un like o un repost»).
+  # `.value.first` no vale con las listas de referencias: hay que recorrerlas.
+  assign la_imagen = page_image
+  if la_imagen == blank and request.page_type == 'metaobject'
+    for f in metaobject.galeria.value limit: 1
+      assign la_imagen = f.preview_image
+    endfor
+    if la_imagen == blank and metaobject.portada.value != blank
+      assign la_imagen = metaobject.portada.value.preview_image
+    endif
+  endif
+  # LA END
+-%}
+
+{%- if la_imagen != blank -%}
   <meta
     property="og:image"
-    content="http:{{ page_image | image_url }}"
+    content="http:{{ la_imagen | image_url: width: 1200 }}"
   >
   <meta
     property="og:image:secure_url"
-    content="https:{{ page_image | image_url }}"
+    content="https:{{ la_imagen | image_url: width: 1200 }}"
   >
   <meta
     property="og:image:width"
-    content="{{ page_image.width }}"
+    content="{{ la_imagen.width }}"
   >
   <meta
     property="og:image:height"
-    content="{{ page_image.height }}"
+    content="{{ la_imagen.height }}"
   >
+  {%- if la_imagen.alt != blank -%}
+    <meta
+      property="og:image:alt"
+      content="{{ la_imagen.alt | escape }}"
+    >
+  {%- endif -%}
 {%- endif -%}
 
 {%- if request.page_type == 'product' -%}
@@ -102,6 +127,14 @@
   name="twitter:description"
   content="{{ og_description | escape }}"
 >
+{%- if la_imagen != blank -%}
+  {%- comment -%} LA START: sin esto la tarjeta de Twitter/X salía sin foto {%- endcomment -%}
+  <meta
+    name="twitter:image"
+    content="https:{{ la_imagen | image_url: width: 1200 }}"
+  >
+  {%- comment -%} LA END {%- endcomment -%}
+{%- endif -%}
 
 <title>
   {{ page_title }}

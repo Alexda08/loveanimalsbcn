@@ -62,16 +62,24 @@
       -%}
       {%- capture fichas -%}
         {%- liquid
-          for a in album.animales.value
-            assign estado = a.estado.value | downcase | strip
-            if estado == 'adoptado'
-              continue
+          # Liquid solo lee 50 referencias por lista: la cola va en `animales_mas`
+          for parte in (1..2)
+            if parte == 1
+              assign trozo = album.animales.value
+            else
+              assign trozo = album.animales_mas.value
             endif
-            if a.ppp.value
-              assign hay_ppp = true
-            endif
-            assign visibles = visibles | plus: 1
-            render 'animal-card', animal: a, mostrar_frase: true
+            for a in trozo
+              assign estado = a.estado.value | downcase | strip
+              if estado == 'adoptado'
+                continue
+              endif
+              if a.ppp.value
+                assign hay_ppp = true
+              endif
+              assign visibles = visibles | plus: 1
+              render 'animal-card', animal: a, mostrar_frase: true
+            endfor
           endfor
         -%}
       {%- endcapture -%}
@@ -83,6 +91,14 @@
       {%- else -%}
         <p class="album-main__sin-animales">
           {{ section.settings.texto_vacio }}
+        </p>
+      {%- endif -%}
+
+      {%- if request.design_mode and album.animales.value.size > 50 -%}
+        <p class="album-main__aviso">
+          Este álbum tiene {{ album.animales.value.size }} animales en «Animales» y la web solo
+          lee los 50 primeros: mueve los {{ album.animales.value.size | minus: 50 }} últimos al
+          campo «Animales (continuación)» y saldrán detrás, seguidos.
         </p>
       {%- endif -%}
 
@@ -207,6 +223,17 @@
     .album-main__grid {
       grid-template-columns: 1fr;
     }
+  }
+
+  .album-main__aviso {
+    margin: 24px auto 0;
+    max-width: 640px;
+    padding: 12px 16px;
+    border: 1px dashed currentColor;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 0.9rem;
+    opacity: 0.85;
   }
 
   .album-main__sin-animales {

@@ -139,11 +139,42 @@ Los animales vivían como artículos del blog (Ciclone, Tuco, Rocky, Jhonny, Woo
 > Personalizar*, y en el desplegable de arriba elegir la plantilla **Álbum** o **Animal**.
 
 
-- `shop.metaobjects.X.values` devuelve **máximo 50 entradas** por tipo, y ya hay 200 animales.
-  Solo afecta a los *fallbacks* automáticos (`a-quien-ayudas`, `peludo-destacado`,
-  `finales-felices` cuando no llevan bloques puestos a mano): elegirían «el que más lleva
-  esperando» mirando solo 50 de 200, así que el resultado sería falso. En la home no pasa
-  porque las tres secciones llevan sus bloques fijados. Con `album` no hay problema: son 11.
+- **El 50 es el número a temer, y aparece en dos sitios.** Comprobado el 12-09-2026 contra la
+  tienda real, con una sonda en un tema de usar y tirar.
+
+  1. `shop.metaobjects.X.values` devuelve **50 entradas** por tipo, por orden alfabético de
+     handle (`adam airon aixa alan-moto alexia…`). Con `album` da igual, que son 11; con
+     `animal` se queda en 50 de 198. Afecta a los modos automáticos, y **no basta con fijar
+     bloques en la home**: `templates/product.json` tenía `a-quien-ayudas` sin bloques y
+     elegía «los que más esperan» entre los 50 del principio del abecedario (salían siempre
+     Blue, Cay y Coco). Desde el 12-09 esos recorridos van por los álbumes, no por
+     `shop.metaobjects.animal.values`.
+  2. **Un campo de lista de referencias se sirve igual: 50 y para.** Esto no lo sabíamos y es
+     lo que escondió a 28 gatos. El álbum GATOS tenía 78 animales; `album.animales.value.size`
+     decía 78, pero el `for` daba 50 vueltas y ahí se acababa. Los 28 últimos —los que entraron
+     entre marzo y agosto de 2026— no salían en el álbum, ni se enlazaban desde ninguna página,
+     ni su propia ficha sabía a qué álbum pertenecía (la búsqueda del álbum también se comía el
+     tope). Existían y eran públicos: solo se llegaba escribiendo la URL a mano.
+
+  **Cómo está resuelto.** El álbum tiene un campo más, **`animales_mas`** (misma validación que
+  `animales`), y los seis recorridos del theme leen las dos listas seguidas con este patrón:
+
+  ```liquid
+  for parte in (1..2)
+    if parte == 1
+      assign trozo = album.animales.value
+    else
+      assign trozo = album.animales_mas.value
+    endif
+    for a in trozo
+      …
+    endfor
+  endfor
+  ```
+
+  Ojo con dos cosas: **`| concat:` no sirve** para juntarlas (devuelve la primera tal cual, son
+  drops perezosos y no arrays), y **`.value.first` tampoco** (hay que recorrer con `limit: 1`).
+  `album-main` avisa en el editor si `animales` pasa de 50, para que no vuelva a colarse.
 - Los importes de la licencia PPP del snippet son genéricos a propósito — pendientes
   los reales de Carla.
 

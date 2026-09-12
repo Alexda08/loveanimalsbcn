@@ -16,7 +16,7 @@
           "type": "migas",
           "settings": {
             "texto_raiz": "Tienda solidaria",
-            "enlace_raiz": "/collections/tienda-solidaria",
+            "enlace_raiz": "/collections/all",
             "mostrar_coleccion": true,
             "separador": "›",
             "tamano": 13,
@@ -264,7 +264,7 @@
           "settings": {
             "titulo": "Envíos y dudas",
             "origen": "manual",
-            "puntos": "Preparamos los pedidos las voluntarias: dános unos días 🤍\nEnvío a toda España\n¿Dudas con la talla? Escríbenos por DM y te ayudamos\nCambios y devoluciones según nuestra política de reembolso",
+            "puntos": "Preparamos los pedidos las voluntarias: danos unos días 🤍\nEnvío a toda España\n¿Dudas con la talla? Escríbenos por DM y te ayudamos\nCambios y devoluciones según nuestra política de reembolso",
             "mostrar_certificaciones": false
           }
         }

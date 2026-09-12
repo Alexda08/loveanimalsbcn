@@ -38,16 +38,27 @@
       {%- capture fichas -%}
         {%- liquid
           assign mostrados = 0
-          for a in album.animales.value
+          # Liquid solo lee 50 referencias por lista: la cola va en `animales_mas`
+          for parte in (1..2)
             if mostrados >= max
               break
             endif
-            assign estado = a.estado.value | downcase | strip
-            if estado == 'adoptado'
-              continue
+            if parte == 1
+              assign trozo = album.animales.value
+            else
+              assign trozo = album.animales_mas.value
             endif
-            assign mostrados = mostrados | plus: 1
-            render 'animal-card', animal: a, mostrar_frase: true, cta_estilo: 'boton', cta_label: section.settings.cta_label
+            for a in trozo
+              if mostrados >= max
+                break
+              endif
+              assign estado = a.estado.value | downcase | strip
+              if estado == 'adoptado'
+                continue
+              endif
+              assign mostrados = mostrados | plus: 1
+              render 'animal-card', animal: a, mostrar_frase: true, cta_estilo: 'boton', cta_label: section.settings.cta_label
+            endfor
           endfor
         -%}
       {%- endcapture -%}

@@ -40,26 +40,39 @@
     {%- endfor -%}
   {%- else -%}
     {%- liquid
-      # sin bloques: los que llevan más tiempo esperando, de más antiguo a más reciente
+      # sin bloques: los que llevan más tiempo esperando, de más antiguo a más reciente.
+      # Se recorren los álbumes y no `shop.metaobjects.animal.values` porque de esa
+      # lista Liquid solo sirve 50 de los casi 200, y además por orden alfabético:
+      # salían siempre los mismos tres del principio del abecedario, que no tienen
+      # por qué ser los que más esperan.
       assign max = section.settings.columns | default: 3
       assign usados = ','
       for ronda in (1..max)
         assign mejor = blank
         assign mejor_fecha = '9999-99-99'
-        for a in shop.metaobjects.animal.values
-          assign estado = a.estado.value | downcase | strip
-          if estado == 'adoptado' or a.fecha_entrada.value == blank
-            continue
-          endif
-          assign clave = ',' | append: a.system.handle | append: ','
-          if usados contains clave
-            continue
-          endif
-          assign fecha_txt = a.fecha_entrada.value | append: ''
-          if fecha_txt < mejor_fecha
-            assign mejor_fecha = fecha_txt
-            assign mejor = a
-          endif
+        for alb in shop.metaobjects.album.values
+          for parte in (1..2)
+            if parte == 1
+              assign trozo = alb.animales.value
+            else
+              assign trozo = alb.animales_mas.value
+            endif
+            for a in trozo
+              assign estado = a.estado.value | downcase | strip
+              if estado == 'adoptado' or a.fecha_entrada.value == blank
+                continue
+              endif
+              assign clave = ',' | append: a.system.handle | append: ','
+              if usados contains clave
+                continue
+              endif
+              assign fecha_txt = a.fecha_entrada.value | append: ''
+              if fecha_txt < mejor_fecha
+                assign mejor_fecha = fecha_txt
+                assign mejor = a
+              endif
+            endfor
+          endfor
         endfor
         if mejor == blank
           break

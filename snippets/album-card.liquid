@@ -12,9 +12,20 @@
   assign anio = album.anio_espera.value
 
   assign tiene_ppp = false
-  for a in album.animales.value
-    if a.ppp.value
-      assign tiene_ppp = true
+  # Liquid solo lee 50 referencias por lista: la cola va en `animales_mas`
+  for parte in (1..2)
+    if parte == 1
+      assign trozo = album.animales.value
+    else
+      assign trozo = album.animales_mas.value
+    endif
+    for a in trozo
+      if a.ppp.value
+        assign tiene_ppp = true
+        break
+      endif
+    endfor
+    if tiene_ppp
       break
     endif
   endfor

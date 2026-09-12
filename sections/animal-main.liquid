@@ -10,9 +10,20 @@
   # Primer álbum que contiene a este animal (para migas, tag y relacionados)
   assign primer_album = blank
   for alb in shop.metaobjects.album.values
-    for a in alb.animales.value
-      if a.system.id == animal.system.id
-        assign primer_album = alb
+    # Liquid solo lee 50 referencias por lista: la cola va en `animales_mas`
+    for parte in (1..2)
+      if parte == 1
+        assign trozo = alb.animales.value
+      else
+        assign trozo = alb.animales_mas.value
+      endif
+      for a in trozo
+        if a.system.id == animal.system.id
+          assign primer_album = alb
+          break
+        endif
+      endfor
+      if primer_album != blank
         break
       endif
     endfor

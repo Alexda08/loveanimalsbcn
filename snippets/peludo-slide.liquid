@@ -49,8 +49,15 @@
 
   # mensaje de WhatsApp con su ficha
   assign url_ficha = request.origin | append: animal.system.url
-  assign msg = 'Este es ' | append: nombre | append: ', lleva '
-  assign msg = msg | append: dias_num | append: ' días esperando una familia. ¿Le echas un ojo? '
+  # `dias_num` solo existe si el animal tiene fecha de entrada; sin ella el
+  # mensaje se queda sin la cifra (y, dentro de un bucle, heredaría la del
+  # anterior), así que se dice de otra manera
+  if animal.fecha_entrada.value != blank
+    assign msg = 'Este es ' | append: nombre | append: ', lleva '
+    assign msg = msg | append: dias_num | append: ' días esperando una familia. ¿Le echas un ojo? '
+  else
+    assign msg = 'Este es ' | append: nombre | append: ', está esperando una familia. ¿Le echas un ojo? '
+  endif
   assign msg = msg | append: url_ficha
   assign msg_enc = msg | url_encode | replace: '+', '%20'
   assign wa_url = 'https://wa.me/?text=' | append: msg_enc

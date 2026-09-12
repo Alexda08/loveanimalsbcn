@@ -10,9 +10,20 @@
 
   assign primer_album = blank
   for alb in shop.metaobjects.album.values
-    for a in alb.animales.value
-      if a.system.id == animal.system.id
-        assign primer_album = alb
+    # Liquid solo lee 50 referencias por lista: la cola va en `animales_mas`
+    for parte in (1..2)
+      if parte == 1
+        assign trozo = alb.animales.value
+      else
+        assign trozo = alb.animales_mas.value
+      endif
+      for a in trozo
+        if a.system.id == animal.system.id
+          assign primer_album = alb
+          break
+        endif
+      endfor
+      if primer_album != blank
         break
       endif
     endfor
@@ -43,19 +54,30 @@
   {%- capture cards -%}
     {%- liquid
       assign mostrados = 0
-      for otro in primer_album.animales.value
+      # Liquid solo lee 50 referencias por lista: la cola va en `animales_mas`
+      for parte in (1..2)
         if mostrados >= max
           break
         endif
-        if otro.system.id == animal.system.id
-          continue
+        if parte == 1
+          assign trozo = primer_album.animales.value
+        else
+          assign trozo = primer_album.animales_mas.value
         endif
-        assign estado = otro.estado.value | downcase | strip
-        if estado == 'adoptado'
-          continue
-        endif
-        render 'animal-card', animal: otro
-        assign mostrados = mostrados | plus: 1
+        for otro in trozo
+          if mostrados >= max
+            break
+          endif
+          if otro.system.id == animal.system.id
+            continue
+          endif
+          assign estado = otro.estado.value | downcase | strip
+          if estado == 'adoptado'
+            continue
+          endif
+          render 'animal-card', animal: otro
+          assign mostrados = mostrados | plus: 1
+        endfor
       endfor
     -%}
   {%- endcapture -%}

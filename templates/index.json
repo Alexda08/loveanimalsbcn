@@ -4050,40 +4050,16 @@
     "finales_felices_JKyyhW": {
       "type": "finales-felices",
       "blocks": {
-        "animal_bmMxd9": {
+        "animal_gnar": {
           "type": "animal",
           "settings": {
-            "animal": "luna",
-            "frase": ""
-          }
-        },
-        "animal_URm3jm": {
-          "type": "animal",
-          "settings": {
-            "animal": "simba-3",
-            "frase": ""
-          }
-        },
-        "animal_WUKDzg": {
-          "type": "animal",
-          "settings": {
-            "animal": "kira",
-            "frase": ""
-          }
-        },
-        "animal_EwTAMi": {
-          "type": "animal",
-          "settings": {
-            "animal": "bruno",
+            "animal": "gnar",
             "frase": ""
           }
         }
       },
       "block_order": [
-        "animal_bmMxd9",
-        "animal_URm3jm",
-        "animal_WUKDzg",
-        "animal_EwTAMi"
+        "animal_gnar"
       ],
       "name": "Finales felices",
       "settings": {
