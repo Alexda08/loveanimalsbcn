@@ -505,3 +505,47 @@ al final del álbum sigue al mismo campo. Cada ficha sigue llevando su propia ca
 así que en Abuelos o en Acogidas el que sea PPP lo dice su ficha, no el álbum. Comprobado
 renderizando: dos pestañas en la parrilla, desplegable sólo en los dos álbumes PPP.
 
+## Fotos y enlaces, a fondo (13-09-2026)
+
+Alex pidió cruzar **todas las fotos de la web con el Excel** —que todas estén en uso, que no haya
+repetidas, que no se haya quedado nada fuera— y, de paso, **todos los enlaces**. Método: huella
+visual (dHash) de las 720 fotos de los zips y de las 493 de las galerías de la tienda, para
+casarlas aunque cambie el nombre o la compresión; el Excel releído con `lee_excel.py`; la
+biblioteca de Archivos entera (738 ficheros); y un rastreo nuevo de la web comprobando cada
+destino una vez.
+
+### Lo que cuadra
+
+- **Excel → tienda: nada perdido.** Los 202 animales del Excel están (los 4 gatos que faltan
+  son Andrés, Chiquitita, Kaur y Katsuki, que siguen sin foto). Las 60 diferencias de campo son
+  todas nuestras correcciones ya documentadas: tildes, «a penas», «reservado → tímido», el
+  estado de Gnar. Ni un dato de Carla cambiado sin motivo.
+- **Cada foto de cada galería viene del fichero que el Excel da a ese animal**: 493 de 493. Ningún
+  animal sin foto, ningún recuento distinto del Excel, ninguna foto nombrada en el Excel que no
+  exista en los zips.
+- **De las 582 fotos de los zips de animales, 491 están en la web** y las 91 restantes están todas
+  clasificadas en `_sin_dueno/` (31 esperan a que Carla diga de quién son; el resto son
+  repeticiones o material de tienda). No hay ninguna foto suelta sin explicar.
+- **Biblioteca de Archivos: 670 de 738 en uso.** Los 68 sin uso son las 28 fotos de la franja de la
+  tienda (que sí se usan, desde la plantilla, no desde un metaobjeto) y 40 restos del tema viejo
+  (capturas de 2020, previews de camisetas, `web-bannerinferior.jpg`…). **No se borran**: el tema
+  publicado hoy sigue siendo el viejo y puede que los use. Cuando se publique el nuevo, fuera.
+- **Enlaces: 497 destinos distintos, 0 rotos.** 280 internos, 203 de WhatsApp (uno por ficha), 4
+  anclas a la home (las cuatro resuelven), Instagram ×3, Teaming, el catálogo de Canva, las 4
+  páginas de ayuda de cookies y el correo del CAACB. Todo 200.
+
+### Lo que se ha arreglado
+
+| Qué | Fichas | Arreglo |
+|---|---|---|
+| La misma foto dos veces en la galería | Maisha y Dagzs (idéntica), Nanu (dos fotogramas de una ráfaga: `IMG_2980`/`IMG_2981`) | fuera la repetida y borrado el fichero sobrante; el original sigue en el zip |
+| Foto de pareja con el alt de uno solo: en la ficha de Thor la foto decía «Tyson» | Tyson/Thor, Bonnie/Clyde, Lou Reed/Rei | alt con los dos nombres |
+
+### Lo que se sabe y no se toca
+
+- **`shukur-1_f46bbbd9….jpg`**: Shopify le añadió el sufijo porque ya existía un `shukur-1.jpg`
+  cuando se subió. Sólo es el nombre; la foto es la buena.
+- **`cambio-de-producto`** (3,90 €, sin foto) es un producto interno: no está en la tienda online,
+  sólo en Buy Button, Meta y Copilot. No se ve en la web.
+- **Los 4 gatos sin foto** siguen igual: `_sin_dueno/1-de-quien-es/`, a la espera de Carla.
+
