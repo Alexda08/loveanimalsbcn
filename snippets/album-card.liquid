@@ -1,6 +1,7 @@
 {% doc %}
   Card de un álbum para el grid de álbumes: portada (o cubierta con el año),
-  badge Álbum/Urgente, solapita de licencia PPP, banda de días para los álbumes
+  badge Álbum/Urgente, solapita de licencia PPP (si el álbum está marcado como PPP),
+  banda de días para los álbumes
   de año, título y subtítulo.
 
   Requiere que la section contenedora defina las variables --la-* (render 'paleta-vars').
@@ -11,24 +12,10 @@
   assign portada = album.portada.value
   assign anio = album.anio_espera.value
 
-  assign tiene_ppp = false
-  # Liquid solo lee 50 referencias por lista: la cola va en `animales_mas`
-  for parte in (1..2)
-    if parte == 1
-      assign trozo = album.animales.value
-    else
-      assign trozo = album.animales_mas.value
-    endif
-    for a in trozo
-      if a.ppp.value
-        assign tiene_ppp = true
-        break
-      endif
-    endfor
-    if tiene_ppp
-      break
-    endif
-  endfor
+  # La pestaña PPP la decide el álbum (campo `es_ppp`), no sus animales: antes
+  # bastaba un perro PPP dentro para que la llevara el álbum entero, y nueve de
+  # once la tenían — parecía que todo era PPP y echaba para atrás.
+  assign tiene_ppp = album.es_ppp.value
 -%}
 
 <a class="album-card" href="{{ album.system.url }}">

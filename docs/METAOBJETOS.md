@@ -64,6 +64,8 @@ Nombre: **Álbum** · tipo: `album`
 | Portada | `portada` | Archivo | los álbumes "desde XXXX" pueden ir sin portada: sale la cubierta con el año |
 | Animales | `animales` | Metaobjeto (animal) → **lista** | **el orden manual manda**: arrastrar en el admin |
 | Es urgente | `es_urgente` | Verdadero o falso | badge URGENTE en la card y en la cabecera |
+| Es un álbum de PPP | `es_ppp` | Verdadero o falso | pestaña «licencia PPP» en la card y desplegable de la licencia al final del álbum. **No se deduce de los animales**: hasta el 13-09-2026 bastaba un PPP dentro y nueve de once la llevaban, y parecía que todo era PPP. Hoy sólo en PPP JÓVENES y PPP ADULTOS |
+| Animales (continuación) | `animales_mas` | Metaobjeto (animal) → **lista** | la cola cuando `animales` llega a 50, ver §5 |
 | Año de espera | `anio_espera` | Número entero | solo en los "desde XXXX"; activa la banda de días (base: 1 de enero) |
 
 **Activar también Web pages** (plantilla: `album`).

@@ -495,3 +495,13 @@ Cero errores de Liquid y cero traducciones sin poner en las 226 páginas. Cero f
 390 px el documento mide exactamente 390. Las 292 tarjetas de álbum coinciden con sus fichas.
 Cero fechas imposibles. Cero SKU repetidos. Las siete portadas de álbum son de quien dicen ser.
 
+### La pestaña «licencia PPP» de los álbumes (13-09-2026)
+
+Se calculaba sola: con un solo perro PPP dentro, el álbum entero llevaba la pestaña, y la
+llevaban **nueve de once** (todos menos Mestizos y Gatos). Alex y Carla sospechan que eso echa
+para atrás: parece que todo lo que hay dentro es PPP y la gente no entra. Ahora es un campo del
+álbum, **`es_ppp`**, encendido sólo en PPP JÓVENES y PPP ADULTOS; el desplegable de la licencia
+al final del álbum sigue al mismo campo. Cada ficha sigue llevando su propia caja de licencia,
+así que en Abuelos o en Acogidas el que sea PPP lo dice su ficha, no el álbum. Comprobado
+renderizando: dos pestañas en la parrilla, desplegable sólo en los dos álbumes PPP.
+
