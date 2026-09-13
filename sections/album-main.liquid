@@ -1,8 +1,9 @@
 {% comment %}
   Página de álbum: cabecera (título, subtítulo, banda de días si es álbum de año),
   grid de fichas iterando album.animales (el orden manual del admin manda,
-  se excluyen los adoptados) y desplegable de licencia PPP si el álbum está marcado
-  como PPP (campo `es_ppp`; no se deduce de los animales).
+  se excluyen los adoptados) y, al final, el desplegable de cómo se tramita la
+  licencia PPP, en todos los álbumes (el campo `es_ppp` del álbum sólo manda en la
+  pestaña de la tarjeta).
   Se usa en templates/metaobject/album.json. El metaobjeto llega como `metaobject`.
 {% endcomment %}
 
@@ -58,7 +59,6 @@
       </div>
 
       {%- liquid
-        assign hay_ppp = album.es_ppp.value
         assign visibles = 0
       -%}
       {%- capture fichas -%}
@@ -100,7 +100,7 @@
         </p>
       {%- endif -%}
 
-      {%- if hay_ppp and section.settings.mostrar_licencia -%}
+      {%- if section.settings.mostrar_licencia -%}
         <div class="album-main__licencia">
           {% render 'licencia-ppp', modo: 'desplegable' %}
         </div>
@@ -269,7 +269,8 @@
     {
       "type": "checkbox",
       "id": "mostrar_licencia",
-      "label": "Mostrar guía de licencia PPP (si el álbum está marcado como PPP)",
+      "label": "Mostrar al final cómo se tramita la licencia PPP",
+      "info": "Sale en todos los álbumes, también en los que no son de PPP.",
       "default": true
     },
     {

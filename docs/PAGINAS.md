@@ -500,10 +500,13 @@ Cero fechas imposibles. Cero SKU repetidos. Las siete portadas de álbum son de 
 Se calculaba sola: con un solo perro PPP dentro, el álbum entero llevaba la pestaña, y la
 llevaban **nueve de once** (todos menos Mestizos y Gatos). Alex y Carla sospechan que eso echa
 para atrás: parece que todo lo que hay dentro es PPP y la gente no entra. Ahora es un campo del
-álbum, **`es_ppp`**, encendido sólo en PPP JÓVENES y PPP ADULTOS; el desplegable de la licencia
-al final del álbum sigue al mismo campo. Cada ficha sigue llevando su propia caja de licencia,
-así que en Abuelos o en Acogidas el que sea PPP lo dice su ficha, no el álbum. Comprobado
-renderizando: dos pestañas en la parrilla, desplegable sólo en los dos álbumes PPP.
+álbum, **`es_ppp`**, encendido sólo en PPP JÓVENES y PPP ADULTOS. Cada ficha sigue llevando su
+propia caja de licencia, así que en Abuelos o en Acogidas el que sea PPP lo dice su ficha, no el
+álbum. Comprobado renderizando: dos pestañas en la parrilla.
+
+Ese mismo día Alex pidió lo contrario para el **desplegable de «cómo se tramita la licencia PPP»**
+del final del álbum: que salga en **todos**, también en los que no son de PPP (Gatos incluido).
+Así que ahí `es_ppp` no manda; sólo el ajuste `mostrar_licencia` de la sección.
 
 ## Fotos y enlaces, a fondo (13-09-2026)
 
