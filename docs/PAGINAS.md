@@ -552,3 +552,67 @@ destino una vez.
   sólo en Buy Button, Meta y Copilot. No se ve en la web.
 - **Los 4 gatos sin foto** siguen igual: `_sin_dueno/1-de-quien-es/`, a la espera de Carla.
 
+## La revisión final antes de publicar (19-09-2026)
+
+Se abrió la web en un Chromium de verdad a **390, 768 y 1440 px**, recorriendo cada página entera
+para que se revelaran todas las secciones, y se midió lo que el HTML no dice: desbordes
+horizontales, texto recortado, áreas de toque, encabezados, imágenes borrosas y contraste.
+Catorce páginas por ancho.
+
+### Lo que salió limpio
+
+**Cero desbordes horizontales** en los tres anchos (a 390 px el documento mide 390), **cero texto
+recortado**, **cero imágenes rotas**, **cero errores de Liquid** y **un solo h1 por página** (tras
+los arreglos de abajo). Los enlaces del pie miden 19 px de alto, por debajo de los 24 que pide la
+WCAG, pero van separados 36 px: cumplen por la excepción de espaciado.
+
+### Dos trampas de medición que conviene recordar
+
+- **La captura de página entera se deja el pie en blanco.** No es un fallo de la web: las
+  secciones se revelan al entrar en pantalla y el pie queda fuera. Comprobado aparte con captura
+  del elemento: el pie pinta sus tres menús en blanco sobre marrón, perfectamente legible.
+- **Por encima de 990 px, Horizon no scrollea la ventana sino un contenedor interno**
+  (`html:has(.page-wrapper), body { height: 100dvh; overflow: hidden }` en `base.css`, y el scroll
+  va dentro de `.page-wrapper`). Con `window.scrollTo` no se mueve nada y la captura sale de
+  1000 px. Para medir o capturar en escritorio hay que devolverle el scroll a la ventana:
+
+  ```js
+  html:has(.page-wrapper), html:has(.page-wrapper) body { height: auto !important; overflow: visible !important }
+  .page-wrapper { overflow: visible !important; height: auto !important }
+  ```
+
+  Y para quitar la barra de vista previa de Shopify de las capturas, `&pb=0`.
+
+### Lo que se arregló
+
+| Qué faltaba | Dónde se veía | Arreglo |
+|---|---|---|
+| **No había favicon** | la pestaña del navegador, en blanco, en toda la web | Se sacó el emblema de la asociación (el perro tras la reja) de la foto de una camiseta —era el único sitio donde existía—, se limpió a dos tintas y se pintó con los colores de la web. `settings.favicon` |
+| **Al compartir un enlace de la home, la tienda o una página de texto no salía imagen** | WhatsApp, Instagram, Facebook | Tarjeta 1200 × 630 con el emblema y el nombre, en la tipografía de la web, y un ajuste nuevo del tema (**Imagen al compartir el enlace**) para cambiarla sin tocar código. Las fichas y los álbumes siguen usando su propia foto |
+| La home tenía **dos h1** (el nombre de la tienda, escondido, y la guía PPP) | buscadores y lectores de pantalla | el titular de la guía PPP pasa a h2 |
+| **«Nuestros animales» no tenía h1** | ídem | ajuste nuevo en `albums-grid`, **Este título es el titular de la página**, activado sólo ahí: «Peludos» sale como h1 |
+| **«Sobre nosotras» no tenía ni un encabezado** en toda la página | ídem | el titular de apertura pasa a h1 y «Qué hacemos» a h2, sin cambiar un píxel del diseño (comprobado con capturas antes/después) |
+| El muro de finales felices, con **un solo adoptado**, dejaba la tarjeta a la izquierda y tres huecos | escritorio | la rejilla usa tantas columnas como tarjetas haya y se centra, manteniendo el ancho de columna. En móvil no cambia nada |
+
+### Lo que se mira y se deja como está
+
+El contraste de la web es correcto salvo en textos secundarios en dorado (`#B08D57`) sobre fondos
+claros: «hoy puede ser el último» (2,5:1), las etiquetas de convivencia «? con otros perros —
+consultar» (2,8:1) y la línea de contacto en vino sobre nude (3,95:1, roza el 4,5 que pide la
+norma). Son decisiones de diseño con un coste de accesibilidad, no erratas: oscurecer el dorado
+un punto los arreglaría, pero cambia la paleta y eso lo decide Carla.
+
+El aviso de contraste que da la herramienta en la **barra superior** es un falso positivo: mide el
+fondo del antepasado y no el de la barra, que es marrón oscuro con texto blanco.
+
+### Estado al cerrar la revisión
+
+- **Enlaces**: 280 rutas rastreadas, 497 destinos distintos, **0 rotos** y ninguna ruta que no
+  devuelva 200.
+- **Redirecciones**: las 13 del blog viejo, puestas y apuntando a su álbum.
+- **Sitemap**: `sitemap_metaobject_pages_1.xml` ya lista las **209** URLs de fichas y álbumes.
+  Dan 404 para el público hasta que se publique el tema.
+- **Borradores**: 6 fichas de animal (las del muro) y 22 productos. Ningún álbum.
+- Lo único que queda antes de publicar y que no depende de nosotros: **las políticas legales**
+  (Crowdence ×27 en cuatro políticas, ROLE CLOTHING ×5 en dos páginas).
+
