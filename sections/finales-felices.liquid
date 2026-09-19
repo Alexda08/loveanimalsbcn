@@ -87,6 +87,30 @@
 {%- endcapture -%}
 
 {%- assign muro_limpio = muro | strip -%}
+{%- liquid
+  # cuántas tarjetas han salido de verdad, para no dejar huecos vacíos al lado
+  # `class="feliz-card"` a secas sólo sale en la apertura de cada tarjeta
+  assign cuantas = muro_limpio | split: 'class="feliz-card"' | size | minus: 1
+  assign vacias = muro_limpio | split: 'class="feliz-card feliz-card--vacia"' | size | minus: 1
+  assign cuantas = cuantas | plus: vacias
+  if cuantas < 1
+    assign cuantas = 1
+  endif
+  assign cols_llenas = section.settings.columns | default: 4
+  assign cols = cols_llenas
+  assign ancho = '100%'
+  if cuantas < cols_llenas
+    # menos tarjetas que columnas: se dejan tantas columnas como tarjetas y la
+    # rejilla se encoge a lo que ocuparían dentro de la rejilla completa, para
+    # que la tarjeta no se estire de lado a lado
+    assign cols = cuantas
+    assign huecos_llenos = cols_llenas | minus: 1
+    assign huecos = cuantas | minus: 1
+    assign ancho = 'calc(' | append: cuantas | append: ' * (100% - ' | append: huecos_llenos
+    assign ancho = ancho | append: ' * var(--felices-gap)) / ' | append: cols_llenas
+    assign ancho = ancho | append: ' + ' | append: huecos | append: ' * var(--felices-gap))'
+  endif
+-%}
 {%- if muro_limpio != blank or request.design_mode -%}
   <div class="felices{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}">
     <div class="felices__wrap{% if section.settings.section_width == 'full-width' %} felices__wrap--full{% endif %}">
@@ -103,7 +127,10 @@
       </div>
 
       {%- if muro_limpio != blank -%}
-        <div class="felices__grid{% if section.settings.girar %} felices__grid--girado{% endif %}">
+        <div
+          class="felices__grid{% if section.settings.girar %} felices__grid--girado{% endif %}"
+          style="--felices-cols: {{ cols }}; --felices-ancho: {{ ancho }}"
+        >
           {{ muro }}
         </div>
       {%- else -%}
@@ -167,11 +194,15 @@
     display: grid;
     grid-template-columns: repeat(var(--felices-cols, 4), 1fr);
     gap: var(--felices-gap, 20px);
+    width: var(--felices-ancho, 100%);
+    max-width: 100%;
+    margin-inline: auto;
   }
 
   @media (max-width: 960px) {
     .felices__grid {
       grid-template-columns: repeat(2, 1fr);
+      width: 100%;
     }
   }
 

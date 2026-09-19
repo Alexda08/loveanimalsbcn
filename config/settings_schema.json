@@ -53,6 +53,12 @@
         "type": "image_picker",
         "id": "favicon",
         "label": "t:settings.favicon"
+      },
+      {
+        "type": "image_picker",
+        "id": "imagen_social",
+        "label": "Imagen al compartir el enlace",
+        "info": "La que sale en WhatsApp, Instagram o Facebook cuando la página no tiene foto propia (la home, la tienda, las páginas de texto). Las fichas de los animales y los álbumes usan su propia foto. Tamaño recomendado: 1200 x 630 px."
       }
     ]
   },

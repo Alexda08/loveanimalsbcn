@@ -70,6 +70,12 @@
       assign la_imagen = metaobject.portada.value.preview_image
     endif
   endif
+  # y para lo que no tiene foto propia (la home, la tienda, las páginas de
+  # texto), la tarjeta de la asociación: compartir el enlace sin nada es
+  # perder la mitad del mensaje
+  if la_imagen == blank
+    assign la_imagen = settings.imagen_social
+  endif
   # LA END
 -%}
 

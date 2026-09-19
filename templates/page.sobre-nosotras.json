@@ -101,7 +101,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<p>Nacimos para ayudar a los animales que se cruzan en nuestro camino</p>",
+                "text": "<h1>Nacimos para ayudar a los animales que se cruzan en nuestro camino</h1>",
                 "width": "100%",
                 "max_width": "none",
                 "alignment": "center",
@@ -340,7 +340,7 @@
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<p>Qué hacemos</p>",
+            "text": "<h2>Qué hacemos</h2>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "center",

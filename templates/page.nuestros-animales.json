@@ -38,6 +38,7 @@
         "album_gatos"
       ],
       "settings": {
+        "es_titular_de_pagina": true,
         "padding-block-start": 78,
         "padding-block-end": 78
       }

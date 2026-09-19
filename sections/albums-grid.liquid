@@ -37,7 +37,15 @@
           <p class="albums-grid__fina">{{ section.settings.fina }}</p>
         {%- endif -%}
         {%- if section.settings.titulo != blank -%}
-          <h2 class="albums-grid__titulo">{{ section.settings.titulo }}</h2>
+          {%- comment -%}
+            En «Nuestros animales» este titular es el de la página: ahí va como h1.
+            En la home no, que allí el h1 es el nombre de la tienda.
+          {%- endcomment -%}
+          {%- if section.settings.es_titular_de_pagina -%}
+            <h1 class="albums-grid__titulo">{{ section.settings.titulo }}</h1>
+          {%- else -%}
+            <h2 class="albums-grid__titulo">{{ section.settings.titulo }}</h2>
+          {%- endif -%}
         {%- endif -%}
         {%- if section.settings.lead != blank -%}
           <p class="albums-grid__lead">{{ section.settings.lead }}</p>
@@ -167,6 +175,13 @@
       "id": "lead",
       "label": "Texto introductorio",
       "default": "Organizados por álbumes, como en nuestro Instagram. Dentro de cada álbum encontrarás la ficha de cada animal con sus fotos, su historia y su carácter."
+    },
+    {
+      "type": "checkbox",
+      "id": "es_titular_de_pagina",
+      "label": "Este título es el titular de la página",
+      "info": "Actívalo sólo si la sección abre la página (sale como h1). En la home debe estar apagado.",
+      "default": false
     },
     {
       "type": "paragraph",
