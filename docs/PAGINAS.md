@@ -655,3 +655,27 @@ desde el editor del tema.
 Quedan fuera las 5 fotos del catálogo que son ropa o repiten otra (la sudadera «Adoptar es vida», el
 totebag, la camiseta, la segunda mochila y los jabones del lavabo).
 
+### Fuera todas las referencias a Crowdence y Role Clothing (04-10-2026)
+
+La tienda salió de la plataforma de Crowdence, y sus datos seguían en los textos legales: «Crowdence,
+S.L.» (con NIF y dirección en Mairena del Aljarafe) aparecía como titular de **toda** la web, y
+«Role Clothing» como quien trata los datos. Decisión de Alex: fuera. Se han limpiado **seis textos**:
+el aviso legal, la privacidad, los términos, la política de reembolso y las páginas `legal` y
+`cambios-y-devoluciones`. En total, **41 menciones**; ahora hay **0** (comprobado en la tienda y en
+las páginas servidas).
+
+- El titular pasa a ser «Asociación animalista sin ánimo de lucro *De la jaula a la vida bcn*
+  (Love Animals BCN)», con el correo `loveanimalsbcn@gmail.com`.
+- «Crowdence ofrece este sitio» pasa a «Love Animals BCN ofrece este sitio»; `soporte@crowdence.com`,
+  al correo de la asociación; «error de Role Clothing», a «error nuestro»; la ley aplicable, a «las
+  leyes de España».
+- **Pendiente de Carla, y es obligatorio:** el aviso legal (art. 10 de la LSSI) exige **NIF y
+  domicilio** del titular. No los tenemos, así que se han quitado los de Crowdence y **no se ha
+  puesto ninguno**. La dirección que figura en la tienda parece de una persona y no se ha publicado.
+  Cuando los dé, es una línea en *Configuración → Políticas → Aviso legal*.
+- Los originales están guardados en el scratchpad de la sesión (`copia_legal/`), por si hubiera que
+  volver atrás.
+- Ojo: son textos legales reescritos con sustituciones, no por un abogado. Sirven para publicar, pero
+  conviene que Carla los repase (sobre todo las menciones a «empresa» y «sociedad» que queden en los
+  términos del servicio, que vienen de una plantilla de tienda online).
+
