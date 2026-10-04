@@ -692,3 +692,17 @@ Notificaciones* y *Personalizar → Pago*.
 
 El resto, en palabras de Carla, «todo perfect».
 
+### Título y descripción de la portada (05-10-2026)
+
+Los de *Tienda online → Preferencias* eran los de la tienda vieja («Camisetas animalistas fabricadas
+con algodón 100 % orgánico…») y la API de Shopify no deja tocarlos. Así que los pone el tema: dos
+ajustes nuevos en *Personalizar → Ajustes del tema → Logo y favicon*, **Título de la portada** y
+**Descripción de la portada**, que `meta-tags.liquid` usa sólo en la home (en `<title>`, en la meta
+descripción y en `og:`/`twitter:`). Si se vacían, vuelve a mandar lo de Preferencias.
+
+- Título (53 caracteres): «Love Animals BCN · Adopta perros y gatos en Barcelona».
+- Descripción (155): «Perros y gatos del CAACB que buscan familia en Barcelona. Conoce su historia, adopta, acoge o
+  colabora con nuestra tienda solidaria. De la jaula a la vida.»
+
+El resto de páginas no cambian (comprobado en «Nuestros animales», una ficha y un producto).
+

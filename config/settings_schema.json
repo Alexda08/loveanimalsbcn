@@ -59,6 +59,18 @@
         "id": "imagen_social",
         "label": "Imagen al compartir el enlace",
         "info": "La que sale en WhatsApp, Instagram o Facebook cuando la página no tiene foto propia (la home, la tienda, las páginas de texto). Las fichas de los animales y los álbumes usan su propia foto. Tamaño recomendado: 1200 x 630 px."
+      },
+      {
+        "type": "text",
+        "id": "titulo_home",
+        "label": "Título de la portada (buscadores y enlaces)",
+        "info": "El que sale en la pestaña, en Google y al compartir la home. Mejor por debajo de 60 caracteres. Vacío: el de Tienda online → Preferencias."
+      },
+      {
+        "type": "textarea",
+        "id": "descripcion_home",
+        "label": "Descripción de la portada (buscadores y enlaces)",
+        "info": "La que sale debajo del título en Google y al compartir la home. Mejor entre 120 y 160 caracteres. Vacío: la de Tienda online → Preferencias."
       }
     ]
   },
