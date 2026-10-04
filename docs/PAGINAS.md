@@ -706,3 +706,23 @@ descripción y en `og:`/`twitter:`). Si se vacían, vuelve a mandar lo de Prefer
 
 El resto de páginas no cambian (comprobado en «Nuestros animales», una ficha y un producto).
 
+### Tarjetas que se cortaban en el móvil (05-10-2026)
+
+Alex lo vio en el editor: en la home, la tarjeta «iii. Nuestros animales» salía cortada en el móvil,
+con el título a medias y sin texto ni enlace. **Medía 73 px** cuando su contenido pide 173.
+
+**Por qué.** Las cuatro tarjetas son grupos de Horizon. Tres tenían la altura en «Rellenar» y esa en
+«Ajustar al contenido». En escritorio no se nota, porque van en fila. En el móvil se apilan, y las
+que «rellenan» se reparten el alto disponible: la que se ajustaba se quedó con lo que sobraba y el
+resto se cortó por `overflow: hidden`. Las otras tres, al revés, se estiraban con un hueco vacío abajo.
+
+**Arreglo.** Las cuatro en «Rellenar» para escritorio (mismo alto en la fila) y **«Ajustar al
+contenido» en móvil** (`height_mobile: fit`). Ahora miden 173 px las cuatro, sin recortes ni huecos.
+
+Buscándolo por toda la web —cualquier caja que recorte su propio contenido, en 10 páginas, a 390 y
+768 px— salió un caso más, con el mismo mecanismo: la tarjeta «iii. Donación puntual» de «Sobre
+nosotras» (la del IBAN), que perdía 43 px. Mismo arreglo, y ya no hay ninguna.
+
+**Para la próxima:** en un grupo de tarjetas que se apila en móvil, «Altura en móviles» →
+«Ajustar al contenido». Con «Igual que en escritorio» y «Rellenar», se cortan.
+

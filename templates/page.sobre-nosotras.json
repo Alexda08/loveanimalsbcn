@@ -1957,7 +1957,8 @@
                 "padding-block-start": 24,
                 "padding-block-end": 24,
                 "padding-inline-start": 20,
-                "padding-inline-end": 20
+                "padding-inline-end": 20,
+                "height_mobile": "fit"
               },
               "blocks": {
                 "colabora_i_num": {
@@ -2080,7 +2081,8 @@
                 "padding-block-start": 24,
                 "padding-block-end": 24,
                 "padding-inline-start": 20,
-                "padding-inline-end": 20
+                "padding-inline-end": 20,
+                "height_mobile": "fit"
               },
               "blocks": {
                 "colabora_ii_num": {
@@ -2203,7 +2205,8 @@
                 "padding-block-start": 24,
                 "padding-block-end": 24,
                 "padding-inline-start": 20,
-                "padding-inline-end": 20
+                "padding-inline-end": 20,
+                "height_mobile": "fit"
               },
               "blocks": {
                 "colabora_iii_num": {
@@ -2352,7 +2355,8 @@
                 "padding-block-start": 24,
                 "padding-block-end": 24,
                 "padding-inline-start": 20,
-                "padding-inline-end": 20
+                "padding-inline-end": 20,
+                "height_mobile": "fit"
               },
               "blocks": {
                 "colabora_iv_num": {
