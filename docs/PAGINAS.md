@@ -100,7 +100,7 @@ caben; si no fuera por eso se quedarían sin ningún enlace en toda la web.
 
 Los menús `footer` y `footer-1` son del tema viejo y ya no los usa nadie. No se han borrado, pero
 tampoco se pintan. Con ellos dejan de estar enlazadas `/pages/envios`, `/pages/cambios-y-devoluciones`
-y `/pages/legal` — las dos primeras describen la operativa antigua de Role Clothing, así que
+y `/pages/legal` — las dos primeras describen la operativa antigua de la plataforma anterior, así que
 tampoco convenía enlazarlas tal como están.
 
 ## El blog viejo
@@ -151,7 +151,7 @@ borrador (no se han borrado) y hay **12 redirecciones 301** de cada URL vieja a 
 2. ~~Pasar las entradas a publicadas~~ — hecho: las 211 están en ACTIVE.
 3. Repasar los *fallbacks* que miran `shop.metaobjects.animal.values`, que solo ven 50 de 200.
 4. Decidir qué se hace con `/pages/envios` y `/pages/cambios-y-devoluciones`, que se quedan sin
-   enlace y siguen contando la operativa antigua de Role Clothing.
+   enlace y siguen contando la operativa antigua de la plataforma anterior.
 5. Añadir «Otros productos» a la tienda, como pidió Carla (lo repitió el 06-09). **Sigue sin
    poderse**: las tazas, fundas, llaveros, láminas, mochilas, bodys, bolis y jabones no existen
    como producto, solo hay fotos suyas, y las del «último enlace de Smash» que menciona no han
@@ -457,7 +457,7 @@ su álbum y sus relacionados.
 ### La página de contacto (lo que Alex decía que estaba mal)
 
 Eran dos cosas. El cuerpo era HTML del tema viejo (clases `PageHeader`/`SectionHeader`) y el
-«formulario de contacto» era un **Typeform de `crowdence.typeform.com`**, o sea de otra empresa:
+«formulario de contacto» era un **formulario externo** de otra empresa:
 lo que escribiera la gente no llegaba a la protectora. Y la plantilla con el formulario de verdad
 (`templates/page.contact.json`, que trae el theme) **no la usaba ninguna página**, porque a esta
 le faltaba el sufijo `contact`.
@@ -469,10 +469,9 @@ viejo está guardado en el scratchpad por si hiciera falta.
 
 ### Lo que NO se ha tocado, porque no es cosa nuestra
 
-1. **Las políticas de la tienda son de otra empresa.** «Crowdence, S.L.», con NIF y dirección en
-   Mairena del Aljarafe (Sevilla), aparece **26 veces**: 19 en el aviso legal, 5 en los términos
+1. **Las políticas de la tienda son de otra empresa.** Otra empresa, con NIF y dirección en Sevilla, aparece **26 veces**: 19 en el aviso legal, 5 en los términos
    del servicio y 2 en la política de privacidad. En la página de cambios y devoluciones y en
-   `/pages/legal` manda otra distinta, **ROLE CLOTHING** (5 menciones). Es texto legal de una web
+   `/pages/legal` manda otra distinta (5 menciones). Es texto legal de una web
    publicada: lo tiene que rehacer Carla con los datos de la asociación.
 2. **Dos precios se salen**: la camiseta `mestizos` a 17,90 € cuando las otras once van a 15, y
    `sudadera-mestizos` a 27,90 € cuando las otras diez van a 25.
@@ -614,7 +613,7 @@ fondo del antepasado y no el de la barra, que es marrón oscuro con texto blanco
   Dan 404 para el público hasta que se publique el tema.
 - **Borradores**: 6 fichas de animal (las del muro) y 22 productos. Ningún álbum.
 - Lo único que queda antes de publicar y que no depende de nosotros: **las políticas legales**
-  (Crowdence ×27 en cuatro políticas, ROLE CLOTHING ×5 en dos páginas).
+  (la empresa de la plataforma anterior, en cuatro políticas y dos páginas; ya quitadas).
 
 ## La tercera ronda de Carla (04-10-2026)
 
@@ -655,27 +654,27 @@ desde el editor del tema.
 Quedan fuera las 5 fotos del catálogo que son ropa o repiten otra (la sudadera «Adoptar es vida», el
 totebag, la camiseta, la segunda mochila y los jabones del lavabo).
 
-### Fuera todas las referencias a Crowdence y Role Clothing (04-10-2026)
+### Fuera todas las referencias a la empresa de la plataforma anterior (04-10-2026)
 
-La tienda salió de la plataforma de Crowdence, y sus datos seguían en los textos legales: «Crowdence,
-S.L.» (con NIF y dirección en Mairena del Aljarafe) aparecía como titular de **toda** la web, y
-«Role Clothing» como quien trata los datos. Decisión de Alex: fuera. Se han limpiado **seis textos**:
-el aviso legal, la privacidad, los términos, la política de reembolso y las páginas `legal` y
-`cambios-y-devoluciones`. En total, **41 menciones**; ahora hay **0** (comprobado en la tienda y en
-las páginas servidas).
+La tienda salió de la plataforma de otra empresa y sus datos seguían en los textos legales: figuraba
+como titular de **toda** la web, con su NIF, su registro mercantil y su dirección, y su marca de ropa
+como quien trata los datos. Decisión de Alex: fuera. Se han limpiado **seis textos** (el aviso legal,
+la privacidad, los términos, el reembolso y las páginas `legal` y `cambios-y-devoluciones`): 41
+menciones, ahora **0**.
+
+Comprobado en tres sitios: las 285 rutas servidas por el tema (políticas incluidas), los datos de la
+tienda (productos, colecciones, fichas, álbumes, menús, blogs, páginas, ficheros y ajustes) y el
+código del tema. En todos, 0. Queda **sin revisar lo que no se puede leer por API**: las plantillas
+de los correos de notificación y la página de pago, que se miran en *Configuración →
+Notificaciones* y *Personalizar → Pago*.
 
 - El titular pasa a ser «Asociación animalista sin ánimo de lucro *De la jaula a la vida bcn*
   (Love Animals BCN)», con el correo `loveanimalsbcn@gmail.com`.
-- «Crowdence ofrece este sitio» pasa a «Love Animals BCN ofrece este sitio»; `soporte@crowdence.com`,
-  al correo de la asociación; «error de Role Clothing», a «error nuestro»; la ley aplicable, a «las
-  leyes de España».
+- El correo de reembolsos y las menciones al fabricante pasan a la asociación («error nuestro»), y
+  la ley aplicable, a «las leyes de España».
 - **Pendiente de Carla, y es obligatorio:** el aviso legal (art. 10 de la LSSI) exige **NIF y
-  domicilio** del titular. No los tenemos, así que se han quitado los de Crowdence y **no se ha
-  puesto ninguno**. La dirección que figura en la tienda parece de una persona y no se ha publicado.
-  Cuando los dé, es una línea en *Configuración → Políticas → Aviso legal*.
-- Los originales están guardados en el scratchpad de la sesión (`copia_legal/`), por si hubiera que
-  volver atrás.
-- Ojo: son textos legales reescritos con sustituciones, no por un abogado. Sirven para publicar, pero
-  conviene que Carla los repase (sobre todo las menciones a «empresa» y «sociedad» que queden en los
-  términos del servicio, que vienen de una plantilla de tienda online).
-
+  domicilio** del titular. Se quitaron los antiguos y **no se ha puesto ninguno**: no los tenemos, y
+  la dirección que figura en la tienda parece de una persona. Es una línea en *Configuración →
+  Políticas → Aviso legal*.
+- Son textos reescritos por sustitución, no por un abogado: conviene que Carla los repase. Los
+  originales están en el scratchpad de la sesión (`copia_legal/`).
