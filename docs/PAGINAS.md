@@ -678,3 +678,17 @@ Notificaciones* y *Personalizar → Pago*.
   Políticas → Aviso legal*.
 - Son textos reescritos por sustitución, no por un abogado: conviene que Carla los repase. Los
   originales están en el scratchpad de la sesión (`copia_legal/`).
+
+### Los retoques de Carla a «Otros productos» (04-10-2026, por la noche)
+
+- Al final del texto de entrada: «TODOS LOS PRODUCTOS SON PERSONALIZABLES con el diseño, frase o foto
+  que quieras», para que no se piense que sólo existe el diseño de la foto. Sus mayúsculas, tal cual.
+- «Jabones con tarjeta» pasa a **«Detalles para bodas y celebraciones»**, con la línea «personalizados
+  para cada evento, con o sin tarjeta»: hacen de todo para eventos y no siempre llevan tarjeta.
+- Para que no se confundan los detalles de boda con el jabón normal, la tarjeta de «Jabones
+  solidarios» cambia de foto: la del jabón azul en el lavabo (`otros-jabon-lavabo.jpg`, la misma que
+  ya estaba en el catálogo del repo), con la línea «para el día a día». La foto de los cinco jabones
+  con etiqueta (`otros-jabones.jpg`) queda en Ficheros sin usar.
+
+El resto, en palabras de Carla, «todo perfect».
+

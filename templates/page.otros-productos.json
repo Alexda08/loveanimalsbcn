@@ -87,17 +87,17 @@
         "jabones": {
           "type": "producto",
           "settings": {
-            "imagen": "shopify://shop_images/otros-jabones.jpg",
+            "imagen": "shopify://shop_images/otros-jabon-lavabo.jpg",
             "titulo": "Jabones solidarios",
-            "texto": "en bolsita, con su etiqueta"
+            "texto": "para el día a día"
           }
         },
         "jabon_tarjeta": {
           "type": "producto",
           "settings": {
             "imagen": "shopify://shop_images/otros-jabon-tarjeta.jpg",
-            "titulo": "Jabones con tarjeta",
-            "texto": "con etiqueta personalizada y la ficha de un peludo"
+            "titulo": "Detalles para bodas y celebraciones",
+            "texto": "personalizados para cada evento, con o sin tarjeta"
           }
         },
         "cuadro": {
@@ -126,7 +126,7 @@
       "settings": {
         "fina": "también en la tienda solidaria…",
         "titulo": "Otros productos",
-        "lead": "Además de camisetas, sudaderas y totebags: tazas, fundas de móvil, bodys, mochilas, llaveros, bolígrafos y más.",
+        "lead": "Además de camisetas, sudaderas y totebags: tazas, fundas de móvil, bodys, mochilas, llaveros, bolígrafos y más. TODOS LOS PRODUCTOS SON PERSONALIZABLES con el diseño, frase o foto que quieras.",
         "es_titular_de_pagina": true,
         "nota": "<p>Todos los pedidos y productos pueden <strong>PERSONALIZARSE</strong>: elige el <strong>COLOR</strong> de la prenda, el <strong>DISEÑO</strong> que más te guste e, incluso, podemos poner tus <strong>FOTOS</strong> favoritas en llaveros, tazas, fundas de móvil…</p><p>Los pedidos se hacen por Instagram: escribe a <strong>@el_armario_de_pris</strong> diciéndole qué quieres. Parte de los beneficios se donan a la asociación <strong>De la jaula a la vida</strong>.</p>",
         "boton_texto": "Pídelo por Instagram",
