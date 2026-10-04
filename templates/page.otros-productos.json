@@ -1,0 +1,142 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "otros": {
+      "type": "otros-productos",
+      "blocks": {
+        "taza_miau": {
+          "type": "producto",
+          "settings": {
+            "imagen": "shopify://shop_images/otros-taza-miau.jpg",
+            "titulo": "Taza «Si tú me dices miau»",
+            "texto": "lo dejo todo"
+          }
+        },
+        "taza_amor": {
+          "type": "producto",
+          "settings": {
+            "imagen": "shopify://shop_images/otros-taza-amor.jpg",
+            "titulo": "Taza «El amor no se compra»",
+            "texto": "con el lema de la tienda"
+          }
+        },
+        "tazas_peligroso": {
+          "type": "producto",
+          "settings": {
+            "imagen": "shopify://shop_images/otros-tazas-peligroso.jpg",
+            "titulo": "Tazas «Yo no soy peligroso» y «Ley STOP PPP»",
+            "texto": "para defender a los perros PPP"
+          }
+        },
+        "fundas": {
+          "type": "producto",
+          "settings": {
+            "imagen": "shopify://shop_images/otros-fundas-movil.jpg",
+            "titulo": "Fundas de móvil",
+            "texto": "con el emblema y los lemas de la asociación"
+          }
+        },
+        "bodys": {
+          "type": "producto",
+          "settings": {
+            "imagen": "shopify://shop_images/otros-bodys.jpg",
+            "titulo": "Bodys de bebé",
+            "texto": "con «Si tú me dices miau», «Ley STOP PPP» o «El amor no se compra»"
+          }
+        },
+        "mochila": {
+          "type": "producto",
+          "settings": {
+            "imagen": "shopify://shop_images/otros-mochila.jpg",
+            "titulo": "Mochilas de cuerdas",
+            "texto": "con el emblema de la asociación"
+          }
+        },
+        "llaveros": {
+          "type": "producto",
+          "settings": {
+            "imagen": "shopify://shop_images/otros-llaveros.jpg",
+            "titulo": "Llaveros",
+            "texto": "redondos, con el emblema"
+          }
+        },
+        "punto_libro": {
+          "type": "producto",
+          "settings": {
+            "imagen": "shopify://shop_images/otros-punto-libro.jpg",
+            "titulo": "Puntos de libro",
+            "texto": "con las fotos de tu peludo"
+          }
+        },
+        "boli": {
+          "type": "producto",
+          "settings": {
+            "imagen": "shopify://shop_images/otros-boli.jpg",
+            "titulo": "Bolígrafos",
+            "texto": "con huellitas"
+          }
+        },
+        "jabones": {
+          "type": "producto",
+          "settings": {
+            "imagen": "shopify://shop_images/otros-jabones.jpg",
+            "titulo": "Jabones solidarios",
+            "texto": "en bolsita, con su etiqueta"
+          }
+        },
+        "jabon_tarjeta": {
+          "type": "producto",
+          "settings": {
+            "imagen": "shopify://shop_images/otros-jabon-tarjeta.jpg",
+            "titulo": "Jabones con tarjeta",
+            "texto": "con etiqueta personalizada y la ficha de un peludo"
+          }
+        },
+        "cuadro": {
+          "type": "producto",
+          "settings": {
+            "imagen": "shopify://shop_images/otros-cuadro.jpg",
+            "titulo": "Cuadro con su historia",
+            "texto": "la ficha de un adoptado, enmarcada"
+          }
+        }
+      },
+      "block_order": [
+        "taza_miau",
+        "taza_amor",
+        "tazas_peligroso",
+        "fundas",
+        "bodys",
+        "mochila",
+        "llaveros",
+        "punto_libro",
+        "boli",
+        "jabones",
+        "jabon_tarjeta",
+        "cuadro"
+      ],
+      "settings": {
+        "fina": "también en la tienda solidaria…",
+        "titulo": "Otros productos",
+        "lead": "Además de camisetas, sudaderas y totebags: tazas, fundas de móvil, bodys, mochilas, llaveros, bolígrafos y más.",
+        "es_titular_de_pagina": true,
+        "nota": "<p>Todos los pedidos y productos pueden <strong>PERSONALIZARSE</strong>: elige el <strong>COLOR</strong> de la prenda, el <strong>DISEÑO</strong> que más te guste e, incluso, podemos poner tus <strong>FOTOS</strong> favoritas en llaveros, tazas, fundas de móvil…</p><p>Los pedidos se hacen por Instagram: escribe a <strong>@el_armario_de_pris</strong> diciéndole qué quieres. Parte de los beneficios se donan a la asociación <strong>De la jaula a la vida</strong>.</p>",
+        "boton_texto": "Pídelo por Instagram",
+        "boton_enlace": "https://www.instagram.com/el_armario_de_pris",
+        "padding-block-start": 78,
+        "padding-block-end": 78
+      }
+    }
+  },
+  "order": [
+    "otros"
+  ]
+}

@@ -616,3 +616,42 @@ fondo del antepasado y no el de la barra, que es marrón oscuro con texto blanco
 - Lo único que queda antes de publicar y que no depende de nosotros: **las políticas legales**
   (Crowdence ×27 en cuatro políticas, ROLE CLOTHING ×5 en dos páginas).
 
+## La tercera ronda de Carla (04-10-2026)
+
+Carla mandó un audio, un Excel nuevo (`Downloads/Love Animals BCN - fichas de los animales.xlsx`) y
+un zip con tres fotos (`Simba, Fabrizzio, Behia .zip`). Pedía dos cosas: meter los adoptados y
+poner «otros productos» en la tienda solidaria.
+
+### Los adoptados
+
+Catorce filas llevan «ADOPTADO/A» pegado al nombre. Todas están ya marcadas como `adoptado`:
+Simba «abuelo», Fabrizzio, Behia, Saitama, Seimus, Thorin, Gnar, Kuka & Kuqui, Pepinillos, Ninu
+(siamés), Felipe, Laks, Bulma (cachorra) y Bibi & Sepi.
+
+- **Simba y Fabrizzio no estaban en la tienda** (el Excel viejo decía NO PONERLO): se han creado con
+  los datos de su fila. Las fotos de Simba son las del zip de abuelos, que ya teníamos.
+- **Behia, Saitama y Thorin estaban en borrador** y Liquid no ve los borradores: publicados.
+  Behia no tenía ninguna foto: lleva la del perro grande blanco y negro del zip nuevo (es la
+  «vaquita» mastín); la de la mujer con el pitbull del pañuelo es de Fabrizzio, que es PPP.
+  **La asignación de esas dos fotos la he deducido de la ficha: conviene que Carla la confirme.**
+- Los que no tenían álbum se han metido en los del Excel (si no, su ficha no sabe de dónde viene).
+- **Sin fecha de adopción**: Carla no la ha dado. El sello del muro sabe quedarse en «Adoptado» a
+  secas, así que no se inventa ninguna.
+- **El muro**: en la home pasa de estar fijado a Gnar a ser automático (8), y en «Nuestros animales»
+  salen hasta 24. Con 14 adoptados salen todos.
+- Las 5 filas rojas de `NO PONERLO` (Loki, Ramen, Kenia, Liona, Negrita) y Carmela y Sakura siguen
+  fuera, como estaban.
+
+### «Otros productos»
+
+Las fotos ya estaban en el repo: `PRODUCTOS LAB CATÁLOGO BONITO.zip` es justo el catálogo de lo que no
+es ropa. Se han subido 12 (`otros-*.jpg`), se ha creado la página **`/pages/otros-productos`** con una
+sección nueva, `otros-productos` (tarjetas con foto, título y una línea, más el recuadro de
+personalización con el texto de Carla y el botón a `@el_armario_de_pris`), y la entrada **«Otros
+productos»** en el submenú de Tienda solidaria, debajo de «Niños», y como píldora en la barra de la
+tienda. Sin precios ni fichas: es un escaparate, y el pedido es por Instagram. Cada tarjeta se edita
+desde el editor del tema.
+
+Quedan fuera las 5 fotos del catálogo que son ropa o repiten otra (la sudadera «Adoptar es vida», el
+totebag, la camiseta, la segunda mochila y los jabones del lavabo).
+

@@ -4049,18 +4049,8 @@
     },
     "finales_felices_JKyyhW": {
       "type": "finales-felices",
-      "blocks": {
-        "animal_gnar": {
-          "type": "animal",
-          "settings": {
-            "animal": "gnar",
-            "frase": ""
-          }
-        }
-      },
-      "block_order": [
-        "animal_gnar"
-      ],
+      "blocks": {},
+      "block_order": [],
       "name": "Finales felices",
       "settings": {
         "fina": "sí, esto acaba bien",

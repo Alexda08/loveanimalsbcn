@@ -1,0 +1,374 @@
+{% comment %}
+  «Otros productos» de la tienda solidaria: lo que no es ropa (tazas, fundas de móvil,
+  bodys, llaveros…). No hay ficha de producto ni tallas: son fotos para que se vea qué
+  hay, y el pedido se hace por Instagram.
+
+  Cada bloque es una tarjeta: foto, título y una línea. Al final, un recuadro con el
+  texto de personalización y el botón a Instagram.
+{% endcomment %}
+
+{% liquid
+  if section.settings.background_color != blank
+    render 'contrast-override', background_color: section.settings.background_color, section_id: section.id
+  endif
+%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    {% render 'paleta-vars' %}
+    --otros-padding-top: {{ section.settings.padding-block-start }}px;
+    --otros-padding-bottom: {{ section.settings.padding-block-end }}px;
+    {%- if section.settings.background_color != blank %}
+    --otros-bg: var(--color-background);
+    {%- endif %}
+  }
+</style>
+
+<div class="otros{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}">
+  <div class="otros__wrap">
+    {%- if section.settings.fina != blank or section.settings.titulo != blank -%}
+      <div class="otros__head">
+        {%- if section.settings.fina != blank -%}
+          <p class="otros__fina">{{ section.settings.fina }}</p>
+        {%- endif -%}
+        {%- if section.settings.titulo != blank -%}
+          {%- if section.settings.es_titular_de_pagina -%}
+            <h1 class="otros__titulo">{{ section.settings.titulo }}</h1>
+          {%- else -%}
+            <h2 class="otros__titulo">{{ section.settings.titulo }}</h2>
+          {%- endif -%}
+        {%- endif -%}
+        {%- if section.settings.lead != blank -%}
+          <p class="otros__lead">{{ section.settings.lead }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <ul class="otros__grid">
+        {%- for block in section.blocks -%}
+          <li class="otros__item" {{ block.shopify_attributes }}>
+            <figure class="otros__card">
+              <div class="otros__ph">
+                {%- if block.settings.imagen != blank -%}
+                  {{
+                    block.settings.imagen
+                    | image_url: width: 700
+                    | image_tag:
+                      widths: '300, 450, 600, 700',
+                      sizes: '(min-width: 1000px) 280px, (min-width: 500px) 33vw, 50vw',
+                      alt: block.settings.imagen.alt,
+                      loading: 'lazy',
+                      class: 'otros__img'
+                  }}
+                {%- elsif request.design_mode -%}
+                  <span class="otros__vacia">Elige una foto</span>
+                {%- endif -%}
+              </div>
+              <figcaption class="otros__pie">
+                {%- if block.settings.titulo != blank -%}
+                  <h3 class="otros__nombre">{{ block.settings.titulo }}</h3>
+                {%- endif -%}
+                {%- if block.settings.texto != blank -%}
+                  <p class="otros__texto">{{ block.settings.texto }}</p>
+                {%- endif -%}
+              </figcaption>
+            </figure>
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- elsif request.design_mode -%}
+      <p class="otros__vacio">Añade bloques «Producto» para que aparezcan aquí.</p>
+    {%- endif -%}
+
+    {%- if section.settings.nota != blank or section.settings.boton_enlace != blank -%}
+      <div class="otros__pedido">
+        {%- if section.settings.nota != blank -%}
+          <div class="otros__nota">{{ section.settings.nota }}</div>
+        {%- endif -%}
+        {%- if section.settings.boton_enlace != blank and section.settings.boton_texto != blank -%}
+          <a class="otros__boton" href="{{ section.settings.boton_enlace }}" target="_blank" rel="noopener">
+            {{ section.settings.boton_texto }}
+          </a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .otros {
+    background: var(--otros-bg, var(--la-nude, var(--color-background)));
+    padding-block: var(--otros-padding-top) var(--otros-padding-bottom);
+    color: var(--color-foreground);
+  }
+
+  .otros__wrap {
+    max-width: var(--page-width);
+    margin-inline: auto;
+    padding-inline: var(--page-margin);
+  }
+
+  .otros__head {
+    text-align: center;
+    margin-bottom: 46px;
+  }
+
+  .otros__fina {
+    font-family: var(--font-heading--family);
+    font-style: italic;
+    font-size: clamp(1.4rem, 2.8vw, 1.9rem);
+    color: var(--la-wine, var(--color-foreground));
+    margin: 0;
+  }
+
+  .otros__titulo {
+    font-family: var(--font-heading--family);
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: clamp(1.6rem, 4.6vw, 3.1rem);
+    letter-spacing: 0.22em;
+    margin: 4px 0 0;
+    margin-right: -0.22em;
+    overflow-wrap: normal;
+  }
+
+  .otros__lead {
+    max-width: 44em;
+    margin: 14px auto 0;
+    font-size: 0.98rem;
+  }
+
+  .otros__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .otros__card {
+    margin: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: var(--la-white, var(--color-background));
+    border: 1px solid rgb(var(--color-foreground-rgb) / var(--opacity-15));
+    border-radius: 4px;
+    padding: 10px 10px 14px;
+    box-shadow: 0 8px 22px rgb(var(--color-foreground-rgb) / 0.12);
+  }
+
+  .otros__ph {
+    overflow: hidden;
+  }
+
+  .otros__img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+  }
+
+  .otros__vacia {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 4 / 5;
+    background: var(--la-cream, var(--color-background));
+    font-size: 0.9rem;
+  }
+
+  .otros__pie {
+    text-align: center;
+    padding: 14px 6px 0;
+  }
+
+  .otros__nombre {
+    font-family: var(--font-heading--family);
+    font-weight: 500;
+    font-size: 1.1rem;
+    letter-spacing: 0.04em;
+    margin: 0;
+  }
+
+  .otros__texto {
+    font-size: 0.86rem;
+    line-height: 1.45;
+    margin: 6px 0 0;
+    color: rgb(var(--color-foreground-rgb) / var(--opacity-muted-text));
+  }
+
+  .otros__vacio {
+    text-align: center;
+    margin: 0;
+  }
+
+  .otros__pedido {
+    max-width: 44em;
+    margin: 56px auto 0;
+    text-align: center;
+    background: var(--la-white, var(--color-background));
+    border: 1px solid rgb(var(--color-foreground-rgb) / var(--opacity-15));
+    border-radius: 4px;
+    padding: 28px 24px 30px;
+  }
+
+  .otros__nota > :first-child {
+    margin-top: 0;
+  }
+
+  .otros__nota > :last-child {
+    margin-bottom: 0;
+  }
+
+  .otros__boton {
+    display: inline-block;
+    margin-top: 22px;
+    background: var(--color-foreground);
+    color: var(--la-cream, var(--color-background));
+    font-family: var(--font-accent--family);
+    font-weight: 500;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1em 1.8em;
+    border-radius: 2px;
+  }
+
+  .otros__boton:hover {
+    background: var(--la-wine, var(--color-foreground));
+  }
+
+  @media (max-width: 1000px) {
+    .otros__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 700px) {
+    .otros__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+  }
+
+  @media (max-width: 340px) {
+    .otros__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Otros productos",
+  "settings": [
+    {
+      "type": "text",
+      "id": "fina",
+      "label": "Entradilla (cursiva)",
+      "default": "también en la tienda solidaria…"
+    },
+    {
+      "type": "text",
+      "id": "titulo",
+      "label": "Título",
+      "default": "Otros productos"
+    },
+    {
+      "type": "textarea",
+      "id": "lead",
+      "label": "Texto introductorio"
+    },
+    {
+      "type": "checkbox",
+      "id": "es_titular_de_pagina",
+      "label": "Este título es el titular de la página",
+      "info": "Actívalo sólo si la sección abre la página (sale como h1).",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Pedido"
+    },
+    {
+      "type": "richtext",
+      "id": "nota",
+      "label": "Texto del recuadro final"
+    },
+    {
+      "type": "text",
+      "id": "boton_texto",
+      "label": "Texto del botón"
+    },
+    {
+      "type": "url",
+      "id": "boton_enlace",
+      "label": "Enlace del botón"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "placeholder": "t:settings.default"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 78
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 78
+    }
+  ],
+  "blocks": [
+    {
+      "type": "producto",
+      "name": "Producto",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "imagen",
+          "label": "Foto"
+        },
+        {
+          "type": "text",
+          "id": "titulo",
+          "label": "Título"
+        },
+        {
+          "type": "text",
+          "id": "texto",
+          "label": "Una línea"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 24,
+  "presets": [
+    {
+      "name": "Otros productos"
+    }
+  ]
+}
+{% endschema %}

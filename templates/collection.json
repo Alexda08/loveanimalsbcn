@@ -202,6 +202,14 @@
             "coleccion": "ninos",
             "etiqueta": ""
           }
+        },
+        "otros": {
+          "type": "chip",
+          "settings": {
+            "coleccion": "",
+            "etiqueta": "Otros productos",
+            "enlace": "/pages/otros-productos"
+          }
         }
       },
       "block_order": [
@@ -210,7 +218,8 @@
         "camisetas",
         "sudaderas",
         "totebags",
-        "ninos"
+        "ninos",
+        "otros"
       ],
       "settings": {
         "fijar": true,

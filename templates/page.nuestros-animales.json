@@ -46,6 +46,7 @@
     "felices": {
       "type": "finales-felices",
       "settings": {
+        "max_animales": 24,
         "padding-block-start": 78,
         "padding-block-end": 78
       }
