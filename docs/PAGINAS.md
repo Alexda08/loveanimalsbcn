@@ -766,7 +766,15 @@ tema publicado está conectado a GitHub, **cada push va directo al tema en vivo*
 - **Los enlaces salen de la columna «Notas» del Excel**, casando cada fila con su ficha por nombre +
   fecha de entrada (206 de 206 fichas casan). **273 enlaces en 163 animales** (210 posts y 63
   reels), normalizados y sin duplicados. **43 fichas publicadas no tienen ningún enlace** en el Excel
-  (sobre todo de la fila 106 en adelante). Chiquitita y Katsuki tienen enlace pero no ficha. Hay 16
+  (sobre todo de la fila 106 en adelante). Chiquitita y Katsuki tenían enlace pero no ficha: se
+  les hizo con los datos del Excel y sus fotos, sacadas de `_sin_dueno` comparando con su post
+  (Chiquitita = `gato-2-atigrado-dorado`, Katsuki = `gato-5-blanco-manchita`). Hay 16
   posts compartidos entre varios animales (parejas y camadas): se dejan así. El script está en el
   scratchpad (`insta_extract.py`) por si llega otro Excel.
-
+- **Descripciones de producto.** 23 de los 26 activos arrastraban de la plataforma anterior «100 %
+  algodón orgánico · Certificación PETA, Fair Wear, Oeko Tex» y dos logos alojados en la tienda vieja;
+  los de «Día de la madre 2022» empezaban con «si pides antes del miércoles…». No se veía en pantalla
+  pero sí lo leía Google (datos estructurados). Se ha dejado la historia de cada diseño y cerrado con
+  lo que dice Carla: hecho a mano por El Armario de Pris, personalizable, estampación apta para
+  lavadora, algodón y poliéster según proveedor, pedidos por Instagram o WhatsApp. Los borradores no
+  se han tocado.
