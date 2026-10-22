@@ -32,6 +32,37 @@
     endif
   endfor
 
+  # Las acogidas son para perros concretos: «Quiero acogerle» solo en los del álbum de
+  # acogidas, para que nadie crea que puede acoger a cualquiera. Sin álbum elegido, en ninguno.
+  assign en_acogida = false
+  assign album_acogida = section.settings.album_acogida
+  if album_acogida != blank
+    for parte in (1..2)
+      if parte == 1
+        assign trozo = album_acogida.animales.value
+      else
+        assign trozo = album_acogida.animales_mas.value
+      endif
+      for a in trozo
+        if a.system.id == animal.system.id
+          assign en_acogida = true
+          break
+        endif
+      endfor
+      if en_acogida
+        break
+      endif
+    endfor
+  endif
+
+  # Posts de Instagram (list.url): el primero va al botón y el resto, en enlaces pequeños.
+  # Se saca recorriendo con `limit: 1` porque `.first` no es de fiar con listas de metacampos.
+  assign posts_insta = animal.posts_instagram.value
+  assign post_principal = blank
+  for post in posts_insta limit: 1
+    assign post_principal = post
+  endfor
+
   assign galeria = animal.galeria.value
 -%}
 
@@ -210,10 +241,44 @@
               Quiero adoptar a {{ nombre }}
             </a>
           {%- endif -%}
-          {%- if section.settings.link_acoger != blank -%}
-            <a class="animal-main__btn animal-main__btn--light" href="{{ section.settings.link_acoger }}">
-              Quiero acogerle
-            </a>
+          {%- if en_acogida -%}
+            {%- if section.settings.link_acoger != blank -%}
+              <a class="animal-main__btn animal-main__btn--light" href="{{ section.settings.link_acoger }}">
+                Quiero acogerle
+              </a>
+            {%- endif -%}
+          {%- endif -%}
+          {%- if post_principal != blank and section.settings.texto_instagram != blank -%}
+            {%- comment -%}
+              Su post, en todos los que lo tengan (los de acogidas también): Carla manda
+              los álbumes por WhatsApp y lo que más funciona es que entren al post.
+            {%- endcomment -%}
+            <div class="animal-main__insta">
+              <a
+                class="animal-main__btn animal-main__btn--light"
+                href="{{ post_principal }}"
+                target="_blank"
+                rel="noopener"
+              >
+                {{ section.settings.texto_instagram }}
+              </a>
+              {%- if posts_insta.size > 1 -%}
+                <p class="animal-main__insta-mas">
+                  Más posts:
+                  {% for post in posts_insta offset: 1 -%}
+                    {% unless forloop.first %}<span aria-hidden="true">·</span>{% endunless %}
+                    <a
+                      href="{{ post }}"
+                      target="_blank"
+                      rel="noopener"
+                      aria-label="Post {{ forloop.index | plus: 1 }} de {{ nombre }} en Instagram"
+                    >
+                      {{- forloop.index | plus: 1 -}}
+                    </a>
+                  {%- endfor -%}
+                </p>
+              {%- endif -%}
+            </div>
           {%- endif -%}
         </div>
 
@@ -536,6 +601,37 @@
     border: 1px solid rgb(var(--color-foreground-rgb) / var(--opacity-15));
   }
 
+  .animal-main__insta {
+    display: grid;
+    gap: 6px;
+  }
+
+  /* Discretos a propósito: el protagonista es el botón */
+  .animal-main__insta-mas {
+    margin: 0;
+    text-align: center;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--la-wine-soft, var(--color-foreground));
+  }
+
+  .animal-main__insta-mas a {
+    display: inline-block;
+    min-width: 1.6em;
+    padding: 0.2em 0.3em;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .animal-main__insta-mas a:hover {
+    color: var(--la-wine, var(--color-foreground));
+  }
+
+  .animal-main__insta-mas a:focus-visible {
+    outline: 2px solid var(--la-gold, var(--color-foreground));
+    outline-offset: 2px;
+  }
+
   .animal-main__contacto {
     margin-top: 14px;
     font-size: 0.85rem;
@@ -694,6 +790,20 @@
       "type": "url",
       "id": "link_acoger",
       "label": "Enlace «Quiero acoger»"
+    },
+    {
+      "type": "metaobject",
+      "id": "album_acogida",
+      "metaobject_type": "album",
+      "label": "Álbum de acogidas",
+      "info": "«Quiero acoger» solo sale en los animales de este álbum. Vacío = no sale en ninguno."
+    },
+    {
+      "type": "text",
+      "id": "texto_instagram",
+      "label": "Texto del botón de Instagram",
+      "default": "Su post en Insta",
+      "info": "Lleva al primer enlace de «Posts de Instagram» del animal; si tiene más, salen debajo en pequeño. Sin enlaces, no sale."
     },
     {
       "type": "text",

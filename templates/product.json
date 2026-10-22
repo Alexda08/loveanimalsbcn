@@ -170,7 +170,7 @@
               "settings": {
                 "icono": "✓",
                 "linea_1": "Cada pedido deja algo para <strong>veterinario, pienso y residencias</strong>.",
-                "linea_2": "Algodón ecológico certificado <strong>PETA, Fair Wear y Oeko-Tex</strong>.",
+                "linea_2": "Hecho a mano y <strong>100 % personalizable</strong>.",
                 "linea_3": "Envío a toda España · gastos de envío aparte.",
                 "linea_4": "",
                 "tamano": 14,
@@ -185,7 +185,7 @@
               "name": "Cómo comprarlo",
               "settings": {
                 "titulo": "Cómo conseguirlo",
-                "texto": "<p>Este diseño lo prepara <strong>El Armario de Pris</strong>: escríbele por Instagram diciéndole qué quieres y qué talla y ella se encarga del resto. Parte de cada pedido vuelve a la protectora.</p>",
+                "texto": "<p>Este diseño lo prepara <strong>El Armario de Pris</strong>: escríbele por Instagram o por WhatsApp (<a href=\"https://wa.me/34674583689\">674 58 36 89</a>) diciéndole qué quieres y en qué talla, y ella se encarga del resto. Parte de cada pedido vuelve a la protectora.</p>",
                 "boton_texto": "Compra aquí",
                 "boton_enlace": "https://www.instagram.com/el_armario_de_pris",
                 "boton_estilo": "primario",
@@ -255,16 +255,16 @@
           "settings": {
             "titulo": "El producto",
             "origen": "producto",
-            "puntos": "Algodón ecológico / orgánico, más suave y más responsable\nEstampación duradera, apta para lavadora a 30°",
+            "puntos": "Artesanal: todo está hecho a mano\n100 % personalizable a tu gusto\nEstampación duradera, apta para lavadora\nRopa de algodón y poliéster, según proveedor\nVelas y jabones veganos y cruelty free, SIEMPRE",
             "mostrar_certificaciones": true
           }
         },
         "envios": {
           "type": "tarjeta",
           "settings": {
-            "titulo": "Envíos y dudas",
+            "titulo": "Envíos",
             "origen": "manual",
-            "puntos": "Preparamos los pedidos las voluntarias: danos unos días 🤍\nEnvío a toda España\n¿Dudas con la talla? Escríbenos por DM y te ayudamos\nCambios y devoluciones según nuestra política de reembolso",
+            "puntos": "Envíos a toda España\nPlazo: 15 días\nTodo lo hace a mano @el_armario_de_pris: por eso, pedimos paciencia\nValora el comercio artesanal, solidario y de proximidad\n¿Dudas con la talla o devoluciones? ¡Escríbenos y lo resolvemos!",
             "mostrar_certificaciones": false
           }
         }

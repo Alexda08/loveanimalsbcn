@@ -130,7 +130,7 @@
           "type": "cifra",
           "settings": {
             "numero": "1",
-            "texto": "chica lo prepara todo a mano: El Armario de Pris"
+            "texto": "artesana lo prepara todo a mano: El Armario de Pris"
           }
         },
         "c3": {
@@ -160,21 +160,6 @@
     "chips": {
       "type": "chips-colecciones",
       "blocks": {
-        "todo": {
-          "type": "chip",
-          "settings": {
-            "coleccion": "",
-            "etiqueta": "Todo",
-            "enlace": "/collections/all"
-          }
-        },
-        "novedades": {
-          "type": "chip",
-          "settings": {
-            "coleccion": "novedades",
-            "etiqueta": ""
-          }
-        },
         "camisetas": {
           "type": "chip",
           "settings": {
@@ -213,8 +198,6 @@
         }
       },
       "block_order": [
-        "todo",
-        "novedades",
         "camisetas",
         "sudaderas",
         "totebags",
@@ -235,8 +218,8 @@
       "type": "franja-impacto",
       "settings": {
         "cifra": "",
-        "titulo": "Los pedidos se hacen por Instagram",
-        "texto": "<p>Estos diseños los prepara <strong>El Armario de Pris</strong>. Elige lo que te guste, escríbele por Instagram diciéndole el diseño y la talla, y ella se encarga del resto. Parte de los beneficios se donan a la asociación <strong>De la jaula a la vida</strong>.</p><p>Todos los pedidos y productos pueden PERSONALIZARSE: elige el COLOR de la prenda, el DISEÑO que más te guste e, incluso, podemos poner tus FOTOS favoritas en llaveros, tazas, fundas de móvil…</p>",
+        "titulo": "Los pedidos se hacen por Instagram o WhatsApp, lo que prefieras",
+        "texto": "<p>Estos diseños los prepara <strong>El Armario de Pris</strong>. Elige lo que te guste, escríbele por Instagram o por WhatsApp diciéndole qué producto quieres y ella se encarga del resto. Parte de los beneficios se donan a la asociación <strong>De la jaula a la vida</strong>.</p><p>Todos los pedidos y productos pueden PERSONALIZARSE: elige tu TALLA, el COLOR de la prenda, el DISEÑO que más te guste e, incluso, podemos poner tus FOTOS favoritas en llaveros, tazas, fundas de móvil…</p><p><strong><a href=\"https://www.instagram.com/el_armario_de_pris\">@el_armario_de_pris</a></strong><br><strong><a href=\"https://wa.me/34674583689\">674 58 36 89</a></strong></p>",
         "boton_texto": "Compra aquí",
         "boton_enlace": "https://www.instagram.com/el_armario_de_pris",
         "boton_estilo": "primario",

@@ -726,3 +726,47 @@ nosotras» (la del IBAN), que perdía 43 px. Mismo arreglo, y ya no hay ninguna.
 **Para la próxima:** en un grupo de tarjetas que se apila en móvil, «Altura en móviles» →
 «Ajustar al contenido». Con «Igual que en escritorio» y «Rellenar», se cortan.
 
+## La cuarta ronda de Carla (22-10-2026)
+
+**Ojo antes de nada:** el 18-10 se publicó `loveanimalsbcn/main` (ya es el tema principal) y la tienda
+tiene **contraseña**: todo, vista previa incluida, redirige a `/password`. Esta ronda no se ha podido
+ver renderizada; se ha validado por plantillas y con Theme Check (0 avisos en lo tocado). Como el
+tema publicado está conectado a GitHub, **cada push va directo al tema en vivo**.
+
+### Tienda solidaria
+- **Pedidos por Instagram o WhatsApp.** La franja de la tienda: título «Los pedidos se hacen por
+  Instagram o WhatsApp, lo que prefieras»; «diciéndole qué producto quieres y ella se encarga del
+  resto»; «elige tu TALLA, el COLOR…»; y al final `@el_armario_de_pris` y **674 58 36 89** (enlace a
+  `wa.me/34674583689`). El botón «Compra aquí» sigue yendo a Instagram. Lo mismo en «Cómo
+  conseguirlo» de la ficha de producto, en el recuadro de «Otros productos» y en las descripciones
+  de las dos «Adoptar es vida».
+- **«chica» → «artesana»** en la franja de cifras.
+- **Fuera «Novedades»** del submenú y de las píldoras, y fuera **«Todo»** de las píldoras (el último
+  diseño nuevo es de 2022, y «Todo» solo enseñaba ropa que ya tiene su apartado).
+- **Ficha de producto, «El producto»**: artesanal (todo a mano) · 100 % personalizable · estampación
+  duradera, apta para lavadora · ropa de algodón y poliéster, según proveedor · velas y jabones
+  veganos y cruelty free, siempre. **«Envíos»** (antes «Envíos y dudas»): a toda España · plazo de 15
+  días · todo a mano por @el_armario_de_pris, paciencia · comercio artesanal y de proximidad · dudas
+  de talla o devoluciones, escribidnos.
+- **La línea de garantías decía «Algodón ecológico certificado PETA, Fair Wear y Oeko-Tex»**, que
+  choca con «algodón y poliéster, según proveedor». Pasa a «Hecho a mano y 100 % personalizable»,
+  para no afirmar una certificación que no sabemos si se cumple.
+- **«Otros productos»**: cuadro → «la ficha de tu adoptado, en formato digital» (la artesana la manda
+  por correo); bolígrafos → «con huellitas y muchas más figuritas»; llaveros → «de muchas formas y
+  colores».
+
+### Fichas de animales (hecho con dos subagentes, revisado a mano)
+- **«Quiero acogerle» solo en los animales del álbum de acogidas.** Ajuste nuevo de la sección,
+  «Álbum de acogidas» (tipo metaobjeto, apuntando a `necesitamos-casa-de-acogida`); se comprueba la
+  pertenencia leyendo las dos listas del álbum (`animales` y `animales_mas`). Vacío = no sale en
+  ninguno.
+- **Botón «Su post en Insta»** en todas las fichas que tengan enlace (también las de acogidas),
+  abriendo en pestaña nueva; si hay más de uno, debajo «Más posts: 2 · 3…». Campo nuevo del animal:
+  **`posts_instagram`** (lista de URL). Texto del botón editable en el editor.
+- **Los enlaces salen de la columna «Notas» del Excel**, casando cada fila con su ficha por nombre +
+  fecha de entrada (206 de 206 fichas casan). **273 enlaces en 163 animales** (210 posts y 63
+  reels), normalizados y sin duplicados. **43 fichas publicadas no tienen ningún enlace** en el Excel
+  (sobre todo de la fila 106 en adelante). Chiquitita y Katsuki tienen enlace pero no ficha. Hay 16
+  posts compartidos entre varios animales (parejas y camadas): se dejan así. El script está en el
+  scratchpad (`insta_extract.py`) por si llega otro Excel.
+

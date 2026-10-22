@@ -65,7 +65,7 @@
           "settings": {
             "imagen": "shopify://shop_images/otros-llaveros.jpg",
             "titulo": "Llaveros",
-            "texto": "redondos, con el emblema"
+            "texto": "de muchas formas y colores"
           }
         },
         "punto_libro": {
@@ -81,7 +81,7 @@
           "settings": {
             "imagen": "shopify://shop_images/otros-boli.jpg",
             "titulo": "Bolígrafos",
-            "texto": "con huellitas"
+            "texto": "con huellitas y muchas más figuritas"
           }
         },
         "jabones": {
@@ -105,7 +105,7 @@
           "settings": {
             "imagen": "shopify://shop_images/otros-cuadro.jpg",
             "titulo": "Cuadro con su historia",
-            "texto": "la ficha de un adoptado, enmarcada"
+            "texto": "la ficha de tu adoptado, en formato digital"
           }
         }
       },
@@ -128,7 +128,7 @@
         "titulo": "Otros productos",
         "lead": "Además de camisetas, sudaderas y totebags: tazas, fundas de móvil, bodys, mochilas, llaveros, bolígrafos y más. TODOS LOS PRODUCTOS SON PERSONALIZABLES con el diseño, frase o foto que quieras.",
         "es_titular_de_pagina": true,
-        "nota": "<p>Todos los pedidos y productos pueden <strong>PERSONALIZARSE</strong>: elige el <strong>COLOR</strong> de la prenda, el <strong>DISEÑO</strong> que más te guste e, incluso, podemos poner tus <strong>FOTOS</strong> favoritas en llaveros, tazas, fundas de móvil…</p><p>Los pedidos se hacen por Instagram: escribe a <strong>@el_armario_de_pris</strong> diciéndole qué quieres. Parte de los beneficios se donan a la asociación <strong>De la jaula a la vida</strong>.</p>",
+        "nota": "<p>Todos los pedidos y productos pueden <strong>PERSONALIZARSE</strong>: elige el <strong>COLOR</strong> de la prenda, el <strong>DISEÑO</strong> que más te guste e, incluso, podemos poner tus <strong>FOTOS</strong> favoritas en llaveros, tazas, fundas de móvil…</p><p>Los pedidos se hacen por Instagram o por WhatsApp, lo que prefieras: escribe a <strong>@el_armario_de_pris</strong> o al <strong><a href=\"https://wa.me/34674583689\">674 58 36 89</a></strong> diciéndole qué producto quieres y ella se encarga del resto. Parte de los beneficios se donan a la asociación <strong>De la jaula a la vida</strong>.</p>",
         "boton_texto": "Pídelo por Instagram",
         "boton_enlace": "https://www.instagram.com/el_armario_de_pris",
         "padding-block-start": 78,
