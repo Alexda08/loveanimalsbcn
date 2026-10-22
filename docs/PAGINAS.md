@@ -1,4 +1,9 @@
-# Páginas y menús
+# Páginas y menús — y el diario del proyecto
+
+> Este fichero es **cronológico**: páginas y menús arriba, y después cada ronda de cambios de
+> Carla y cada revisión, con su fecha, qué se hizo y por qué. Para saber **cómo funciona algo hoy**,
+> mejor las referencias: [`OPERACION.md`](OPERACION.md), [`METAOBJETOS.md`](METAOBJETOS.md),
+> [`TIENDA.md`](TIENDA.md) y [`SECCIONES.md`](SECCIONES.md).
 
 Los menús y las páginas **no son theme**: viven en el admin de Shopify (Contenido → Páginas y
 Navegación → Menús). El theme solo pone la plantilla con la que se pintan.
@@ -741,8 +746,8 @@ tema publicado está conectado a GitHub, **cada push va directo al tema en vivo*
   conseguirlo» de la ficha de producto, en el recuadro de «Otros productos» y en las descripciones
   de las dos «Adoptar es vida».
 - **«chica» → «artesana»** en la franja de cifras.
-- **Fuera «Novedades»** del submenú y de las píldoras, y fuera **«Todo»** de las píldoras (el último
-  diseño nuevo es de 2022, y «Todo» solo enseñaba ropa que ya tiene su apartado).
+- **Fuera «Novedades»** del submenú y de las píldoras, y fuera **«Todo»** de las píldoras. Lo pidió
+  Carla sin dar motivo; a «todo» se sigue llegando desde «Tienda solidaria» del menú.
 - **Ficha de producto, «El producto»**: artesanal (todo a mano) · 100 % personalizable · estampación
   duradera, apta para lavadora · ropa de algodón y poliéster, según proveedor · velas y jabones
   veganos y cruelty free, siempre. **«Envíos»** (antes «Envíos y dudas»): a toda España · plazo de 15

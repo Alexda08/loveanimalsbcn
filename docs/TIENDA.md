@@ -1,224 +1,397 @@
-# Tienda solidaria — colecciones y ficha de producto
+# Tienda solidaria
 
-Cómo está montada la parte de tienda (colección + ficha) y qué hay que rellenar para
-que un producto nuevo salga completo.
+Cómo funciona hoy la parte de tienda de la web: qué se ve, de dónde sale cada cosa y qué hay que
+tocar para cambiarla. Estado a **22-10-2026**, con los datos sacados de la tienda real
+(`loveanimalsbcn.myshopify.com`) por Admin API.
 
 Diseños de referencia: `design/loveanimalsbcn-collections.html` y `design/loveanimalsbcn-pdp.html`.
+El catálogo técnico de cada pieza del tema (sections, bloques, snippets) está en
+[`SECCIONES.md`](SECCIONES.md).
 
 ---
 
-## 1. Metacampos de producto (`custom.*`)
+## 1. La idea: un escaparate, no una tienda
 
-Todos son opcionales: lo que falta, no se pinta (la sección o el bloque desaparece solo).
+**La web no vende.** Enseña los diseños y manda a la gente a pedirlos fuera:
 
-| Clave | Tipo | Dónde sale | Ejemplo |
-| --- | --- | --- | --- |
-| `etiqueta` | texto | Sello sobre la foto en la tarjeta y etiqueta de la ficha | `Aniversario 2022` |
-| `etiqueta_eco` | booleano | Pinta ese sello en verde | `true` |
-| `tipo_prenda` | texto | Línea corta bajo el título en la tarjeta | `Camiseta · unisex y mujer` |
-| `impacto_corto` | texto | Banda crema bajo la foto | `= 1 semana de pienso` |
-| `impacto_icono` | texto | Icono de la caja de impacto | `🥣` |
-| `impacto_frase` | texto largo | Caja granate de la ficha; lo que va entre `**dobles asteriscos**` sale en dorado | `Con esta camiseta pagas **una semana de pienso** para un perro grande.` |
-| `claim` | texto | Frase en cursiva bajo el título de la ficha | `tres años haciendo posible lo imposible` |
-| `eco_badge` | texto | Sello verde sobre la foto grande | `Algodón orgánico · Vegano` |
-| `historia_fina` | texto | Entradilla de la sección de historia | `la historia detrás de este diseño` |
-| `historia_titulo` | texto | Título grande de esa sección | `Tres años` |
-| `historia_a` | texto largo | Párrafos (línea en blanco = párrafo nuevo) | |
-| `historia_destacada` | texto largo | Frase grande centrada en cursiva (salto de línea = `<br>`) | |
-| `historia_b` | texto largo | Párrafos de cierre | |
-| `historia_firma` | texto | Firma | `— el equipo de Love Animals BCN` |
-| `ficha` | lista de textos | Viñetas de la tarjeta «El producto» | |
-| `certificaciones` | lista de textos | Píldoras verdes | `PETA`, `Fair Wear`, `Oeko-Tex`, `Vegano` |
+- Los hace **El Armario de Pris**, una artesana que lo prepara todo **a mano**.
+- Se piden por **Instagram** ([@el_armario_de_pris](https://www.instagram.com/el_armario_de_pris))
+  o por **WhatsApp** al **674 58 36 89** (`https://wa.me/34674583689`).
+- **Parte de cada pedido va a la protectora.** La web no da ningún porcentaje: no está confirmado
+  (el catálogo de Pris en Canva dice «10 %», pero Carla no lo ha validado).
+- El botón **«Compra aquí»** lleva al Instagram de Pris. El WhatsApp va como enlace en el texto.
 
-**Metacampo de colección:** `custom.fina` (texto) = la entradilla en cursiva sobre el título.
+Por qué así: la protectora no prepara pedidos ni gestiona stock. Si la web cobrara, alguien tendría
+que tramitar cada pedido, y quien los hace ya los recibe por mensaje.
 
-Si un producto no tiene `historia_a` ni `historia_b`, la sección de historia no aparece.
-Si no tiene `impacto_frase`, la caja granate tampoco.
+### Los dos interruptores
 
----
-
-## 2. Colecciones
-
-Son inteligentes: los productos entran solos.
-
-| Handle | Título | Regla |
-| --- | --- | --- |
-| `tienda-solidaria` | Tienda | proveedor = `Love Animals BCN` |
-| `camisetas` | Camisetas | tipo = `Camiseta` |
-| `sudaderas` | Sudaderas | tipo = `Sudadera` |
-| `tazas` | Tazas | tipo = `Taza` |
-| `bolsas` | Bolsas | tipo = `Totebag` **o** `Mochila` |
-| `fundas` | Fundas de móvil | tipo = `Funda de móvil` |
-| `infantil` | Infantil | etiqueta `infantil` |
-| `causa-stop-ley-ppp` | Stop Ley PPP | etiqueta `ppp` |
-
-Las píldoras de la barra superior se configuran en la section «Píldoras de colección»:
-un bloque por colección, con texto propio opcional («Todo», «Causa · Stop Ley PPP»).
-
----
-
-## 3. Piezas nuevas del theme
-
-### Bloques
-
-| Bloque | Para qué | Dónde se puede usar |
-| --- | --- | --- |
-| `fina` | La línea en cursiva del diseño (entradillas, claim, cierre). Lo que va **en negrita** sale recto y en el color destacado (dorado claro por defecto) | Secciones, grupos, ficha, tarjeta |
-| `etiqueta` | Sello en mayúsculas (contorno, sólido o verde) | Ficha y tarjeta |
-| `impacto-banda` | Banda «= 1 semana de pienso» | Tarjeta de producto |
-| `impacto-caja` | Caja granate del «por qué» | Ficha |
-| `garantias` | Líneas con ✓ bajo el botón | Ficha |
-| `ahorro` | Sello dorado «Ahorras 4,90 €» | Ficha (junto al precio) |
-| `migas` | Migas de pan | Cualquier sección |
-
-### Secciones
-
-| Sección | Para qué |
-| --- | --- |
-| `barra-cifras` | Franja granate con 3 cifras |
-| `chips-colecciones` | Barra de píldoras + contador de artículos |
-| `franja-impacto` | «¿A dónde va exactamente tu compra?» |
-| `historia-producto` | La historia del diseño (metacampos) |
-| `ficha-tecnica` | Tarjetas «El producto» y «Envíos y dudas» |
-| `a-quien-ayudas` | Tres peludos con su contador de días |
-
-`a-quien-ayudas` funciona con bloques (eliges tú) o sin bloques (salen los que llevan
-más tiempo esperando, saltándose a los adoptados).
-
-### Ediciones al theme original
-
-En Liquid y CSS van entre marcadores `LA START` / `LA END`:
-
-- `snippets/product-card.liquid`: clases de sombra y recorte de la tarjeta.
-- `snippets/card-gallery.liquid`: fondo de la foto de la tarjeta.
-- `blocks/_product-card-gallery.liquid`: sello de `custom.etiqueta` junto a los del theme.
-- `snippets/product-badges-styles.liquid`: estilos de ese sello.
-- `snippets/product-media-gallery-content.liquid`: panel de la foto (fondo, borde, sombra) y sello ecológico.
-- `snippets/theme-styles-variables.liquid`: paleta `--la-*` en `:root` y trackings anchos.
-- `snippets/group.liquid`: sombras del grupo, la clase de «Dónde se ve» (reutiliza las utilidades
-  `hidden--mobile` / `hidden--desktop` que ya trae `base.css`, así que no añade CSS) y la regla que
-  deja mandar a la altura de móvil.
-- `snippets/size-style.liquid`: escribe `--size-style-height-mobile`. `base.css` ya la leía, pero no
-  la escribía nadie.
-
-Dentro de un `{% schema %}` no se pueden poner comentarios, así que **estos añadidos van sin
-marcadores** (se reconocen porque las etiquetas están en español):
-
-- `blocks/_product-card.liquid`: acepta los bloques nuevos (`impacto-banda`, `etiqueta`, `fina`, `button`)
-  y añade los ajustes «Sombra» y «Alinear el pie de la tarjeta» (precio y botón abajo del todo, para
-  que queden a la misma altura en toda la fila).
-- `blocks/_product-card-gallery.liquid`: ajustes «Fondo de la foto», «Margen interior de la foto» y
-  «Ocultar el sello de rebaja del theme».
-- `blocks/_product-media-gallery.liquid`: ajustes «Fondo de las fotos», «Margen interior de las fotos»,
-  «Borde en las fotos» y «Sombra de las fotos».
-- `sections/main-collection.liquid` + `snippets/product-grid.liquid`: ajuste «Columnas en escritorio»
-  (número fijo de columnas, una menos entre 750 y 1000px).
-- `assets/tienda.css` (cargado desde `snippets/stylesheets.liquid`): precio comparativo, botón de la
-  tarjeta, etiquetas de las opciones de variante y margen interior de la foto de la tarjeta.
-- `blocks/text.liquid`: opciones de separación «Ancho (0.1em)» y «Display (0.24em)».
-- `blocks/group.liquid`: ajustes «Sombra» y **«Dónde se ve → Pantallas»** (móvil y escritorio / solo
-  móvil / solo escritorio; por defecto los dos). Sirve para montar dos versiones de un mismo bloque,
-  una para cada tamaño de pantalla. El corte es el del theme: 750 px.
-  En **Tamaño**, ancho y altura tienen cada uno su selector de móvil con las mismas opciones:
-  *igual que en escritorio · ajustar al contenido · rellenar · personalizado*, y el rango de móvil
-  aparece al elegir «personalizado». Los dos rangos de ancho ya venían del theme (se llamaban igual
-  los dos, ahora llevan apellido); **«Altura en móviles»** y las dos opciones «igual que en
-  escritorio» son nuestras.
-
-  Dos cosas del theme que había que arreglar para que esto se comportara:
-
-  - **El ancho mandaba en la altura del móvil.** Con «Apilar en el móvil» el grupo pasa a columna
-    pero conserva la clase `layout-panel-flex--row`, así que seguían aplicando las reglas de ancho
-    de `base.css` (`flex: 0` / `flex: 1` / `flex-basis: var(--size-style-width)`) — y en vertical el
-    `flex-basis` no es el ancho, es la altura. Se devuelven a `flex: 0 1 auto` solo en móvil y solo
-    si el grupo apila.
-  - **Las variables CSS se heredan.** Un grupo dentro de otro cogía el `--size-style-width-mobile`
-    del padre, así que «igual que en escritorio» nunca llegaba a aplicarse. Cuando el ajuste está
-    vacío, `blocks/group.liquid` reescribe la variable apuntando al valor de escritorio del propio
-    bloque y corta la herencia.
-- `config/settings_schema.json`: esas mismas dos opciones en la tipografía global (de la fase anterior).
-
----
-
-## 4. Datos de la tienda de muestra
-
-**31 productos** (agosto 2026, tras la limpieza):
-
-- **21 de la tienda antigua** (camisetas, sudaderas, infantil y totebags) con sus fotos, textos y
-  precios reales de `loveanimalsbcn.com`. Fuera: la campaña del Día de la Madre 2022, las
-  «sorpresa» de última talla y los diseños repetidos con otra colocación del estampado.
-- **10 del catálogo actual de El Armario de Pris** (6 tazas, 2 mochilas-saco, 2 fundas de móvil),
-  con los precios de su Canva y las fotos recortadas de ese mismo catálogo. Cada uno hereda la
-  historia del diseño de su prenda hermana.
-
-Todos tienen **una sola variante**: en escaparate no se elige talla en la web (las tallas y colores
-reales siguen contados en el metacampo «ficha»).
-
-Los metacampos se rellenaron a partir de esa información:
-
-- el impacto se calcula por tipo y precio (camiseta 15 € = una semana de pienso, sudadera =
-  desparasitación, totebag = vacuna, sorpresa 8 € = media semana);
-- la ficha técnica se genera con las opciones reales (cortes, tallas, colores);
-- la historia sale de la descripción real de cada producto, quitando la parte técnica.
-
-Scripts en el scratchpad de la sesión: `import_products.py`, `import_collections.py`,
-`defs_producto.py`, `add_tipo_prenda.py`, `menus_tienda.py` (todos idempotentes por handle).
-
----
-
-## 5. Modo escaparate (sin compra online)
-
-Desde agosto de 2026 **no se compra por la web**: los pedidos los prepara
-[El Armario de Pris](https://www.instagram.com/el_armario_de_pris) y se piden por Instagram.
-Su catálogo con precios está en Canva:
-<https://www.canva.com/design/DAFpS5kxTqo/O18dCNZNGhcp2cTfY5Ijrw/view>.
-
-Dos interruptores en **Ajustes del tema → Tienda solidaria**:
+En **Personalizar → Ajustes del tema → Tienda solidaria**. Los dos están **activados**:
 
 | Ajuste | Qué hace |
-| --- | --- |
-| «Modo escaparate (sin compra online)» | Quita el carrito de la cabecera, los botones de compra de la ficha y el añadir rápido de las tarjetas. |
-| «Ocultar los precios» | Deja de pintar importes en toda la web (tarjetas, ficha, buscador, carrito). |
+|---|---|
+| «Modo escaparate (sin compra online)» (`escaparate`) | Quita el carrito de la cabecera, los botones de compra de la ficha y el añadir rápido de las tarjetas |
+| «Ocultar los precios» (`ocultar_precios`) | No pinta ningún importe en toda la web (tarjetas, ficha, buscador, carrito) |
 
-La ficha lleva en su lugar el bloque **«Cómo comprarlo»** (`blocks/compra-externa.liquid`):
-explicación + botón «Compra aquí» al Instagram de Pris + enlace al catálogo con precios.
-En la colección, la franja de arriba cuenta lo mismo.
+Por qué ocultar los precios: los pone quien prepara el pedido, y con la personalización (color,
+diseño, foto) el precio final puede cambiar. Los precios **siguen en el admin** (camiseta 15 €,
+sudadera 25 €, totebag 15 €), solo que no salen.
 
-Con volver a desmarcar los dos ajustes, la tienda vuelve a vender: los bloques de precio y compra
-siguen en su sitio en las plantillas (solo hay que añadirlos otra vez a la ficha desde el
-personalizador, porque ahí sí se quitaron del `product.json`).
+**Si algún día se quiere vender por la web:** desmarcar los dos ajustes **no basta**. La ficha de
+producto no lleva ni precio, ni selector de talla, ni botón de compra: se quitaron de
+`templates/product.json`. Habría que volver a añadirlos desde el editor (bloques *Precio*,
+*Selector de variantes* y *Botones de compra* dentro de «Detalles del producto»).
 
-**Catálogo actual de Pris** (sacado de su Canva, agosto 2026): tazas de cerámica 10 € (nº 3 «De la
-jaula a la vida», nº 5 «Si tú me dices MIAU», nº 6 «Yo también soy de raza(s)», nº 10 «Stop Ley PPP»),
-tazas personalizables con foto 11 € (nº 11 y nº 12), mochila-saco 10 €, funda de móvil 14,95 €,
-envío 6 €. El catálogo dice «10% será donado para la asociación».
+---
 
-> ⚠️ **Pendiente de confirmar con Carla:** qué parte de cada pedido vuelve a la protectora.
-> De eso dependen las bandas «= 1 semana de pienso» de las tarjetas, la caja de impacto de la ficha
-> y las cifras de la cabecera. Mientras tanto la web no afirma ningún porcentaje.
+## 2. Colecciones y píldoras
 
-## 6. Diferencias conscientes con el diseño
+### Cómo se forman las colecciones
 
-- **La franja «¿a dónde va tu compra?» va después de la rejilla**, no intercalada tras la primera fila:
-  la rejilla de Horizon no admite meter contenido entre tarjetas sin reescribirla.
-- **El botón de la tarjeta dice «Lo quiero»** y lleva a la ficha: desde la rejilla no se puede añadir al
-  carrito una camiseta de 40 variantes sin elegir talla.
-- **El sello «Ahorras …» no se recalcula al cambiar de variante** (solo el precio, que sí lo hace el theme).
-  En este catálogo todas las tallas valen lo mismo, así que el importe es correcto; si algún día una
-  variante cambia de precio, habría que darle su propio JS.
-- **La guía de tallas** del diseño no está: hacen falta las medidas reales de las prendas.
-- Los números y destacados sobre granate usan `color8` (#E3C08D, el dorado claro del diseño) en vez del
-  dorado normal: el dorado oscuro sobre granate no llega al contraste mínimo.
+**Todas son automáticas por etiqueta.** Un producto entra en una colección en cuanto lleva su
+etiqueta; no hay que añadirlo a mano.
 
-## 7. Pendiente / a mano
+| Colección | Handle | Etiqueta | En el menú y en las píldoras |
+|---|---|---|---|
+| Camisetas | `camisetas` | `camiseta` | **sí** |
+| Sudaderas | `sudaderas` | `sudadera` | **sí** |
+| Totebags | `totebags` | `Totebag` | **sí** |
+| Niños | `ninos` | `Infantil` | **sí** |
+| Novedades | `novedades` | `novedades` | no (retirada el 22-10-2026) |
+| Clásicos | `clasicos` | `Clásicos` | no |
+| De la jaula a la vida | `de-la-jaula-a-la-vida` | `jaulavida` | no |
+| Mestizos | `mestizos` | `mestizos` | no |
+| En mi casa manda el gato | `en-mi-casa-manda-el-gato` | `mandagato` | no |
+| Día de la madre | `dia-de-la-madre-2022` | `diamadre` | no |
+| Colección Especial de aniversario | `coleccion-especial-de-aniversario` | `adoptar2022` | no |
+| Prendas misteriosas | `prendas-misteriosas` | `sorpresa` | no (casi todo en borrador) |
 
-- **Moneda:** la tienda de pruebas está en dólares, así que los precios salen como `$15.00`.
-  Es un ajuste del panel (Configuración → Datos de la tienda → Moneda), no del theme;
-  en la tienda real de la protectora saldrá en euros.
-- Fotos: las de ropa son las reales de su tienda (las 4 primeras de cada producto). Las de tazas,
-  mochilas y fundas están recortadas del catálogo en Canva y son pequeñas (393 px de origen):
-  en cuanto Pris pase las suyas, se cambian en un minuto.
-- Los textos de «Envíos y dudas» están escritos en la propia section: cámbialos ahí, no por producto.
-- **La cifra `2019`** de la barra de la colección sí tiene fuente: la página «Sobre Love Animals BCN»
-  de la tienda real dice que la primera publicación de @adopta.loveanimals.bcn fue el **9 de enero de
-  2019**. El `1` y los `6 €` de envío salen del catálogo de Pris.
+Las que no están en el menú **siguen existiendo** y se pueden abrir por URL, pero no las enlaza
+nadie. No se han borrado porque sus etiquetas agrupan los diseños y no molestan.
+
+> Ojo: **las infantiles no llevan la etiqueta `camiseta`**, solo `Infantil`. Por eso salen en Niños y
+> no en Camisetas. Es a propósito: si no, se repetirían.
+
+**«Tienda solidaria» es `/collections/all`**, la colección que Shopify crea sola con todo lo
+publicado. No es una colección del admin: su título sale como **«Productos»** y no se puede elegir
+con el selector de colecciones del editor (por eso las píldoras aceptan un enlace suelto, ver abajo).
+
+### Las píldoras
+
+La barra de píldoras es la section **«Píldoras de colección»** (`chips-colecciones`) de la plantilla
+de colección. Hoy son cinco y coinciden con el submenú de «Tienda solidaria»:
+
+**Camisetas · Sudaderas · Totebags · Niños · Otros productos**
+
+- Cada píldora es un bloque. Con **colección** elegida, se marca sola cuando estás en ella.
+- Con **«Enlace suelto»** (sin colección) sirve para lo que no es una colección: así está «Otros
+  productos» (`/pages/otros-productos`). Ahí el texto hay que escribirlo a mano.
+- **Una píldora que apunta a una colección que no existe no pinta nada, sin avisar.** Pasó el
+  06-09-2026: de ocho píldoras salían dos.
+- A la derecha, el contador de artículos de la colección que estás viendo.
+
+No hay «Todo» ni «Novedades» porque Carla lo pidió el 22-10-2026, sin dar motivo. A «todo» se
+llega igualmente desde «Tienda solidaria» del menú y desde las migas de la ficha. La colección
+Novedades sigue existiendo (y las «Adoptar es vida» llevan su etiqueta): solo no se enlaza.
+
+---
+
+## 3. La página de colección
+
+Plantilla: `templates/collection.json`. La usan **todas** las colecciones, `/collections/all`
+incluida. De arriba abajo:
+
+| # | Sección | Qué es | Dónde se edita |
+|---|---|---|---|
+| 1 | `cabecera` (section de Horizon) | Entradilla en cursiva + título de la colección + descripción | Entradilla: metacampo de colección `custom.fina`; si está vacío, «mientras esperan, puedes ayudarles con…» (bloque «Línea fina», editor). Título y descripción: admin de la colección |
+| 2 | `cifras` — Barra de cifras | Franja granate: **2019** «desde entonces vistiendo a la familia LAB» · **1** «artesana lo prepara todo a mano: El Armario de Pris» · **6 €** «de envío a toda España» | Editor, un bloque por cifra |
+| 3 | `chips` — Píldoras de colección | Ver arriba | Editor |
+| 4 | `galeria` — Galería de la tienda | Cinta de 28 fotos que pasa sola: «así la lleváis» / **La familia LAB** | Editor, una foto por bloque |
+| 5 | `donde` — Franja de impacto | **«Los pedidos se hacen por Instagram o WhatsApp, lo que prefieras»** + botón «Compra aquí» | Editor |
+| 6 | `main` — rejilla de productos (Horizon) | Tarjetas de producto | Editor (diseño de la tarjeta); productos, admin |
+| 7 | `cierre` | «Cada prenda que sale de aquí / es un día menos esperando para alguno de ellos.» + botón «Conoce a nuestros peludos» | Editor |
+
+Ninguna colección tiene descripción ni `custom.fina` rellenos (salvo «Prendas misteriosas», que tiene
+descripción vieja y no está enlazada). Por eso en todas sale el texto de reserva.
+
+### La tarjeta de producto
+
+Dentro de la rejilla, de arriba abajo: **foto** (cuadrada, fondo crema) · **banda de impacto**
+(`custom.impacto_corto`) · **título** · **tipo de prenda** (`custom.tipo_prenda`) · botón
+**«Ver el diseño»**, que lleva a la ficha.
+
+Hoy **ningún producto tiene esos dos metacampos**, así que la tarjeta queda en foto + título + botón.
+No hay precio (ocultos) ni añadir rápido (escaparate).
+
+### La galería de fotos
+
+La pidió Carla: «fotos chulas de gente con la ropa o productos, que vayan cambiando». Fotos
+`tienda-01` … `tienda-28` (Contenido → Archivos), alternando el catálogo cuidado con fotos de gente
+real que ha comprado. Pie: «Fotos de quienes ya visten SOLIDARIDAD. Tú también puedes formar parte
+de este museo. ¡Haz tu pedido!».
+
+Se para al pasar el ratón o con el teclado; con «reducir movimiento» no se mueve y se arrastra a
+mano. Cada foto admite pie y enlace.
+
+> **Shopify renombra los `.jpeg` a `.jpg`** al subirlos. Si en la plantilla pone `tienda-02.jpeg`, el
+> bloque sale en blanco sin ningún error. Las referencias, siempre con el nombre que da la tienda.
+
+---
+
+## 4. La ficha de producto
+
+Plantilla: `templates/product.json`. Ningún producto usa plantilla alternativa.
+
+### Sección a sección
+
+| # | Sección / bloque | Qué pinta | Dónde se cambia |
+|---|---|---|---|
+| 1 | `migas` → bloque **Migas de pan** | «Tienda solidaria › Camisetas › título» | Editor. «Tienda solidaria» va a `/collections/all`; el segundo nivel es la colección desde la que llegaste (o la primera del producto) |
+| 2 | `main` (Horizon «Información del producto») → **galería** | Fotos con miniaturas, fondo crema, borde y sombra | Fotos: admin del producto. Aspecto: editor |
+| 2 | → **Etiqueta de la edición** | Sello pequeño sobre el título | Metacampo `custom.etiqueta` (verde si `custom.etiqueta_eco`). **Vacío en todos** |
+| 2 | → **Título** | El título del producto | Admin del producto |
+| 2 | → **Claim** (Línea fina) | Frase en cursiva bajo el título | Metacampo `custom.claim`. **Vacío en todos** |
+| 2 | → **Caja de impacto** | Caja granate «con esto pagas…» | Metacampos `custom.impacto_frase` / `impacto_icono`. **Vacío en todos** |
+| 2 | → **Cómo conseguirlo** (bloque `compra-externa`) | Texto + botón **«Compra aquí»** a Instagram + «ver el catálogo con precios» (Canva) + nota | Editor |
+| 2 | → **Garantías** | Tres líneas con ✓ | Editor |
+| 2 | → **Desplegables** (Horizon) | Vacío hoy | Editor |
+| 3 | `historia` — Historia del diseño | La historia del diseño, con frase destacada y firma | Metacampos `custom.historia_*`. **Vacío en todos: la sección no sale** |
+| 4 | `tecnica` — Ficha técnica | Dos tarjetas: **«El producto»** y **«Envíos»** | Editor (ver abajo) |
+| 5 | `ayudas` — A quién ayudas | «tu compra les llega directamente a…» / **Ellos**: tres peludos con sus días esperando + «Conocerlos a todos» | Editor. Sin bloques: salen solos los que más llevan esperando |
+| 6 | `relacionados` (Horizon) | «También te puede gustar» | Automático (recomendaciones de Shopify) |
+
+**La descripción del producto no se pinta en la ficha.** No hay bloque de descripción: la historia
+iba a salir de los metacampos. Aun así **la descripción importa**: Google la lee (datos estructurados
+y meta descripción) y sale al compartir el enlace. Por eso se limpió el 22-10-2026 (ver §8).
+
+### Las dos tarjetas de la ficha técnica
+
+| Tarjeta | De dónde salen los puntos |
+|---|---|
+| **El producto** | Del metacampo `custom.ficha` del producto; **si está vacío, de los puntos escritos en el bloque**. Hoy ningún producto lo tiene, así que salen los de Carla en todos |
+| **Envíos** | Siempre los escritos en el bloque |
+
+> Cuidado: si algún día se rellena `custom.ficha` en un producto, **sus puntos sustituyen a los de
+> Carla** en esa ficha, no se suman. Y si se rellena `custom.certificaciones`, salen como píldoras
+> verdes en «El producto» (el bloque tiene «Mostrar certificaciones» activado). No afirmar
+> certificaciones que no estén confirmadas.
+
+---
+
+## 5. Otros productos
+
+Lo que **no es ropa**: tazas, fundas de móvil, bodys, mochilas, llaveros, bolígrafos, puntos de
+libro, jabones, detalles de boda, el cuadro con la historia del adoptado. **No son productos de
+Shopify**: no tienen ficha, ni precio, ni tallas. Son tarjetas con foto para que se vea qué hay; el
+pedido es por mensaje, como todo.
+
+- Página `/pages/otros-productos` (publicada), plantilla `page.otros-productos`
+  (`templates/page.otros-productos.json`), section **«Otros productos»** (`otros-productos`).
+- Enlazada desde el submenú de «Tienda solidaria» (debajo de «Niños») y desde la última píldora.
+- Arriba: «también en la tienda solidaria…» / **Otros productos** (es el h1 de la página) y el texto
+  de entrada, que acaba con «TODOS LOS PRODUCTOS SON PERSONALIZABLES con el diseño, frase o foto que
+  quieras».
+- **12 tarjetas** en rejilla (4 columnas en escritorio, 3 en tableta, **2 en el móvil**).
+- Al final, el recuadro de personalización con el Instagram y el WhatsApp de Pris y el botón
+  **«Pídelo por Instagram»**.
+
+### Cómo añadir (o cambiar) una tarjeta
+
+1. Subir la foto en **Contenido → Archivos**. Mejor cuadrada o casi (la tarjeta la recorta).
+2. **Personalizar** → en el desplegable de plantillas, **Páginas → otros-productos**.
+3. En la section «Otros productos», **Añadir bloque → Producto**.
+4. Rellenar **Foto**, **Título** y **Una línea** (corta: en el móvil la tarjeta mide media pantalla).
+5. Arrastrar el bloque a su sitio y **Guardar**.
+
+Para quitar una, se oculta (ojo) o se borra el bloque. Las fotos que no se usan se quedan en
+Archivos (`otros-jabones.jpg`, por ejemplo, quedó fuera el 04-10-2026).
+
+---
+
+## 6. Metacampos de producto (`custom.*`)
+
+Las 16 definiciones existen en la tienda real. **Hoy no hay ni un valor rellenado en ningún
+producto** (comprobado el 22-10-2026): se crearon para la tienda de pruebas, donde sí se rellenaron
+con datos de muestra, y no se pasaron a la real. Todo lo que depende de ellos **desaparece solo**
+cuando están vacíos, así que no se nota ningún hueco.
+
+Se ven en el admin del producto, al final, en **Metacampos** (no están fijados: puede que haya que
+abrir «Ver todos»).
+
+| Clave | Nombre en el admin | Tipo | Dónde sale |
+|---|---|---|---|
+| `etiqueta` | Etiqueta | texto | Sello sobre el título de la ficha y sobre la foto de la tarjeta |
+| `etiqueta_eco` | Etiqueta ecológica | sí/no | Pinta ese sello en verde |
+| `tipo_prenda` | Tipo de prenda | texto | Línea bajo el título en la tarjeta («Camiseta · unisex y mujer») |
+| `impacto_corto` | Impacto (banda) | texto | Banda crema bajo la foto de la tarjeta («= 1 semana de pienso») |
+| `impacto_icono` | Impacto (icono) | texto | Emoji de la caja de impacto |
+| `impacto_frase` | Impacto (frase) | texto largo | Caja granate de la ficha; lo que va entre `**dobles asteriscos**` sale en dorado |
+| `claim` | Claim | texto | Cursiva bajo el título de la ficha |
+| `eco_badge` | Sello de la galería | texto | Sello verde sobre la foto grande |
+| `historia_fina` | Historia · entradilla | texto | Entradilla de la sección de historia |
+| `historia_titulo` | Historia · título | texto | Título grande de esa sección |
+| `historia_a` | Historia · texto | texto largo | Párrafos (línea en blanco = párrafo nuevo) |
+| `historia_destacada` | Historia · frase destacada | texto largo | Frase grande en cursiva |
+| `historia_b` | Historia · cierre | texto largo | Párrafos de cierre |
+| `historia_firma` | Historia · firma | texto | Firma |
+| `ficha` | Ficha técnica | lista de textos | **Sustituye** los puntos de «El producto» |
+| `certificaciones` | Certificaciones | lista de textos | Píldoras verdes en «El producto» |
+
+**De colección:** `custom.fina` (Entradilla) = la cursiva sobre el título. Vacía en todas.
+
+Los de impacto (`impacto_*`) **no conviene rellenarlos** mientras no se sepa qué parte de cada
+pedido llega a la protectora: dirían «esta camiseta paga una semana de pienso» sin base.
+
+---
+
+## 7. Dar de alta un producto nuevo (Carla o Alex)
+
+Para una prenda nueva de Pris. (Si no es ropa, no es un producto: es una tarjeta de «Otros
+productos», ver §5.)
+
+1. **Productos → Añadir producto.**
+2. **Título** como sus hermanos: «Camiseta | Nombre del diseño», «Sudadera | …», «… | Totebag».
+   La URL se saca del título **la primera vez que se guarda** y después ya no cambia sola: si luego
+   se corrige el título, la URL se queda con el viejo (así nacieron las `copia-de-…`).
+3. **Descripción**: la historia del diseño en uno o dos párrafos y, al final, el cierre común
+   (§9). No se ve en la ficha, pero es lo que lee Google y lo que sale al compartir.
+4. **Fotos**: la primera es la de la tarjeta y la de compartir. Cuadradas si se puede.
+5. **Precio**: el de Pris (no se ve en la web, pero queda apuntado).
+6. **Variantes**: las opciones como sus hermanos (*Modelo*, *Talla*, *Color*). No se ven en la web
+   —la talla se dice por mensaje—, pero sirven si un día se vende online. Una sola variante también vale.
+7. **Organización**:
+   - **Tipo**: Camiseta / Sudadera / Totebag. **Proveedor**: BCN, como los demás.
+   - **Etiquetas**: la que decide la colección (`camiseta`, `sudadera`, `Totebag` o `Infantil`) y,
+     si es de una línea existente, la del diseño (`jaulavida`, `mestizos`, `stopleyppp`,
+     `elamornosecompra`, `mandagato`, `adoptaresvida`…). **No hace falta `novedades`**: ya no se enlaza.
+8. **Estado: Activo** y **canales**: Tienda online (y Buy Button y Shop, como sus hermanos). Sin
+   el canal Tienda online no sale en la web aunque esté activo.
+9. **Metacampos**: opcionales (§6). Si se quiere, `tipo_prenda` y la historia (`historia_*`): con
+   `historia_a` relleno aparece la sección de historia en su ficha.
+10. Comprobar en la web: que sale en su colección y en «Tienda solidaria», y que la ficha se ve bien.
+
+**Para retirar un producto**: pasarlo a **Borrador**, no borrarlo. Conserva fotos, textos y
+variantes, y se reactiva con un clic. Así están los 22 borradores de hoy.
+
+---
+
+## 8. Los productos hoy (22-10-2026)
+
+**26 activos y 22 en borrador.** De los activos, 25 están en la Tienda online; el otro es
+**«Cambio de producto»** (3,90 €, sin foto), un producto interno que solo está en Buy Button, Meta y
+Copilot y no se ve en la web.
+
+| Colección | Activos |
+|---|---|
+| Camisetas | 10 |
+| Sudaderas | 10 |
+| Totebags | 3 |
+| Niños | 2 |
+
+**En borrador** (retirados, no borrados): las camisetas y sudaderas «Sorpresa» y «Giving Tuesday»
+(solo para campañas de stock), las dos «De la jaula a la vida | Diseño delantero y trasero» (diseño
+retirado), las dos «Adoptar es vida 2022 Aniversario» (el dibujo con silueta, `SILUETAADOPTAR`), las
+cuatro de la «Colección Gris» y la tarjeta regalo.
+
+Cosas que se saben y no se han tocado (las decide Carla):
+
+- **«Mestizos - Diseño trasero.»** lleva un guion y un punto que sus hermanos no llevan. Es el
+  título del admin; mejor que lo corrija ella.
+- **Dos precios distintos**: la camiseta `mestizos` a 17,90 € y la `sudadera-mestizos` a 27,90 €,
+  cuando las demás van a 15 y 25. Hoy no se ve (precios ocultos).
+- **Tres URLs `copia-de-…`** que no corresponden al título (`/products/copia-de-sudadera-love-animals`
+  es «Sudadera: Stop Ley PPP»). Cambiar el handle cambia la URL.
+- **No usar `adoptaresvida` y `SILUETAADOPTAR` como si fueran lo mismo**: el primero es la frase
+  sola (los dos productos nuevos, a la venta); el segundo, el diseño de 2022 con silueta (retirado).
+
+---
+
+## 9. Textos de Carla vigentes
+
+Todos están en el editor de temas salvo el cierre de las descripciones, que está en cada producto.
+Van tal cual los escribió ella, **mayúsculas incluidas**.
+
+**Franja de la colección** (`donde`):
+> **Los pedidos se hacen por Instagram o WhatsApp, lo que prefieras**
+> Estos diseños los prepara **El Armario de Pris**. Elige lo que te guste, escríbele por Instagram o
+> por WhatsApp diciéndole qué producto quieres y ella se encarga del resto. Parte de los beneficios
+> se donan a la asociación **De la jaula a la vida**.
+> Todos los pedidos y productos pueden PERSONALIZARSE: elige tu TALLA, el COLOR de la prenda, el
+> DISEÑO que más te guste e, incluso, podemos poner tus FOTOS favoritas en llaveros, tazas, fundas
+> de móvil…
+> **@el_armario_de_pris** · **674 58 36 89** — botón «Compra aquí».
+
+**Ficha, «Cómo conseguirlo»**: «Este diseño lo prepara **El Armario de Pris**: escríbele por
+Instagram o por WhatsApp (674 58 36 89) diciéndole qué quieres y en qué talla, y ella se encarga del
+resto. Parte de cada pedido vuelve a la protectora.» Nota: «Los pedidos se hacen por mensaje
+directo, no desde esta web.»
+
+**Ficha, garantías**: «Cada pedido deja algo para **veterinario, pienso y residencias**.» · «Hecho
+a mano y **100 % personalizable**.» · «Envío a toda España · gastos de envío aparte.»
+
+**Ficha, «El producto»**:
+- Artesanal: todo está hecho a mano
+- 100 % personalizable a tu gusto
+- Estampación duradera, apta para lavadora
+- Ropa de algodón y poliéster, según proveedor
+- Velas y jabones veganos y cruelty free, SIEMPRE
+
+**Ficha, «Envíos»**:
+- Envíos a toda España
+- Plazo: 15 días
+- Todo lo hace a mano @el_armario_de_pris: por eso, pedimos paciencia
+- Valora el comercio artesanal, solidario y de proximidad
+- ¿Dudas con la talla o devoluciones? ¡Escríbenos y lo resolvemos!
+
+**Otros productos**: entrada con «TODOS LOS PRODUCTOS SON PERSONALIZABLES con el diseño, frase o foto
+que quieras»; recuadro final con PERSONALIZARSE / COLOR / DISEÑO / FOTOS, Instagram y WhatsApp. Líneas
+de tarjeta suyas: bolígrafos «con huellitas y muchas más figuritas», llaveros «de muchas formas y
+colores», cuadro «la ficha de tu adoptado, en formato digital», «Detalles para bodas y celebraciones»
+«personalizados para cada evento, con o sin tarjeta», jabones «para el día a día».
+
+**Cifras**: «artesana» (no «chica») lo prepara todo a mano.
+
+**Cierre común de las descripciones** (23 productos):
+> Lo prepara a mano **El Armario de Pris** y es **100 % personalizable**: eliges la talla, el color
+> de la prenda y el diseño. La estampación es duradera y apta para lavadora, y el tejido es de
+> algodón y poliéster, según proveedor.
+> Los pedidos se hacen por Instagram o por WhatsApp (674 58 36 89), lo que prefieras. Parte de cada
+> pedido vuelve a la protectora.
+
+En las tres totebags dice «eliges el color y el diseño» y «la tela». Las dos «Adoptar es vida» tienen
+su propio texto (otro color aunque la foto sea blanca; «no admiten devolución»).
+
+**Lo que ya no se dice en ningún sitio**: «algodón orgánico», «certificado PETA, Fair Wear,
+Oeko-Tex», «Novedades», el nombre de la empresa de la plataforma anterior. Si alguien lo ve
+reaparecer, viene de un texto viejo.
+
+---
+
+## 10. Histórico
+
+| Fecha | Qué |
+|---|---|
+| 03-08-2026 | Tienda montada al diseño en la tienda de pruebas: colección, ficha, bloques y metacampos. El mismo día, **modo escaparate**: se enseña y se pide por Instagram a Pris |
+| 06-08-2026 | Grupos con ajustes de móvil (ancho, altura, «Dónde se ve») |
+| 02-09-2026 | Menús de la tienda real: «Tienda solidaria» con Novedades, Camisetas, Sudaderas, Totebags y Niños |
+| 03-09-2026 | **Siete prendas retiradas** a borrador (sorpresas, Día de la madre 2022, jaula delantero y trasero, Adoptar es vida 2022). **Galería de fotos** de la tienda (28 fotos) |
+| 06-09-2026 | Las píldoras: de ocho, seis apuntaban a colecciones que no existían. Pasan a Todo · Novedades · Camisetas · Sudaderas · Totebags · Niños, y aceptan enlace suelto. Párrafo de **personalizar** en la franja. Alta de **Camiseta y Sudadera «Adoptar es vida»** (solo en blanco); la sudadera de 2022, a borrador |
+| 12-09-2026 | Repaso a fondo: las migas de producto iban a una colección que no existía, ahora a `/collections/all`; «dános» → «danos» |
+| 04-10-2026 | **Otros productos**: página, 12 tarjetas, entrada del submenú y píldora. Fuera de los textos legales la empresa de la plataforma anterior. Retoques de Carla a Otros productos |
+| 05-10-2026 | Título y descripción propios de la portada (ajustes del tema) |
+| 18-10-2026 | **Se publica el tema** `loveanimalsbcn/main`. La tienda sigue con contraseña |
+| 22-10-2026 | Cuarta ronda de Carla: **pedidos por Instagram o WhatsApp** en franja, ficha, Otros productos y descripciones; «chica» → «artesana»; **fuera «Novedades» y «Todo»**; listas nuevas de «El producto» y «Envíos»; garantías sin certificaciones; **23 descripciones limpiadas** (sin algodón orgánico, PETA/Fair Wear/Oeko Tex ni logos de la tienda vieja). Otros productos: en el móvil, dos columnas iguales y sin desbordar |
+
+El detalle de cada ronda está en [`PAGINAS.md`](PAGINAS.md).
+
+---
+
+## 11. Diferencias conscientes con el diseño
+
+- **La franja «cómo se pide» va antes de la rejilla**, no intercalada tras la primera fila: la
+  rejilla de Horizon no admite contenido entre tarjetas sin reescribirla.
+- **El botón de la tarjeta dice «Ver el diseño»** y lleva a la ficha: no hay compra en la web.
+- **No hay guía de tallas**: las tallas se resuelven por mensaje con Pris.
+- **Los números y destacados sobre granate** usan `color8` (#E3C08D, dorado claro) en vez del dorado
+  normal: el dorado oscuro sobre granate no llega al contraste mínimo.
+- El bloque **«Ahorro»** («Ahorras 4,90 €») existe pero no está puesto: sin precios no tiene sentido.

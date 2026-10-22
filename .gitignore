@@ -1,3 +1,10 @@
 claude-resume.txt
 # Las fotos que manda Carla: medio giga de zips, no van al repo
 docs/img_loveanimalsbcn/
+
+# Lo que generan los scripts de herramientas/ al lanzarse: se rehace, y puede llevar datos de la tienda
+herramientas/*.json
+herramientas/*.txt
+herramientas/*.xlsx
+herramientas/dump/
+herramientas/__pycache__/
